@@ -71,6 +71,8 @@ class MemberController extends Controller
             Log::info('Photo updated at: ' . $validated['photo']);
         }
 
+        // Explicitly set the status field
+        $member->status = $request->input('status');
         $member->update($validated);
 
         return redirect()->route('members.show', $member->id)->with('success', 'Member updated successfully.');

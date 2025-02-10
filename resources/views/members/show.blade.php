@@ -8,7 +8,7 @@
             {{ $member->name }}
         </div>
         <div class="card-body">
-        @if ($member->photo)
+            @if ($member->photo)
                 <p><strong>Photo:</strong></p>
                 <img src="{{ asset('storage/' . $member->photo) }}" alt="Member Photo" style="max-width: 200px;">
             @endif
@@ -20,10 +20,8 @@
             <p><strong>Share Price:</strong> {{ $member->share_price }}</p>
             <p><strong>Member Type:</strong> {{ $member->member_type }}</p>
             <p><strong>Status:</strong> {{ $member->status }}</p>
-            
         </div>
     </div>
     <a href="{{ route('members.index') }}" class="btn btn-secondary mt-3">Back to Members</a>
-
 </div>
 @endsection
