@@ -7,7 +7,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Member_ID</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Actions</th>
