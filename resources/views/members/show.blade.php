@@ -1,18 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/members.css') }}">
-<div class="container">
-    <h1>Member Details</h1>
-    <div class="card">
-        <div class="card-header">
-            {{ $member->name }}
-        </div>
-        <div class="card-body">
+
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Member Details</h1>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex items-center mb-4">
             @if ($member->photo)
-                <p><strong>Photo:</strong></p>
-                <img src="{{ asset('storage/' . $member->photo) }}" alt="Member Photo" style="max-width: 200px;">
+                <img src="{{ asset('storage/' . $member->photo) }}" alt="Member Photo" class="w-24 h-24 object-cover rounded-full mr-4">
             @endif
+            <h2 class="text-xl font-semibold">{{ $member->name }}</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <p><strong>ID:</strong> {{ $member->member_id }}</p>
             <p><strong>Number:</strong> {{ $member->number }}</p>
             <p><strong>Village:</strong> {{ $member->village }}</p>

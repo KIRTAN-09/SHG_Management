@@ -15,7 +15,7 @@
                 <thead>
                     <tr>
                         <th>Member ID</th>
-                        <th>Name/ID
+                        <th>Name/ID</th>
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Actions</th>
@@ -27,7 +27,7 @@
                             <td>{{ $saving->id }}</td>
                             <td>{{ $saving->name }}{{ $saving->group_id }}</td>
                             <td>{{ $saving->amount }}</td>
-                            <td>{{ $saving->date }}</td>
+                            <td>{{ $saving->date_of_deposit }}</td>
                             <td>
                                 <a href="{{ route('savings.edit', $saving->id) }}" class="btn btn-warning">Edit</a>
                                 <form action="{{ route('savings.destroy', $saving->id) }}" method="POST" style="display:inline;">

@@ -6,6 +6,10 @@
     <form action="{{ route('igas.store') }}" method="POST">
         @csrf
         <div class="form-group">
+            <label for="name">Member-id</label>
+            <input type="text" class="form-control" id="member-id" name="member-id" required>
+        </div>
+        <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
