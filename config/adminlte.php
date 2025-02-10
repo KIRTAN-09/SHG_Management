@@ -311,11 +311,7 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        ['header' => 'account_settings'],
+      
             [
                 'text' => 'Dashboard',
                 'url' => 'home',

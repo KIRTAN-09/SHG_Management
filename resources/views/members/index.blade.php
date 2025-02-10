@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<link rel="stylesheet" href="{{ asset('css/members.css') }}">
     <h2>Member List</h2>
     <a href="{{ route('members.create') }}" class="btn btn-primary">Add Member</a>
     <table class="table">
@@ -49,13 +49,4 @@
     <div class="d-flex justify-content-center">
         {{ $members->links('pagination::bootstrap-4') }}
     </div>
-
-<style>
-    .profile-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-</style>
 @endsection

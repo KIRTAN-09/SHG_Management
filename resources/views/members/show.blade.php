@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/members.css') }}">
 <div class="container">
     <h1>Member Details</h1>
     <div class="card">

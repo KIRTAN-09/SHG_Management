@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/members.css') }}">
 <div class="container">
     <h1>Edit Member</h1>
     <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data">
