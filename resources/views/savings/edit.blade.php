@@ -16,6 +16,10 @@
                     <label for="amount">Amount</label>
                     <input type="number" name="amount" class="form-control" value="{{ $saving->amount }}" required>
                 </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" name="date" class="form-control" value="{{ $saving->date }}" required>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

@@ -23,5 +23,7 @@
             
         </div>
     </div>
+    <a href="{{ route('members.index') }}" class="btn btn-secondary mt-3">Back to Members</a>
+
 </div>
 @endsection

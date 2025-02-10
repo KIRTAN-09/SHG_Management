@@ -17,6 +17,7 @@ class CreateSavingsTable extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('amount', 8, 2);
+            $table->date('date');
             $table->timestamps();
         });
     }

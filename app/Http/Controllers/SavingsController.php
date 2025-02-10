@@ -26,6 +26,7 @@ class SavingsController extends Controller
         $request->validate([
             'name' => 'required',
             'amount' => 'required|numeric',
+            'date' => 'required|date',
         ]);
 
         Savings::create($request->all());
@@ -54,6 +55,7 @@ class SavingsController extends Controller
         $request->validate([
             'name' => 'required',
             'amount' => 'required|numeric',
+            'date' => 'required|date',
         ]);
 
         $saving = Savings::find($id);
@@ -71,5 +73,22 @@ class SavingsController extends Controller
 
         return redirect()->route('savings.index')
                          ->with('success', 'Saving deleted successfully.');
+    }
+
+    // Handle the POST request
+    public function submit(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'name' => 'required',
+            'amount' => 'required|numeric',
+            'date' => 'required|date',
+        ]);
+
+        // Create a new saving entry
+        Savings::create($request->all());
+
+        return redirect()->route('savings.index')
+                         ->with('success', 'Saving submitted successfully.');
     }
 }

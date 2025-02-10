@@ -9,5 +9,9 @@ class Savings extends Model
 {
     use HasFactory;
 
-    // Define any necessary properties and relationships here
+    protected $fillable = [
+        'amount',
+        'name', // Added to resolve SQL error
+        'date', // Added date to the fillable array
+    ];
 }
