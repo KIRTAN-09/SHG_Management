@@ -156,7 +156,7 @@ h1 {
     color: #fff;
     z-index: 2;
     box-shadow: 0px 0px 10px 0px #4060ee;
-    transition: transform 3s ease-in-out, background 1s, box-shadow 1s; /* Add transition for background and box-shadow */
+    transition: transform 1.8s ease-in-out, background 1s, box-shadow 1s; /* Add transition for background and box-shadow */
     border-radius: 295px; /* Add this line */
     transform: translateX(-50%); /* Set initial position to the left */
     
