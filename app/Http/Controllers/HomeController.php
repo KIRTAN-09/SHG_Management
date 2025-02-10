@@ -27,6 +27,7 @@ class HomeController extends Controller
     {
         $totalGroups = Group::count(); // Assuming you have a Group model
         $totalMembers = Member::count(); // Assuming you have a Member model
-        return view('home', compact('totalGroups', 'totalMembers'));
+        $totalActiveMembers = Member::where('status', 'Active')->count(); // Assuming you have a Member model
+        return view('home', compact('totalGroups', 'totalMembers', 'totalActiveMembers'));
     }
 }

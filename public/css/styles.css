@@ -12,28 +12,26 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(90deg, #fffefe, #668af0d2);
+    background: rgb(205, 203, 203);
     transition: background 3s ease-in-out; /* Ensure smooth transition */
 }
 
-body.register-mode-active {
-    background: linear-gradient(90deg, #668af0d2, #fffefe);
-}
+
 
 .container {
     position: fixed;
     width: 900px;
     height: 600px;
-    background: #fff;
+    background: #dedcdc;
     border-radius: 30px;
-    box-shadow: 0 0 30px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 30px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     display: flex;
     border-radius: 50px; 
 }
 
 .container.animate-background {
-    animation: containerBackground 3s;
+    animation: containerBackground 5s;
 }
 
 .form-container {
@@ -146,29 +144,6 @@ h1 {
     background: #5a73e8;
     transform: translateY(-3px);
 }
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.social-icons a {
-    display: inline-flex;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 24px;
-    color: #333;
-    margin: 0 8px;
-    transition: background 0.3s, transform 0.3s;
-}
-
-.social-icons a:hover {
-    background: #ddd;
-    transform: translateY(-3px);
-}
-
 .toggle-box {
     position: absolute;
     width: 100%;
@@ -177,12 +152,19 @@ h1 {
     justify-content: space-between;
     align-items: center;
     padding: 50px;
-    background: #7494ec;
+    background: #4060ee;
     color: #fff;
     z-index: 2;
-    transition: transform 2s ease-in-out;
+    box-shadow: 0px 0px 10px 0px #4060ee;
+    transition: transform 3s ease-in-out, background 1s, box-shadow 1s; /* Add transition for background and box-shadow */
     border-radius: 295px; /* Add this line */
     transform: translateX(-50%); /* Set initial position to the left */
+    
+}
+
+.toggle-box:hover {
+    background: #3050cc; /* Change background color on hover */
+    box-shadow: 0px 0px 20px 40px #3050cc; /* Enhance box-shadow on hover */
 }
 
 .toggle-panel {
@@ -231,13 +213,13 @@ h1 {
 
 @keyframes containerBackground {
     0% {
-        background: #fff;
+        background: #dedcdc;
     }
     50% {
-        background: #7494ec;
+        background: #4060ee;
     }
     100% {
-        background: #fff;
+        background: #dedcdc;
     }
 }
 @media screen and (max-width: 650px) {  
