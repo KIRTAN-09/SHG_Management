@@ -10,8 +10,11 @@ class Savings extends Model
     use HasFactory;
 
     protected $fillable = [
+        'group_id',
+        'group_name',
+        'member_id',
+        'member_name',
         'amount',
-        'name', // Added to resolve SQL error
-        'date', // Added date to the fillable array
+        'date_of_deposit',
     ];
 }

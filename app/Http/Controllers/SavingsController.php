@@ -24,12 +24,22 @@ class SavingsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'group-id' => 'nullable|numeric',
+            'group-name' => 'nullable|string',
+            'member-id' => 'required|numeric',
+            'member-name' => 'required|string',
             'amount' => 'required|numeric',
-            'date' => 'required|date',
+            'date-of-deposit' => 'required|date',
         ]);
 
-        Savings::create($request->all());
+        Savings::create([
+            'group_id' => $request->input('group-id'),
+            'group_name' => $request->input('group-name'),
+            'member_id' => $request->input('member-id'),
+            'member_name' => $request->input('member-name'),
+            'amount' => $request->input('amount'),
+            'date_of_deposit' => $request->input('date-of-deposit'),
+        ]);
 
         return redirect()->route('savings.index')
                          ->with('success', 'Saving created successfully.');
@@ -53,13 +63,23 @@ class SavingsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'group-id' => 'nullable|numeric',
+            'group-name' => 'nullable|string',
+            'member-id' => 'required|numeric',
+            'member-name' => 'required|string',
             'amount' => 'required|numeric',
-            'date' => 'required|date',
+            'date-of-deposit' => 'required|date',
         ]);
 
         $saving = Savings::find($id);
-        $saving->update($request->all());
+        $saving->update([
+            'group_id' => $request->input('group-id'),
+            'group_name' => $request->input('group-name'),
+            'member_id' => $request->input('member-id'),
+            'member_name' => $request->input('member-name'),
+            'amount' => $request->input('amount'),
+            'date_of_deposit' => $request->input('date-of-deposit'),
+        ]);
 
         return redirect()->route('savings.index')
                          ->with('success', 'Saving updated successfully.');
