@@ -23,7 +23,7 @@ form {
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    border: 1px solid #343798;
+    border: 1px solidrgb(38, 42, 174);
     border-radius: 20px;
     box-shadow: 7px 7px 10px rgba(8, 8, 8, 0.478);
     background-color: #fff;
