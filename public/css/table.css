@@ -97,11 +97,3 @@ table tbody tr:last-of-type {
 .btn-primary:hover {
     background-color: #0056b3;
 }
-
-/* Photo styling */
-table img {
-    width: 5px;
-    height: 5px;
-    object-fit: cover;
-    border-radius: 50%;
-}
