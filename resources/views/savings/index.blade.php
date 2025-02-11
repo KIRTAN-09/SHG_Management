@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Savings</h1>
-            @if(session('success'))
+        <div class="col-md-12"><br>
+        <h2 class="text-2xl font-bold mb-4">Savings</h2>
+        @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
