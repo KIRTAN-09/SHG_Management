@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Groups</h1>
-    <a href="{{ route('groups.create') }}" class="btn btn-primary">Add Group</a>
+<div class="container"><br>
+<h2 class="text-2xl font-bold mb-4">Groups</h2>
+<a href="{{ route('groups.create') }}" class="btn btn-primary">Add Group</a>
     <table class="table mt-3">
         <thead>
             <tr>
