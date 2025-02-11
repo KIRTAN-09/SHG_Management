@@ -4,6 +4,7 @@
 
 <div class="container mx-auto p-4">
     <h2 class="text-2xl font-bold mb-4">Member List</h2>
+    <link rel="stylesheet" href="{{ asset('css/table.css') }}">
     <a href="{{ route('members.create') }}" class="btn btn-primary mb-4">Add Member</a>
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white shadow-md rounded-lg">
@@ -36,12 +37,12 @@
                         <td class="py-2 px-4 border-b">{{ $member->member_type }}</td>
                         <td class="py-2 px-4 border-b">{{ $member->status }}</td>
                         <td class="py-2 px-4 border-b">
-                            <a href="{{ route('members.show', $member->id) }}" class="btn btn-info btn-sm">View</a>
-                            <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ route('members.show', $member->id) }}" class="view-btn">View</a>
+                            <a href="{{ route('members.edit', $member->id) }}" class="edit-btn">Edit</a>
                             <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit"class="delete-btn">Delete</button>
                             </form>
                         </td>
                     </tr>

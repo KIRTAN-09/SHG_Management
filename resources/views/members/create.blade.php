@@ -144,7 +144,7 @@ input[type="submit"]:hover {
             <label for="status">Status:</label>
             <select id="status" name="status" required>
                 <option value="Active">Active</option>
-                <option value="Inactive">Inactive>
+                <option value="Inactive">Inactive
             </select>
         </div>
         <div class="form-group">
