@@ -11,7 +11,7 @@ class MemberController extends Controller
 
     public function index()
     {
-        $members = Member::paginate(10); // Adjust the number as needed
+        $members = Member::paginate(14); // Display 14 members per page
         return view('members.index', compact('members')); // Pass to the view
     }
 
@@ -87,7 +87,7 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = Member::findOrFail($id);
-        return view('members.show', compact('member'));
+        return view('members.show', data: compact('member'));
     }
 
     public function edit($id)

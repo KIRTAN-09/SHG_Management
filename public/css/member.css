@@ -10,7 +10,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    font-size: 10px;
+    font-size: 12px;
     background-color: #f3f3f338;
     font-family: Verdana, Helvetica, sans-serif;
     text-align: center;
@@ -48,7 +48,9 @@ table tbody tr:last-of-type {
 
 /* Action buttons styling */
 .action-buttons .view-btn {
-    background-color: #006f98f6;
+    opacity: 80%;
+    font-family: "Times New Roman", Times, serif;
+    background-color: #013649f6;
     color: white;
     padding: 5px 10px;
     border: none;
@@ -57,7 +59,9 @@ table tbody tr:last-of-type {
 }
 
 .action-buttons .edit-btn {
-    background-color: #006f98f6;
+    opacity: 80%;
+    font-family: "Times New Roman", Times, serif;
+    background-color: #05486ad0;
     color: white;
     padding: 5px 10px;
     border: none;
@@ -66,7 +70,9 @@ table tbody tr:last-of-type {
 }
 
 .action-buttons .delete-btn {
-    background-color: #006f98f6;
+    opacity: 80%;
+    font-family: "Times New Roman", Times, serif;
+    background-color: #05486ad0;
     color: white;
     padding: 5px 10px;
     border: none;
@@ -74,7 +80,7 @@ table tbody tr:last-of-type {
     cursor: pointer;
 }
 
-/* Add Group button styling */
+/* Add Member button styling */
 .btn-primary {
     background-color: #002398bd;
     font-family: "Times New Roman", Times, serif;
@@ -90,4 +96,12 @@ table tbody tr:last-of-type {
 
 .btn-primary:hover {
     background-color: #0056b3;
+}
+
+/* Photo styling */
+table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
 }
