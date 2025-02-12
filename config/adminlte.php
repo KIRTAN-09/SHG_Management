@@ -321,7 +321,6 @@ return [
             [
                 'text' => 'Roles',
                 'url' => 'roles',
-                'icon' => '',
                 'icon' => 'fas fa-fw fa-user',
                 
             ],
