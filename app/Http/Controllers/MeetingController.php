@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Meeting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MeetingController extends Controller
 {
     public function index()
     {
-        $meetings = Meeting::all();
+        $meetings = Meeting::paginate(10); // Adjust the number as needed
         return view('meetings.index', compact('meetings'));
     }
 
@@ -21,13 +22,33 @@ class MeetingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
             'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
+            'group-name' => 'required|string',
+            'group-id' => 'nullable|numeric',
+            'discussion' => 'required|string',
+            'photo' => 'required|image',
         ]);
 
-        Meeting::create($request->all());
-        return redirect()->route('meetings.index');
+        $meeting = new Meeting();
+        $meeting->date = $request->input('date');
+        $meeting->group_name = $request->input('group-name');
+        $meeting->group_id = $request->input('group-id');
+        $meeting->discussion = $request->input('discussion');
+
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+            $meeting->photo = $photoPath;
+        }
+
+        $meeting->save();
+
+        return redirect()->route('meetings.index')->with('success', 'Meeting scheduled successfully.');
+    }
+
+    public function show($id)
+    {
+        $meeting = Meeting::findOrFail($id);
+        return view('meetings.show', compact('meeting'));
     }
 
     public function edit(Meeting $meeting)

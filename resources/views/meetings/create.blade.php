@@ -1,122 +1,44 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Form</title>
+    <link rel="stylesheet" href="{{ asset('css/Meeting.css') }}">
+    <script src="{{ asset('js/Meeting.js') }}" defer></script>
+</head>
+<body>
+    <div class="container">
 
-@section('content')
-<style>
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-form {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    border: 1px solid #343798;
-    border-radius: 20px;
-    box-shadow: 7px 7px 10px rgba(8, 8, 8, 0.478);
-    background-color: #fff;
-}
-
-form:hover {
-    box-shadow: 10px 10px 15px rgba(19, 19, 20, 0.6);
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color: #495057;
-    font-size: 28px;
-    font-style: bold;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #495057;
-    font-size: 16px;
-}
-
-.radio-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="time"] {
-    width: calc(100% - 16px);
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-    font-weight: normal; /* Ensure font is not bold */
-    transition: border-color 0.3s ease-in-out;
-}
-
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-input[type="submit"] {
-    background-color: #092f57;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-    display: block;
-    margin: 0 auto;
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.error-message {
-    font-size: 12px;
-}
-</style>
-<div class="container">
-    <form action="{{ route('meetings.store') }}" method="POST">
-        @csrf
-        <h1><b>Schedule a New Meeting</b></h1>
-        <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        <div class="form-group">
+        <form action="{{ route('meetings.store') }}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            @csrf
+            <h1>Meeting Form</h1>
             <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <div class="form-group">
-            <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required>
-        </div>
-        <input type="submit" value="Add Meeting">
-    </form>
-</div>
-@endsection
+            <input type="date" id="date" name="date" required><br><br>
+
+            <label for="group-name">Group Name:</label>
+            <input type="text" id="group-name" name="group-name" placeholder="Group Name" required>
+            <span class="error-message-group-name" style="display: none; color: red;">Group Name should only contain letters.</span><br><br>
+
+            <label for="group-id">Group ID:</label>
+            <input type="text" id="group-id" name="group-id" placeholder="Group ID">
+            <span class="error-message-group-id" style="display: none; color: red;">Group ID should only contain numbers.</span><br><br>
+
+            <label for="attendance">Attendance List:</label>
+            <div id="attendance-list">
+                <!-- Fetched members will be displayed here -->
+            </div>
+            <br><br>
+
+            <label for="discussion">Discussion Points:</label>
+            <textarea id="discussion" name="discussion" placeholder="Discussion Topic" required style="height: 100%; width: 100%;"></textarea><br>
+
+        
+            <label for="photo">Group Photo:</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required><br><br>
+
+            <input type="submit" value="Schedule Meeting">
+            </form>
+    </div>
+</body>
+</html>

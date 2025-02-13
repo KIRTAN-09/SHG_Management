@@ -32,4 +32,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('igas', IGAController::class);
     Route::resource('training', TrainingController::class);
     Route::resource('meetings', MeetingController::class); // Ensure this line is present
+    Route::post('/meetings/store', [MeetingController::class, 'store'])->name('meetings.store');
 });

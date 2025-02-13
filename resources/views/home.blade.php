@@ -25,4 +25,51 @@
         </div>
     </div>
 </div>
+
+<div class="d-flex justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Savings Graph</div>
+            <div class="card-body">
+                <canvas id="savingsChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('savingsChart').getContext('2d');
+        var savingsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @json($savingsDates),
+                datasets: [{
+                    label: 'Amount of Deposit',
+                    data: @json($savingsAmounts),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
 @endsection

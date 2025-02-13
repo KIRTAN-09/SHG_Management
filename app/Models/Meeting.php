@@ -9,5 +9,11 @@ class Meeting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'date', 'time'];
+    protected $fillable = [
+        'date',
+        'group_name',
+        'group_id',
+        'discussion',
+        'photo',
+    ];
 }
