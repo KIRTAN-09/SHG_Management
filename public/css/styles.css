@@ -213,13 +213,13 @@ h1 {
 
 @keyframes containerBackground {
     0% {
-        background: #dedcdc;
+        background: #ffffff;
     }
     50% {
         background: #4060ee;
     }
     100% {
-        background: #dedcdc;
+        background: #ffffff;
     }
 }
 @media screen and (max-width: 650px) {  
