@@ -22,7 +22,7 @@ body {
     position: fixed;
     width: 900px;
     height: 600px;
-    background: #dedcdc;
+    background: #ffffff;
     border-radius: 30px;
     box-shadow: 0 0 30px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -213,13 +213,13 @@ h1 {
 
 @keyframes containerBackground {
     0% {
-        background: #dedcdc;
+        background: #ffffff;
     }
     50% {
         background: #4060ee;
     }
     100% {
-        background: #dedcdc;
+        background: #ffffff;
     }
 }
 @media screen and (max-width: 650px) {  
