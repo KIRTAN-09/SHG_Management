@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1>IGAs</h1>
+    <link rel="stylesheet" href="{{ asset(path: 'css/table.css') }}">
     <a href="{{ route('igas.create') }}" class="btn btn-primary">Create IGA</a>
     <table class="table">
         <thead>

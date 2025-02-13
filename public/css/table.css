@@ -91,3 +91,33 @@ table tbody tr:last-of-type {
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+/* Pagination styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.pagination li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.pagination li a, .pagination li span {
+    color: #004998bd;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.pagination li a:hover {
+    background-color: #ddd;
+}
+
+.pagination .active span {
+    background-color: #004998bd;
+    color: white;
+    border: 1px solid #004998bd;
+}

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 <h2 class="text-2xl font-bold mb-4">Groups</h2>
-<link rel="stylesheet" href="{{ asset('css/table.css') }}">
+<link rel="stylesheet" href="{{ asset(path: 'css/table.css') }}">
 <a href="{{ route('groups.create') }}" class="btn btn-primary">Add Group</a>
     <div class="table-container">
         <table class="table mt-3">

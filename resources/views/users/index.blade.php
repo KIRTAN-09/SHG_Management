@@ -6,6 +6,7 @@
         <div class="pull-left">
             <img src="{{ asset('vendor/almasaeed2010/adminlte/docs/assets/img/DF(logo).jpg') }}" alt="Logo" class="mb-3">
             <h2>Users Management</h2>
+            <link rel="stylesheet" href="{{ asset(path: 'css/Manageuser.css') }}">
         </div>
         <div class="pull-right">
             <a class="btn btn-success mb-2" href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create New User</a>

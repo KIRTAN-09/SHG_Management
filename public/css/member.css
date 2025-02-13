@@ -1,10 +1,3 @@
-/* Table container */
-.table-container {
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-}
-
 /* Table styling */
 table {
     width: 100%;
@@ -29,8 +22,7 @@ table thead tr {
 }
 
 table th, table td {
-    padding: 12px 15px;
-    border: 1px solid #1c1c1d5c; /* Add border to table cells */
+    border: 2px solid #1c1c1d5c; /* Add border to table cells */
 }
 
 /* Table body styling */
@@ -48,36 +40,36 @@ table tbody tr:last-of-type {
 
 /* Action buttons styling */
 .action-buttons .view-btn {
-    opacity: 80%;
     font-family: "Times New Roman", Times, serif;
-    background-color: #013649f6;
+    background-color: #006f98f6;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-block; /* Ensure the button is displayed correctly */
 }
 
 .action-buttons .edit-btn {
-    opacity: 80%;
     font-family: "Times New Roman", Times, serif;
-    background-color: #05486ad0;
+    background-color: #006f98f6;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-block; /* Ensure the button is displayed correctly */
 }
 
 .action-buttons .delete-btn {
-    opacity: 80%;
     font-family: "Times New Roman", Times, serif;
-    background-color: #05486ad0;
+    background-color: #006f98f6;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-block; /* Ensure the button is displayed correctly */
 }
 
 /* Add Member button styling */
@@ -100,8 +92,39 @@ table tbody tr:last-of-type {
 
 /* Photo styling */
 table img {
-    width: 50px;
-    height: 50px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 80%;
+    border: rgb(6, 57, 158) 1px solid;
+}
+
+/* Pagination styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.pagination li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.pagination li a, .pagination li span {
+    color: #004998bd;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 50%; /* Make buttons round */
+    background-color: transparent; /* Make buttons transparent */
+}
+
+.pagination li a:hover {
+    opacity: 0.6;
+    background-color: #0fd7b95d;
+}
+
+.pagination .active span {
+    background-color: #004998bd;
+    color: white;
+    border: 1px solid #004998bd;
 }
