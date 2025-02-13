@@ -27,6 +27,7 @@ class MeetingController extends Controller
             'group-id' => 'nullable|numeric',
             'discussion' => 'required|string',
             'photo' => 'required|image',
+            'No of members present' => 'required|numeric',  
         ]);
 
         $meeting = new Meeting();

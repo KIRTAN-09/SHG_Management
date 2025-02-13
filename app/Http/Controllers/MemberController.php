@@ -87,7 +87,7 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = Member::findOrFail($id);
-        return view('members.show', data: compact('member'));
+        return response()->view('members.show', ['member' => $member]);
     }
 
     public function edit($id)
