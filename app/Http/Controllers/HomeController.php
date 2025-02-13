@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Group;
 use App\Models\Member;
+use App\Models\Savings;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -28,6 +30,13 @@ class HomeController extends Controller
         $totalGroups = Group::count(); // Assuming you have a Group model
         $totalMembers = Member::count(); // Assuming you have a Member model
         $totalActiveMembers = Member::where('status', 'Active')->count(); // Assuming you have a Member model
-        return view('home', compact('totalGroups', 'totalMembers', 'totalActiveMembers'));
+
+        $savings = Savings::select('amount', 'date_of_deposit')->get();
+        $savingsDates = $savings->pluck('date_of_deposit')->map(function($date) {
+            return Carbon::parse($date)->format('Y-m-d');
+        });
+        $savingsAmounts = $savings->pluck('amount');
+
+        return view('home', compact('totalGroups', 'totalMembers', 'totalActiveMembers', 'savingsDates', 'savingsAmounts'));
     }
 }
