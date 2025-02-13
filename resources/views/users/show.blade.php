@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2 class="centered-bold-heading"> Show User</h2>
+            <h2 align="center" class="text-2xl font-bold"> Show User</h2>
             <link rel="stylesheet" href="{{ asset('css/Showuser.css') }}">
         </div>
     </div>

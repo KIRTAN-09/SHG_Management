@@ -62,8 +62,8 @@ body {
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
-    margin: 20px;
-    float: right; /* Align the button to the right */
+    margin: 10px auto; /* Center the button with auto margin */
+    float: right; /**/
 }
 
 .btn-primary:hover {
