@@ -1,5 +1,5 @@
 body {
-    transform: translateY(20px);
+    /* transform: translateY(20px); */
     animation: fadeIn 2s ease-in-out forwards;
 }
 /* Table container */

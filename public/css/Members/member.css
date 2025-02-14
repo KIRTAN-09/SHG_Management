@@ -1,6 +1,6 @@
-body {
-    transform: translateY(20px);
+body {  
     animation: fadeIn 2s ease-in-out forwards;
+    overflow: hidden; /* Hide the scrollbar */
 }
 /* Table container */
 .table-container {
