@@ -4,7 +4,7 @@
 
 <div class="container mx-auto p-4">
     <h2 class="text-2xl font-bold mb-4">Member List</h2>
-    <link rel="stylesheet" href="{{ asset('css/member.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Members/member.css') }}">
     <a href="{{ route('members.create') }}" class="btn btn-primary mb-4">Add Member</a>
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white shadow-md rounded-lg">

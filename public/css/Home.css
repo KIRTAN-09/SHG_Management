@@ -1,0 +1,70 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    transform: translateY(2px);
+    animation: fadeIn 2s ease-in-out forwards;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 10px;
+    text-align: center;
+    background: transparent;
+    background-color: rgba(11, 159, 196, 0.32);
+    border: solid 1px #0c0c0c5d;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(10, 109, 230, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.08);
+}
+
+.card h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card p {
+    font-size: 12px;
+}
+
+.card a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.card:hover {
+    opacity: 0.9;
+    box-shadow: 0 10px 10px rgba(10, 102, 230, 0.352);
+}
+.container {
+    margin-top: 300px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}

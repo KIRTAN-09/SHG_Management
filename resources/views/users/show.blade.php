@@ -5,12 +5,12 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2 align="center" class="text-2xl font-bold"> Show User</h2>
-            <link rel="stylesheet" href="{{ asset('css/Showuser.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/Manageuser/Showuser.css') }}">
         </div>
     </div>
 </div>
 
-<div class="row">
+<div class="container">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Name:</strong>

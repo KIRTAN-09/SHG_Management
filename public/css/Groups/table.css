@@ -1,0 +1,127 @@
+body {
+    transform: translateY(20px);
+    animation: fadeIn 10s ease-in-out forwards;
+}
+/* Table container */
+.table-container {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 10px;
+    background-color: #f3f3f338;
+    font-family: Verdana, Helvetica, sans-serif;
+    text-align: center;
+    border: 1px solid #0a0a0a;
+}
+
+/* Table header styling */
+table thead tr {
+    opacity: 0.9;
+    background-color: #004998bd;
+    color: #0f0f0f;
+    font-family: "Georgia", Times, serif;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #1c1c1d5c; /* Add border to table cells */
+}
+
+/* Table body styling */
+table tbody tr {
+    border-bottom: 1px solid #121111;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #0c0b0b1d;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 1px solid #0a0a0a;
+}
+
+/* Action buttons styling */
+.action-buttons .view-btn {
+    background-color: #006f98f6;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-buttons .edit-btn {
+    background-color: #006f98f6;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-buttons .delete-btn {
+    background-color: #006f98f6;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Add Group button styling */
+.btn-primary {
+    background-color: #002398bd;
+    font-family: "Times New Roman", Times, serif;
+    color: rgb(255, 255, 255);
+    padding: 7px 7px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Pagination styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.pagination li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.pagination li a, .pagination li span {
+    color: #004998bd;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.pagination li a:hover {
+    background-color: #ddd;
+}
+
+.pagination .active span {
+    background-color: #004998bd;
+    color: white;
+    border: 1px solid #004998bd;
+}

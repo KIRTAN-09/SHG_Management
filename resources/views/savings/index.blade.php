@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12"><br>
         <h2 class="text-2xl font-bold mb-4">Savings</h2>
-        <link rel="stylesheet" href="{{ asset(path: 'css/table.css') }}">
+        <link rel="stylesheet" href="{{ asset(path: 'css/Savings/table.css') }}">
         @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
