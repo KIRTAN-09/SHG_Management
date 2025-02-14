@@ -23,21 +23,21 @@ form {
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    border: 1px solid #343798;
+    border: 2px solid #343798;
     border-radius: 20px;
-    box-shadow: 7px 7px 10px rgba(8, 8, 8, 0.478);
+    box-shadow: 0px 0px 10px rgba(8, 8, 8, 0.478);
     background-color: #fff;
 }
 
 form:hover {
-    box-shadow: 10px 10px 15px rgba(19, 19, 20, 0.6);
+    box-shadow: 0px 0px 15px rgba(19, 19, 20, 0.6);
 }
 
 h1 {
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
-    color: #495057;
+    color:rgb(0, 0, 0);
     font-size: 28px;
     font-style: bold;
 }
@@ -46,7 +46,7 @@ label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
-    color: #495057;
+    color:rgb(0, 0, 0);
     font-size: 16px;
 }
 
