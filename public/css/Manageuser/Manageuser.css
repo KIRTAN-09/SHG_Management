@@ -1,5 +1,5 @@
 body {
-    transform: translateY(20px);
+    transform: translateY(0px);
     animation: fadeIn 0.8s ease-in-out forwards;
 }
 .container {
