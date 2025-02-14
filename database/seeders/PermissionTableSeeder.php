@@ -14,14 +14,23 @@ class PermissionTableSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-           'role-list',
-           'role-create',
-           'role-edit',
-           'role-delete',
-           'product-list',
-           'product-create',
-           'product-edit',
-           'product-delete'
+            'role-list',
+            'role-create',
+            'role-edit',
+            'role-delete',
+            'Member-list',
+            'Member-create',
+            'Member-edit',
+            'Member-delete',
+            'Group-list',
+            'Group-create',
+            'Group-edit',
+            'Group-delete',
+            'Savings-list',
+            'Savings-create',
+            'Savings-edit',
+            'Savings-delete',
+            
         ];
         
         foreach ($permissions as $permission) {
