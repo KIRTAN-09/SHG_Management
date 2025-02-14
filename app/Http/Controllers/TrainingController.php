@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Training;
 
 class TrainingController extends Controller
 {
     public function index()
     {
-        return view('training.index');
+        $trainings = Training::paginate(10);
+        return view('training.index', compact('trainings'));
     }
 
     public function create()

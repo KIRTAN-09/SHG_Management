@@ -12,6 +12,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Actions</th>
+                <th>Activities</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,9 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
+                </td>
+                <td>
+                    <a href="{{ route('igas.activities', $iga->id) }}" class="btn btn-info">View Activities</a>
                 </td>
             </tr>
             @endforeach

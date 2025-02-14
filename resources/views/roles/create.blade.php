@@ -124,8 +124,8 @@ input[type="submit"]:hover {
             </div>
         @endif
         <div class="form-group">
-            <label for="name"><strong>Name:</strong></label>
-            <input type="text" name="name" placeholder="Name" class="form-control">
+            <label for="name"><strong>Role Name:</strong></label>
+            <input type="text" name="name" placeholder="Add role name" class="form-control">
         </div>
         <div class="form-group">
             <label for="permission"><strong>Permission:</strong></label>
