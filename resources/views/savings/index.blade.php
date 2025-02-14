@@ -16,7 +16,7 @@
                 <thead>
                     <tr>
                         <th>Member ID</th>
-                        <th>Name/ID</th>
+                        <th>Member Name</th>
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Actions</th>
@@ -26,7 +26,7 @@
                     @foreach($savings as $saving)
                         <tr>
                             <td>{{ $saving->id }}</td>
-                            <td>{{ $saving->name }}{{ $saving->group_id }}</td>
+                            <td>{{ $saving->member_name }}</td>
                             <td>{{ $saving->amount }}</td>
                             <td>{{ $saving->date_of_deposit }}</td>
                             <td>
