@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    <h1>Savings Details</h1>
     <div class="card">
         <div class="card-header">
             Savings Information
@@ -11,6 +10,9 @@
             <p><strong>Amount:</strong> {{ $saving->amount }}</p>
             <p><strong>Date:</strong> {{ $saving->date }}</p>
             <p><strong>Description:</strong> {{ $saving->description }}</p>
+            <p><strong>member_name:</strong> {{ $saving->member_name }}</p>
+            <p><strong>member_id:</strong> {{ $saving->member_id }}</p>
+
         </div>
     </div>
     <a href="{{ route('savings.index') }}" class="btn btn-primary mt-3">Back to Savings List</a>
