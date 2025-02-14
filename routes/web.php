@@ -10,7 +10,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\IGAController;
 use App\Http\Controllers\TrainingController;
-use App\Http\Controllers\MeetingController; // Ensure this line is present
+use App\Http\Controllers\MeetingController;
 
 Route::resource('members', MemberController::class);
 
@@ -31,6 +31,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('savings', SavingsController::class);
     Route::resource('igas', IGAController::class);
     Route::resource('training', TrainingController::class);
-    Route::resource('meetings', MeetingController::class); // Ensure this line is present
-    Route::post('/meetings/store', [MeetingController::class, 'store'])->name('meetings.store');
+    Route::resource('meetings', MeetingController::class); 
+    //Route::post('/meetings/store', [MeetingController::class, 'store'])->name('meetings.store'); remove if not needed
 });

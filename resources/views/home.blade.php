@@ -26,44 +26,29 @@
     </div>
 </div>
 
-<div class="d-flex justify-content-center mt-4">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">Savings Graph</div>
-            <div class="card-body">
-                <canvas id="savingsChart"></canvas>
-            </div>
-        </div>
-    </div>
+<div class="container mt-5">
+    <h3 class="text-center">Monthly Savings</h3>
+    <canvas id="savingsChart"></canvas>
 </div>
 
-@endsection
-
-@section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var ctx = document.getElementById('savingsChart').getContext('2d');
         var savingsChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
-                labels: @json($savingsDates),
+                labels: @json($months),
                 datasets: [{
-                    label: 'Amount of Deposit',
-                    data: @json($savingsAmounts),
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: false
+                    label: 'Savings',
+                    data: @json($savings),
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
                 }]
             },
             options: {
                 scales: {
-                    x: {
-                        type: 'time',
-                        time: {
-                            unit: 'day'
-                        }
-                    },
                     y: {
                         beginAtZero: true
                     }
@@ -73,3 +58,5 @@
     });
 </script>
 @endsection
+
+

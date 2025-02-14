@@ -37,6 +37,20 @@ class HomeController extends Controller
         });
         $savingsAmounts = $savings->pluck('amount');
 
-        return view('home', compact('totalGroups', 'totalMembers', 'totalActiveMembers', 'savingsDates', 'savingsAmounts'));
+        $monthlySavings = Savings::selectRaw('SUM(amount) as total, MONTH(date_of_deposit) as month')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->pluck('total', 'month')
+            ->toArray();
+
+        $months = [];
+        $savings = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $months[] = Carbon::create()->month($i)->format('F');
+            $savings[] = $monthlySavings[$i] ?? 0;
+        }
+
+        return view('home', compact('totalGroups', 'totalMembers', 'totalActiveMembers', 'months', 'savings'));
     }
 }
