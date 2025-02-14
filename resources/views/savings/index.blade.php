@@ -30,6 +30,7 @@
                             <td>{{ $saving->amount }}</td>
                             <td>{{ $saving->date_of_deposit }}</td>
                             <td>
+                                <a href="{{ route('savings.show', $saving->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('savings.edit', $saving->id) }}" class="btn btn-warning">Edit</a>
                                 <form action="{{ route('savings.destroy', $saving->id) }}" method="POST" style="display:inline;">
                                     @csrf
