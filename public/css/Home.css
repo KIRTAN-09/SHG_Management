@@ -52,3 +52,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.8s ease-in-out forwards;
 }
+
+.text-dark1:hover {
+    color: gray !important;
+    text-decoration: underline;
+}
