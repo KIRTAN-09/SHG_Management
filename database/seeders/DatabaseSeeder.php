@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
             CreateAdminUserSeeder::class,
             MemberSeeder::class,
         ]);
+
+        $this->call(PermissionSeeder::class);
     }
 }
