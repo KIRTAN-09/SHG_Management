@@ -1,91 +1,85 @@
-body{
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    transform: translateY(0px);
-    animation: fadeIn 0.5s ease-in-out forwards;
-}
 /* Table styling */
 table {
     width: 100%;
-    border-collapse: collapse;
     margin: 20px 0;
-    font-size: 12px;
-    background-color: #f3f3f338;
+    font-size: 14px;
+    background-color: #ffffff;
     font-family: Verdana, Helvetica, sans-serif;
-    text-align: center;
-    border: 1px solid #0a0a0a;
+    text-align: left;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px; 
+    overflow: hidden; 
 }
 
 /* Table header styling */
 table thead tr {
-    opacity: 0.9;
     background-color: #004998bd;
-    color: #0f0f0f;
+    color: #ffffff;
     font-family: "Georgia", Times, serif;
-    text-align: center;
-    font-size: 12px;
+    text-align: left;
+    font-size: 16px;
     font-weight: bold;
 }
 
 table th, table td {
-    border: 2px solid #1c1c1d5c; /* Add border to table cells */
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 /* Table body styling */
 table tbody tr {
-    border-bottom: 1px solid #121111;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
 }
 
 table tbody tr:nth-of-type(even) {
-    background-color: #0c0b0b1d;
+    background-color: #f3f3f3;
 }
 
 table tbody tr:last-of-type {
-    border-bottom: 1px solid #0a0a0a;
+    border-bottom: none;
 }
 
 /* Action buttons styling */
 .action-buttons .view-btn {
-    font-family: "Times New Roman", Times, serif;
     background-color: #006f98f6;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    display: inline-block; /* Ensure the button is displayed correctly */
 }
 
 .action-buttons .edit-btn {
-    font-family: "Times New Roman", Times, serif;
     background-color: #006f98f6;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    display: inline-block; /* Ensure the button is displayed correctly */
 }
 
 .action-buttons .delete-btn {
-    font-family: "Times New Roman", Times, serif;
-    background-color: #006f98f6;
+    background-color: #d9534f;
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    display: inline-block; /* Ensure the button is displayed correctly */
 }
 
-/* Add Member button styling */
+/* Add Group button styling */
 .btn-primary {
     background-color: #002398bd;
     font-family: "Times New Roman", Times, serif;
     color: rgb(255, 255, 255);
     padding: 7px 7px;
     border: none;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
@@ -94,13 +88,6 @@ table tbody tr:last-of-type {
 
 .btn-primary:hover {
     background-color: #0056b3;
-}
-
-/* Photo styling */
-table img {
-    object-fit: cover;
-    border-radius: 80%;
-    border: rgb(6, 57, 158) 1px solid;
 }
 
 /* Pagination styling */
@@ -120,13 +107,11 @@ table img {
     padding: 8px 16px;
     text-decoration: none;
     border: 1px solid #ddd;
-    border-radius: 50%; /* Make buttons round */
-    background-color: transparent; /* Make buttons transparent */
+    border-radius: 5px;
 }
 
 .pagination li a:hover {
-    opacity: 0.6;
-    background-color: #0fd7b95d;
+    background-color: #ddd;
 }
 
 .pagination .active span {
