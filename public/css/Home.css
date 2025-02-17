@@ -1,8 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    transform: translateY(0px);
-    animation: fadeIn 2s ease-in-out forwards;
+    animation: fadeIn 1s ease-in-out forwards;
 }
 
 .d-flex {
@@ -51,4 +49,9 @@ body {
     border-radius: 0px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+.text-dark1:hover {
+    color: gray !important;
+    text-decoration: underline;
 }

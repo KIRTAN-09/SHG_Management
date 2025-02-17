@@ -7,21 +7,21 @@
         <div class="card text-dark text-center p-3" style="height: 150px;">
             <h3 class="text-dark">{{ $totalGroups }}</h3>
             <p class="text-dark">Total Groups</p>
-            <a href="{{ route('groups.index') }}" class="text-dark">More info </a>
+            <a href="{{ route('groups.index') }}" class="text-dark1">More info: </a>
         </div>
     </div>
     <div class="col-md-3 mt-3">
         <div class="card text-dark text-center p-3" style="height: 150px;">
             <h3 class="text-dark">{{ $totalMembers }}</h3>
             <p class="text-dark">Total Members</p>
-            <a href="{{ route('members.index') }}" class="text-dark">More info </a>
+            <a href="{{ route('members.index') }}" class="text-dark1">More info: </a>
         </div>
     </div>
     <div class="col-md-3 mt-3">
         <div class="card text-dark text-center p-3" style="height: 150px;">
             <h3 class="text-dark">{{ $totalActiveMembers }}</h3>
             <p class="text-dark">Total Active Members</p>
-            <a href="#" class="text-dark">More info </a>
+            <a href="#" class="text-dark1">More info: </a>
         </div>
     </div>
 </div>
