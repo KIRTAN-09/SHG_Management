@@ -1,3 +1,9 @@
+body{
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    transform: translateY(0px);
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
 /* Table styling */
 table {
     width: 100%;

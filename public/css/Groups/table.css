@@ -1,6 +1,6 @@
 body {
     transform: translateY(0px);
-    animation: fadeIn 1s ease-in-out forwards;
+    animation: fadeIn 0.5s ease-in-out forwards;
 }
 /* Table container */
 .table-container {
