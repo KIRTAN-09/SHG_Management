@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<div class="container mt-5">
+ <div class="container mt-5">
     <h3 class="text-center">Monthly Savings</h3>
     <canvas id="savingsChart"></canvas>
 </div>
@@ -56,5 +56,5 @@
             }
         });
     });
-</script>
+</script> 
 @endsection

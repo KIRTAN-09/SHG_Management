@@ -11,7 +11,7 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::paginate(14);
+        $groups = Group::with('members')->paginate(14); // Ensure members relationship is loaded
         return view('groups.index', compact('groups'));
     }
 

@@ -267,9 +267,9 @@ return [
     'disable_darkmode_routes' => false,
 
     /*
-    |--------------------------------------------------------------------------
+    |--------------------------------------------------------------------------         
     | Laravel Asset Bundling
-    |--------------------------------------------------------------------------
+    |--------------------------------------------------------------------------I
     |
     | Here we can enable the Laravel Asset Bundling option for the admin panel.
     | Currently, the next modes are supported: 'mix', 'vite' and 'vite_js_only'.

@@ -26,3 +26,23 @@ class CreateGroupsTable extends Migration
         Schema::dropIfExists('groups');
     }
 }
+
+// Add the migration for adding group_id to members table
+class AddGroupIdToMembersTable extends Migration
+{
+    public function up()
+    {
+        Schema::table('members', function (Blueprint $table) {
+            $table->unsignedBigInteger('group_id')->nullable()->after('id');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('members', function (Blueprint $table) {
+            $table->dropForeign(['group_id']);
+            $table->dropColumn('group_id');
+        });
+    }
+}

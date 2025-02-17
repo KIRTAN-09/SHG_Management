@@ -17,4 +17,9 @@ class Group extends Model
         'secretary_name',
         'no_of_members',
     ];
+
+    public function members()
+    {
+        return $this->hasMany(Member::class);
+    }
 }
