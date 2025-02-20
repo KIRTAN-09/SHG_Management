@@ -23,11 +23,11 @@
                     <p class="text-gray-600 mb-2"><strong>Member UID:</strong> {{ $member->member_id }}</p>
                     <div class="flex justify-center space-x-2 mt-4">
                         <button onclick="showMemberDetails({{ $member->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
-                        <a href="{{ route('members.edit', $member->id) }}" class="bg-purple-500 text-white py-1 px-2 rounded hover:bg-yellow-700">Edit</a>
+                        <a href="{{ route('members.edit', $member->id) }}" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-yellow-700">Edit</a>
                         <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="bg--500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
+                            <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
                         </form>
                     </div>
                 </div>
