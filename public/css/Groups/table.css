@@ -24,7 +24,7 @@ table {
 
 /* Table header styling */
 table thead tr {
-    background-color: #004998bd;
+    background-color: #023b79;
     color: #ffffff;
     font-family: "Georgia", Times, serif;
     text-align: left;
@@ -85,7 +85,7 @@ table tbody tr:last-of-type {
 
 /* Add Group button styling */
 .btn-primary {
-    background-color: #002398bd;
+    background-color: #28a745;
     font-family: "Times New Roman", Times, serif;
     color: rgb(255, 255, 255);
     padding: 7px 7px;

@@ -22,9 +22,9 @@
                         <input type="password" name="password" placeholder="Password" required>  
                         <i class='bx bx-show password-toggle' onclick="togglePassword()"></i> <!-- Add show password icon -->
                     </div>  
-                    <div class="forgot-link">  
+                    <!-- <div class="forgot-link">  
                         <a href="{{ route('password.request') }}">Forgot Password?</a>  
-                    </div>  
+                    </div>   -->
                     <button type="submit" class="btn"><u>Login</u></button>  
                 </form>  
             </div>  
