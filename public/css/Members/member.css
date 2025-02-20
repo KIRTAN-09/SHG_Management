@@ -1,20 +1,72 @@
 body {  
     animation: fadeIn 2s ease-in-out forwards;
 }
+.container {
+    width: full;
+    height: 100%;
+    background: scroll 0 0 #b5b3b3a0;
+}
 
 .grid{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
     grid-gap: 1rem;
     padding: 1rem;
 }
 
-.bg{
-    background-color: #a9e6fb;
+.bgcard{
+    background-color: #cbfffb;
     padding: 1rem;
     border-radius: 10px;
-    border: 5px solid;
-    border-color: #81dffe;
+    border: 1px solid;
+    border-color: #1c282c;
+    position: relative;
+    transition: fade 1.5s ease-in-out;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* Indicate the card is clickable */
+}
+
+.bgcard:hover{
+    background: linear-gradient(180deg, #cbfffb , #039ea3  );
+    transform: scale(1.05);
+}
+
+.hidden-content {
+    display: none;
+}
+
+.bg:hover .hidden-content {
+    display: block;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+   
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 /* Action buttons styling */

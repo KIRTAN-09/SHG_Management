@@ -1,42 +1,85 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Member List')
+
+@section('content_header')
+    <h1>Member List</h1>
+@stop
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<div class="container">
-    <h2 class="text-2xl font-bold mb-4">Member List</h2>
-    <link rel="stylesheet" href="{{ asset('css/Members/member.css') }}">
-    <a href="{{ route('members.create') }}" class="btn btn-primary mb-4">Add Member</a>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="container mx-auto p-4">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">Members</h1>
+        <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700">Add Member</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         @foreach ($members as $member)
-            <div class="bg">
-                <div class="flex items-center mb-4">
-                    <img src="{{ asset('storage/' . $member->photo) }}" class="w-12 h-12 object-cover rounded-full mr-4">
-                    <div>
-                        <h3 class="text-lg font-bold">{{ $member->name }}</h3>
-                        <p class="text-gray-600">{{ $member->member_id }}</p>
+            <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
+                <div class="text-center">
+                    <img src="{{ asset('storage/' . $member->photo) }}" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
+                    <h3 class="text-l font-bold mb-2">{{ $member->name }}</h3>
+                    <p class="text-gray-600 mb-2"><strong>Member UID:</strong> {{ $member->member_id }}</p>
+                    <div class="flex justify-center space-x-2 mt-4">
+                        <button onclick="showMemberDetails({{ $member->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
+                        <a href="{{ route('members.edit', $member->id) }}" class="bg-purple-500 text-white py-1 px-2 rounded hover:bg-yellow-700">Edit</a>
+                        <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg--500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
+                        </form>
                     </div>
-                </div>
-                <p><strong>Number:</strong> {{ $member->number }}</p>
-                <p><strong>Village:</strong> {{ $member->village }}</p>
-                <p><strong>Group:</strong> {{ is_object($member->group) ? $member->group->name : '' }}</p>
-                <!-- <p><strong>Caste:</strong> {{ $member->caste }}</p>
-                <p><strong>Share Price:</strong> {{ $member->share_price }}</p>
-                <p><strong>Member Type:</strong> {{ $member->member_type }}</p>
-                <p><strong>Status:</strong> {{ $member->status }}</p> -->
-                <div class="mt-4 action-buttons justify-end">
-                    <a href="{{ route('members.show', $member->id) }}" class="view-btn">View</a>
-                    <a href="{{ route('members.edit', $member->id) }}" class="edit-btn">Edit</a>
-                    <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="delete-btn">Delete</button>
-                    </form>
                 </div>
             </div>
         @endforeach
     </div>
     <div class="mt-4">
-        {{ $members->links('pagination::custom') }}
+        {{ $members->links('pagination::bootstrap-4') }}
     </div>
 </div>
-@endsection
+
+<!-- Modal -->
+<div id="memberModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">Member Details</h2>
+            <span class="text-2xl cursor-pointer" onclick="closeModal()">&times;</span>
+        </div>
+        <div id="modalContent" class="space-y-4">
+            <!-- Member details will be loaded here -->
+        </div>
+        <div class="flex justify-end mt-4">
+            <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showMemberDetails(memberId) {
+        fetch(`/members/${memberId}`)
+            .then(response => response.json())
+            .then(data => {
+                const modalContent = `
+                    <div class="text-center">
+                        <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4">
+                    </div>
+                    <p><strong>ID:</strong> ${data.member_id}</p>
+                    <p><strong>Number:</strong> ${data.number}</p>
+                    <p><strong>Village:</strong> ${data.village}</p>
+                    <p><strong>Group:</strong> ${data.group}</p>
+                    <p><strong>Caste:</strong> ${data.caste}</p>
+                    <p><strong>Share Price:</strong> ${data.share_price}</p>
+                    <p><strong>Member Type:</strong> ${data.member_type}</p>
+                    <p><strong>Status:</strong> ${data.status}</p>
+                `;
+                document.getElementById('modalContent').innerHTML = modalContent;
+                document.getElementById('memberModal').classList.remove('hidden');
+            });
+    }
+
+    function closeModal() {
+        document.getElementById('memberModal').classList.add('hidden');
+    }
+</script>
+@stop

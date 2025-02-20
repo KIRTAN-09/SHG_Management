@@ -34,3 +34,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('meetings', MeetingController::class); 
     //Route::post('/meetings/store', [MeetingController::class, 'store'])->name('meetings.store'); remove if not needed
 });
+
+Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
