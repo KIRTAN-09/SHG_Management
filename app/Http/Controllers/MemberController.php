@@ -103,4 +103,10 @@ class MemberController extends Controller
 
         return redirect()->route('members.index')->with('success', 'Member deleted successfully');
     }
+
+    public function someFunction(Request $request)
+    {
+        $groupId = $request->input('group_id');
+        $members = Member::where('group_id', $groupId)->get();
+    }
 }
