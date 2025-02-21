@@ -6,13 +6,27 @@ use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Member;
 
 class GroupController extends Controller
 {
+
+    public function __construct()
+    {
+         $this->middleware('permission:Group-list|Group-create|Group-edit|Group-delete', ['only' => ['index', 'show']]);
+         $this->middleware('permission:Group-create', ['only' => ['create','store']]);
+         $this->middleware('permission:Group-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:Group-delete', ['only' => ['destroy']]);
+    }
+    
+
     public function index()
     {
+        $totalMembers = Member::count(); // Count total members
+        $totalGroups = Group::count(); // Count total groups
+        // $totalGroups = Group::count(); // Count total groups
         $groups = Group::with('members')->paginate(14); // Ensure members relationship is loaded
-        return view('groups.index', compact('groups'));
+        return view('groups.index', compact('groups', 'totalMembers'));
     }
 
     public function create(): View

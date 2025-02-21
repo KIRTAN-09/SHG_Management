@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\Group;
 
 class MemberController extends Controller
 {
@@ -30,7 +31,8 @@ class MemberController extends Controller
 
     public function create()
     {
-        return view('members.create');
+        $groups = Group::all(); // Assuming you have a Group model
+        return view('members.create', compact('groups'));
     }
 
     public function store(Request $request)

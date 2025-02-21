@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class PermissionSeeder extends Seeder
 {
@@ -52,5 +54,13 @@ class PermissionSeeder extends Seeder
                 Permission::create(['name' => $permission, 'guard_name' => 'web']);
             }
         }
+
+        // Assign all permissions to the admin role
+        $adminRole = Role::where('name', 'admin')->first();
+        if ($adminRole) {
+            $adminRole->syncPermissions($permissions);
+        }
+
+    
     }
 }

@@ -26,10 +26,13 @@
                     <td>{{ $group->village_name }}</td>
                     <td>{{ $group->president_name }}</td>
                     <td>{{ $group->secretary_name }}</td>
-                    <td>{{ $group->members->count() }}</td> <!-- Updated to show number of members -->
+
+                    <td>{{ $totalMembers }}</td> <!-- Updated to show number of members -->
                     <td class="action-buttons">
                         <a href="{{ route('groups.show', $group->id) }}" class="view-btn">View</a>
+                        
                         <a href="{{ route('groups.edit', $group->id) }}" class="edit-btn">Edit</a>
+                        
                         <form action="{{ route('groups.destroy', $group->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
