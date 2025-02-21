@@ -7,6 +7,13 @@ use App\Models\Savings;
 
 class SavingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Savings-list|Savings-create|Savings-edit|Savings-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Savings-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Savings-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Savings-delete', ['only' => ['destroy']]);
+    }
     // Display a listing of the resource.
     public function index()
     {

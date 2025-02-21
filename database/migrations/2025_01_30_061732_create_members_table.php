@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('group_id')->nullable();
             $table->string('photo')->nullable();
             $table->string('name');
             $table->string('number')->nullable();
@@ -53,3 +54,30 @@ return new class extends Migration
             ->update(['status' => $status]);
     }
 };
+
+class AddGroupIdToMembersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('members', function (Blueprint $table) {
+            $table->unsignedBigInteger('group_id')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('members', function (Blueprint $table) {
+            $table->dropColumn('group_id');
+        });
+    }
+}

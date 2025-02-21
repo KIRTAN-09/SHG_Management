@@ -7,6 +7,13 @@ use App\Models\IGA;
 
 class IGAController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:IGA-list|IGA-create|IGA-edit|IGA-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:IGA-create', ['only' => ['create','store']]);
+        $this->middleware('permission:IGA-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:IGA-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $igas = IGA::all();

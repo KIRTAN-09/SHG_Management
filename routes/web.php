@@ -12,7 +12,7 @@ use App\Http\Controllers\IGAController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MeetingController;
 
-Route::resource('members', MemberController::class);
+// Route::resource('members', MemberController::class);
 
 Route::get('/', function () {
     return view('auth.login');

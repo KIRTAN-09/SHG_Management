@@ -14,6 +14,13 @@ use Illuminate\Http\RedirectResponse;
     
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:User-list|User-create|User-edit|User-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:User-create', ['only' => ['create','store']]);
+        $this->middleware('permission:User-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:User-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
