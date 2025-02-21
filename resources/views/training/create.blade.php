@@ -16,7 +16,6 @@
         <h1 class="text-center mb-4"><b>Add Training</b></h1>
         <!-- Add your form fields here -->
         <div class="container">
-            <h2 class="mb-4">IGA Training Form</h2>
             <form>
                 <div class="form-group">
                     <label for="training_date">Training Date:</label>
