@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1>IGAs</h1>
-    <link rel="stylesheet" href="{{ asset(path: 'css/table.css') }}">
+<h2 class="text-2xl font-bold mb-4">IGAs</h2>
+<link rel="stylesheet" href="{{ asset(path: 'css/table.css') }}">
     <a href="{{ route('igas.create') }}" class="btn btn-primary">Create IGA</a>
     <table class="table">
         <thead>
