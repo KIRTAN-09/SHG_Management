@@ -63,7 +63,7 @@
 
 <script>
     function showMemberDetails(memberId) {
-        fetch(/members/${memberId})
+        fetch(`/members/${memberId}`)
             .then(response => response.json())
             .then(data => {
                 const modalContent = `

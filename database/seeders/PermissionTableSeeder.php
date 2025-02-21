@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role; // Add this line
   
 class PermissionTableSeeder extends Seeder
 {
@@ -50,6 +51,11 @@ class PermissionTableSeeder extends Seeder
         
         foreach ($permissions as $permission) {
              Permission::create(['name' => $permission]);
+        }
+        
+        $adminRole = Role::where('name', 'admin')->first();
+        if ($adminRole) {
+            $adminRole->syncPermissions($permissions);
         }
     }
 }

@@ -10,7 +10,7 @@ class MeetingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:meeting-list|meeting-create|meeting-edit|meeting-delete', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:meeting-list|meeting-create|meeting-edit|meeting-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:meeting-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:meeting-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:meeting-delete', ['only' => ['destroy']]);
