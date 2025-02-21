@@ -4,10 +4,12 @@
 
 @section('content_header')
     <h1>Member List</h1>
-    <form action="{{ route('members.index') }}" method="GET" class="flex space-x-2">
-        <input type="text" name="search" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
-        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Search</button>
-    </form>
+    <div class="flex justify-end">
+        <form action="{{ route('members.index') }}" method="GET" class="flex space-x-2">
+            <input type="text" name="search" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Search</button>
+        </form>
+    </div>
 @stop
         
 
@@ -29,7 +31,7 @@
                     <p class="text-gray-600 mb-2"><strong>Member UID:</strong> {{ $member->member_id }}</p>
                     <div class="flex justify-center space-x-2 mt-4">
                         <button onclick="showMemberDetails({{ $member->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
-                        <a href="{{ route('members.edit', $member->id) }}" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-yellow-700">Edit</a>
+                        <a href="{{ route('members.edit', $member->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
                         <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
@@ -63,7 +65,7 @@
 
 <script>
     function showMemberDetails(memberId) {
-        fetch(/members/${memberId})
+        fetch(`/members/${memberId}`)
             .then(response => response.json())
             .then(data => {
                 const modalContent = `

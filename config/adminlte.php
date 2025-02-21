@@ -366,6 +366,12 @@ return [
                 'icon' => 'fas fa-fw fa-users',
                 
             ],
+            [
+                'text' => 'Reports', 
+                'url' => 'reports',
+                'icon' => 'fas fa-file-excel',
+                
+            ],
             
             
        

@@ -60,10 +60,10 @@ class GroupController extends Controller
         return redirect()->route('groups.index')->with('success', 'Group added successfully.');
     }
 
-    public function show($id): View
+    public function show($id)
     {
-        $group = Group::find($id);
-        return view('groups.show', compact('group'));
+        $group = Group::findOrFail($id);
+        return response()->json($group);
     }
 
     public function edit($id): View
