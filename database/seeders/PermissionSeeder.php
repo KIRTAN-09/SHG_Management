@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class PermissionSeeder extends Seeder
 {
@@ -59,5 +60,7 @@ class PermissionSeeder extends Seeder
         if ($adminRole) {
             $adminRole->syncPermissions($permissions);
         }
+
+    
     }
 }

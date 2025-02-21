@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\Group;
 
 class MemberController extends Controller
 {
@@ -19,7 +20,8 @@ class MemberController extends Controller
 
     public function create()
     {
-        return view('members.create');
+        $groups = Group::all(); // Assuming you have a Group model
+        return view('members.create', compact('groups'));
     }
 
     public function store(Request $request)
@@ -102,11 +104,5 @@ class MemberController extends Controller
         $member->delete();
 
         return redirect()->route('members.index')->with('success', 'Member deleted successfully');
-    }
-
-    public function someFunction(Request $request)
-    {
-        $groupId = $request->input('group_id');
-        $members = Member::where('group_id', $groupId)->get();
     }
 }

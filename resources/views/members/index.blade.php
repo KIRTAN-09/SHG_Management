@@ -31,7 +31,8 @@
                         <td class="py-2 px-4 border-b">{{ $member->name }}</td>
                         <td class="py-2 px-4 border-b">{{ $member->number }}</td>
                         <td class="py-2 px-4 border-b">{{ $member->village }}</td>
-                        <td class="py-2 px-4 border-b">{{ is_object($member->group) ? $member->group->name : '' }}</td>
+                        <!-- <td class="py-2 px-4 border-b">{{ is_object($member->group) ? $member->group : '' }}</td> -->
+                        <td class="py-2 px-4 border-b">{{ $member->group }}</td>
                         <td class="py-2 px-4 border-b">{{ $member->caste }}</td>
                         <td class="py-2 px-4 border-b">{{ $member->share_price }}</td>
                         <td class="py-2 px-4 border-b">{{ $member->member_type }}</td>

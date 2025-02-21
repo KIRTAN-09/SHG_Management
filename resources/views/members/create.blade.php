@@ -122,7 +122,11 @@ input[type="submit"]:hover {
         </div>
         <div class="form-group">
             <label for="group">Group:</label>
-            <input type="text" id="group" name="group" required>
+            <select id="group" name="group" required>
+            @foreach($groups as $group)
+                <option value="{{ $group->name }}">{{ $group->name }}</option>
+            @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label for="caste">Caste:</label>
