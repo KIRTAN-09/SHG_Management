@@ -3,7 +3,7 @@
 @section('title', 'Member List')
 
 @section('content_header')
-    <h1>Member List</h1>
+    <h1>Member List</h1><br>
     <form action="{{ route('members.index') }}" method="GET" class="flex space-x-2">
         <input type="text" name="search" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
         <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Search</button>
