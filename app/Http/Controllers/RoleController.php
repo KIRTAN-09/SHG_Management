@@ -69,6 +69,7 @@ class RoleController extends Controller
     
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($permissionsID);
+
     
         return redirect()->route('roles.index')
                         ->with('success','Role created successfully');
@@ -142,6 +143,9 @@ class RoleController extends Controller
         );
     
         $role->syncPermissions($permissionsID);
+
+        // Clear cache
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
     
         return redirect()->route('roles.index')
                         ->with('success','Role updated successfully');

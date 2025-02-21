@@ -18,7 +18,7 @@ body {
     background-color: #cbfffb;
     padding: 1rem;
     border-radius: 10px;
-    border: 1px solid;
+    border: 1px solid black;
     border-color: #1c282c;
     position: relative;
     transition: fade 1.5s ease-in-out;

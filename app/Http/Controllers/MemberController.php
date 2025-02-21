@@ -24,7 +24,7 @@ class MemberController extends Controller
                         ->orWhere('status', 'like', "%{$search}%");
                 });
             })
-            ->paginate(10);
+            ->paginate(30);
 
         return view('members.index', compact('members'));
     }
@@ -38,7 +38,7 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'image|mimes:jpg,jpeg,png|max:1024', // Validate photo size to be less than or equal to 1 MB
             'name' => 'required|string|max:255',
             'number' => 'nullable|string|max:15',
             'village' => 'required|string|max:255',

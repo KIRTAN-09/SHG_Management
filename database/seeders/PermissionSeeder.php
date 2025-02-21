@@ -56,7 +56,7 @@ class PermissionSeeder extends Seeder
         }
 
         // Assign all permissions to the admin role
-        $adminRole = Role::where('name', 'admin')->first();
+        $adminRole = Role::where('name', 'user')->first();
         if ($adminRole) {
             $adminRole->syncPermissions($permissions);
         }
