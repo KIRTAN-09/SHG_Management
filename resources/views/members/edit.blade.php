@@ -4,13 +4,14 @@
 
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Edit Member</h1>
-    <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-6">
+    <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-6" onsubmit="return validatePhotoSize()">
         @csrf
         @method('PUT')
 
         <div class="mb-4">
             <label for="photo" class="block text-gray-700">Photo</label>
-            <input type="file" class="form-control" id="photo" name="photo">
+            <input type="file" class="form-control" id="photo" name="photo" onchange="validatePhotoSize()">
+            <span id="photo-error" style="color: red; display: none;">Photo size should be less than 1 MB</span>
             @if ($member->photo)
                 <img src="{{ asset('storage/' . $member->photo) }}" alt="Member Photo" class="w-24 h-24 object-cover mt-2 rounded-full">
             @endif
@@ -63,33 +64,31 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Member</button>
+        <button type="submit" class="btn btn-primary" id="submit-btn">Update Member</button>
     </form>
 </div>
 
 <script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
+function validatePhotoSize() {
+    const photoInput = document.getElementById('photo');
+    const photoError = document.getElementById('photo-error');
+    const submitButton = document.getElementById('submit-btn');
+    const maxSize = 1; // Maximum file size in MB
 
-        fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.location.href = "{{ route('members.index') }}";
-            } else {
-                // Handle validation errors
-                console.error(data.errors);
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
+    if (photoInput.files.length > 0) {
+        const fileSize = photoInput.files[0].size / 1024 / 1024; // Convert size to MB
+        if (fileSize >= maxSize) {
+            photoError.style.display = 'block';
+            photoInput.value = ''; // Clear the file input field
+            submitButton.disabled = true; // Disable submit button
+            return false;
+        } else {
+            photoError.style.display = 'none';
+            submitButton.disabled = false; // Enable submit button
+        }
+    }
+    return true;
+}
 </script>
+
 @endsection
