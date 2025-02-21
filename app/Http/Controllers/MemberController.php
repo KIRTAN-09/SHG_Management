@@ -10,13 +10,24 @@ use App\Models\Group;
 class MemberController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::paginate(14); // Display 14 members per page
-        return view('members.index', compact('members')); // Pass to the view
+        $search = $request->input('search');
+
+        $members = Member::query()
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('village', 'like', "%{$search}%")
+                        ->orWhere('group', 'like', "%{$search}%")
+                        ->orWhere('caste', 'like', "%{$search}%")
+                        ->orWhere('status', 'like', "%{$search}%");
+                });
+            })
+            ->paginate(10);
+
+        return view('members.index', compact('members'));
     }
-
-
 
     public function create()
     {
@@ -77,7 +88,7 @@ class MemberController extends Controller
         $member->status = $request->input('status');
         $member->update($validated);
 
-        return redirect()->route('members.show', $member->id)->with('success', 'Member updated successfully.');
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -89,7 +100,7 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = Member::findOrFail($id);
-        return response()->view('members.show', ['member' => $member]);
+        return response()->json($member);
     }
 
     public function edit($id)

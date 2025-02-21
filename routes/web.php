@@ -33,4 +33,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('training', TrainingController::class);
     Route::resource('meetings', MeetingController::class); 
     //Route::post('/meetings/store', [MeetingController::class, 'store'])->name('meetings.store'); remove if not needed
+    Route::get('/roles/{id}/json', [RoleController::class, 'showJson'])->name('roles.showJson');
 });
+
+Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');

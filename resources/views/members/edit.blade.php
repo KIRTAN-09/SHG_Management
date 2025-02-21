@@ -66,4 +66,30 @@
         <button type="submit" class="btn btn-primary">Update Member</button>
     </form>
 </div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = "{{ route('members.index') }}";
+            } else {
+                // Handle validation errors
+                console.error(data.errors);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
 @endsection

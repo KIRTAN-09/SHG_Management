@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meeting Form</title>
-    <link rel="stylesheet" href="{{ asset('css/Meeting.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Meetings/Meeting.css') }}">
     <script src="{{ asset('js/Meeting.js') }}" defer></script>
 </head>
 <body>

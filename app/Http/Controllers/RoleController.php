@@ -88,6 +88,18 @@ class RoleController extends Controller
     
         return view('roles.show',compact('role','rolePermissions'));
     }
+
+    /**
+     * Fetch the specified resource as JSON.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function showJson($id)
+    {
+        $role = Role::with('permissions')->findOrFail($id);
+        return response()->json($role);
+    }
     
     /**
      * Show the form for editing the specified resource.
