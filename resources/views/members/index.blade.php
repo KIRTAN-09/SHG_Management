@@ -4,7 +4,12 @@
 
 @section('content_header')
     <h1>Member List</h1>
+    <form action="{{ route('members.index') }}" method="GET" class="flex space-x-2">
+        <input type="text" name="search" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Search</button>
+    </form>
 @stop
+        
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -12,6 +17,7 @@
 <div class="container mx-auto p-4">
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-bold">Members</h1>
+        
         <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700">Add Member</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
