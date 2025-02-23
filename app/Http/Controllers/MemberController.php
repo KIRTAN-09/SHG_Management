@@ -88,7 +88,8 @@ class MemberController extends Controller
         $member->status = $request->input('status');
         $member->update($validated);
 
-        return response()->json(['success' => true]);
+        // Redirect to the index page after successful update
+        return redirect()->route('members.index')->with('success', 'Member updated successfully');
     }
 
     /**
