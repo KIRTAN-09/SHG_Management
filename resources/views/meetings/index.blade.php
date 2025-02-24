@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2 class="text-2xl font-bold mb-4">Meetings</h2>
-    <link rel="stylesheet" href="{{ asset('css/table.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Meetings/Index.css') }}">
     <a href="{{ route('meetings.create') }}" class="btn btn-primary">Schedule a New Meeting</a>
     <div class="table-container">
         <table class="table mt-3">
@@ -28,7 +28,7 @@
                     <td>{{ $meeting->discussion }}</td>
                     <td>{{ $meeting->attendance_list }}</td>
                     <td class="action-buttons">
-                        <a href="{{ route('meetings.show', $meeting) }}" class="show-btn">View</a>
+                        <button type="button" class="show-btn" data-toggle="modal" data-target="#meetingModal{{ $meeting->id }}">View</button>
                         <a href="{{ route('meetings.edit', $meeting) }}" class="edit-btn">Edit</a>
                         <form action="{{ route('meetings.destroy', $meeting) }}" method="POST" style="display:inline-block;">
                             @csrf
@@ -37,6 +37,30 @@
                         </form>
                     </td>
                 </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="meetingModal{{ $meeting->id }}" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel{{ $meeting->id }}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="meetingModalLabel{{ $meeting->id }}">Meeting Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Date:</strong> {{ $meeting->date }}</p>
+                                <p><strong>Group Name:</strong> {{ $meeting->group_name }}</p>
+                                <p><strong>Group ID:</strong> {{ $meeting->group_id }}</p>
+                                <p><strong>Discussion Points:</strong> {{ $meeting->discussion }}</p>
+                                <p><strong>No. Members Present:</strong> {{ $meeting->attendance_list }}</p>
+                                <img src="{{ asset('storage/' . $meeting->photo) }}" alt="Group Photo" style="width: 100%; height: auto;">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </tbody>
         </table>

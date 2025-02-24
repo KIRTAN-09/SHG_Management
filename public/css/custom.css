@@ -69,3 +69,86 @@ h2 {
 .pull-right {
     margin-bottom: 20px;
 }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+}
+
+.meetings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.meeting-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.meeting-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.meeting-photo {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.meeting-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.meeting-date {
+    color: gray;
+}
+
+.meeting-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-form {
+    display: inline-block;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
