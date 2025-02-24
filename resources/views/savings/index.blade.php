@@ -3,9 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Savings</h1>
-            @if(session('success'))
+        <div class="col-md-12"><br>
+        <h2 class="text-2xl font-bold mb-4">Savings</h2>
+        <link rel="stylesheet" href="{{ asset(path: 'css/table.css') }}">
+        @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
@@ -15,7 +16,7 @@
                 <thead>
                     <tr>
                         <th>Member ID</th>
-                        <th>Name/ID
+                        <th>Member Name</th>
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Actions</th>
@@ -25,10 +26,11 @@
                     @foreach($savings as $saving)
                         <tr>
                             <td>{{ $saving->id }}</td>
-                            <td>{{ $saving->name }}{{ $saving->group_id }}</td>
+                            <td>{{ $saving->member_name }}</td>
                             <td>{{ $saving->amount }}</td>
-                            <td>{{ $saving->date }}</td>
+                            <td>{{ $saving->date_of_deposit }}</td>
                             <td>
+                                <a href="{{ route('savings.show', $saving->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('savings.edit', $saving->id) }}" class="btn btn-warning">Edit</a>
                                 <form action="{{ route('savings.destroy', $saving->id) }}" method="POST" style="display:inline;">
                                     @csrf

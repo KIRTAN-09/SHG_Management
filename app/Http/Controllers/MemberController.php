@@ -5,27 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\Group;
 
 class MemberController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::paginate(10); // Adjust the number as needed
-        return view('members.index', compact('members')); // Pass to the view
+        $search = $request->input('search');
+
+        $members = Member::query()
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('village', 'like', "%{$search}%")
+                        ->orWhere('group', 'like', "%{$search}%")
+                        ->orWhere('caste', 'like', "%{$search}%")
+                        ->orWhere('status', 'like', "%{$search}%");
+                });
+            })
+            ->paginate(15);
+
+        return view('members.index', compact('members'));
     }
-
-
 
     public function create()
     {
-        return view('members.create');
+        $groups = Group::all(); // Assuming you have a Group model
+        return view('members.create', compact('groups'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'image|mimes:jpg,jpeg,png|max:1024', // Validate photo size to be less than or equal to 1 MB
             'name' => 'required|string|max:255',
             'number' => 'nullable|string|max:15',
             'village' => 'required|string|max:255',
@@ -71,9 +84,12 @@ class MemberController extends Controller
             Log::info('Photo updated at: ' . $validated['photo']);
         }
 
+        // Explicitly set the status field
+        $member->status = $request->input('status');
         $member->update($validated);
 
-        return redirect()->route('members.show', $member->id)->with('success', 'Member updated successfully.');
+        // Redirect to the index page after successful update
+        return redirect()->route('members.index')->with('success', 'Member updated successfully');
     }
 
     /**
@@ -85,7 +101,7 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = Member::findOrFail($id);
-        return view('members.show', compact('member'));
+        return response()->json($member);
     }
 
     public function edit($id)

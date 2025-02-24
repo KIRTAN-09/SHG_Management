@@ -14,6 +14,13 @@ use Illuminate\Http\RedirectResponse;
     
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:User-list|User-create|User-edit|User-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:User-create', ['only' => ['create','store']]);
+        $this->middleware('permission:User-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:User-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +28,7 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = User::latest()->paginate(5);
+        $data = User::latest()->paginate(15);
   
         return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);

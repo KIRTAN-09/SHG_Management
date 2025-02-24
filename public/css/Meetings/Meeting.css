@@ -1,0 +1,130 @@
+body {
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #ffffff; /* Different background color */
+    border-radius: 10px; /* Add border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Different height from body */
+    width: 100%; /* Different width from body */
+    padding: 40px;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #495057;
+    font-size: 28px;
+}
+
+form {
+    width: 60%;
+    height: 100%;
+    padding: 30px;
+    border: 1px solid #080808;
+    border-radius: 20px;
+    box-shadow: 2px 7px 10px 5px rgba(8, 8, 8, 0.478);
+    background-color: #fff;
+    overflow-y: auto; /* Make form scrollable */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+form:hover {
+    box-shadow: 10px 10px 15px rgba(19, 19, 20, 0.6);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #495057;
+    font-size: 16px;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+input[type="file"] {
+    width: calc(100% - 16px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: normal;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+textarea {
+    width: 100%;
+    height: auto; /* Adjust height to fit within the form */
+    max-width: 100%; /* Ensure textarea does not exceed form height */
+    padding: 10px; /* Adjust padding for better appearance */
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+    background-color: #092f57;
+    color: white;
+    padding: 12px 24px; /* Adjust padding for a better look */
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 18px; /* Increase font size for better readability */
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+input[type="submit"] {
+    width: auto;
+    display: block;
+    margin: 20px 0 0 auto; /* Align the submit button to the right */
+    background-color:#092f57; /* Professional blue color */
+    padding: 12px 24px; /* Adjust padding for a better look */
+    font-size: 18px; /* Increase font size for better readability */
+}
+
+.attendance-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.attendance-item input[name="attendance-id[]"] {
+    flex: 0 0 20%; /* 20% width for ID field */
+}
+
+.attendance-item input[name="attendance-name[]"] {
+    flex: 1; /* 80% width for Name field */
+}

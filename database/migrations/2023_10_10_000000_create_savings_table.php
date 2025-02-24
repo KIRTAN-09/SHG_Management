@@ -20,7 +20,7 @@ class CreateSavingsTable extends Migration
             $table->string('member_id');
             $table->string('member_name');
             $table->decimal('amount', 8, 2);
-            $table->date('date_of_deposit');
+            $table->date('date_of_deposit'); // Ensure correct date field is defined
             $table->timestamps();
         });
     }

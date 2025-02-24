@@ -14,10 +14,11 @@ class CreateMeetingsTable extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->dateTime('start_time');
-            $table->dateTime('end_time')->nullable();
+            $table->date('date');
+            $table->string('group_name');
+            $table->string('group_id')->nullable();
+            $table->text('discussion');
+            $table->string('photo');
             $table->timestamps();
         });
     }

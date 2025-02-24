@@ -20,10 +20,10 @@ class RoleController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:role-create', ['only' => ['create','store']]);
-         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:role-list|role-create|role-edit|role-delete|Member-list|Member-create|Member-edit|Member-delete|Group-list|Group-create|Group-edit|Group-delete|Savings-list|Savings-create|Savings-edit|Savings-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:role-create|Member-create|Group-create|Savings-create', ['only' => ['create','store']]);
+         $this->middleware('permission:role-edit|Member-edit|Group-edit|Savings-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:role-delete|Member-delete|Group-delete|Savings-delete', ['only' => ['destroy']]);
     }
     
     /**
@@ -33,7 +33,7 @@ class RoleController extends Controller
      */
     public function index(Request $request): View
     {
-        $roles = Role::orderBy('id','DESC')->paginate(5);
+        $roles = Role::orderBy('id','DESC')->paginate(15);
         return view('roles.index',compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -69,6 +69,7 @@ class RoleController extends Controller
     
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($permissionsID);
+
     
         return redirect()->route('roles.index')
                         ->with('success','Role created successfully');
@@ -87,6 +88,18 @@ class RoleController extends Controller
             ->get();
     
         return view('roles.show',compact('role','rolePermissions'));
+    }
+
+    /**
+     * Fetch the specified resource as JSON.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function showJson($id)
+    {
+        $role = Role::with('permissions')->findOrFail($id);
+        return response()->json($role);
     }
     
     /**
@@ -130,6 +143,9 @@ class RoleController extends Controller
         );
     
         $role->syncPermissions($permissionsID);
+
+        // Clear cache
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
     
         return redirect()->route('roles.index')
                         ->with('success','Role updated successfully');
