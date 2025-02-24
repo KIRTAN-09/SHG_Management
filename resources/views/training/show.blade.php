@@ -1,12 +1,20 @@
-@extends('adminlte::page')
-
-@section('title', 'Training Details')
-
-@section('content_header')
-    <h1>Training Details</h1>
-@stop
+@extends('layouts.app')
 
 @section('content')
-    <p>Details of training with ID: {{ $id }}</p>
-    <!-- Add your training details content here -->
-@stop
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Savings Information
+        </div>
+        <div class="card-body">
+            <p><strong>Training Category:</strong> {{ $training->category }}</p>
+            <p><strong>Training Date:</strong> {{ $training->training_date}}</p>
+            <p><strong>Training Location:</strong> {{ $training->location }}</p>
+            <p><strong>Number of Participants:</strong> {{ $training->participants }}</p>
+            <p><strong>Trainer Name:</strong> {{ $training->trainer}}</p>
+
+        </div>
+    </div>
+    <a href="{{ route('savings.index') }}" class="btn btn-primary mt-3">Back to Savings List</a>
+</div>
+@endsection
