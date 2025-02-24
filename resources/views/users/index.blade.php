@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Add this line to include Font Awesome -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -9,7 +12,7 @@
         <div class="pull-right">
             <a class="btn btn-success mb-2" href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create New User</a>
         </div>
-        
+        <br>
     </div>
 </div>
 
@@ -19,11 +22,10 @@
     </div>
 @endsession
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
    @foreach ($data as $key => $user)
     <div class="bg-white shadow-md rounded-lg p-6">
         <h3 class="text-lg font-semibold mb-2">{{ $user->name }}</h3>
-        <p class="text-gray-600 mb-2">{{ $user->email }}</p>
         <div class="mb-4">
           @if(!empty($user->getRoleNames()))
             @foreach($user->getRoleNames() as $v)
@@ -32,7 +34,7 @@
           @endif
         </div>
         <div class="flex space-x-2">
-            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"><i class="fa-solid fa-list"></i> Show</button>
+            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"><i class="fa-solid fa-list"></i> View</button>
             <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"><i class="fa-solid fa-trash"></i> Delete</button>
         </div>
