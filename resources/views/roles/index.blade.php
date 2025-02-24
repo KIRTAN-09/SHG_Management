@@ -44,16 +44,18 @@
 </div>
 
 <!-- Modal -->
-<div id="roleModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">Role Details</h2>
-        </div>
-        <div id="modalContent" class="space-y-4">
-            <!-- Role details will be loaded here -->
-        </div>
-        <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
+<div id="roleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Role Details</h2>
+            </div>
+            <div id="modalContent" class="space-y-4">
+                <!-- Role details will be loaded here -->
+            </div>
+            <div class="flex justify-end mt-4">
+                <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
+            </div>
         </div>
     </div>
 </div>

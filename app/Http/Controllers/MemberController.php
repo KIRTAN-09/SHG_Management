@@ -24,6 +24,7 @@ class MemberController extends Controller
                         ->orWhere('status', 'like', "%{$search}%");
                 });
             })
+            ->orderBy('created_at', 'desc') // Sort by latest added
             ->paginate(15);
 
         return view('members.index', compact('members'));

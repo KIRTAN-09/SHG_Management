@@ -13,7 +13,7 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        $meetings = Meeting::paginate(10); // Use pagination
+        $meetings = Meeting::orderBy('created_at', 'desc')->paginate(10); // Sort by latest added
         return view('meetings.index', compact('meetings'));
     }
 
@@ -103,5 +103,14 @@ class MeetingController extends Controller
         Storage::delete('public/' . $meeting->photo);
         $meeting->delete();
         return redirect()->route('meetings.index')->with('success', 'Meeting deleted successfully!');
+    }
+
+    /**
+     * Fetch the specified meeting details for AJAX request.
+     */
+    public function fetchMeetingDetails($id)
+    {
+        $meeting = Meeting::findOrFail($id);
+        return response()->json($meeting);
     }
 }
