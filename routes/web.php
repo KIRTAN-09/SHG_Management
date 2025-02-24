@@ -33,7 +33,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('training', TrainingController::class);
     Route::resource('meetings', MeetingController::class);
     Route::get('/roles/{id}/json', [RoleController::class, 'showJson'])->name('roles.showJson');
-    Route::get('/meetings/{id}/details', [MeetingController::class, 'fetchMeetingDetails']);
 });
 
 Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');

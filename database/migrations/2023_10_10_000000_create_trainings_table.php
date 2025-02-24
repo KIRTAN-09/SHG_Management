@@ -10,14 +10,12 @@ class CreateTrainingsTable extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->string('training_id')->unique();
-            $table->string('title');
-            $table->date('date');
-            $table->string('location');
+            $table->date('training_date');
             $table->string('trainer');
-            $table->integer('duration');
-            $table->string('status');
-            $table->string('photo')->nullable();
+            $table->string('members_name');
+            $table->string('members_ID');
+            $table->string('location');
+            $table->string('category');
             $table->timestamps();
         });
     }
