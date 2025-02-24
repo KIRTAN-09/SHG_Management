@@ -4,10 +4,12 @@
 
 @section('content_header')
     <h1>Group List</h1>
+    <div class="flex justify-end">
     <form action="{{ route('groups.index') }}" method="GET" class="flex space-x-2">
         <input type="text" name="search" placeholder="Search groups..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
         <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Search</button>
     </form>
+    </div>
 @stop
 
 @section('content')
@@ -27,7 +29,7 @@
                     <div class="flex justify-center space-x-2 mt-4">
                     <button onclick="showGroupDetails({{ $group->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
                     <a href="{{ route('groups.edit', $group->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
-                        <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline">
+                        <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
@@ -58,6 +60,34 @@
 </div>
 
 <script>
+    let formToSubmit;
+
+    function confirmDelete(event, form) {
+        event.preventDefault();
+        formToSubmit = form;
+        const confirmationBox = document.createElement('div');
+        confirmationBox.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
+        confirmationBox.innerHTML = `
+            <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+                <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
+                <p class="mb-4">Are you sure you want to delete this group?</p>
+                <div class="flex justify-end space-x-4">
+                    <button onclick="closeConfirmationBox()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">No</button>
+                    <button onclick="submitDeleteForm()" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">Yes</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(confirmationBox);
+    }
+
+    function closeConfirmationBox() {
+        document.querySelector('.fixed.inset-0').remove();
+    }
+
+    function submitDeleteForm() {
+        formToSubmit.submit();
+    }
+
     function showGroupDetails(groupId) {
         fetch(`/groups/${groupId}`)
             .then(response => response.json())
