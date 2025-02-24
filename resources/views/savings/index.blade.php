@@ -32,7 +32,7 @@
                             <td>
                                 <a href="{{ route('savings.show', $saving->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('savings.edit', $saving->id) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('savings.destroy', $saving->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('savings.destroy', $saving->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this saving?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
