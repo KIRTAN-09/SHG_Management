@@ -53,7 +53,6 @@
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold">Member Details</h2>
-            <span class="text-2xl cursor-pointer" onclick="closeModal()">&times;</span>
         </div>
         <div id="modalContent" class="space-y-4">
             <!-- Member details will be loaded here -->

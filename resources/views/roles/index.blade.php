@@ -16,7 +16,7 @@
             <a href="{{ route('roles.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700">Create New Role</a>
         @endcan
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         @foreach ($roles as $role)
             <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
                 <div class="text-center">

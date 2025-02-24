@@ -24,7 +24,7 @@ class MemberController extends Controller
                         ->orWhere('status', 'like', "%{$search}%");
                 });
             })
-            ->paginate(30);
+            ->paginate(15);
 
         return view('members.index', compact('members'));
     }
