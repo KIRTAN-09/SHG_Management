@@ -2,83 +2,106 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Meeting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Models\Meeting;
+use Illuminate\Support\Facades\Storage;
 
 class MeetingController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware('permission:meeting-list|meeting-create|meeting-edit|meeting-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:meeting-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:meeting-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:meeting-delete', ['only' => ['destroy']]);
-    }
+    /**
+     * Display a listing of meetings.
+     */
     public function index()
     {
-        $meetings = Meeting::paginate(10); // Adjust the number as needed
+        $meetings = Meeting::paginate(10); // Use pagination
         return view('meetings.index', compact('meetings'));
     }
 
+    /**
+     * Show the form for creating a new meeting.
+     */
     public function create()
     {
         return view('meetings.create');
     }
 
+    /**
+     * Store a newly created meeting in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
             'date' => 'required|date',
-            'group-name' => 'required|string',
-            'group-id' => 'nullable|numeric',
+            'group_name' => 'required|string|max:255',
+            'group_id' => 'nullable|numeric',
             'discussion' => 'required|string',
-            'photo' => 'required|image',
-            'No of members present' => 'required|numeric',  
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $meeting = new Meeting();
-        $meeting->date = $request->input('date');
-        $meeting->group_name = $request->input('group-name');
-        $meeting->group_id = $request->input('group-id');
-        $meeting->discussion = $request->input('discussion');
+        $photoPath = $request->file('photo')->store('meetings/photos', 'public');
 
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
-            $meeting->photo = $photoPath;
-        }
+        Meeting::create([
+            'date' => $request->date,
+            'group_name' => $request->group_name,
+            'group_id' => $request->group_id,
+            'discussion' => $request->discussion,
+            'photo' => $photoPath,
+        ]);
 
-        $meeting->save();
-
-        return redirect()->route('meetings.index')->with('success', 'Meeting scheduled successfully.');
+        return redirect()->route('meetings.index')->with('success', 'Meeting scheduled successfully!');
     }
 
-    public function show($id)
+    /**
+     * Display the specified meeting.
+     */
+    public function show(Meeting $meeting)
     {
-        $meeting = Meeting::findOrFail($id);
         return view('meetings.show', compact('meeting'));
     }
 
+    /**
+     * Show the form for editing the specified meeting.
+     */
     public function edit(Meeting $meeting)
     {
         return view('meetings.edit', compact('meeting'));
     }
 
+    /**
+     * Update the specified meeting in storage.
+     */
     public function update(Request $request, Meeting $meeting)
     {
         $request->validate([
-            'title' => 'required',
             'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
+            'group_name' => 'required|string|max:255',
+            'group_id' => 'nullable|numeric',
+            'discussion' => 'required|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $meeting->update($request->all());
-        return redirect()->route('meetings.index');
+        if ($request->hasFile('photo')) {
+            Storage::delete('public/' . $meeting->photo);
+            $meeting->photo = $request->file('photo')->store('meetings/photos', 'public');
+        }
+
+        $meeting->update([
+            'date' => $request->date,
+            'group_name' => $request->group_name,
+            'group_id' => $request->group_id,
+            'discussion' => $request->discussion,
+        ]);
+
+        return redirect()->route('meetings.index')->with('success', 'Meeting updated successfully!');
     }
 
+    /**
+     * Remove the specified meeting from storage.
+     */
     public function destroy(Meeting $meeting)
     {
+        Storage::delete('public/' . $meeting->photo);
         $meeting->delete();
-        return redirect()->route('meetings.index');
+        return redirect()->route('meetings.index')->with('success', 'Meeting deleted successfully!');
     }
 }
