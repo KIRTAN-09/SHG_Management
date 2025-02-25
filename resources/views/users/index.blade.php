@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Add this line to include Font Awesome -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
 
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -10,7 +8,7 @@
             <h2 class="text-2xl font-bold mb-4">Users Management</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success mb-2" href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create New User</a>
+            <a class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700" href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create New User</a>
         </div>
         <br>
     </div>
@@ -34,9 +32,9 @@
           @endif
         </div>
         <div class="flex space-x-2">
-            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"><i class="fa-solid fa-list"></i> View</button>
-            <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"><i class="fa-solid fa-trash"></i> Delete</button>
+            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"> View</button>
+            <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"> Edit</a>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"> Delete</button>
         </div>
     </div>
  @endforeach
