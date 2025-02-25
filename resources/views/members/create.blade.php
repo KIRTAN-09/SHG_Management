@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<link rel="stylesheet" href="{{ asset('css/Members/Create.css') }}">
+<link rel="stylesheet" href="{{ asset(path: 'css/Members/Create.css') }}">
     <form action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return validatePhotoSize()">
         @csrf
         <h1><b>Add Member</b></h1>
