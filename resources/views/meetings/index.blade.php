@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<br>
 <div class="container">
-    <h2 class="text-2xl font-bold mb-4">Meetings</h2>
+    <h2>Meetings</h2>
     <link rel="stylesheet" href="{{ asset('css/Meetings/Index.css') }}">
-    <a href="{{ route('meetings.create') }}" class="btn btn-primary">Schedule a New Meeting</a>
+    <div class="pull-right">
+        <a href="{{ route('meetings.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Schedule a New Meeting</a>
+    </div>
     <div class="table-container">
         <table class="table mt-3">
             <thead>
@@ -22,7 +25,7 @@
                 @foreach($meetings as $meeting)
                 <tr>
                     <td>{{ $meeting->date }}</td>
-                    <td><img src="{{ asset('storage/' . $meeting->photo) }}" alt="Group Photo" style="width: 100px; height: auto;"></td>
+                    <td><img src="{{ asset('storage/' . $meeting->photo) }}" alt="Group Photo" style="width: 50px; height: 30px;"></td>
                     <td>{{ $meeting->group_name }}</td>
                     <td>{{ $meeting->group_id }}</td>
                     <td>{{ $meeting->discussion }}</td>
