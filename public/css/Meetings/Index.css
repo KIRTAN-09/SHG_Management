@@ -17,7 +17,7 @@ body {
 /* Heading */
 h2 {
     color: #333;
-    text-align: center;
+    text-align: start;
 }
 
 /* Table Container */
@@ -113,10 +113,12 @@ h2 {
 
 .show-btn:hover {
     background-color: #138496;
+    color: white;
 }
 
 .edit-btn:hover {
     background-color: #e0a800;
+    color: white;
 }
 
 .delete-btn:hover {

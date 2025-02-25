@@ -81,14 +81,19 @@
                 </div>
             </div>
         `;
+        confirmationBox.id = 'confirmationBox';
         document.body.appendChild(confirmationBox);
     }
 
     function closeConfirmationBox() {
-        document.querySelector('.fixed.inset-0').remove();
+        const confirmationBox = document.getElementById('confirmationBox');
+        if (confirmationBox) {
+            confirmationBox.remove();
+        }
     }
 
     function submitDeleteForm() {
+        closeConfirmationBox();
         formToSubmit.submit();
     }
 
