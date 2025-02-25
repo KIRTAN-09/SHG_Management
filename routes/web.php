@@ -12,8 +12,6 @@ use App\Http\Controllers\IGAController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MeetingController;
 
-// Route::resource('members', MemberController::class);
-
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -31,9 +29,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('savings', SavingsController::class);
     Route::resource('igas', IGAController::class);
     Route::resource('training', TrainingController::class);
-    Route::resource('meetings', MeetingController::class); 
-    //Route::post('/meetings/store', [MeetingController::class, 'store'])->name('meetings.store'); remove if not needed
+    Route::resource('meetings', MeetingController::class);
     Route::get('/roles/{id}/json', [RoleController::class, 'showJson'])->name('roles.showJson');
+    Route::get('/igas/activities', [IGAController::class, 'activities'])->name('igas.activities');
 });
 
 Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');

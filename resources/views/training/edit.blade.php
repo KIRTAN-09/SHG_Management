@@ -7,10 +7,56 @@
 @stop
 
 @section('content')
-    <form action="{{ route('training.update', $id) }}" method="POST">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('training.update', $training->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <!-- Add your form fields here -->
-        <button type="submit" class="btn btn-primary">Update</button>
+        <div class="container">
+            <div class="form-group">
+                <label for="training_date">Training Date:</label>
+                <input type="date" class="form-control" id="training_date" name="training_date" value="{{ $training->training_date }}" required>
+            </div>  
+
+            <div class="form-group">
+                <label for="trainer">Trainer Name:</label>
+                <input type="text" class="form-control" id="trainer" name="trainer" value="{{ $training->trainer }}" placeholder="Enter trainer's name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="members_name">Member Name:</label>
+                <input type="text" class="form-control" id="members_name" name="members_name" value="{{ $training->members_name }}" placeholder="Enter Member's name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="members_ID">Member ID:</label>
+                <input type="text" class="form-control" id="members_ID" name="members_ID" value="{{ $training->members_ID }}" placeholder="Enter Member's ID" required>
+            </div> 
+            
+            <div class="form-group">
+                <label for="location">Training Location:</label>
+                <input type="text" class="form-control" id="location" name="location" value="{{ $training->location }}" placeholder="Enter location" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Training Category:</label>
+                <select class="form-control" id="category" name="category">
+                    <option value="Farming" {{ $training->category == 'Farming' ? 'selected' : '' }}>Farming</option>
+                    <option value="Business Management" {{ $training->category == 'Business Management' ? 'selected' : '' }}>Business Management</option>
+                    <option value="Handicrafts" {{ $training->category == 'Handicrafts' ? 'selected' : '' }}>Handicrafts</option>
+                    <option value="Other" {{ $training->category == 'Other' ? 'selected' : '' }}>Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Training</button>
+        </div>
     </form>
 @stop

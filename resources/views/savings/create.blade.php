@@ -90,6 +90,7 @@ input[type="radio"] {
     background color: black;
 }
 input[type="submit"] {
+    align-items: left;
     background-color: #092f57;
     color: white;
     padding: 10px 20px;
@@ -99,7 +100,7 @@ input[type="submit"] {
     width: 100%;
     font-size: 16px;
     display: block;
-    margin: 0 auto;
+    margin: 0; /* Changed from '0 auto' to '0' to align left */
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 

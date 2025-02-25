@@ -21,7 +21,7 @@
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-bold">Members</h1>
         
-        <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700">Add Member</a>
+        <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         @foreach ($members as $member)
@@ -81,14 +81,19 @@
                 </div>
             </div>
         `;
+        confirmationBox.id = 'confirmationBox';
         document.body.appendChild(confirmationBox);
     }
 
     function closeConfirmationBox() {
-        document.querySelector('.fixed.inset-0').remove();
+        const confirmationBox = document.getElementById('confirmationBox');
+        if (confirmationBox) {
+            confirmationBox.remove();
+        }
     }
 
     function submitDeleteForm() {
+        closeConfirmationBox();
         formToSubmit.submit();
     }
 

@@ -114,24 +114,16 @@ input[type="submit"]:hover {
         @csrf
         <h1>Create IGA</h1>
         <div class="form-group">
-            <label for="member-id">Member-id</label>
+            <label for="member-id">Member id</label>
             <input type="text" class="form-control" id="member-id" name="member-id" required>
         </div>
         <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">Members Name</label>
             <input type="text" class="form-control" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="description" name="description" required></textarea>
         </div>
         <div class="form-group">
             <label for="date">Date</label>
             <input type="date" class="form-control" id="date" name="date" required>
-        </div>
-        <div class="form-group">
-            <label for="activity">Activity Name</label>
-            <input type="text" class="form-control" id="activity" name="activity" placeholder="Enter activity name" required>
         </div>
         <div class="form-group">
             <label for="category">Category</label>
@@ -141,10 +133,6 @@ input[type="submit"]:hover {
                 <option value="Services">Services</option>
                 <option value="Other">Other</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label for="investment">Amount Invested</label>
-            <input type="number" class="form-control" id="investment" name="investment" placeholder="Enter amount invested" required>
         </div>
         <div class="form-group">
             <label for="earned">Amount Earned</label>

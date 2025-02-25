@@ -27,26 +27,55 @@ class TrainingController extends Controller
 
     public function store(Request $request)
     {
-        // Store training logic
+        $request->validate([
+            'training_date' => 'required|date',
+            'trainer' => 'required|string|max:255',
+            'members_name' => 'required|string|max:255',
+            'members_ID' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+        ]);
+
+        Training::create($request->all());
+
+        return redirect()->route('training.create')->with('success', 'Training added successfully.');
     }
 
     public function show($id)
     {
-        return view('training.show', compact('id'));
+        $training = Training::findOrFail($id);
+        return view('training.show', compact('training'));
     }
 
     public function edit($id)
     {
-        return view('training.edit', compact('id'));
+        $training = Training::findOrFail($id);
+        return view('training.edit', compact('training'));
     }
 
     public function update(Request $request, $id)
     {
-        // Update training logic
+        $request->validate([
+            'training_date' => 'required|date',
+            'trainer' => 'required|string|max:255',
+            'members_name' => 'required|string|max:255',
+            'members_ID' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+        ]);
+
+        $training = Training::findOrFail($id);
+        $training->update($request->all());
+
+        return redirect()->route('training.index')->with('success', 'Training updated successfully.');
+        
     }
 
     public function destroy($id)
     {
-        // Delete training logic
+        $training = Training::findOrFail($id);
+        $training->delete();
+
+        return redirect()->route('training.index')->with('success', 'Training deleted successfully.');
     }
 }

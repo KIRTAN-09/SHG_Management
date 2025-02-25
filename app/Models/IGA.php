@@ -9,7 +9,14 @@ class IGA extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = [
+        'group_id',
+        'activity',
+        'date',
+        'location',
+        'amount',
+        'description',
+    ];
 
-    protected $table = 'igas'; // Add this line
+    protected $table = 'igas'; // Ensure the table name is correct
 }

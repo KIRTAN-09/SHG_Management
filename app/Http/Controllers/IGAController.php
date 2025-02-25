@@ -9,10 +9,10 @@ class IGAController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('permission:IGA-list|IGA-create|IGA-edit|IGA-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:IGA-create', ['only' => ['create','store']]);
-        $this->middleware('permission:IGA-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:IGA-delete', ['only' => ['destroy']]);
+        // // $this->middleware('permission:IGA-list|IGA-create|IGA-edit|IGA-delete', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:IGA-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:IGA-edit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:IGA-delete', ['only' => ['destroy']]);
     }
     public function index()
     {
@@ -28,6 +28,7 @@ class IGAController extends Controller
     public function store(Request $request)
     {
         $iga = new IGA($request->all());
+        $iga->date = $request->input('date'); // Add this line to handle the date field
         $iga->save();
         return redirect()->route('igas.index');
     }
@@ -48,6 +49,8 @@ class IGAController extends Controller
     {
         $iga = IGA::findOrFail($id);
         $iga->update($request->all());
+        $iga->date = $request->input('date'); // Add this line to handle the date field
+        $iga->save();
         return redirect()->route('igas.index');
     }
 
