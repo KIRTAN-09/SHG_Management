@@ -1,48 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-2xl font-bold mb-4">Edit Saving</h1>
-            <form action="{{ route('savings.update', $saving->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <!-- New fields -->
-                <div class="mb-4">
-                    <label for="member-id" class="block text-gray-700">Member ID:</label>
-                    <input type="text" id="member-id" name="member-id" class="form-input mt-1 block w-full" placeholder="Enter Member ID" value="{{ $saving->member_id }}" required>
-                    <span id="member-id-error" class="text-red-500 text-sm mt-1" style="display: none;">ID must be a number</span>
-                </div>
-                <div class="mb-4">
-                    <label for="member-name" class="block text-gray-700">Member Name:</label>
-                    <input type="text" id="member-name" name="member-name" class="form-input mt-1 block w-full" placeholder="Enter Member Name" value="{{ $saving->member_name }}" required>
-                    <span id="member-name-error" class="text-red-500 text-sm mt-1" style="display: none;">Name must be in characters</span>
-                </div>
-                <div class="mb-4">
-                    <label for="date-of-deposit" class="block text-gray-700">Date of Deposit:</label>
-                    <input type="date" id="date-of-deposit" name="date-of-deposit" class="form-input mt-1 block w-full" value="{{ $saving->date_of_deposit }}" required>
-                </div>
-                <div class="mb-4">
-                    <label for="amount" class="block text-gray-700">Amount:</label>
-                    <input type="number" id="amount" name="amount" class="form-input mt-1 block w-full" value="{{ $saving->amount }}" required>
-                    <span id="amount-error" class="text-red-500 text-sm mt-1" style="display: none;">Amount Can't Be Negative</span>
-                </div>
-                <input type="submit" value="Submit" class="btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">    
-            </form>
+<link rel="stylesheet" href="{{ asset('css/savings/SavingEdit.css') }}">
+
+<div class="container">
+    <form action="{{ route('savings.update', $saving->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <h1><b>Edit Savings</b></h1>
+
+        <!-- Group ID/Name -->
+        <label>Group:</label>
+        <div class="radio-group">
+            <input type="radio" id="group-id-option" name="group-option" value="id" {{ is_numeric($saving->group) ? 'checked' : '' }}>
+            <label for="group-id-option">ID</label>
+            <input type="radio" id="group-name-option" name="group-option" value="name" {{ !is_numeric($saving->group) ? 'checked' : '' }}>
+            <label for="group-name-option">Name</label>
         </div>
-    </div>
+        <input type="text" id="group-id" name="group-id" placeholder="Enter Group ID" value="{{ is_numeric($saving->group) ? $saving->group : '' }}" style="{{ !is_numeric($saving->group) ? 'display: none;' : '' }}">
+        <input type="text" id="group-name" name="group-name" placeholder="Enter Group Name" value="{{ !is_numeric($saving->group) ? $saving->group : '' }}" style="{{ is_numeric($saving->group) ? 'display: none;' : '' }}"><br><br>
+
+        <!-- Member ID -->
+        <label for="member-id">Member ID:</label>
+        <input type="text" id="member-id" name="member-id" placeholder="Enter Member ID" value="{{ $saving->member_id }}" required><br><br>
+
+        <!-- Member Name -->
+        <label for="member-name">Member Name:</label>
+        <input type="text" id="member-name" name="member-name" placeholder="Enter Member Name" value="{{ $saving->member_name }}" required><br><br>
+
+        <!-- Date of deposit -->
+        <label for="date-of-deposit">Date of Deposit:</label>
+        <input type="date" id="date-of-deposit" name="date-of-deposit" value="{{ $saving->date_of_deposit }}" required><br><br>
+
+        <!-- Amount -->
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" value="{{ $saving->amount }}" required><br><br>
+
+        <input type="submit" value="Update">    
+    </form>
 </div>
-  
+
 <script>
-document.getElementById('amount').addEventListener('input', function() {
-    const value = this.value;
-    if (value < 0) {
-        this.value = '';
-        document.getElementById('amount-error').style.display = 'block';
-    } else {
-        document.getElementById('amount-error').style.display = 'none';
-    }
+document.getElementById('group-id-option').addEventListener('change', function() {
+    document.getElementById('group-id').style.display = 'block';
+    document.getElementById('group-name').style.display = 'none';
+});
+document.getElementById('group-name-option').addEventListener('change', function() {
+    document.getElementById('group-id').style.display = 'none';
+    document.getElementById('group-name').style.display = 'block';
 });
 </script>
 @endsection
