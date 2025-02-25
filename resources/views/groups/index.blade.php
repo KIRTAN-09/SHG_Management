@@ -98,7 +98,7 @@
                     <p><strong>Village Name:</strong> ${data.village_name}</p>
                     <p><strong>President Name:</strong> ${data.president_name}</p>
                     <p><strong>Secretary Name:</strong> ${data.secretary_name}</p>
-                    <p><strong>No. of Members:</strong> ${data.totalMembers}</p>
+                    <p><strong>No. of Members:</strong> ${data.no_of_members}</p>
                 `;
                 document.getElementById('modalContent').innerHTML = modalContent;
                 document.getElementById('groupModal').classList.remove('hidden');

@@ -46,24 +46,26 @@ class GroupController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        // dd($request->all());
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'village_name' => 'required|string|max:255',
             'president_name' => 'required|string|max:255',
             'secretary_name' => 'required|string|max:255',
-            'no_of_members' => 'required|integer|min:10|max:20',
+            // 'no_of_members' => 'required|integer|min:10|max:20',
         ], [
             'no_of_members.min' => 'The number of members must be at least 10.',
             'no_of_members.max' => 'The number of members may not be greater than 20.',
         ]);
 
-        if ($validated['no_of_members'] < 10 || $validated['no_of_members'] > 20) {
-            return redirect()->back()->withErrors([
-                'no_of_members' => 'The number of members must be between 10 and 20.'
-            ])->withInput();
-        }
+        // if ($validated['no_of_members'] < 10 || $validated['no_of_members'] > 20) {
+        //     return redirect()->back()->withErrors([
+        //         'no_of_members' => 'The number of members must be between 10 and 20.'
+        //     ])->withInput();
+        // }
 
         $validated['group_id'] = uniqid('GRP');
+        $validated['no_of_members'] = 0; // Initialize with 0 members
 
         Group::create($validated);
 
@@ -72,7 +74,9 @@ class GroupController extends Controller
 
     public function show($id)
     {
+        // dd('hi');
         $group = Group::findOrFail($id);
+        // dd($group);
         return response()->json($group);
     }
 

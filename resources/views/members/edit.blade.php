@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Edit Member</h1>
+<link rel="stylesheet" href="{{ asset('css/Members/Edit.css') }}">
     <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-6" onsubmit="return validatePhotoSize()">
         @csrf
         @method('PUT')
-
+        <h1 class="text-2xl font-bold mb-4">Edit Member</h1>
         <div class="mb-4">
             <label for="photo" class="block text-gray-700">Photo</label>
             <input type="file" class="form-control" id="photo" name="photo" onchange="validatePhotoSize()">

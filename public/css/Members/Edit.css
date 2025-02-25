@@ -1,7 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
-<style>
+/* General Styles */
 body, html {
     height: 100%;
     margin: 0;
@@ -9,6 +6,7 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
+/* Center the form container */
 .container {
     display: flex;
     justify-content: center;
@@ -19,6 +17,7 @@ body, html {
     box-sizing: border-box;
 }
 
+/* Form Styling */
 form {
     width: 100%;
     max-width: 600px;
@@ -33,15 +32,16 @@ form:hover {
     box-shadow: 10px 10px 15px rgba(19, 19, 20, 0.6);
 }
 
+/* Heading */
 h1 {
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
     color: #495057;
     font-size: 28px;
-    font-style: bold;
 }
 
+/* Label Styling */
 label {
     display: block;
     margin-bottom: 10px;
@@ -50,8 +50,12 @@ label {
     font-size: 16px;
 }
 
+/* Input Fields */
 input[type="text"],
-input[type="number"] {
+input[type="tel"],
+input[type="number"],
+select,
+input[type="file"] {
     width: calc(100% - 16px);
     padding: 10px;
     margin-bottom: 20px;
@@ -59,16 +63,19 @@ input[type="number"] {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
-    font-weight: normal; /* Ensure font is not bold */
     transition: border-color 0.3s ease-in-out;
 }
 
 input[type="text"]:focus,
-input[type="number"]:focus {
+input[type="tel"]:focus,
+input[type="number"]:focus,
+select:focus,
+input[type="file"]:focus {
     border-color: #007bff;
     outline: none;
 }
 
+/* Submit Button */
 input[type="submit"] {
     background-color: #092f57;
     color: white;
@@ -87,33 +94,20 @@ input[type="submit"]:hover {
     background-color: #0056b3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-</style>
-<div class="container">
-    
-    <form action="{{ route('groups.store') }}" method="POST">
-        @csrf
-        <h1><b>Add Group</b></h1>
-        <div class="form-group">
-            <label for="name">Group Name</label>
-            <input type="text" name="name" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="village_name">Village Name</label>
-            <input type="text" name="village_name" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="president_name">Group President Name</label>
-            <input type="text" name="president_name" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="secretary_name">Group Secretary Name</label>
-            <input type="text" name="secretary_name" class="form-control" required>
-        </div>
-        <!-- <div class="form-group">
-            <label for="no_of_members">No. of Members</label>
-            <input type="number" name="no_of_members" class="form-control" required>
-        </div> -->
-        <button type="submit" class="btn btn-primary">Add Group</button>
-    </form>
-</div>
-@endsection
+
+/* Error Message */
+.error-message {
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+/* Image Preview */
+img {
+    display: block;
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
