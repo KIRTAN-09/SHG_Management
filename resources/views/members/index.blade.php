@@ -13,14 +13,11 @@
     </div>
 @stop
         
-
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="container mx-auto p-4">
-    <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold">Members</h1>
-        
+    <div class="flex justify-start items-center mb-4">
         <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -50,7 +47,8 @@
 
 <!-- Modal -->
 <div id="memberModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl relative">
+     
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold">Member Details</h2>
         </div>
@@ -58,7 +56,7 @@
             <!-- Member details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
+            <button onclick="closeModal()" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Close</button>
         </div>
     </div>
 </div>

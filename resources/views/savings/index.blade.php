@@ -11,7 +11,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <a href="{{ route('savings.create') }}" class="btn btn-primary mb-3">Add New Saving</a>
+            <a href="{{ route('savings.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Add New Saving</a>
             <table class="table table-bordered">
                 <thead>
                     <tr>

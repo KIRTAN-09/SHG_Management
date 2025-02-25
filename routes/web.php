@@ -11,6 +11,7 @@ use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\IGAController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -19,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
@@ -30,8 +32,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('igas', IGAController::class);
     Route::resource('training', TrainingController::class);
     Route::resource('meetings', MeetingController::class);
+    Route::resource('reports', ReportController::class);
     Route::get('/roles/{id}/json', [RoleController::class, 'showJson'])->name('roles.showJson');
     Route::get('/igas/activities', [IGAController::class, 'activities'])->name('igas.activities');
+    Route::get('/reports/filter', [ReportController::class, 'filter'])->name('reports.filter');
 });
 
-Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');

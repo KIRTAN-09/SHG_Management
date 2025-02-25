@@ -15,6 +15,6 @@
 
         </div>
     </div>
-    <a href="{{ route('savings.index') }}" class="btn btn-primary mt-3">Back to Savings List</a>
+    <a href="{{ route('training.index') }}" class="btn btn-primary mt-3">Back to Training List</a>
 </div>
 @endsection

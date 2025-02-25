@@ -4,9 +4,9 @@
 <br>
 <div class="container">
     <h2>Meetings</h2>
-    <link rel="stylesheet" href="{{ asset('css/Meetings/Index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/table.css') }}">
     <div class="pull-right">
-        <a href="{{ route('meetings.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Schedule a New Meeting</a>
+        <a href="{{ route('meetings.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Schedule a New Meeting</a>
     </div>
     <div class="table-container">
         <table class="table mt-3">
