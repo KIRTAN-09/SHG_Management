@@ -24,7 +24,7 @@
         @foreach ($groups as $group)
             <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
                 <div class="text-center">
-                    <h3 class="text-l font-bold mb-2">{{ $group->name }}</h3>
+                    <h3 class="text-l font-bold mb-2">{{ $group->name }} 1</h3>
                     <p class="text-gray-600 mb-2"><strong>Group ID:</strong> {{ $group->group_id }}</p> 
                     <div class="flex justify-center space-x-2 mt-4">
                     <button onclick="showGroupDetails({{ $group->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
@@ -98,7 +98,7 @@
                     <p><strong>Village Name:</strong> ${data.village_name}</p>
                     <p><strong>President Name:</strong> ${data.president_name}</p>
                     <p><strong>Secretary Name:</strong> ${data.secretary_name}</p>
-                    <p><strong>No. of Members:</strong> ${data.totalMembers}</p>
+                    <p><strong>No. of Members:</strong> ${data.no_of_members}</p>
                 `;
                 document.getElementById('modalContent').innerHTML = modalContent;
                 document.getElementById('groupModal').classList.remove('hidden');

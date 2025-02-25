@@ -59,6 +59,10 @@ class MemberController extends Controller
         $validated['member_id'] = uniqid('MEM');
         $validated['status'] = $request->input('status'); // Add status to validated data
 
+        $validated['group'] = $request->input('group');
+        $group = Group::where('name', $validated['group'])->firstOrFail();
+        $group->increment('no_of_members');
+
         Member::create($validated);
 
         return redirect()->route('members.index')->with('success', 'Member added successfully.');
@@ -114,6 +118,8 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $member = Member::findOrFail($id);
+        $group = Group::where('name', $member->group)->firstOrFail();
+        $group->decrement('no_of_members');
         $member->delete();
 
         return redirect()->route('members.index')->with('success', 'Member deleted successfully');
