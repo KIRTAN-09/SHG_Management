@@ -109,10 +109,10 @@ input[type="submit"]:hover {
             <label for="secretary_name">Group Secretary Name</label>
             <input type="text" name="secretary_name" class="form-control" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="no_of_members">No. of Members</label>
             <input type="number" name="no_of_members" class="form-control" required>
-        </div>
+        </div> -->
         <button type="submit" class="btn btn-primary">Add Group</button>
     </form>
 </div>
