@@ -31,11 +31,10 @@ class GroupController extends Controller
                              ->orWhere('president_name', 'like', "%{$search}%")
                              ->orWhere('secretary_name', 'like', "%{$search}%")
                              ->orWhere('no_of_members', 'like', "%{$search}%");
-            })
-            ->paginate(10);
-
+            });
         $totalMembers = Member::count(); // Count total members
         $totalGroups = Group::count(); // Count total groups
+        $groups = Group::with('members')->paginate(14); // Ensure members relationship is loaded
         return view('groups.index', compact('groups', 'totalMembers'));
     }
 
