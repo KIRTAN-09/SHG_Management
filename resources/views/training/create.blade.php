@@ -10,7 +10,7 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 <div class="container mt-5">
-    <form action="{{ route('training.store') }}" method="POST">
+    <form action="{{ route('training.store') }}" method="POST" onsubmit="return handleFormSubmit(event)">
         @csrf
         <h1 class="text-center mb-4"><b>Add Training</b></h1>
         <!-- Add your form fields here -->
@@ -54,4 +54,31 @@
         </div>
     </form>
 </div>
+
+<script>
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = "{{ route('training.index') }}";
+            } else {
+                alert('Failed to add training. Please try again.');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('Failed to add training. Please try again.');
+        });
+
+        return false;
+    }
+</script>
 @stop
