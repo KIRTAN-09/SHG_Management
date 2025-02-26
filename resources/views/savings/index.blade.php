@@ -28,7 +28,6 @@
                     @foreach($savings as $saving)
                         <tr>
                             <td>{{ $saving->group_id }}</td>
-                            <td>{{ $saving->group_id }}</td>
                             <td>{{$saving->group_name  }}</td>
                             <td>{{ $saving->member_id }}</td>
                             <td>{{ $saving->member_name }}</td>
