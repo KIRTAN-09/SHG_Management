@@ -21,8 +21,8 @@ class MemberController extends Controller
                     $query->where('name', 'like', "%{$search}%")
                         ->orWhere('village', 'like', "%{$search}%")
                         ->orWhere('group', 'like', "%{$search}%")
-                        ->orWhere('caste', 'like', "%{$search}%")
-                        ->orWhere('status', 'like', "%{$search}%");
+                        ->orWhere('caste', 'like', "%{$search}%");
+                        // ->orWhere('status', 'like', "%{$search}%");
                 });
             })
             ->orderBy('created_at', 'desc') // Sort by latest added
