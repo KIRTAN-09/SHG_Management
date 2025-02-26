@@ -12,6 +12,7 @@ class MemberController extends Controller
 
     public function index(Request $request)
     {
+        // dd('index');
         $search = $request->input('search');
 
         $members = Member::query()
@@ -32,8 +33,9 @@ class MemberController extends Controller
 
     public function create()
     {
-        $groups = Group::all(); // Assuming you have a Group model
-        return view('members.create', compact('groups'));
+        dd('test');
+        $groups = Group::all();
+        return view('members.create', compact('groups'));	
     }
 
     public function store(Request $request)
