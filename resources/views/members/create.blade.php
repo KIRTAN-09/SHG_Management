@@ -1,67 +1,63 @@
-@extends('adminlte::page')
-
-@section('title', 'Add Member')
-
-@section('content_header')
-    <h1>Add Member</h1>
-@stop
+@extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data">
+
+<div class="container">
+<link rel="stylesheet" href="{{ asset(path: 'css/Members/Create.css') }}">
+    <form action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return validatePhotoSize()">
         @csrf
-        <div class="mb-4">
-            <label for="name" class="block text-gray-700">Name:</label>
-            <input type="text" name="name" id="name" class="py-2 px-4 rounded-lg border border-gray-300 w-full">
+        <h1><b>Add Member</b></h1>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
         </div>
-        <div class="mb-4">
-            <label for="number" class="block text-gray-700">Number:</label>
-            <input type="tel" id="number" name="number" class="py-2 px-4 rounded-lg border border-gray-300 w-full">
+        <div class="form-group">
+            <label for="number">Number:</label>
+            <input type="tel" id="number" name="number">
         </div>
-        <div class="mb-4">
-            <label for="village" class="block text-gray-700">Village:</label>
-            <input type="text" id="village" name="village" class="py-2 px-4 rounded-lg border border-gray-300 w-full">
+        <div class="form-group">
+            <label for="village">Village:</label>
+            <input type="text" id="village" name="village" required>
         </div>
-        <div class="mb-4">
-            <label for="group" class="block text-gray-700">Group:</label>
-            <select id="group" name="group" class="py-2 px-4 rounded-lg border border-gray-300 w-full">
+        <div class="form-group">
+            <label for="group">Group:</label>
+            <select id="group" name="group" required>
             @foreach($groups as $group)
                 <option value="{{ $group->name }}">{{ $group->name }}</option>
             @endforeach
             </select>
         </div>
-        <div class="mb-4">
-            <label for="caste" class="block text-gray-700">Caste:</label>
-            <input type="text" id="caste" name="caste" class="py-2 px-4 rounded-lg border border-gray-300 w-full">
+        <div class="form-group">
+            <label for="caste">Caste:</label>
+            <input type="text" id="caste" name="caste" required>
         </div>
-        <div class="mb-4">
-            <label for="share_price" class="block text-gray-700">Share Price:</label>
-            <input type="number" id="share_price" name="share_price" class="py-2 px-4 rounded-lg border border-gray-300 w-full">
+        <div class="form-group">
+            <label for="share_price">Share Price:</label>
+            <input type="number" id="share_price" name="share_price" required>
         </div>
-        <div class="mb-4">
-            <label for="member_type" class="block text-gray-700">Member Type:</label>
-            <select id="member_type" name="member_type" class="py-2 px-4 rounded-lg border border-gray-300 w-full">
+        <div class="form-group">
+            <label for="member_type">Member Type:</label>
+            <select id="member_type" name="member_type" required>
                 <option value="President">President</option>
                 <option value="Secretary">Secretary</option>
                 <option value="Member">Member</option>
             </select>
         </div>
-        <div class="mb-4">
-            <label for="status" class="block text-gray-700">Status:</label>
-            <select id="status" name="status" class="py-2 px-4 rounded-lg border border-gray-300 w-full">
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
             </select>
         </div>
-        <div class="mb-4">
-            <label for="photo" class="block text-gray-700">Photo:</label>
-            <input type="file" id="photo" name="photo" class="py-2 px-4 rounded-lg border border-gray-300 w-full" onchange="validatePhotoSize()">
+        <div class="form-group">
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="photo" onchange="validatePhotoSize()">
             <span id="photo-error" style="color: red; display: none;">Photo size should not be more than 1 MB</span>
         </div>
-        <div class="mb-4">
-            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700">Save</button>
-        </div>
+        <input type="submit" value="Add Member">
     </form>
-@stop
+</div>
 
 <script>
 function validatePhotoSize() {
@@ -85,3 +81,6 @@ function validatePhotoSize() {
     return true;
 }
 </script>
+
+
+@endsection

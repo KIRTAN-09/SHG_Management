@@ -12,7 +12,7 @@ class MemberController extends Controller
 
     public function index(Request $request)
     {
-        // dd('index');
+       
         $search = $request->input('search');
 
         $members = Member::query()
