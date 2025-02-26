@@ -19,8 +19,8 @@
                         <th>Group Name</th>
                         <th>Member ID</th>
                         <th>Member Name</th>
-                        <th>Amount</th>
                         <th>Date</th>
+                        <th>Amount</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -28,11 +28,12 @@
                     @foreach($savings as $saving)
                         <tr>
                             <td>{{ $saving->group_id }}</td>
+                            <td>{{ $saving->group_id }}</td>
                             <td>{{$saving->group_name  }}</td>
                             <td>{{ $saving->member_id }}</td>
                             <td>{{ $saving->member_name }}</td>
-                            <td>{{ $saving->amount }}</td>
                             <td>{{ $saving->date_of_deposit }}</td>
+                            <td>{{ $saving->amount }}</td>
                             <td>
                                 <a href="{{ route('savings.show', $saving->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('savings.edit', $saving->id) }}" class="btn btn-warning">Edit</a>
