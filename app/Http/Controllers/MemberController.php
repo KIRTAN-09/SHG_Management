@@ -33,7 +33,7 @@ class MemberController extends Controller
 
     public function create()
     {
-        dd('test');
+        
         $groups = Group::all();
         return view('members.create', compact('groups'));	
     }
