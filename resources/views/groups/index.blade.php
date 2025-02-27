@@ -17,8 +17,8 @@
 
 <div class="container mx-auto p-4">
     <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold">Groups</h1>
-        <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700">Add Group</a>
+        
+        <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i>Add Group</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         @foreach ($groups as $group)

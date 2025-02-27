@@ -12,6 +12,7 @@ class MemberController extends Controller
 
     public function index(Request $request)
     {
+       
         $search = $request->input('search');
 
         $members = Member::query()
@@ -20,8 +21,8 @@ class MemberController extends Controller
                     $query->where('name', 'like', "%{$search}%")
                         ->orWhere('village', 'like', "%{$search}%")
                         ->orWhere('group', 'like', "%{$search}%")
-                        ->orWhere('caste', 'like', "%{$search}%")
-                        ->orWhere('status', 'like', "%{$search}%");
+                        ->orWhere('caste', 'like', "%{$search}%");
+                        // ->orWhere('status', 'like', "%{$search}%");
                 });
             })
             ->orderBy('created_at', 'desc') // Sort by latest added
@@ -32,8 +33,9 @@ class MemberController extends Controller
 
     public function create()
     {
-        $groups = Group::all(); // Assuming you have a Group model
-        return view('members.create', compact('groups'));
+        
+        $groups = Group::all();
+        return view('members.create', compact('groups'));	
     }
 
     public function store(Request $request)

@@ -10,10 +10,9 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="container mx-auto p-4">
-    <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold">Roles</h1>
+    <div class="flex justify-start items-center mb-4">
         @can('role-create')
-            <a href="{{ route('roles.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700">Create New Role</a>
+            <a href="{{ route('roles.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Role</a>
         @endcan
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

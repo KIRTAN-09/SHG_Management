@@ -4,7 +4,7 @@
 <div class="container">
 <h2 class="text-2xl font-bold mb-4">IGAs</h2>
 <link rel="stylesheet" href="{{ asset('css/table.css') }}">
-    <a href="{{ route('igas.create') }}" class="btn btn-primary">Create IGA</a>
+    <a href="{{ route('igas.create') }}" class="btn btn-primary"><i class="fa fa-plus"> </i> Create IGA</a>
     <table class="table">
         <thead>
             <tr>

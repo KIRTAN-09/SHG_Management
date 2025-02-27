@@ -20,11 +20,20 @@ class GroupController extends Controller
     }
     
 
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+        $groups = Group::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%")
+                             ->orWhere('group_id', 'like', "%{$search}%")
+                             ->orWhere('village_name', 'like', "%{$search}%")
+                             ->orWhere('president_name', 'like', "%{$search}%")
+                             ->orWhere('secretary_name', 'like', "%{$search}%")
+                             ->orWhere('no_of_members', 'like', "%{$search}%");
+            });
         $totalMembers = Member::count(); // Count total members
         $totalGroups = Group::count(); // Count total groups
-        // $totalGroups = Group::count(); // Count total groups
         $groups = Group::with('members')->paginate(14); // Ensure members relationship is loaded
         return view('groups.index', compact('groups', 'totalMembers'));
     }
