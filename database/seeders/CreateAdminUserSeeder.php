@@ -22,7 +22,7 @@ class CreateAdminUserSeeder extends Seeder
                 'password' => bcrypt('1609')
             ],
             [
-                'name' => 'Jay Survey',
+                'name' => 'Jay Surve',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('123456')
             ],

@@ -362,9 +362,9 @@ return [
                 
             ],
             [
-                'text' => 'Reports', 
+                'text' => 'Generate Reports', 
                 'url' => 'reports',
-                'icon' => 'fas fa-file-excel',
+                'icon' => 'fas fa-file-pdf',
                 
             ],
             

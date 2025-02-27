@@ -11,7 +11,8 @@
                 <th>Name</th>
                 <th>Date</th>
                 <th>Category</th>
-                <th>Earned</th>                                                                          
+                <th>Earned</th>   
+                <!-- <th>Activity</th>                                                                        -->
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ $iga->date }}</td>
                 <td>{{ $iga->category }}</td>
                 <td>{{ $iga->earned }}</td>
+                <!-- <td>{{ $iga->activity}}</td> -->
                 <td>
                     <a href="{{ route('igas.show', $iga->id) }}" class="btn btn-info">View</a>
                     <a href="{{ route('igas.edit', $iga->id) }}" class="btn btn-warning">Edit</a>
