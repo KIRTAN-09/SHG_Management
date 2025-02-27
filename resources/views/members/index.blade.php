@@ -55,12 +55,12 @@
                         <td class="py-2">{{ $member->status }}</td>
                         <td class="py-2">
                             <div class="flex justify-center space-x-2">
-                                <button onclick="showMemberDetails({{ $member->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
-                                <a href="{{ route('members.edit', $member->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
+                                <button onclick="showMemberDetails({{ $member->id }})" class="btn btn-info">View</button>
+                                <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
                                 <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </div>
                         </td>
