@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Meeting;
+use App\Models\Group;
 use Illuminate\Support\Facades\Storage;
 
 class MeetingController extends Controller
@@ -22,7 +23,8 @@ class MeetingController extends Controller
      */
     public function create()
     {
-        return view('meetings.create');
+        $groups = Group::all();
+        return view('meetings.create', compact('groups'));
     }
 
     /**

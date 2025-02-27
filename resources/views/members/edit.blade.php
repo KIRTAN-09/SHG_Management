@@ -32,9 +32,13 @@
             <input type="text" class="form-control" id="village" name="village" value="{{ $member->village }}" required>
         </div>
 
-        <div class="mb-4">
-            <label for="group" class="block text-gray-700">Group</label>
-            <input type="text" class="form-control" id="group" name="group" value="{{ $member->group }}" required>
+        <div class="form-group">
+            <label for="group">Group:</label>
+            <select id="group" name="group" required>
+            @foreach($groups as $group)
+                <option value="{{ $group->name }}">{{ $group->name }}</option>
+            @endforeach
+            </select>
         </div>
 
         <div class="mb-4">
