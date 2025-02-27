@@ -12,8 +12,8 @@ class MemberController extends Controller
 
     public function index(Request $request)
     {
-       
         $search = $request->input('search');
+        $status = $request->input('sort');
 
         $members = Member::query()
             ->when($search, function ($query, $search) {
@@ -25,11 +25,15 @@ class MemberController extends Controller
                         // ->orWhere('status', 'like', "%{$search}%");
                 });
             })
+            ->when($status, function ($query, $status) {
+                return $query->where('status', $status);
+            })
             ->orderBy('created_at', 'desc') // Sort by latest added
             ->paginate(15);
 
         return view('members.index', compact('members'));
     }
+    
 
     public function create()
     {

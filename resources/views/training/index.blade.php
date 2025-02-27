@@ -11,14 +11,14 @@
     <!-- Search and Sort Form -->
     <form method="GET" action="{{ route('training.index') }}" class="mb-4">
         <div class="flex justify-end">
-            <input type="text" name="search" placeholder="Search..." class="py-2 px-2 w-1/6 rounded-lg border border-gray-300 mr-2" value="{{ request('search') }}">
-            <select name="sort" class="py-2 px-2 rounded-lg border border-gray-300 mr-2">
+            <input type="text" name="search" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2" value="{{ request('search') }}">
+            <select name="sort" class="py-2 px-2 rounded-lg border border-gray-300 w-20 text-xs mr-2">
                 <option value="">Sort By</option>
                 <option value="date_asc" {{ request('sort') == 'date_asc' ? 'selected' : '' }}>Date Ascending</option>
                 <option value="date_desc" {{ request('sort') == 'date_desc' ? 'selected' : '' }}>Date Descending</option>
                 <option value="category" {{ request('sort') == 'category' ? 'selected' : '' }}>Category</option>
             </select>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary w-auto">Search</button>
         </div>
     </form>
     
