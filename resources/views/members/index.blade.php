@@ -7,7 +7,7 @@
     <div class="flex justify-end">
         <form action="{{ route('members.index') }}" method="GET" class="flex space-x-2">
             <input type="text" name="search" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Search</button>
+            <button type="submit" class="btn btn-primary w-auto">Search</button>
         </form>
     </div>
 @stop
@@ -15,10 +15,9 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/table.css') }}">
-
 <div class="container mx-auto p-4">
     <div class="flex justify-start items-center mb-4">
-        <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
+        <a href="{{ route('members.create') }}" class="btn btn-primary w-auto"><i class="fa fa-plus"></i> Add Member</a>
         <form action="{{ route('members.index') }}" method="GET" class="ml-4">
             <label for="view" class="mr-2">View:</label>
             <select name="view" onchange="this.form.submit()" class="py-2 px-4 rounded-lg border border-gray-300">
