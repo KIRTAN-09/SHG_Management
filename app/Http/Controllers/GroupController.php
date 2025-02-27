@@ -48,7 +48,7 @@ class GroupController extends Controller
             'no_of_members.max' => 'The number of members may not be greater than 20.',
         ]);
 
-        // if ($validated['no_of_members'] < 10 || $validated['no_of_members'] > 20) {
+        // if ($validated['no_of_members'] < 10 || $validated['no_of_members'] > 20) { 
         //     return redirect()->back()->withErrors([
         //         'no_of_members' => 'The number of members must be between 10 and 20.'
         //     ])->withInput();

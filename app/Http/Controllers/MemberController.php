@@ -89,6 +89,17 @@ class MemberController extends Controller
             Log::info('Photo updated at: ' . $validated['photo']);
         }
 
+        // Check if the group has changed
+        if ($member->group !== $validated['group']) {
+            // Decrement the old group's member count
+            $oldGroup = Group::where('name', $member->group)->firstOrFail();
+            $oldGroup->decrement('no_of_members');
+
+            // Increment the new group's member count
+            $newGroup = Group::where('name', $validated['group'])->firstOrFail();
+            $newGroup->increment('no_of_members');
+        }
+
         // Explicitly set the status field
         $member->status = $request->input('status');
         $member->update($validated);
@@ -112,7 +123,8 @@ class MemberController extends Controller
     public function edit($id)
     {
         $member = Member::findOrFail($id);
-        return view('members.edit', compact('member'));
+        $groups = Group::all(); // Assuming you have a Group model to fetch all groups
+        return view('members.edit', compact('member', 'groups'));
     }
 
     public function destroy($id)
