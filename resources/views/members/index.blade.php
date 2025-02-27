@@ -14,6 +14,7 @@
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/table.css') }}">
 
 <div class="container mx-auto p-4">
     <div class="flex justify-start items-center mb-4">
@@ -35,7 +36,7 @@
         </form>
     </div>
     @if(request('view') == 'table')
-        <table class="min-w-full bg-white">
+        <table class="table">
             <thead>
                 <tr>
                     <th class="py-2">Photo</th>
