@@ -138,10 +138,10 @@ input[type="submit"]:hover {
             <label for="earned">Amount Earned</label>
             <input type="number" class="form-control" id="earned" name="earned" placeholder="Enter amount earned" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="remarks">Remarks</label>
             <textarea class="form-control" id="remarks" name="remarks" rows="3" placeholder="Enter any remarks"></textarea>
-        </div>
+        </div> -->
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>

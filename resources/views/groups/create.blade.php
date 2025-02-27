@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
+<!-- <style>
 body, html {
     height: 100%;
     margin: 0;
@@ -87,7 +87,7 @@ input[type="submit"]:hover {
     background-color: #0056b3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-</style>
+</style> -->
 <div class="container">
     
     <form action="{{ route('groups.store') }}" method="POST">
@@ -101,14 +101,14 @@ input[type="submit"]:hover {
             <label for="village_name">Village Name</label>
             <input type="text" name="village_name" class="form-control" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="president_name">Group President Name</label>
             <input type="text" name="president_name" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="secretary_name">Group Secretary Name</label>
             <input type="text" name="secretary_name" class="form-control" required>
-        </div>
+        </div> -->
         <!-- <div class="form-group">
             <label for="no_of_members">No. of Members</label>
             <input type="number" name="no_of_members" class="form-control" required>

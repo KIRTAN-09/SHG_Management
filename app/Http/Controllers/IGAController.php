@@ -29,7 +29,7 @@ class IGAController extends Controller
     {
         $iga = new IGA($request->all());
         $iga->date = $request->input('date'); // Add this line to handle the date field
-        $iga->save();
+        $iga->save();   
         return redirect()->route('igas.index');
     }
 
