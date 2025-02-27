@@ -7,10 +7,10 @@
         <h2 class="text-2xl font-bold mb-4">Savings</h2>
         <link rel="stylesheet" href="{{ asset(path: 'css/table.css') }}">
         @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+            <div class="alert alert-success" id="success-alert">
+                {{ session('success') }}
+            </div>
+        @endif
             <a href="{{ route('savings.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Add New Saving</a>
             <table class="table table-bordered">
                 <thead>
@@ -49,4 +49,14 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }, 2000); // 2000 milliseconds = 2 seconds
+    });
+</script>
 @endsection

@@ -10,8 +10,8 @@
 <div class="container mt-5">
     <form action="{{ route('training.store') }}" method="POST" onsubmit="return handleFormSubmit(event)">
         @csrf
+        <div class="container1">
         <h1 class="text-center mb-4"><b>Add Training</b></h1>
-        <div class="container">
             <div class="form-group custom-form-group">
                 <label for="training_date">Training Date:</label>
                 <input type="date" class="form-control custom-input" id="training_date" name="training_date" required>

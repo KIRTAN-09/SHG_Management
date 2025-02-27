@@ -16,10 +16,46 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="container mx-auto p-4">
-    <div class="flex justify-between items-center mb-4">
-        
-        <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i>Add Group</a>
+    <div class="flex justify-start items-center mb-4">
+        <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Group</a>
+        <form action="{{ route('groups.index') }}" method="GET" class="ml-4">
+            <label for="view" class="mr-2">View:</label>
+            <select name="view" onchange="this.form.submit()" class="py-2 px-4 rounded-lg border border-gray-300">
+                <option value="cards" {{ request('view') == 'cards' ? 'selected' : '' }}>Cards</option>
+                <option value="table" {{ request('view') == 'table' ? 'selected' : '' }}>Table</option>
+            </select>
+        </form>
     </div>
+    @if (request('view') == 'table')
+    <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="py-2">Name</th>
+                    <th class="py-2">Group ID</th>
+                    <th class="py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($groups as $group)
+                    <tr class="bg-gray-100 border-b">
+                        <td class="py-2">{{ $group->name }}</td>
+                        <td class="py-2">{{ $group->group_id }}</td>
+                        <td class="py-2">
+                            <div class="flex justify-center space-x-2">
+                                <button onclick="showGroupDetails({{ $group->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
+                                <a href="{{ route('groups.edit', $group->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
+                                <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         @foreach ($groups as $group)
             <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
@@ -42,6 +78,7 @@
     <div class="mt-4">
         {{ $groups->links('pagination::bootstrap-4') }}
     </div>
+@endif
 </div>
 
 <!-- Modal -->
