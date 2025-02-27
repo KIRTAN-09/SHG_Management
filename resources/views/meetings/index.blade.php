@@ -3,7 +3,7 @@
 @section('content')
 <br>
 <div class="container">
-    <h2>Meetings</h2>
+    <h2 class="text-2xl font-bold mb-4">Meetings</h2>
     <link rel="stylesheet" href="{{ asset('css/table.css') }}">
     <div class="pull-right">
         <a href="{{ route('meetings.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Schedule a New Meeting</a>
@@ -31,12 +31,12 @@
                     <td>{{ $meeting->discussion }}</td>
                     <td>{{ $meeting->attendance_list }}</td>
                     <td class="action-buttons">
-                        <button type="button" class="show-btn" data-toggle="modal" data-target="#meetingModal{{ $meeting->id }}">View</button>
-                        <a href="{{ route('meetings.edit', $meeting) }}" class="edit-btn">Edit</a>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#meetingModal{{ $meeting->id }}">View</button>
+                        <a href="{{ route('meetings.edit', $meeting) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('meetings.destroy', $meeting) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="delete-btn">Delete</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
