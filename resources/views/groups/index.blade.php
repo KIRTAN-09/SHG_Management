@@ -83,7 +83,7 @@
 
 <!-- Modal -->
 <div id="groupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+    <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/4 max-w-2xl">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold">Group Details</h2>
         </div>
@@ -130,12 +130,35 @@
             .then(response => response.json())
             .then(data => {
                 const modalContent = `
-                    <p><strong>Group ID:</strong> ${data.group_id}</p>
-                    <p><strong>Name:</strong> ${data.name}</p>
-                    <p><strong>Village Name:</strong> ${data.village_name}</p>
-                    <p><strong>President Name:</strong> ${data.president_name}</p>
-                    <p><strong>Secretary Name:</strong> ${data.secretary_name}</p>
-                    <p><strong>No. of Members:</strong> ${data.no_of_members}</p>
+                    <table class="table-auto w-1/3  border-2 border-black">
+                        <tbody>
+                            <tr class="border border-black text-black">
+                                <td class="font-bold border-1 border-black">Name:</td>
+                                <td class="border-1 border-black px-4 ">${data.name}</td>
+                            </tr>
+                            <tr class="border border-black text-black">
+                                <td class="font-bold border-1 border-black">ID:</td>
+                                <td class="border-1 border-black">${data.group_id}</td>
+                            </tr>
+                            <tr class="border border-black text-black">
+                                <td class="font-bold border-1 border-black">Number:</td>
+                                <td class="border-1 border-black">${data.village_name}</td>
+                            </tr>
+                            <tr class="border border-black text-black">
+                                <td class="font-bold border-1 border-black">Village:</td>
+                                <td class="border-1 border-black">${data.president_name}</td>
+                            </tr>
+                            <tr class="border border-black text-black">
+                                <td class="font-bold border-1 border-black">Group:</td>
+                                <td class="border-1 border-black">${data.secretary_name}</td>
+                            </tr>
+                            <tr class="border border-black text-black">
+                                <td class="font-bold borde-1 border-black">Caste:</td>
+                                <td class="border-1 border-black">${data.no_of_members}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
                 `;
                 document.getElementById('modalContent').innerHTML = modalContent;
                 document.getElementById('groupModal').classList.remove('hidden');
