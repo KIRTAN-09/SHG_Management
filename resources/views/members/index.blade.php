@@ -97,8 +97,8 @@
 </div>
 
 <!-- Modal -->
-<div id="memberModal" class="fixed inset-0 flex items-center justify-center bg-blue-200 bg-opacity-50 hidden">
-    <div class="bg-pink-100 p-6 rounded-lg shadow-lg w-1/4 max-w-2xl relative">
+<div id="memberModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/4 max-w-2xl relative">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold text-black">Member Details</h2>
         </div>
@@ -153,43 +153,43 @@
                     <div class="text-center">
                         <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4">
                     </div>
-                    <table class="table-auto w-full border-2 border-black">
+                    <table class="table-auto w-full  border-2 border-black">
                         <tbody>
                             <tr class="border border-black text-black">
-                                <td class="font-bold border-2 border-black">Name:</td>
-                                <td class="border-2 border-black">${data.name}</td>
+                                <td class="font-bold border-1 border-black">Name:</td>
+                                <td class="border-1 border-black px-4 ">${data.name}</td>
                             </tr>
                             <tr class="border border-black text-black">
-                                <td class="font-bold border-2 border-black">ID:</td>
-                                <td class="border-2 border-black">${data.member_id}</td>
+                                <td class="font-bold border-1 border-black">ID:</td>
+                                <td class="border-1 border-black">${data.member_id}</td>
                             </tr>
                             <tr class="border border-black text-black">
-                                <td class="font-bold border-2 border-black">Number:</td>
-                                <td class="border-2 border-black">${data.number}</td>
+                                <td class="font-bold border-1 border-black">Number:</td>
+                                <td class="border-1 border-black">${data.number}</td>
                             </tr>
                             <tr class="border border-black text-black">
-                                <td class="font-bold border-2 border-black">Village:</td>
-                                <td class="border-2 border-black">${data.village}</td>
+                                <td class="font-bold border-1 border-black">Village:</td>
+                                <td class="border-1 border-black">${data.village}</td>
                             </tr>
                             <tr class="border border-black text-black">
-                                <td class="font-bold border-2 border-black">Group:</td>
-                                <td class="border-2 border-black">${data.group}</td>
+                                <td class="font-bold border-1 border-black">Group:</td>
+                                <td class="border-1 border-black">${data.group}</td>
                             </tr>
                             <tr class="border border-black text-black">
-                                <td class="font-bold borde-2 border-black">Caste:</td>
-                                <td class="border-2 border-black">${data.caste}</td>
+                                <td class="font-bold borde-1 border-black">Caste:</td>
+                                <td class="border-1 border-black">${data.caste}</td>
                             </tr>
                             <tr class="border border-black text-black">
-                                <td class="font-bold border-2 border-black">Share Price:</td>
-                                <td class="border-2 border-black">${data.share_price}</td>
+                                <td class="font-bold border-1 border-black">Share Price:</td>
+                                <td class="border-1 border-black">${data.share_price}</td>
                             </tr>
                             <tr class="border border-black text-black">
-                                <td class="font-bold border-2 border-black">Member Type:</td>
-                                <td class="border-2 border-black">${data.member_type}</td>
+                                <td class="font-bold border-1 border-black">Member Type:</td>
+                                <td class="border-1 border-black">${data.member_type}</td>
                             </tr>
                             <tr class="border border-black text-black">
-                                <td class="font-bold border-2 border-black">Status:</td>
-                                <td class="border-2 border-black">${data.status}</td>
+                                <td class="font-bold border-1 border-black">Status:</td>
+                                <td class="border-1 border-black">${data.status}</td>
                             </tr>
                         </tbody>
                     </table>
