@@ -204,7 +204,7 @@ document.getElementById('member-id').addEventListener('input', function() {
 
 document.getElementById('member-name').addEventListener('input', function() {
     const value = this.value;
-    if (/[^a-zA-Z]/.test(value)) {
+    if ([varchar]/.test(value)) {
         document.getElementById('member-name-error').style.display = 'block';
     } else {
         document.getElementById('member-name-error').style.display = 'none';
