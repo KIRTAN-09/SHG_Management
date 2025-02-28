@@ -63,12 +63,12 @@
                     <h3 class="text-l font-bold mb-2">{{ $group->name }}</h3>
                     <p class="text-gray-600 mb-2"><strong>Group ID:</strong> {{ $group->group_id }}</p> 
                     <div class="flex justify-center space-x-2 mt-4">
-                    <button onclick="showGroupDetails({{ $group->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
-                    <a href="{{ route('groups.edit', $group->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
+                    <button onclick="showGroupDetails({{ $group->id }})" class="btn btn-info">View</button>
+                    <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
