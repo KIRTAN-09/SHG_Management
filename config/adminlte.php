@@ -299,12 +299,26 @@ return [
     */
 
     'menu' => [
-       
+        [
+            'type' => 'dropdown',
+            'text' => 'Language',
+            'icon' => 'fas fa-globe',
+            'topnav_right' => true,
+            'url' => '#',
+        ],
+        [
+            'type' => 'dropdown',
+            'text' => '',
+            'icon' => 'fas fa-bell',
+            'topnav_right' => true,
+            'url' => '#',   
+        ],
+        
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-
+        
         // Sidebar items:
       
             [
