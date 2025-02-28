@@ -142,17 +142,3 @@ h2 {
 .pagination-controls button:hover {
     background: #ccc;
 }
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .table th, .table td {
-        padding: 8px;
-    }
-
-    .btn {
-        width: 100%;
-        text-align: center;
-        display: block;
-        margin-top: 5px;
-    }
-}
