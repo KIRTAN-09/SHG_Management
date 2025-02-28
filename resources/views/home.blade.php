@@ -31,9 +31,9 @@
     <div class="d-flex justify-content-end mb-3">
         <form method="get" class="d-flex justify-content-right">
             <input type="number" name="year" value="{{ request('year') }}" class="form-control" placeholder="Enter year">
+            <br><br>
             <button type="submit" class="btn btn-primary ml-2">Filter</button>
         </form>
-        <button id="sortButton" class="btn btn-secondary ml-2">Sort by Savings</button>
     </div>
     <canvas id="savingsChart"></canvas>
 </div>
@@ -76,14 +76,6 @@
             savingsChart.data.datasets[0].data = filteredData;
             savingsChart.update();
         @endif
-
-        document.getElementById('sortButton').addEventListener('click', function() {
-            var sortedData = savingsChart.data.datasets[0].data.slice().sort((a, b) => b - a);
-            var sortedLabels = savingsChart.data.labels.slice().sort((a, b) => savingsChart.data.datasets[0].data[savingsChart.data.labels.indexOf(b)] - savingsChart.data.datasets[0].data[savingsChart.data.labels.indexOf(a)]);
-            savingsChart.data.labels = sortedLabels;
-            savingsChart.data.datasets[0].data = sortedData;
-            savingsChart.update();
-        });
     });
 </script> 
 @endsection

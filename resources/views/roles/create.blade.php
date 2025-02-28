@@ -137,38 +137,6 @@ input[type="submit"]:hover {
                 {{ $value->name }}</label>
             <br/>
             @endforeach
-            <label><input type="checkbox" name="permission[]" value="role-list"> role-list</label><br/>
-            <label><input type="checkbox" name="permission[]" value="role-create"> role-create</label><br/>
-            <label><input type="checkbox" name="permission[]" value="role-edit"> role-edit</label><br/>
-            <label><input type="checkbox" name="permission[]" value="role-delete"> role-delete</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Member-list"> Member-list</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Member-create"> Member-create</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Member-edit"> Member-edit</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Member-delete"> Member-delete</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Group-list"> Group-list</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Group-create"> Group-create</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Group-edit"> Group-edit</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Group-delete"> Group-delete</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Savings-list"> Savings-list</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Savings-create"> Savings-create</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Savings-edit"> Savings-edit</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Savings-delete"> Savings-delete</label><br/>
-            <label><input type="checkbox" name="permission[]" value="User-list"> User-list</label><br/>
-            <label><input type="checkbox" name="permission[]" value="User-create"> User-create</label><br/>
-            <label><input type="checkbox" name="permission[]" value="User-edit"> User-edit</label><br/>
-            <label><input type="checkbox" name="permission[]" value="User-delete"> User-delete</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Iga-list"> Iga-list</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Iga-create"> Iga-create</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Iga-edit"> Iga-edit</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Iga-delete"> Iga-delete</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Training-list"> Training-list</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Training-create"> Training-create</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Training-edit"> Training-edit</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Training-delete"> Training-delete</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Meetings-list"> Meetings-list</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Meetings-create"> Meetings-create</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Meetings-edit"> Meetings-edit</label><br/>
-            <label><input type="checkbox" name="permission[]" value="Meetings-delete"> Meetings-delete</label><br/>
         </div>
         <input type="submit" value="Submit">
     </form>
