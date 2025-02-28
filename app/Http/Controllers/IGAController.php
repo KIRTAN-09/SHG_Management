@@ -14,9 +14,13 @@ class IGAController extends Controller
         // $this->middleware('permission:IGA-edit', ['only' => ['edit', 'update']]);
         // $this->middleware('permission:IGA-delete', ['only' => ['destroy']]);
     }
-    public function index()
+    public function index(Request $request)
     {
-        $igas = IGA::all();
+        $search = $request->input('search');
+        $igas = IGA::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('category', 'LIKE', "%{$search}%")
+            ->get();
         return view('igas.index', compact('igas'));
     }
 

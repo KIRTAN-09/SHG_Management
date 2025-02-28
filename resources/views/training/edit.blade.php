@@ -18,10 +18,10 @@
     @endif
 
     <form action="{{ route('training.update', $training->id) }}" method="POST">
-    <link rel="stylesheet" href="{{ asset('css/training/Create.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/create.css') }}">
         @csrf
         @method('PUT')
-        <div class="container">
+        <div class="container1">
             <div class="form-group custom-form-group">
                 <label for="training_date">Training Date:</label>
                 <input type="date" class="form-control custom-input" id="training_date" name="training_date" required>

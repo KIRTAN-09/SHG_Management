@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<br>
+<link href="{{ asset('css/create.css') }}" rel="stylesheet">
+<div class="container1">
     <h1>Edit Group</h1>
     <form action="{{ route('groups.update', $group->id) }}" method="POST">
         @csrf

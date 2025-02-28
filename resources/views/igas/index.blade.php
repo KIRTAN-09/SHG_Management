@@ -5,6 +5,14 @@
 <h2 class="text-2xl font-bold mb-4">IGAs</h2>
 <link rel="stylesheet" href="{{ asset('css/table.css') }}">
     <a href="{{ route('igas.create') }}" class="btn btn-primary"><i class="fa fa-plus"> </i> Create IGA</a>
+    <!-- Search and Sort Form -->
+    <form method="GET" action="{{ route('igas.index') }}" class="mb-4">
+        <div class="flex justify-end">
+            <input type="text" name="search" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2" value="{{ request('search') }}">
+    
+            <button type="submit" class="btn btn-primary w-auto">Search</button>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>
@@ -18,6 +26,7 @@
         </thead>
         <tbody>
             @foreach($igas as $iga)
+            @if (stripos($iga->name, request('search')) !== false || stripos($iga->category, request('search')) !== false)
             <tr>
                 <td>{{ $iga->name }}</td>
                 <td>{{ $iga->date }}</td>
@@ -34,6 +43,7 @@
                     </form>
                 </td>   
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

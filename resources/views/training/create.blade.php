@@ -6,7 +6,8 @@
 @stop
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/training/Create.css') }}">
+<br>
+<link rel="stylesheet" href="{{ asset('css/Create.css') }}">
 <div class="container mt-5">
     <form action="{{ route('training.store') }}" method="POST" onsubmit="return handleFormSubmit(event)">
         @csrf

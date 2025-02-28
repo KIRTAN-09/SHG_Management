@@ -12,9 +12,17 @@ class MeetingController extends Controller
     /**
      * Display a listing of meetings.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $meetings = Meeting::orderBy('created_at', 'desc')->paginate(10); // Sort by latest added
+        $query = Meeting::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('group_name', 'LIKE', "%{$search}%")
+                  ->orWhere('discussion', 'LIKE', "%{$search}%");
+        }
+
+        $meetings = $query->orderBy('created_at', 'desc')->paginate(10); // Sort by latest added
         return view('meetings.index', compact('meetings'));
     }
 
