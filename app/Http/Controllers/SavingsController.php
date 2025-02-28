@@ -15,9 +15,17 @@ class SavingsController extends Controller
         $this->middleware('permission:Savings-delete', ['only' => ['destroy']]);
     }
     // Display a listing of the resource.
-    public function index()
+    public function index(Request $request)
     {
-        $savings = Savings::paginate(20); // Add pagination
+        $query = Savings::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('group_name', 'LIKE', "%{$search}%")
+                  ->orWhere('member_name', 'LIKE', "%{$search}%");
+        }
+
+        $savings = $query->paginate(20); // Add pagination
         return view('savings.index', compact('savings'));
     }
 
