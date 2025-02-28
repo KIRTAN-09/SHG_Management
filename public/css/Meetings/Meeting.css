@@ -30,13 +30,14 @@ h1 {
 }
 
 form {
-    width: 60%;
+    width: 100%;
+    max-width: 1600px;
     height: 100%;
     padding: 30px;
-    border: 1px solid #080808;
+    border: 1px solid #9192b09a;
     border-radius: 20px;
-    box-shadow: 2px 7px 10px 5px rgba(8, 8, 8, 0.478);
-    background-color: #fff;
+    box-shadow: 7px 7px 10px rgba(77, 72, 72, 0.199);
+    background-color: #ffffff32;
     overflow-y: auto; /* Make form scrollable */
     display: flex;
     flex-direction: column;
@@ -45,7 +46,7 @@ form {
 }
 
 form:hover {
-    box-shadow: 10px 10px 15px rgba(19, 19, 20, 0.6);
+    box-shadow: 10px 10px 15px rgba(59, 59, 61, 0.356);
 }
 
 label {
@@ -89,7 +90,7 @@ textarea {
 button,
 input[type="submit"],
 input[type="button"] {
-    background-color: #092f57;
+    background-color: #435c77;
     color: white;
     padding: 12px 24px; /* Adjust padding for a better look */
     border: none;
@@ -102,7 +103,7 @@ input[type="button"] {
 button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover {
-    background-color: #0056b3;
+    background-color: #0057b39f;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -110,7 +111,7 @@ input[type="submit"] {
     width: auto;
     display: block;
     margin: 20px 0 0 auto; /* Align the submit button to the right */
-    background-color:#092f57; /* Professional blue color */
+    background-color: #738fac;
     padding: 12px 24px; /* Adjust padding for a better look */
     font-size: 18px; /* Increase font size for better readability */
 }
