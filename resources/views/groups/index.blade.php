@@ -14,6 +14,22 @@
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="{{ asset('css/table.css') }}" rel="stylesheet">
+<style>
+    .modal-table {
+        width: 100%;
+        border-collapse: collapse;
+        color: black;
+    }
+    .modal-table th, .modal-table td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        color: black;
+        background-color: white;
+    }
+    
+</style>
 
 <div class="container mx-auto p-4">
     <div class="flex justify-start items-center mb-4">
@@ -27,7 +43,7 @@
         </form>
     </div>
     @if (request('view') == 'table')
-    <table class="min-w-full bg-white">
+    <table class="table">
             <thead>
                 <tr>
                     <th class="py-2">Name</th>
@@ -85,7 +101,7 @@
 <div id="groupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/4 max-w-2xl">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">Group Details</h2>
+            <h2 class="text-xl font-bold text-black"><u>Group Details</u></h2>
         </div>
         <div id="modalContent" class="space-y-4">
             <!-- Group details will be loaded here -->
@@ -130,33 +146,32 @@
             .then(response => response.json())
             .then(data => {
                 const modalContent = `
-                    <table class="table-auto w-1/3  border-2 border-black">
+                    <table class="modal-table mx-auto">
                         <tbody>
-                            <tr class="border border-black text-black">
-                                <td class="font-bold border-1 border-black">Name:</td>
-                                <td class="border-1 border-black px-4 ">${data.name}</td>
+                            <tr>
+                                <th>Name:</th>
+                                <td>${data.name}</td>
                             </tr>
-                            <tr class="border border-black text-black">
-                                <td class="font-bold border-1 border-black">ID:</td>
-                                <td class="border-1 border-black">${data.group_id}</td>
+                            <tr>
+                                <th>ID:</th>
+                                <td>${data.group_id}</td>
                             </tr>
-                            <tr class="border border-black text-black">
-                                <td class="font-bold border-1 border-black">Number:</td>
-                                <td class="border-1 border-black">${data.village_name}</td>
+                            <tr>
+                                <th>Number:</th>
+                                <td>${data.village_name}</td>
                             </tr>
-                            <tr class="border border-black text-black">
-                                <td class="font-bold border-1 border-black">Village:</td>
-                                <td class="border-1 border-black">${data.president_name}</td>
+                            <tr>
+                                <th>Village:</th>
+                                <td>${data.president_name}</td>
                             </tr>
-                            <tr class="border border-black text-black">
-                                <td class="font-bold border-1 border-black">Group:</td>
-                                <td class="border-1 border-black">${data.secretary_name}</td>
+                            <tr>
+                                <th>Group:</th>
+                                <td>${data.secretary_name}</td>
                             </tr>
-                            <tr class="border border-black text-black">
-                                <td class="font-bold borde-1 border-black">Caste:</td>
-                                <td class="border-1 border-black">${data.no_of_members}</td>
+                            <tr>
+                                <th>Caste:</th>
+                                <td>${data.no_of_members}</td>
                             </tr>
-                            
                         </tbody>
                     </table>
                 `;
