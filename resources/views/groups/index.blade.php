@@ -24,9 +24,11 @@
     .modal-table th, .modal-table td {
         border: 1px solid black;
         padding: 8px;
-        text-align: center;
         color: black;
         background-color: white;
+    }
+    .modal-table td{
+        text-align: center;
     }
     
 </style>

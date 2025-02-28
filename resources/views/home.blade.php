@@ -29,11 +29,12 @@
 <div class="container mt-5">
     <h3 class="text-center">Monthly Savings</h3>
     <div class="d-flex justify-content-end mb-3">
-        <form method="get" class="d-flex justify-content-right">
-            <input type="number" name="year" value="{{ request('year') }}" class="form-control" placeholder="Enter year">
-            <br><br>
-            <button type="submit" class="btn btn-primary ml-2">Filter</button>
-        </form>
+        <select id="yearSelect" class="form-select w-25">
+            <option value="" disabled>Select Year</option>
+            @foreach($years as $year)
+                <option value="{{ $year }}" {{ $year == date('Y') ? 'selected' : '' }}>{{ $year }}</option>
+            @endforeach
+        </select>
     </div>
     <canvas id="savingsChart"></canvas>
 </div>
@@ -43,10 +44,10 @@
     document.addEventListener('DOMContentLoaded', function () {
         var ctx = document.getElementById('savingsChart').getContext('2d');
         var savingsData = {
-            labels: @json($months),
+            labels: [],
             datasets: [{
                 label: 'Savings',
-                data: @json($savings),
+                data: [],
                 backgroundColor: 'rgba(54, 93, 235, 0.2)',
                 borderColor: 'rgba(54, 163, 235, 0.14)',
                 borderWidth: 1
@@ -64,18 +65,23 @@
             }
         });
 
-        @if(request('year'))
-            // Filter data by year
-            var filteredData = savingsData.datasets[0].data.filter((value, index) => {
-                return new Date(savingsData.labels[index] + '-01').getFullYear() == {{ request('year') }};
-            });
-            var filteredLabels = savingsData.labels.filter((label, index) => {
-                return new Date(label + '-01').getFullYear() == {{ request('year') }};
-            });
-            savingsChart.data.labels = filteredLabels;
-            savingsChart.data.datasets[0].data = filteredData;
-            savingsChart.update();
-        @endif
+        function fetchSavingsData(year) {
+            fetch(`/home/savings-data?year=${year}`)
+                .then(response => response.json())
+                .then(data => {
+                    savingsChart.data.labels = data.months;
+                    savingsChart.data.datasets[0].data = data.savings;
+                    savingsChart.update();
+                });
+        }
+
+        var currentYear = new Date().getFullYear();
+        fetchSavingsData(currentYear);
+
+        document.getElementById('yearSelect').addEventListener('change', function() {
+            var selectedYear = this.value;
+            fetchSavingsData(selectedYear);
+        });
     });
 </script> 
 @endsection

@@ -24,9 +24,11 @@
     .modal-table th, .modal-table td {
         border: 1px solid black;
         padding: 8px;
-        text-align: center;
         color: black;
         background-color: white;
+    }
+    .modal-table td{
+        text-align: center;
     }
     
 </style>
@@ -111,7 +113,7 @@
 </div>
 
 <!-- Modal -->
-<div id="memberModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+<div id="memberModal" class="fixed inset-1 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/3 max-w-2xl relative">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold text-black">Member Details</h2>
