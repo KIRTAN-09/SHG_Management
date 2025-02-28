@@ -46,6 +46,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $savings->links('pagination::bootstrap-4') }} <!-- Add this line for pagination links -->
         </div>
     </div>
 </div>

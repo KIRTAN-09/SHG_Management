@@ -17,7 +17,7 @@ class SavingsController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        $savings = Savings::all();
+        $savings = Savings::paginate(20); // Add pagination
         return view('savings.index', compact('savings'));
     }
 
