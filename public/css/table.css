@@ -106,8 +106,8 @@ h2 {
 
 /* Alert Message */
 .alert-success {
-    background-color: #06f13c;
-    color: #49120d;
+    background-color: #0660f15a;
+    color: #3c1a91;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;

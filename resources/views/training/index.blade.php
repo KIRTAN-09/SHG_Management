@@ -33,8 +33,6 @@
                     <th>Number of Participants</th>
                     <th>Trainer Name</th>
                     <th>Actions</th>
-
-
                 </tr>
             </thead>
             <tbody>
