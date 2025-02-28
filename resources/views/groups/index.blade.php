@@ -7,7 +7,7 @@
     <div class="flex justify-end">
     <form action="{{ route('groups.index') }}" method="GET" class="flex space-x-2">
         <input type="text" name="search" placeholder="Search groups..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
-        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Search</button>
+        <button type="submit" class="btn btn-primary w-auto">Search</button>
     </form>
     </div>
 @stop
@@ -33,7 +33,7 @@
 
 <div class="container mx-auto p-4">
     <div class="flex justify-start items-center mb-4">
-        <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Group</a>
+        <a href="{{ route('groups.create') }}" class="btn btn-primary w-auto"><i class="fa fa-plus"></i> Add Group</a>
         <form action="{{ route('groups.index') }}" method="GET" class="ml-4">
             <label for="view" class="mr-2">View:</label>
             <select name="view" onchange="this.form.submit()" class="py-2 px-4 rounded-lg border border-gray-300">
@@ -155,19 +155,19 @@
                                 <td>${data.group_id}</td>
                             </tr>
                             <tr>
-                                <th>Number:</th>
+                                <th>Village:</th>
                                 <td>${data.village_name}</td>
                             </tr>
                             <tr>
-                                <th>Village:</th>
+                                <th>President:</th>
                                 <td>${data.president_name}</td>
                             </tr>
                             <tr>
-                                <th>Group:</th>
+                                <th>Secretary:</th>
                                 <td>${data.secretary_name}</td>
                             </tr>
                             <tr>
-                                <th>Caste:</th>
+                                <th>No. of members:</th>
                                 <td>${data.no_of_members}</td>
                             </tr>
                         </tbody>

@@ -22,7 +22,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
    @foreach ($data as $key => $user)
-    <div class="bg-white shadow-md rounded-lg p-6">
+    <div class="bg-blue-100 shadow-md rounded-lg p-6">
         <h3 class="text-lg font-semibold mb-2">{{ $user->name }}</h3>
         <div class="mb-4">
           @if(!empty($user->getRoleNames()))
