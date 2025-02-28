@@ -57,15 +57,13 @@
                         <td class="py-2">{{ $group->name }}</td>
                         <td class="py-2">{{ $group->group_id }}</td>
                         <td class="py-2">
-                            <div class="flex justify-center space-x-2">
-                                <button onclick="showGroupDetails({{ $group->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
-                                <a href="{{ route('groups.edit', $group->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
-                                <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
-                                </form>
-                            </div>
+                        <button onclick="showGroupDetails({{ $group->id }})" class="btn btn-info">View</button>
+                    <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                         </td>
                     </tr>
                 @endforeach
