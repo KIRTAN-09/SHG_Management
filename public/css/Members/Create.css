@@ -17,16 +17,16 @@ body, html {
 
 form {
     width: 100%;
-    max-width: 600px;
+    max-width: 1600px;
     padding: 20px;
-    border: 1px solid #343798;
+    border: 1px solid #9192b09a;
     border-radius: 20px;
-    box-shadow: 7px 7px 10px rgba(8, 8, 8, 0.478);
-    background-color: #fff;
+    box-shadow: 7px 7px 10px rgba(77, 72, 72, 0.199);
+    background-color: #ffffff32;
 }
 
 form:hover {
-    box-shadow: 10px 10px 15px rgba(19, 19, 20, 0.6);
+    box-shadow: 10px 10px 15px rgba(59, 59, 61, 0.356);
 }
 
 h1 {
@@ -78,13 +78,14 @@ input[type="file"]:focus {
 }
 
 input[type="submit"] {
-    background-color: #092f57;
+    float: right;
+    background-color: #435c77;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 7px;
     cursor: pointer;
-    width: 100%;
+    width: 15%;
     font-size: 16px;
     display: block;
     margin: 0 auto;
@@ -92,7 +93,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #0057b39f;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
