@@ -13,8 +13,8 @@ body {
     margin: 10px;
     text-align: center;
     background: transparent;
-    background-color: rgba(11, 159, 196, 0.32);
-    border: solid 1px #0c0c0c5d;
+    background-color: rgba(11, 57, 196, 0.157);
+    border: solid 1px #383c4835;
     border-radius: 10px;
     box-shadow: 0 10px 10px rgba(10, 109, 230, 0.1);
     transition: transform 0.3s ease-in-out;
@@ -40,7 +40,7 @@ body {
 
 .card:hover {
     opacity: 0.9;
-    box-shadow: 0 10px 10px rgba(10, 102, 230, 0.352);
+    box-shadow: 0 10px 10px rgba(10, 131, 230, 0.352);
 }
 .container {
     margin-top: 300px;
@@ -51,7 +51,12 @@ body {
     animation: fadeIn 0.8s ease-in-out forwards;
 }
 
+.text-dark1 {
+    color: rgba(45, 55, 78, 0.797) !important;
+    text-decoration: underline;
+}
+
 .text-dark1:hover {
-    color: rgb(47, 82, 97) !important;
+    color: rgba(44, 81, 86, 0.797) !important;
     text-decoration: underline;
 }

@@ -47,8 +47,8 @@
             datasets: [{
                 label: 'Savings',
                 data: @json($savings),
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 93, 235, 0.2)',
+                borderColor: 'rgba(54, 163, 235, 0.14)',
                 borderWidth: 1
             }]
         };
