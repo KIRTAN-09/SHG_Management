@@ -1,18 +1,23 @@
 @extends('layouts.app')
 
+@section('title', 'Users Management')
+
+@section('content_header')
+    <h1>Users Management</h1>
+    @stop
+
 @section('content')
 
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2 class="text-2xl font-bold mb-4">Users Management</h2>
-        </div>
+<div class="container mx-auto p-4">
+    <div class="flex justify-between items-center mb-4">
         <div class="pull-right">
-            <a class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700" href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create New User</a>
+        @can('User-create')
+            <a href="{{ route('users.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Role</a>
+        @endcan
+            <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
         </div>
-        <br>
     </div>
-</div>
+
 
 @session('success')
     <div class="alert alert-success" role="alert"> 
@@ -20,9 +25,7 @@
     </div>
 @endsession
 
-<div class="flex justify-end mb-4">
-    <button id="toggleView" class="bg-blue-900 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
-</div>
+
 
 <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
    @foreach ($data as $key => $user)
@@ -78,7 +81,9 @@
     </table>
 </div>
 
-{!! $data->links('pagination::bootstrap-5') !!}
+<div class="mt-4">
+        {{ $data->links('pagination::bootstrap-4') }}
+    </div></div>
 
 <p class="text-center text-primary"><small> </small></p>
 

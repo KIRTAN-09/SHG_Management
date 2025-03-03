@@ -34,22 +34,26 @@
 </style>
 
 <div class="container mx-auto p-4">
-    <div class="flex justify-start items-center mb-4">
-        <a href="{{ route('groups.create') }}" class="btn btn-primary w-auto"><i class="fa fa-plus"></i> Add Group</a>
-        <form action="{{ route('groups.index') }}" method="GET" class="ml-4">
-            <label for="view" class="mr-2">View:</label>
-            <select name="view" onchange="this.form.submit()" class="py-2 px-4 rounded-lg border border-gray-300">
-                <option value="cards" {{ request('view') == 'cards' ? 'selected' : '' }}>Cards</option>
-                <option value="table" {{ request('view') == 'table' ? 'selected' : '' }}>Table</option>
-            </select>
-        </form>
-    </div>
-    @if (request('view') == 'table')
-    <table class="table">
+    <div class="flex justify-between items-center mb-4">
+        <div class="pull-right">
+        @can('role-create')
+            <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Group</a>
+        @endcan
+        <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle View</button>
+        </div>
+    </div>     
+   
+    <div id="tableView" class="hidden">
+    <link href="css/table.css"   rel="stylesheet">   
+        <table class="table">
             <thead>
                 <tr>
                     <th class="py-2">Name</th>
                     <th class="py-2">Group ID</th>
+                    <th class="py-2">Village</th>
+                    <th class="py-2">President</th>
+                    <th class="py-2">Secretary</th>
+                    <th class="py-2">No. of Members</th>
                     <th class="py-2">Actions</th>
                 </tr>
             </thead>
@@ -58,6 +62,10 @@
                     <tr class="bg-gray-100 border-b">
                         <td class="py-2">{{ $group->name }}</td>
                         <td class="py-2">{{ $group->group_id }}</td>
+                        <td class="py-2">{{ $group->village_name }}</td>
+                        <td class="py-2">{{ $group->president_name }}</td>
+                        <td class="py-2">{{ $group->secretary_name }}</td>
+                        <td class="py-2">{{ $group->no_of_members }}</td>
                         <td class="py-2">
                         <button onclick="showGroupDetails({{ $group->id }})" class="btn btn-info">View</button>
                     <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-warning">Edit</a>
@@ -71,8 +79,9 @@
                 @endforeach
             </tbody>
         </table>
-    @else
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+    </div>
+    
+    <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         @foreach ($groups as $group)
             <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
                 <div class="text-center">
@@ -94,7 +103,6 @@
     <div class="mt-4">
         {{ $groups->links('pagination::bootstrap-4') }}
     </div>
-@endif
 </div>
 
 <!-- Modal -->
@@ -183,5 +191,14 @@
     function closeModal() {
         document.getElementById('groupModal').classList.add('hidden');
     }
+
+    var toggleViewButton = document.getElementById('toggleView');
+    var cardView = document.getElementById('cardView');
+    var tableView = document.getElementById('tableView');
+
+    toggleViewButton.addEventListener('click', function () {
+        cardView.classList.toggle('hidden');
+        tableView.classList.toggle('hidden');
+    });
 </script>
 @stop

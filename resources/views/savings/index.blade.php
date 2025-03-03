@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
+@section('title', 'Savings')
+
+@section('content_header')
+    <h1>Savings</h1>
+    @stop
+
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-12"><br>
-        <h2 class="text-2xl font-bold mb-4">Savings</h2>
         <link rel="stylesheet" href="{{ asset(path: 'css/table.css') }}">
         @if(session('success'))
             <div class="alert alert-success" id="success-alert">

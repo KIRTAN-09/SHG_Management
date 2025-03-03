@@ -35,7 +35,7 @@ Route::resource('meetings', MeetingController::class);
 Route::resource('reports', ReportController::class);
 Route::get('/roles/{id}/json', [RoleController::class, 'showJson'])->name('roles.showJson');
 // Route::get('/igas/activities', [IGAController::class, 'activities'])->name('igas.activities');
-Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
+// Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
 Route::get('/reports/filter', [ReportController::class, 'filter'])->name('reports.filter');
 });
 
