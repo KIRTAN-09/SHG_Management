@@ -15,7 +15,7 @@
                     @csrf
                     <h1><u><b>Login</b></u></h1>  
                     <div class="input-box">  
-                        <input type="text" name="email" placeholder="Email" required>  
+                        <input type="text" name="login" placeholder="Email or Username" required>  
                         <i class='bx bxs-user'></i>  
                     </div>  
                     <div class="input-box">  
