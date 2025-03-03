@@ -26,10 +26,10 @@
     </div>
 </div>
 
-<div class="container mt-5">
+<div class="container1">
     <h3 class="text-center">Monthly Savings</h3>
     <div class="d-flex justify-content-end mb-3">
-        <select id="yearSelect" class="form-select w-25">
+        <select id="yearSelect" class="form-select w-auto">
             <option value="" disabled>Select Year</option>
             @foreach($years as $year)
                 <option value="{{ $year }}" {{ $year == date('Y') ? 'selected' : '' }}>{{ $year }}</option>

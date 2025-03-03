@@ -9,6 +9,18 @@ body {
     flex-wrap: wrap;
 }
 
+.content{
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}   
+
+.container1{
+    background-color: rgba(232, 195, 182, 0.066);
+    padding: 10px;
+}
+
 .card {
     margin: 10px;
     text-align: center;
