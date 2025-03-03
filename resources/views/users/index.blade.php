@@ -20,7 +20,11 @@
     </div>
 @endsession
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="flex justify-end mb-4">
+    <button id="toggleView" class="bg-blue-900 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
+</div>
+
+<div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
    @foreach ($data as $key => $user)
     <div class="bg-blue-100 shadow-md rounded-lg p-6">
         <h3 class="text-lg font-semibold mb-2">{{ $user->name }}</h3>
@@ -38,6 +42,40 @@
         </div>
     </div>
  @endforeach
+</div>
+
+<div id="tableView" class="hidden">
+    <link href="css/table.css"   rel="stylesheet">   
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2">Email</th>
+                <th class="px-4 py-2">Roles</th>
+                <th class="px-4 py-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($data as $key => $user)
+            <tr>
+                <td class="border px-4 py-2">{{ $user->name }}</td>
+                <td class="border px-4 py-2">{{ $user->email }}</td>
+                <td class="border px-4 py-2">
+                    @if(!empty($user->getRoleNames()))
+                        @foreach($user->getRoleNames() as $v)
+                            <span class="inline-block bg-green-200 text-green-800 text-xs px-2 py-1 rounded">{{ $v }}</span>
+                        @endforeach
+                    @endif
+                </td>
+                <td class="border px-4 py-2">
+                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"> View</button>
+                    <a class="btn btn-warning btn-sm" href="{{ route('users.edit',$user->id) }}"> Edit</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"> Delete</button>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 
 {!! $data->links('pagination::bootstrap-5') !!}
@@ -109,6 +147,15 @@
         var userId = button.getAttribute('data-userid');
         var form = document.getElementById('deleteForm');
         form.action = '/users/' + userId;
+    });
+
+    var toggleViewButton = document.getElementById('toggleView');
+    var cardView = document.getElementById('cardView');
+    var tableView = document.getElementById('tableView');
+
+    toggleViewButton.addEventListener('click', function () {
+        cardView.classList.toggle('hidden');
+        tableView.classList.toggle('hidden');
     });
 </script>
 @endsection

@@ -10,12 +10,14 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="container mx-auto p-4">
-    <div class="flex justify-start items-center mb-4">
+    <div class="flex justify-between items-center mb-4">
         @can('role-create')
             <a href="{{ route('roles.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Role</a>
         @endcan
+        <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle View</button>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         @foreach ($roles as $role)
             <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
                 <div class="text-center">
@@ -37,6 +39,46 @@
             </div>
         @endforeach
     </div>
+    <div id="tableView" class="hidden">
+    <link href="css/table.css"   rel="stylesheet">   
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">Permissions</th>
+                    <th class="px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($roles as $role)
+                <tr>
+                    <td class="border px-4 py-2">{{ $role->name }}</td>
+                    <td class="border px-4 py-2">
+                        @if(!empty($role->permissions))
+                            @foreach($role->permissions as $permission)
+                                <span class="inline-block bg-green-200 text-green-800 text-xs px-2 py-1 rounded">{{ $permission->name }}</span>
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="border px-4 py-2">
+                        <button onclick="showRoleDetails({{ $role->id }})" class="btn btn-info btn-sm">Show</button>
+                        @can('role-edit')
+                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        @endcan
+                        @can('role-delete')
+                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        @endcan
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
     <div class="mt-4">
         {{ $roles->links('pagination::bootstrap-4') }}
     </div>
@@ -77,5 +119,14 @@
     function closeModal() {
         document.getElementById('roleModal').classList.add('hidden');
     }
+
+    var toggleViewButton = document.getElementById('toggleView');
+    var cardView = document.getElementById('cardView');
+    var tableView = document.getElementById('tableView');
+
+    toggleViewButton.addEventListener('click', function () {
+        cardView.classList.toggle('hidden');
+        tableView.classList.toggle('hidden');
+    });
 </script>
 @stop
