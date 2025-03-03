@@ -2,11 +2,16 @@
 
 @section('title', 'Role Management')
 
-@section('content_header')
-    <h1>Role Management</h1>
-    @stop
 
 @section('content')
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2 class="text-2xl font-bold mb-4">Role Management</h2>
+        </div>
+        <br>
+    </div>
+</div>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="container mx-auto p-4">
@@ -14,7 +19,7 @@
         @can('role-create')
             <a href="{{ route('roles.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Role</a>
         @endcan
-        <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle View</button>
+        <button id="toggleView" class="bg-blue-900 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
     </div>
 
     <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
