@@ -350,12 +350,14 @@ return [
                 'text' => 'Members Management', 
                 'url' => 'members',
                 'icon' => 'fas fa-address-card',
+                'permission' => 'Member-list',
                 
             ],
             [
                 'text' => 'Savings Management', 
                 'url' => 'savings',
                 'icon' =>'fas fa-rupee-sign',
+                'permission' => 'Savings-list',
                 
             ],
             [
