@@ -87,7 +87,7 @@
                                 @can('member-edit')
                                     <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
                                 @endcan
-                                <!-- <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a> -->
+                                <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
                                 
                                 
                                 <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">

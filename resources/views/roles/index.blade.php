@@ -1,17 +1,13 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Role Management')
+@section('title', 'Roles Management')
 
+@section('content_header')
+    <h1>Roles Management</h1>
+    @stop
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2 class="text-2xl font-bold mb-4">Role Management</h2>
-        </div>
-        <br>
-    </div>
-</div>
+
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 <div class="container mx-auto p-4">
