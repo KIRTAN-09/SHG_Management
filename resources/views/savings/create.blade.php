@@ -117,10 +117,18 @@ input[type="submit"]:hover {
     <form action="{{ route('savings.store') }}" method="post">
         @csrf
         <h1><b>Savings  Form</b></h1>
+<<<<<<< HEAD
         <!-- Group ID/Name -->
         <label for="group-id">Group ID:</label>
         <input type="text" id="group-id" name="group-id" placeholder="Enter Group ID" required>
         <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
+=======
+        <!-- Group ID -->
+        <label for="group-id">Group ID:</label>
+        <input type="text" id="group-id" name="group-id" placeholder="Enter Group ID" required>
+        <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
+        
+>>>>>>> 859671c2d99992b1e835bc983f4acbfa9e67ff7d
         <!-- Member ID -->
         <label for="member-id">Member ID:</label>
         <input type="text" id="member-id" name="member-id" placeholder="Enter Member ID" required>
@@ -145,41 +153,18 @@ input[type="submit"]:hover {
 </div>
 
 <script>
-document.getElementById('group-id-option').addEventListener('change', function() {
-    document.getElementById('group-id').style.display = 'block';
-    document.getElementById('group-id').setAttribute('type', 'number');
-    document.getElementById('group-name').style.display = 'none';
-    document.getElementById('group-id-error').style.display = 'none';
-    document.getElementById('group-name-error').style.display = 'none';
-});
-document.getElementById('group-name-option').addEventListener('change', function() {
-    document.getElementById('group-id').style.display = 'none';
-    document.getElementById('group-name').style.display = 'block';
-    document.getElementById('group-id-error').style.display = 'none';
-    document.getElementById('group-name-error').style.display = 'none';
-});
-
 // Prevent future dates in the date of deposit field
 const dateOfDeposit = document.getElementById('date-of-deposit');
 const today = new Date().toISOString().split('T')[0];
 dateOfDeposit.setAttribute('max', today);
 
-// Validation for Group ID and Name inputs
+// Validation for Group ID input
 document.getElementById('group-id').addEventListener('input', function() {
     const value = this.value;
     if (isNaN(value) || /[^0-9]/.test(value)) {
         document.getElementById('group-id-error').style.display = 'block';
     } else {
         document.getElementById('group-id-error').style.display = 'none';
-    }
-});
-
-document.getElementById('group-name').addEventListener('input', function() {
-    const value = this.value;
-    if (/[^a-zA-Z]/.test(value)) {
-        document.getElementById('group-name-error').style.display = 'block';
-    } else {
-        document.getElementById('group-name-error').style.display = 'none';
     }
 });
 
@@ -195,7 +180,7 @@ document.getElementById('member-id').addEventListener('input', function() {
 
 document.getElementById('member-name').addEventListener('input', function() {
     const value = this.value;
-    if ([varchar]/.test(value)) {
+    if (/[^a-zA-Z]/.test(value)) {
         document.getElementById('member-name-error').style.display = 'block';
     } else {
         document.getElementById('member-name-error').style.display = 'none';

@@ -4,16 +4,15 @@
 
 @section('content_header')
     <h1>Users Management</h1>
-    @stop
+@stop
 
 @section('content')
+
+<link href="{{ asset('css/modal.css') }}" rel="stylesheet">
 
 <div class="container mx-auto p-4">
     <div class="flex justify-between items-center mb-4">
         <div class="pull-right">
-        @can('User-create')
-            <a href="{{ route('users.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Role</a>
-        @endcan
             <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
         </div>
     </div>
@@ -49,6 +48,9 @@
 
 <div id="tableView" class="hidden">
     <link href="css/table.css"   rel="stylesheet">   
+    <table class="table">
+        <thead>
+            <tr>
     <table class="table">
         <thead>
             <tr>
