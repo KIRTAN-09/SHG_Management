@@ -5,10 +5,7 @@
 @section('content_header')
     <h1>Group List</h1>
     <div class="flex justify-end">
-    <form action="{{ route('groups.index') }}" method="GET" class="flex space-x-2">
-        <input type="text" name="search" placeholder="Search groups..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
-        <button type="submit" class="btn btn-primary w-auto">Search</button>
-    </form>
+        <input type="text" id="liveSearch" placeholder="Search groups..." class="py-2 px-4 rounded-lg border border-gray-300">
     </div>
 @stop
 
@@ -37,7 +34,7 @@
     <div class="flex justify-between items-center mb-4">
         <div class="pull-right">
         @can('role-create')
-            <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Group</a>
+            <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2.5 px-3 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Group</a>
         @endcan
         <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle View</button>
         </div>
@@ -196,9 +193,24 @@
     var cardView = document.getElementById('cardView');
     var tableView = document.getElementById('tableView');
 
+    document.getElementById('liveSearch').addEventListener('input', function () {
+        const searchValue = this.value.toLowerCase();
+        const groups = document.querySelectorAll('#cardView > div, #tableView tbody > tr');
+        
+        groups.forEach(group => {
+            const groupName = group.querySelector('h3, td:first-child').textContent.toLowerCase();
+            if (groupName.includes(searchValue)) {
+                group.style.display = '';
+            } else {
+                group.style.display = 'none';
+            }
+        });
+    });
+
     toggleViewButton.addEventListener('click', function () {
         cardView.classList.toggle('hidden');
         tableView.classList.toggle('hidden');
+        document.getElementById('viewMode').value = cardView.classList.contains('hidden') ? 'table' : 'card';
     });
 </script>
 @stop

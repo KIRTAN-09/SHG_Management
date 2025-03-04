@@ -20,10 +20,8 @@
     <!-- Search and Sort Form -->
     <form method="GET" action="{{ route('savings.index') }}" class="mb-4">
         <div class="flex justify-end">
-            <input type="text" name="search" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2" value="{{ request('search') }}">
-    
-            <button type="submit" class="btn btn-primary w-auto">Search</button>
-        </div>
+            <input type="text" name="search" id="search" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2" value="{{ request('search') }}">
+a        </div>
     </form>
             <table class="table table-bordered">
                 <thead>
@@ -36,7 +34,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="savings-table-body">
                     @foreach($savings as $saving)
                         <tr>
                             <td>{{ $saving->group_id }}</td>
@@ -69,6 +67,21 @@
                 alert.style.display = 'none';
             }
         }, 2000); // 2000 milliseconds = 2 seconds
+
+        // Live search functionality
+        document.getElementById('search').addEventListener('keyup', function() {
+            let query = this.value.toLowerCase();
+            let rows = document.querySelectorAll('#savings-table-body tr');
+            rows.forEach(function(row) {
+                let groupName = row.children[1].textContent.toLowerCase();
+                let memberName = row.children[3].textContent.toLowerCase();
+                if (groupName.includes(query) || memberName.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
     });
 </script>
 @endsection
