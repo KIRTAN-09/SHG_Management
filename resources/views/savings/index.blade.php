@@ -21,7 +21,7 @@
     <form method="GET" action="{{ route('savings.index') }}" class="mb-4">
         <div class="flex justify-end">
             <input type="text" name="search" id="search" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2" value="{{ request('search') }}">
-a        </div>
+        </div>
     </form>
             <table class="table table-bordered">
                 <thead>
@@ -73,9 +73,9 @@ a        </div>
             let query = this.value.toLowerCase();
             let rows = document.querySelectorAll('#savings-table-body tr');
             rows.forEach(function(row) {
-                let groupName = row.children[1].textContent.toLowerCase();
-                let memberName = row.children[3].textContent.toLowerCase();
-                if (groupName.includes(query) || memberName.includes(query)) {
+                let date = row.children[3].textContent.toLowerCase();
+                let memberName = row.children[2].textContent.toLowerCase();
+                if (date.includes(query) || memberName.includes(query)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';

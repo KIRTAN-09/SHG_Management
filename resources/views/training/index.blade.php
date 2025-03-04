@@ -8,19 +8,10 @@
 
     <a href="{{ route('training.create') }}" class="btn btn-primary mb-4"><i class="fa fa-plus"></i> Add Training</a>
     
-    <!-- Search and Sort Form -->
-    <form method="GET" action="{{ route('training.index') }}" class="mb-4">
-        <div class="flex justify-end">
-            <input type="text" name="search" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2" value="{{ request('search') }}">
-            <select name="sort" class="py-2 px-2 rounded-lg border border-gray-300 w-20 text-xs mr-2">
-                <option value="">Sort By</option>
-                <option value="date_asc" {{ request('sort') == 'date_asc' ? 'selected' : '' }}>Date Ascending</option>
-                <option value="date_desc" {{ request('sort') == 'date_desc' ? 'selected' : '' }}>Date Descending</option>
-                <option value="category" {{ request('sort') == 'category' ? 'selected' : '' }}>Category</option>
-            </select>
-            <button type="submit" class="btn btn-primary w-auto">Search</button>
-        </div>
-    </form>
+    <!-- Live Search Bar -->
+    <div class="flex justify-end">
+    <input type="text" id="liveSearch" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300">
+    </div>
     
     <div class="table-responsive">
         <table class="table">
@@ -35,7 +26,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="trainingTable">
                 @foreach ($trainings as $training)
                     <tr>
                         <!-- <td class="py-2 px-4 border-b">{{ $training->training_id }}</td> -->
@@ -46,8 +37,6 @@
                         <td>{{ $training->participants }}</td>
                         <td>{{ $training->trainer }}</td>
                         <td class="action-buttons">
-
-
                             <a href="{{ route('training.show', $training->id) }}" class="btn btn-info">View</a>
                             <a href="{{ route('training.edit', $training->id) }}" class="btn btn-warning">Edit</a>
                             <form action="{{ route('training.destroy', $training->id) }}" method="POST" style="display:inline;">
@@ -65,4 +54,22 @@
         {{ $trainings->links('pagination::bootstrap-4') }}
     </div>
 </div>
+
+<script>
+    document.getElementById('liveSearch').addEventListener('keyup', function() {
+        let filter = this.value.toUpperCase();
+        let rows = document.getElementById('trainingTable').getElementsByTagName('tr');
+        for (let i = 0; i < rows.length; i++) {
+            let cells = rows[i].getElementsByTagName('td');
+            let match = false;
+            for (let j = 0; j < cells.length; j++) {
+                if (cells[j].innerText.toUpperCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+</script>
 @endsection

@@ -8,14 +8,10 @@
     <div class="pull-right">
         <a href="{{ route('meetings.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Schedule a New Meeting</a>
     </div>
-     <!-- Search and Sort Form -->
-     <form method="GET" action="{{ route('meetings.index') }}" class="mb-4">
-        <div class="flex justify-end">
-            <input type="text" name="search" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2" value="{{ request('search') }}">
-    
-            <button type="submit" class="btn btn-primary w-auto">Search</button>
-        </div>
-    </form>
+    <!-- Live Search Bar -->
+    <div class="flex justify-end mb-4">
+        <input type="text" id="liveSearch" placeholder="Search..." class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2">
+    </div>
     <div class="table-container">
         <table class="table mt-3">
             <thead>
@@ -29,7 +25,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="meetingsTable">
                 @foreach($meetings as $meeting)
                 <tr>
                     <td>{{ $meeting->date }}</td>
@@ -80,4 +76,15 @@
         {{ $meetings->links('pagination::bootstrap-4') }}
     </div>
 </div>
+
+<script>
+document.getElementById('liveSearch').addEventListener('keyup', function() {
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll('#meetingsTable tr');
+    rows.forEach(row => {
+        let text = row.textContent.toLowerCase();
+        row.style.display = text.includes(filter) ? '' : 'none';
+    });
+});
+</script>
 @endsection
