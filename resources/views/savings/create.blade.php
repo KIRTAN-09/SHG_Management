@@ -117,18 +117,11 @@ input[type="submit"]:hover {
     <form action="{{ route('savings.store') }}" method="post">
         @csrf
         <h1><b>Savings  Form</b></h1>
-<<<<<<< HEAD
         <!-- Group ID/Name -->
         <label for="group-id">Group ID:</label>
         <input type="text" id="group-id" name="group-id" placeholder="Enter Group ID" required>
         <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
-=======
-        <!-- Group ID -->
-        <label for="group-id">Group ID:</label>
-        <input type="text" id="group-id" name="group-id" placeholder="Enter Group ID" required>
-        <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
         
->>>>>>> 859671c2d99992b1e835bc983f4acbfa9e67ff7d
         <!-- Member ID -->
         <label for="member-id">Member ID:</label>
         <input type="text" id="member-id" name="member-id" placeholder="Enter Member ID" required>
