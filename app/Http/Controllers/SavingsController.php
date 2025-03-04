@@ -15,18 +15,26 @@ class SavingsController extends Controller
         $this->middleware('permission:Savings-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:Savings-delete', ['only' => ['destroy']]);
     }
+
     // Display a listing of the resource.
     public function index(Request $request)
     {
         $query = Savings::query();
 
         if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('group_name', 'LIKE', "%{$search}%")
-                  ->orWhere('member_name', 'LIKE', "%{$search}%");
+            $query->where('member_name', 'like', '%' . $request->search . '%')
+                  ->orWhere('group_id', 'like', '%' . $request->search . '%')
+                  ->orWhere('member_id', 'like', '%' . $request->search . '%')
+                  ->orWhere('group_name', 'LIKE', "%{$request->search}%");
         }
 
-        $savings = $query->paginate(20); // Add pagination
+        if ($request->has('column') && $request->has('sort')) {
+            $query->orderBy($request->column, $request->sort);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $savings = $query->paginate(20);
         return view('savings.index', compact('savings'));
     }
 
@@ -57,22 +65,21 @@ class SavingsController extends Controller
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);
 
-        return redirect()->route('savings.index')
-                         ->with('success', 'Saving created successfully.');
+        return redirect()->route('savings.index')->with('success', 'Saving created successfully.');
     }
 
     // Display the specified resource.
     public function show($id)
     {
-        $savings = Savings::with('member')->find($id);
-        return view('savings.show', compact('savings'));
+        $saving = Savings::with('member')->find($id);
+        return view('savings.show', compact('saving'));
     }
 
     // Show the form for editing the specified resource.
     public function edit($id)
     {
-        $savings = Savings::with('member')->find($id);
-        return view('savings.edit', compact('savings'));
+        $saving = Savings::with('member')->find($id);
+        return view('savings.edit', compact('saving'));
     }
 
     // Update the specified resource in storage.
@@ -97,8 +104,7 @@ class SavingsController extends Controller
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);
 
-        return redirect()->route('savings.index')
-                         ->with('success', 'Saving updated successfully.');
+        return redirect()->route('savings.index')->with('success', 'Saving updated successfully.');
     }
 
     // Remove the specified resource from storage.
@@ -107,24 +113,6 @@ class SavingsController extends Controller
         $saving = Savings::find($id);
         $saving->delete();
 
-        return redirect()->route('savings.index')
-                         ->with('success', 'Saving deleted successfully.');
-    }
-
-    // Handle the POST request
-    public function submit(Request $request)
-    {
-        // Validate the request
-        $request->validate([
-            'name' => 'required',
-            'amount' => 'required|numeric',
-            'date' => 'required|date',
-        ]);
-
-        // Create a new saving entry
-        Savings::create($request->all());
-
-        return redirect()->route('savings.index')
-                         ->with('success', 'Saving submitted successfully.');
+        return redirect()->route('savings.index')->with('success', 'Saving deleted successfully.');
     }
 }
