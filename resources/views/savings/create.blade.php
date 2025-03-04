@@ -118,18 +118,9 @@ input[type="submit"]:hover {
         @csrf
         <h1><b>Savings  Form</b></h1>
         <!-- Group ID/Name -->
-        <label>Group:</label>
-        <div class="radio-group">
-            <input type="radio" id="group-id-option" name="group-option" value="id" checked>
-            <label for="group-id-option">ID</label>
-            <input type="radio" id="group-name-option" name="group-option" value="name">
-            <label for="group-name-option">Name</label>
-        </div>
+        <label for="group-id">Group ID:</label>
         <input type="text" id="group-id" name="group-id" placeholder="Enter Group ID" required>
-        <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span>
-        <input type="text" id="group-name" name="group-name" placeholder="Enter Group Name" style="display: none;">
-        <span id="group-name-error" class="error-message" style="display: none; color: red;">Name must be in characters</span><br><br>
-        
+        <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
         <!-- Member ID -->
         <label for="member-id">Member ID:</label>
         <input type="text" id="member-id" name="member-id" placeholder="Enter Member ID" required>
