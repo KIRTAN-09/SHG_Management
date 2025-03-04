@@ -8,7 +8,10 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
 </head>  
 <body>  
-    <div class="container">  
+    <div class="loader" id="loader">
+        <div class="loader-text" id="loader-text">Loading...</div>
+    </div> <!-- Add loader element -->
+    <div class="container" id="container">  
         <div class="form-container">
             <div class="form-box login">  
                 <form action="{{ route('login') }}" method="POST">  
@@ -25,7 +28,7 @@
                     <!-- <div class="forgot-link">  
                         <a href="{{ route('password.request') }}">Forgot Password?</a>  
                     </div>   -->
-                    <button type="submit" class="btn"><u>Login</u></button>  
+                    <button type="submit" class="btn" onclick="showLoader()"><u>Login</u></button>  
                 </form>  
             </div>  
             <div class="form-box register">  
@@ -55,16 +58,66 @@
     <script src="{{ asset('js/script.js') }}" defer></script>
     <script>
         function togglePassword() {
-    const passwordInput = document.querySelector('input[name="password"]');
-    const passwordToggle = document.querySelector('.password-toggle');
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        passwordToggle.classList.replace('bx-show', 'bx-hide');
-    } else {
-        passwordInput.type = 'password';
-        passwordToggle.classList.replace('bx-hide', 'bx-show');
-    }
-}
+            const passwordInput = document.querySelector('input[name="password"]');
+            const passwordToggle = document.querySelector('.password-toggle');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.classList.replace('bx-show', 'bx-hide');
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.classList.replace('bx-hide', 'bx-show');
+            }
+        }
+
+        function showLoader() {
+            const loaderText = document.getElementById('loader-text');
+            document.getElementById('loader').style.display = 'flex';
+            document.getElementById('container').classList.add('blurred');
+            loaderText.innerHTML = loaderText.textContent.split('').map((char, index) => 
+                `<span style="animation-delay: ${index * 0.1}s">${char}</span>`
+            ).join('');
+        }
     </script>
+    <style>
+        .loader {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #7494ec;
+            opacity: 0.8;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader-text {
+            font-size: 1.5em;
+            color: black;
+            font-weight: bold;
+            display: flex;
+        }
+
+        .loader-text span {
+            display: inline-block;
+            animation: jump 1s infinite;
+        }
+
+        .blurred {
+            filter: blur(5px);
+            pointer-events: none;
+        }
+
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
 </body>  
 </html>

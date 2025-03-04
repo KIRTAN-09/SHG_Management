@@ -9,12 +9,29 @@
 @section('content')
 
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+    .modal-table {
+        width: 100%;
+        border-collapse: collapse;
+        color: black;
+    }
+    .modal-table th, .modal-table td {
+        border: 1px solid black;
+        padding: 8px;
+        color: black;
+        background-color: white;
+    }
+    .modal-table td{
+        text-align: center;
+    }
+    
+</style>
 
 <div class="container mx-auto p-4">
     <div class="flex justify-between items-center mb-4">
         <div class="pull-right">
         @can('role-create')
-            <a href="{{ route('roles.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Role</a>
+            <a href="{{ route('roles.create') }}" class="bg-green-500 text-white py-2.5 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Role</a>
         @endcan
         <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle View</button>
         </div>
@@ -90,7 +107,7 @@
 <!-- Modal -->
 <div id="roleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden">
     <div class="flex items-center justify-center min-h-screen">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+        <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-full max-w-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold">Role Details</h2>
             </div>
@@ -110,9 +127,19 @@
             .then(response => response.json())
             .then(data => {
                 const modalContent = `
-                    <p><strong>ID:</strong> ${data.id}</p>
-                    <p><strong>Name:</strong> ${data.name}</p>
-                    <p><strong>Permissions:</strong> ${data.permissions.map(permission => permission.name).join(', ')}</p>
+                    <table class="modal-table mx-auto">
+                        <tbody>
+                            <tr>
+                                <th>Name:</th>
+                                <td>${data.name}</td>
+                            </tr>
+                            <tr>
+                                <th>Permissions:</th>
+                                <td>
+                                    ${data.permissions.map(permission => `<span class="inline-block bg-green-200 text-green-800 text-xs px-2 py-1 rounded">${permission.name}</span>`).join('')}
+                                </td>
+                        </tbody>
+                    </table>
                 `;
                 document.getElementById('modalContent').innerHTML = modalContent;
                 document.getElementById('roleModal').classList.remove('hidden');

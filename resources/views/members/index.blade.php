@@ -5,10 +5,7 @@
 @section('content_header')
     <h1>Member List</h1>
     <div class="flex justify-end">
-        <form action="{{ route('members.index') }}" method="GET" class="flex space-x-2">
-            <input type="text" name="search" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300" value="{{ request('search') }}">
-            <button type="submit" class="btn btn-primary w-auto">Search</button>
-        </form>
+        <input type="text" id="liveSearch" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300 mb-4">
     </div>
 @stop
 
@@ -36,7 +33,7 @@
     <div class="flex justify-start items-center mb-4">
         <div class="pull-right">
         @can('User-create')
-            <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
+            <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2.5 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
         @endcan
             <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
         </div>
@@ -68,7 +65,7 @@
                     <th class="py-2">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="memberTableBody">
                 @foreach ($members as $member)
                     <tr class="bg-gray-100 border-b">
                         <td class="py-2"><img src="{{ asset('storage/' . $member->photo) }}" class="w-10 h-10 object-cover rounded-full mx-auto"></td>
@@ -88,8 +85,6 @@
                                     <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
                                 @endcan
                                 <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
-                                
-                                
                                 <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
                                     @csrf
                                     @method('DELETE')
@@ -104,7 +99,7 @@
     </div>
         <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             @foreach ($members as $member)
-                <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
+                <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150 member-card">
                     <div class="text-center">
                         <img src="{{ asset('storage/' . $member->photo) }}" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
                         <h3 class="text-l font-bold mb-2">{{ $member->name }}</h3>
@@ -144,48 +139,48 @@
 </div>
 
 <script>
-    let formToSubmit;
+        let formToSubmit;
 
-    function confirmDelete(event, form) {
-        event.preventDefault();
-        formToSubmit = form;
-        const confirmationBox = document.createElement('div');
-        confirmationBox.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
-        confirmationBox.innerHTML = `
-            <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-                <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
-                <p class="mb-4">Are you sure you want to delete this member?</p>
-                <div class="flex justify-end space-x-4">
-                    <button onclick="closeConfirmationBox()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">No</button>
-                    <button onclick="submitDeleteForm()" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">Yes</button>
-                </div>
-            </div>
-        `;
-        confirmationBox.id = 'confirmationBox';
-        document.body.appendChild(confirmationBox);
-    }
-
-    function closeConfirmationBox() {
-        const confirmationBox = document.getElementById('confirmationBox');
-        if (confirmationBox) {
-            confirmationBox.remove();
-        }
-    }
-
-    function submitDeleteForm() {
-        closeConfirmationBox();
-        formToSubmit.submit();
-    }
-
-    function showMemberDetails(memberId) {
-        fetch(`/members/${memberId}`)
-            .then(response => response.json())
-            .then(data => {
-                const modalContent = `
-                    <div class="text-center">
-                        <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4">
+        function confirmDelete(event, form) {
+            event.preventDefault();
+            formToSubmit = form;
+            const confirmationBox = document.createElement('div');
+            confirmationBox.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
+            confirmationBox.innerHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+                    <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
+                    <p class="mb-4">Are you sure you want to delete this member?</p>
+                    <div class="flex justify-end space-x-4">
+                        <button onclick="closeConfirmationBox()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">No</button>
+                        <button onclick="submitDeleteForm()" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">Yes</button>
                     </div>
-                    <table class="modal-table mx-auto">
+                </div>
+            `;
+            confirmationBox.id = 'confirmationBox';
+            document.body.appendChild(confirmationBox);
+        }
+
+        function closeConfirmationBox() {
+            const confirmationBox = document.getElementById('confirmationBox');
+            if (confirmationBox) {
+                confirmationBox.remove();
+            }
+        }
+
+        function submitDeleteForm() {
+            closeConfirmationBox();
+            formToSubmit.submit();
+        }
+
+        function showMemberDetails(memberId) {
+            fetch(`/members/${memberId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const modalContent = `
+                        <div class="text-center">
+                            <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4">
+                        </div>
+                        <table class="modal-table mx-auto">
                         <tbody>
                             <tr>
                                 <th>Name:</th>
@@ -243,6 +238,29 @@
     toggleViewButton.addEventListener('click', function () {
         cardView.classList.toggle('hidden');
         tableView.classList.toggle('hidden');
-    });   
+    });
+
+    document.getElementById('liveSearch').addEventListener('input', function() {
+        let searchQuery = this.value.toLowerCase();
+        let members = document.querySelectorAll('#memberTableBody tr');
+        members.forEach(function(member) {
+            let name = member.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            if (name.includes(searchQuery)) {
+                member.style.display = '';
+            } else {
+                member.style.display = 'none';
+            }
+        });
+
+        let memberCards = document.querySelectorAll('.member-card');
+        memberCards.forEach(function(card) {
+            let name = card.querySelector('h3').textContent.toLowerCase();
+            if (name.includes(searchQuery)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
 </script>
 @stop
