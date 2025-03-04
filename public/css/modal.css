@@ -1,0 +1,26 @@
+.modal-header {
+    background: linear-gradient(135deg, #a4d1ea, #8dafa147);
+    border-bottom: 1px solid #dee2e6;
+}
+.modal-title {
+    color: #495057;
+}
+.modal-body {
+    background: linear-gradient(135deg, #a4d1ea, #9e93e5);
+}
+.modal-footer {
+    background: linear-gradient(135deg, #a4d1ea, #9e93e5);
+    border-top: 1px solid #dee2e6;
+}
+.btn-close {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+.btn-secondary {
+    background-color: #4abf0b1e;
+    color: #ffffff;
+}
+.btn-danger {
+    background-color: #dc3545;
+    color: #ffffff;
+}

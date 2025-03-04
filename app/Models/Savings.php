@@ -17,4 +17,10 @@ class Savings extends Model
         'amount',
         'date_of_deposit',
     ];
+
+    // Define the relationship with the Member model
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id');
+    }
 }
