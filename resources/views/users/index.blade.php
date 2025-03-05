@@ -41,9 +41,9 @@
           @endif
         </div>
         <div class="flex space-x-2">
-            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"> View</button>
-            <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"> Edit</a>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"> Delete</button>
+            <button type="button" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"> View</button>
+            <a class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800" href="{{ route('users.edit',$user->id) }}"> Edit</a>
+            <button type="button" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"> Delete</button>
         </div>
     </div>
  @endforeach
