@@ -67,7 +67,7 @@ class MemberController extends Controller
 
         $validated['group'] = $request->input('group');
         $group = Group::where('name', $validated['group'])->firstOrFail();
-        $group->increment('no_of_members');
+        // $group->increment('no_of_members'); // Remove this line
 
         Member::create($validated);
 
@@ -99,11 +99,11 @@ class MemberController extends Controller
         if ($member->group !== $validated['group']) {
             // Decrement the old group's member count
             $oldGroup = Group::where('name', $member->group)->firstOrFail();
-            $oldGroup->decrement('no_of_members');
+            // $oldGroup->decrement('no_of_members'); // Remove this line
 
             // Increment the new group's member count
             $newGroup = Group::where('name', $validated['group'])->firstOrFail();
-            $newGroup->increment('no_of_members');
+            // $newGroup->increment('no_of_members'); // Remove this line
         }
 
         // Explicitly set the status field
@@ -137,7 +137,7 @@ class MemberController extends Controller
     {
         $member = Member::findOrFail($id);
         $group = Group::where('name', $member->group)->firstOrFail();
-        $group->decrement('no_of_members');
+        // $group->decrement('no_of_members'); // Remove this line
         $member->delete();
 
         return redirect()->route('members.index')->with('success', 'Member deleted successfully');

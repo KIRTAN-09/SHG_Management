@@ -23,7 +23,7 @@
         </div>
 
         <div class="mb-4">
-            <label for="number" class="block text-gray-700">Number</label>
+            <label for="number" class="block text-gray-700">Contect Number:</label>
             <input type="text" class="form-control" id="number" name="number" value="{{ $member->number }}">
         </div>
 
