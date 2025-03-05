@@ -304,7 +304,6 @@ return [
             'text' => 'Language',
             'icon' => 'fas fa-globe',
             'topnav_right' => true,
-            'url' => '#',
         ],
         [
             'type' => 'dropdown',
