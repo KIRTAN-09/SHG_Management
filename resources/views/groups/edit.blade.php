@@ -23,6 +23,10 @@
         <div class="form-group">
             <label for="secretary_name">Group Secretary Name</label>
             <input type="text" name="secretary_name" class="form-control" value="{{ $group->secretary_name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="No. of members">No. of members</label>
+            <input type="text" name="No. of members" class="form-control" value="{{ $group->No. of members }}" required>
         </div> -->
         <button type="submit" class="btn btn-primary">Update Group</button>
     </form>
