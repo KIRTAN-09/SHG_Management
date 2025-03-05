@@ -7,7 +7,7 @@
             Savings Information
         </div>
         <div class="card-body">
-            <p><strong>Member Name:</strong> {{ $savings->member_name }}</p>
+            <!-- <p><strong>Member Name:</strong> {{ $savings->member_name }}</p> -->
             <p><strong>Member ID:</strong> {{ $savings->member ? $savings->member->id : 'N/A' }}</p>
             <p><strong>Amount:</strong> {{ $savings->amount }}</p>
             <p><strong>Date of Deposit:</strong> {{ $savings->date_of_deposit }}</p>

@@ -22,7 +22,7 @@ body, html {
 form {
     width: 100%;
     max-width: 600px;
-    padding: 20px;
+    padding: 20px;  
     border: 1px solid #343798;
     border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(8, 8, 8, 0.478);
@@ -128,9 +128,9 @@ input[type="submit"]:hover {
         <span id="member-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
         
         <!-- Member Name -->
-        <label for="member-name">Member Name:</label>
+        <!-- <label for="member-name">Member Name:</label>
         <input type="text" id="member-name" name="member-name" placeholder="Enter Member Name" required>
-        <span id="member-name-error" class="error-message" style="display: none; color: red;">Name must be in characters</span><br><br>
+        <span id="member-name-error" class="error-message" style="display: none; color: red;">Name must be in characters</span><br><br> -->
         
         <!-- Date of deposit -->
         <label for="date-of-deposit">Date of Deposit:</label>

@@ -18,8 +18,8 @@
         <input type="text" id="member-id" name="member-id" placeholder="Enter Member ID" value="{{ $savings->member_id }}" required><br><br>
 
         <!-- Member Name -->
-        <label for="member-name">Member Name:</label>
-        <input type="text" id="member-name" name="member-name" placeholder="Enter Member Name" value="{{ $savings->member ? $savings->member->name : '' }}" required><br><br>
+        <!-- <label for="member-name">Member Name:</label>
+        <input type="text" id="member-name" name="member-name" placeholder="Enter Member Name" value="{{ $savings->member ? $savings->member->name : '' }}" required><br><br> -->
 
         <!-- Date of deposit -->
         <label for="date-of-deposit">Date of Deposit:</label>
