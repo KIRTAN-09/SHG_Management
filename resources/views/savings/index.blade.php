@@ -44,6 +44,7 @@
                                 <input type="hidden" name="column" value="{{ $column }}">
                                 <input type="hidden" name="sort" value="{{ request('column') === $column && request('sort') === 'asc' ? 'desc' : 'asc' }}">
                                 <input type="hidden" name="search" value="{{ request('search') }}">
+                                <input type="hidden" name="page" value="{{ request('page', 1) }}">
                                 <button type="submit" class="header-button">
                                     {{ $label }} {{ request('column') === $column ? (request('sort') === 'asc' ? '▲' : '▼') : '' }}
                                 </button>
@@ -74,7 +75,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $savings->links('pagination::bootstrap-4') }}
+        {{ $savings->appends(request()->query())->links('pagination::bootstrap-4') }}
     </div>
 </div>
 </div>
