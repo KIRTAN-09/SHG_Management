@@ -13,7 +13,7 @@ class GroupController extends Controller
 
     public function __construct()
     {
-         $this->middleware('permission:Group-list|Group-create|Group-edit|Group-delete', ['only' => ['index', 'show']]);
+        //  $this->middleware('permission:Group-list|Group-create|Group-edit|Group-delete', ['only' => ['index', 'show']]);
          $this->middleware('permission:Group-create', ['only' => ['create','store']]);
          $this->middleware('permission:Group-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:Group-delete', ['only' => ['destroy']]);
@@ -45,27 +45,20 @@ class GroupController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // dd($request->all());
+       // dd('test');
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'village_name' => 'required|string|max:255',
-            // 'president_name' => 'required|string|max:255',
-            // 'secretary_name' => 'required|string|max:255',
-            // 'no_of_members' => 'required|integer|min:10|max:20',
+           // 'president_name' => 'required|string|max:255',
+            //'secretary_name' => 'required|string|max:255',
+           // 'no_of_members' => 'required|integer|min:10|max:20',
         ], [
-            'no_of_members.min' => 'The number of members must be at least 10.',
-            'no_of_members.max' => 'The number of members may not be greater than 20.',
+           // 'no_of_members.min' => 'The number of members must be at least 10.',
+           // 'no_of_members.max' => 'The number of members may not be greater than 20.',
         ]);
 
-        // if ($validated['no_of_members'] < 10 || $validated['no_of_members'] > 20) { 
-        //     return redirect()->back()->withErrors([
-        //         'no_of_members' => 'The number of members must be between 10 and 20.'
-        //     ])->withInput();
-        // }
-
         $validated['group_id'] = uniqid('GRP');
-        // $validated['no_of_members'] = 0; // Initialize with 0 members
-
+        
         Group::create($validated);
 
         return redirect()->route('groups.index')->with('success', 'Group added successfully.');
@@ -94,15 +87,9 @@ class GroupController extends Controller
             // 'secretary_name' => 'required|string|max:255',
             // 'no_of_members' => 'required|integer|min:10|max:20',
         ], [
-            'no_of_members.min' => 'The number of members must be at least 10.',
-            'no_of_members.max' => 'The number of members may not be greater than 20.',
+           // 'no_of_members.min' => 'The number of members must be at least 10.',
+           //'no_of_members.max' => 'The number of members may not be greater than 20.',
         ]);
-
-        // if ($validated['no_of_members'] < 10 || $validated['no_of_members'] > 20) {
-        //     return redirect()->back()->withErrors([
-        //         'no_of_members' => 'The number of members must be between 10 and 20.'
-        //     ])->withInput();
-        // }
 
         $group = Group::find($id);
         $group->update($validated);
