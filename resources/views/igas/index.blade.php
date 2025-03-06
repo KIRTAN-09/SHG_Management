@@ -16,7 +16,7 @@
                 <th>Date</th>
                 <th>Category</th>
                 <th>Earned</th>   
-                <!-- <th>Activity</th>                                                                        -->
+                <!-- <th>Activity</th>-->
                 <th>Actions</th>
             </tr>
         </thead>
