@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
+@section('content_header')
+<h2 class="text-2xl font-bold mb-4">IGAs</h2>
+@stop
+
 @section('content')
 <div class="container">
-<h2 class="text-2xl font-bold mb-4">IGAs</h2>
 <link rel="stylesheet" href="{{ asset('css/table.css') }}">
 <style>
     .modal-table {
