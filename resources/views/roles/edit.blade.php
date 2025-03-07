@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
+<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
+<div class="container">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Edit Role</h2>
@@ -22,7 +24,7 @@
         </ul>
     </div>
 @endif
-
+<div class="container">
 <form method="POST" action="{{ route('roles.update', $role->id) }}">
     @csrf
     @method('PUT')
@@ -38,11 +40,15 @@
             <div class="form-group">
                 <strong>Permission:</strong>
                 <br/>
+                <div class="row">
                 @foreach($permission as $value)
-                    <label><input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name" {{ in_array($value->id, $rolePermissions) ? 'checked' : ''}}>
-                    {{ $value->name }}</label>
-                <br/>
+                    <div class="col-md-3 mb-3">
+                        <label><input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name" {{ in_array($value->id, $rolePermissions) ? 'checked' : ''}}>
+                        {{ $value->name }}</label>
+                    </div>
                 @endforeach
+                </div>
+                
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -50,6 +56,6 @@
         </div>
     </div>
 </form>
-
+</div>
 <p class="text-center text-primary"><small> </small></p>
 @endsection
