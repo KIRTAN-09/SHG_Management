@@ -40,7 +40,7 @@ class IGAController extends Controller
     public function show($id)
     {
         $iga = IGA::findOrFail($id);
-        return view('igas.show', compact('iga'));
+        return response()->json($iga); // Corrected variable name to $iga
     }
 
     public function edit($id)

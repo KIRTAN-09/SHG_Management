@@ -4,8 +4,16 @@
 
 @section('content_header')
     <h1>Member List</h1>
-    <div class="flex justify-end">
-        <input type="text" id="liveSearch" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300 mb-4">
+    <div class="flex justify-between items-center mb-4">
+        <!-- <label for="rowsPerPage" class="mr-2">Rows per page:</label> -->
+        <select id="rowsPerPage" class="py-2 px-4 rounded-lg border border-gray-300">
+            <option value="10" {{ request('rows') == 10 ? 'selected' : '' }}>10</option>
+            <option value="20" {{ request('rows') == 20 ? 'selected' : '' }}>20</option>
+            <option value="50" {{ request('rows') == 50 ? 'selected' : '' }}>50</option>
+            <option value="100" {{ request('rows') == 100 ? 'selected' : '' }}>100</option>
+
+        </select>
+        <input type="text" id="liveSearch" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300 ml-4">
     </div>
 @stop
 
@@ -36,7 +44,7 @@
             <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2.5 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
         @endcan
             <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
-        </div>
+            </div>
         
         <form action="{{ route('members.index') }}" method="GET" class="ml-4">
             <label for="sort" class="mr-2">Sort by Status:</label>
@@ -46,6 +54,9 @@
                 <option value="inactive" {{ request('sort') == 'inactive' ? 'selected' : '' }}>Inactive</option>
             </select>
         </form>
+        <div class="ml-auto">
+            {{ $members->appends(request()->query())->links('pagination::bootstrap-4') }}
+        </div>
     </div>
     <div id="tableView" class="hidden">
     <link href="css/table.css"   rel="stylesheet">   
@@ -118,9 +129,7 @@
                 </div>
             @endforeach
         </div>
-    <div class="mt-4">
-        {{ $members->links('pagination::bootstrap-4') }}
-    </div>
+    </div>      
 </div>
 
 <!-- Modal -->
@@ -211,11 +220,11 @@
                                 <td>${data.share_price}</td>
                             </tr>
                             <tr>
-                                <th>Member Type::</th>
+                                <th>Member Type:</th>
                                 <td>${data.member_type}</td>
                             </tr> 
                             <tr>
-                                <th>Status::</th>
+                                <th>Status:</th>
                                 <td>${data.status}</td>
                             </tr>  
                         </tbody>
@@ -241,26 +250,23 @@
     });
 
     document.getElementById('liveSearch').addEventListener('input', function() {
-        let searchQuery = this.value.toLowerCase();
-        let members = document.querySelectorAll('#memberTableBody tr');
+        const searchValue = this.value.toLowerCase();
+        const members = document.querySelectorAll('#cardView > div, #tableView tbody > tr');
         members.forEach(function(member) {
-            let name = member.querySelector('td:nth-child(2)').textContent.toLowerCase();
-            if (name.includes(searchQuery)) {
+            const name = member.querySelector('td:nth-child(2), h3').textContent.toLowerCase();
+            if (name.includes(searchValue)) {
                 member.style.display = '';
             } else {
                 member.style.display = 'none';
             }
         });
+    });
 
-        let memberCards = document.querySelectorAll('.member-card');
-        memberCards.forEach(function(card) {
-            let name = card.querySelector('h3').textContent.toLowerCase();
-            if (name.includes(searchQuery)) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+    document.getElementById('rowsPerPage').addEventListener('change', function() {
+        const rowsPerPage = this.value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('rows', rowsPerPage);
+        window.location.href = url.toString();
     });
 </script>
 @stop

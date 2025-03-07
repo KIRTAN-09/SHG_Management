@@ -56,7 +56,7 @@ class TrainingController extends Controller
     public function show($id)
     {
         $training = Training::findOrFail($id);
-        return view('training.show', compact('training'));
+        return response()->json($training); // Corrected variable name to $iga
     }
 
     public function edit($id)

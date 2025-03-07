@@ -1,154 +1,106 @@
-body {
-    background-color: #f8f9fa;
-    font-family: 'Arial', sans-serif;
-}
 
-h2 {
-    color: #343a40;
-    font-weight: bold;
-}
-
-.table-bordered {
-    border: 1px solid #dee2e6;
-    background-color: #ffffff;
-}
-
-.table-bordered th, .table-bordered td {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.table-bordered th {
-    background-color: #023b79;
-    color: #ffffff;
-}
-
-.table-bordered td {
-    background-color: #f8f9fa;
-}
-
-.btn {
-    border-radius: 5px;
-}
-
-.btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-}
-
-.btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-}
-
-.btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
-}
-
-.pull-left h2 {
-    margin-bottom: 20px;
-}
-
-.pull-right {
-    margin-bottom: 20px;
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.search-form {
-    display: flex;
-    gap: 10px;
-}
-
-.meetings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.meeting-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.meeting-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.meeting-photo {
-    width: 100px;
-    height: auto;
-    border-radius: 50%;
-    margin-right: 20px;
-}
-
-.meeting-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.meeting-date {
-    color: gray;
-}
-
-.meeting-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.delete-form {
-    display: inline-block;
-}
-
-.pagination {
-    margin-top: 20px;
-    text-align: center;
-}
-
-table {
+    height: 100%;
     width: 100%;
-    border-collapse: collapse;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-table td {
-    padding: 8px;
-    border: 1px solid #ddd;
+form {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solidrgb(38, 42, 174);
+    border-radius: 20px;
+    box-shadow: 7px 7px 10px rgba(8, 8, 8, 0.478);
+    background-color: #fff;
+}
+
+form:hover {
+    box-shadow: 10px 10px 15px rgba(19, 19, 20, 0.6);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #495057;
+    font-size: 28px;
+    font-style: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #495057;
+    font-size: 16px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    width: calc(100% - 16px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: normal; /* Ensure font is not bold */
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+input[type="date"] {
+    width: calc(100% - 16px);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #092f57;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.error-message {
+    font-size: 12px;
 }

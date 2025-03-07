@@ -7,17 +7,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: rgb(205, 203, 203);
-    transition: background 3s ease-in-out; /* Ensure smooth transition */
-}
-
-
-
 .container {
     position: fixed;
     width: 900px;

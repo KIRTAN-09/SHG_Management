@@ -8,9 +8,17 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
 </head>  
 <body>  
-    <div class="loader" id="loader">
-        <div class="loader-text" id="loader-text">Loading...</div>
-    </div> <!-- Add loader element -->
+    <div class="cs-loader">
+        <div class="cs-loader-inner">
+            <h2>Loading</h2>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+            <label>●</label>
+        </div>
+    </div>
     <div class="container" id="container">  
         <div class="form-container">
             <div class="form-box login">  
@@ -70,53 +78,116 @@
         }
 
         function showLoader() {
-            const loaderText = document.getElementById('loader-text');
-            document.getElementById('loader').style.display = 'flex';
-            document.getElementById('container').classList.add('blurred');
-            loaderText.innerHTML = loaderText.textContent.split('').map((char, index) => 
-                `<span style="animation-delay: ${index * 0.1}s">${char}</span>`
-            ).join('');
+            document.querySelector('.cs-loader').style.display = 'flex';
+            document.querySelector('.container').classList.add('blur-background');
         }
     </script>
     <style>
-        .loader {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #7494ec;
-            opacity: 0.8;
+        body {
+            display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            min-height: 100vh;
+            background: #70bcef;
+            transition: background 3s ease-in-out; /* Ensure smooth transition */
         }
 
-        .loader-text {
-            font-size: 1.5em;
+        .cs-loader {
+            display: none; /* Initially hide the loader */
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+
+        .cs-loader-inner {
+            transform: translateY(-50%);
+            top: 50%;
+            position: absolute;
+            width: 100%;
             color: black;
-            font-weight: bold;
-            display: flex;
+            padding: 0 100px;
+            text-align: center;
         }
 
-        .loader-text span {
+        .cs-loader-inner label {
+            font-size: 20px;
+            opacity: 0;
             display: inline-block;
-            animation: jump 1s infinite;
         }
 
-        .blurred {
+        @keyframes lol {
+            0% {
+                opacity: 0;
+                transform: translateX(-300px);
+            }
+            33% {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+            66% {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(300px);
+            }
+        }
+
+        @-webkit-keyframes lol {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateX(-300px);
+            }
+            33% {
+                opacity: 1;
+                -webkit-transform: translateX(0px);
+            }
+            66% {
+                opacity: 1;
+                -webkit-transform: translateX(0px);
+            }
+            100% {
+                opacity: 0;
+                -webkit-transform: translateX(300px);
+            }
+        }
+
+        .cs-loader-inner label:nth-child(6) {
+            -webkit-animation: lol 3s infinite ease-in-out;
+            animation: lol 3s infinite ease-in-out;
+        }
+
+        .cs-loader-inner label:nth-child(5) {
+            -webkit-animation: lol 3s 100ms infinite ease-in-out;
+            animation: lol 3s 100ms infinite ease-in-out;
+        }
+
+        .cs-loader-inner label:nth-child(4) {
+            -webkit-animation: lol 3s 200ms infinite ease-in-out;
+            animation: lol 3s 200ms infinite ease-in-out;
+        }
+
+        .cs-loader-inner label:nth-child(3) {
+            -webkit-animation: lol 3s 300ms infinite ease-in-out;
+            animation: lol 3s 300ms infinite ease-in-out;
+        }
+
+        .cs-loader-inner label:nth-child(2) {
+            -webkit-animation: lol 3s 400ms infinite ease-in-out;
+            animation: lol 3s 400ms infinite ease-in-out;
+        }
+
+        .cs-loader-inner label:nth-child(1) {
+            -webkit-animation: lol 3s 500ms infinite ease-in-out;
+            animation: lol 3s 500ms infinite ease-in-out;
+        }
+
+        .blur-background {
             filter: blur(5px);
-            pointer-events: none;
-        }
-
-        @keyframes jump {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
         }
     </style>
 </body>  
