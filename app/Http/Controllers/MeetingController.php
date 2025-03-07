@@ -17,12 +17,15 @@ class MeetingController extends Controller
         $query = Meeting::query();
 
         if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('group_name', 'LIKE', "%{$search}%")
-                  ->orWhere('discussion', 'LIKE', "%{$search}%");
+            $query->where('group_name', 'like', '%' . $request->search . '%')
+                  ->orWhere('discussion', 'like', '%' . $request->search . '%');
         }
-
-        $meetings = $query->orderBy('created_at', 'desc')->paginate(10); // Sort by latest added
+        if ($request->has('column') && $request->has('sort')) {
+            $query->orderBy($request->column, $request->sort);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+        $meetings = $query->paginate(20);
         return view('meetings.index', compact('meetings'));
     }
 
