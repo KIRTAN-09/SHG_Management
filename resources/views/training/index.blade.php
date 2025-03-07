@@ -6,6 +6,23 @@
 @stop
 
 @section('content')
+<style>
+    .modal-table {
+        width: 100%;
+        border-collapse: collapse;
+        color: black;
+    }
+    .modal-table th, .modal-table td {
+        border: 1px solid black;
+        padding: 8px;
+        color: black;
+        background-color: white;
+    }
+    .modal-table td{
+        text-align: center;
+    }
+    
+</style>
 
 <div class="container mx-auto p-4">
     <link rel="stylesheet" href="{{ asset('css/table.css') }}">
