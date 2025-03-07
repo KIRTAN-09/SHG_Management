@@ -38,7 +38,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    @foreach(['group_id' => 'Group ID', 'member_id' => 'Member ID', 'member_name' => 'Member Name', 'date_of_deposit' => 'Date', 'amount' => 'Amount'] as $column => $label)
+                    @foreach(['group_id' => 'Group ID', 'member_id' => 'Member ID', 'date_of_deposit' => 'Date', 'amount' => 'Amount'] as $column => $label)
                         <th>
                             <form method="GET" action="{{ route('savings.index') }}">
                                 <input type="hidden" name="column" value="{{ $column }}">
@@ -59,7 +59,7 @@
                     <tr>
                         <td>{{ $saving->group_id }}</td>
                         <td>{{ $saving->member_id }}</td>
-                        <td>{{ $saving->member_name }}</td>
+                        <!-- <td>{{ $saving->member_name }}</td> -->
                         <td>{{ $saving->date_of_deposit }}</td>
                         <td>{{ $saving->amount }}</td>
                         <td>
