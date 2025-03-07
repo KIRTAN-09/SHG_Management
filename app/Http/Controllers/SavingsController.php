@@ -71,15 +71,15 @@ class SavingsController extends Controller
     // Display the specified resource.
     public function show($id)
     {
-        $saving = Savings::with('member')->find($id);
-        return view('savings.show', compact('saving'));
+        $savings = Savings::with('member')->find($id);
+        return view('savings.show', compact('savings'));
     }
 
     // Show the form for editing the specified resource.
     public function edit($id)
     {
-        $saving = Savings::with('member')->find($id);
-        return view('savings.edit', compact('saving'));
+        $savings = Savings::with('member')->find($id);
+        return view('savings.edit', compact('savings'));
     }
 
     // Update the specified resource in storage.
