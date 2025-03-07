@@ -327,17 +327,20 @@ return [
                 
             ],
             [
-                'text' => 'Roles',
-                'url' => 'roles',
-                'icon' => 'fas fa-fw fa-user',
-                
-            ],
-            [
-                'text' => 'Manage Users',
-                'url' => 'users',
-                'icon' => 'fas fa-user-edit',
-                
-                
+                'text' => 'User Management',
+                'icon' => 'fas fa-users-cog',
+                'submenu' => [
+                    [
+                        'text' => 'Roles',
+                        'url' => 'roles',
+                        'icon' => 'fas fa-fw fa-user',
+                    ],
+                    [
+                        'text' => 'Manage Users',
+                        'url' => 'users',
+                        'icon' => 'fas fa-user-edit',
+                    ],
+                ],
             ],
             [
                 'text' => 'Groups Management', 
@@ -427,17 +430,17 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],

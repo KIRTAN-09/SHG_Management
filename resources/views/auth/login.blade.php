@@ -10,6 +10,7 @@
 <body>  
     <div class="cs-loader">
         <div class="cs-loader-inner">
+            <h2>Loading</h2>
             <label>●</label>
             <label>●</label>
             <label>●</label>
@@ -78,6 +79,7 @@
 
         function showLoader() {
             document.querySelector('.cs-loader').style.display = 'flex';
+            document.querySelector('.container').classList.add('blur-background');
         }
     </script>
     <style>
@@ -97,8 +99,6 @@
             left: 0;
             height: 100%;
             width: 100%;
-            background: #70bcef;
-            opacity: 0.8;
             z-index: 1000; /* Ensure it is above other elements */
         }
 
@@ -184,6 +184,10 @@
         .cs-loader-inner label:nth-child(1) {
             -webkit-animation: lol 3s 500ms infinite ease-in-out;
             animation: lol 3s 500ms infinite ease-in-out;
+        }
+
+        .blur-background {
+            filter: blur(5px);
         }
     </style>
 </body>  
