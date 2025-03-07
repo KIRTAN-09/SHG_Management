@@ -54,12 +54,10 @@
                 <option value="inactive" {{ request('sort') == 'inactive' ? 'selected' : '' }}>Inactive</option>
             </select>
         </form>
-        <div class="ml-auto">
-            {{ $members->appends(request()->query())->links('pagination::bootstrap-4') }}
-        </div>
+       
     </div>
     <div id="tableView" class="hidden">
-    <link href="css/table.css"   rel="stylesheet">   
+        <link href="css/table.css"   rel="stylesheet">   
         <table class="table">
             <thead> 
                 <tr>
@@ -108,28 +106,30 @@
             </tbody>
         </table>
     </div>
-        <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            @foreach ($members as $member)
-                <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150 member-card">
-                    <div class="text-center">
-                        <img src="{{ asset('storage/' . $member->photo) }}" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
-                        <h3 class="text-l font-bold mb-2">{{ $member->name }}</h3>
-                        <p class="text-gray-600 mb-2"><strong>Member UID:</strong> {{ $member->member_id }}</p>
-                        <p class="text-gray-600 mb-2"><strong>Status:</strong> {{ $member->status }}</p>
-                        <div class="flex justify-center space-x-2 mt-4">
-                            <button onclick="showMemberDetails({{ $member->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
-                            <a href="{{ route('members.edit', $member->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
-                            <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
-                            </form>
-                        </div>
+    <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+         @foreach ($members as $member)
+            <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150 member-card">
+                <div class="text-center">
+                    <img src="{{ asset('storage/' . $member->photo) }}" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
+                    <h3 class="text-l font-bold mb-2">{{ $member->name }}</h3>
+                    <p class="text-gray-600 mb-2"><strong>Member UID:</strong> {{ $member->member_id }}</p>
+                    <p class="text-gray-600 mb-2"><strong>Status:</strong> {{ $member->status }}</p>
+                    <div class="flex justify-center space-x-2 mt-4">
+                        <button onclick="showMemberDetails({{ $member->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
+                        <a href="{{ route('members.edit', $member->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
+                        <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
+                             @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
+                        </form>
                     </div>
                 </div>
-            @endforeach
-        </div>
-    </div>      
+            </div>
+        @endforeach
+    </div>
+    <div class="ml-auto">
+        {{ $members->appends(request()->query())->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 
 <!-- Modal -->
