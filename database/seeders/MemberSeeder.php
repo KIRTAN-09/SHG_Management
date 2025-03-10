@@ -54,21 +54,21 @@ class MemberSeeder extends Seeder
             'status' => 'Active',
         ]);
 
-        for ($i = 0; $i < 200; $i++) {
-            Member::create([
-                'photo' => $faker->imageUrl(640, 480, 'people'),
-                'name' => $faker->name,
-                'number' => $faker->phoneNumber,
-                'village' => $faker->city,
-                'group' => $faker->word,
-                'caste' => $faker->word,
-                'share_price' => $faker->randomFloat(2, 50, 150),
-                'share_quantity' => $faker->numberBetween(1, 10),
-                'member_type' => 'Member',
-                'member_id' => uniqid('MEM'),
-                'status' => 'Active',
-            ]);
-        }
+        // for ($i = 0; $i < 100000000000; $i++) {
+        //     Member::create([
+        //         'photo' => $faker->imageUrl(640, 480, 'people'),
+        //         'name' => $faker->name,
+        //         'number' => $faker->phoneNumber,
+        //         'village' => $faker->city,
+        //         'group' => $faker->word,
+        //         'caste' => $faker->word,
+        //         'share_price' => $faker->randomFloat(2, 50, 150),
+        //         'share_quantity' => $faker->numberBetween(1, 10),
+        //         'member_type' => 'Member',
+        //         'member_id' => uniqid('MEM'),
+        //         'status' => 'Active',
+        //     ]);
+        // }
     }
 }
 

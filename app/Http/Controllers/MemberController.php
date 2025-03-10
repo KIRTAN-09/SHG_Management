@@ -70,6 +70,7 @@ class MemberController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd('test');
         $validated = $request->validate([
             'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
             'name' => 'required|string|max:255',
@@ -90,15 +91,15 @@ class MemberController extends Controller
         }
 
         // Check if the group has changed
-        if ($member->group_id !== $request->input('group')) {
-            // Decrement the old group's member count
-            $oldGroup = Group::findOrFail($member->group_id);
-            // $oldGroup->decrement('no_of_members'); // Remove this line
+        // if ($member->group_id !== $request->input('group')) {
+        //     // Decrement the old group's member count
+        //     $oldGroup = Group::findOrFail($member->group_id);
+        //     // $oldGroup->decrement('no_of_members'); // Remove this line
 
-            // Increment the new group's member count
-            $newGroup = Group::findOrFail($request->input('group'));
-            // $newGroup->increment('no_of_members'); // Remove this line
-        }
+        //     // Increment the new group's member count
+        //     $newGroup = Group::findOrFail($request->input('group'));
+        //     // $newGroup->increment('no_of_members'); // Remove this line
+        // }
 
         // Explicitly set the status field
         $member->status = $request->input('status');
@@ -120,7 +121,7 @@ class MemberController extends Controller
         $member = Member::query()
             // ->leftJoin('groups', 'members.group_id', '=', 'groups.id')
             // ->select('members.*', 'groups.name as group_name')
-            // ->where('members.id', $id)
+            ->where('members.id', $id)
             ->firstOrFail();
 
         return response()->json($member);
