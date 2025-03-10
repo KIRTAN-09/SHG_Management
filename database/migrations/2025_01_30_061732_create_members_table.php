@@ -30,6 +30,9 @@ return new class extends Migration
             $table->timestamps();
             $table->enum('status', ['Active', 'Inactive']);
         });
+
+        // Generate member_id based on the first letter of the name followed by the ID
+        DB::statement('UPDATE members SET member_id = CONCAT(LEFT(name, 1), id)');
     }
     
     /**
