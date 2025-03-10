@@ -1,6 +1,8 @@
-@extends('layouts.app')
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+{{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+<br>
 
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -44,9 +46,8 @@
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                
+                        </div>
                         </div>
 
                         <div class="row mb-0">
@@ -62,4 +63,4 @@
         </div>
     </div>
 </div>
-@endsection
+

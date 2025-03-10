@@ -344,9 +344,25 @@ return [
             ],
             [
                 'text' => 'Groups Management', 
-                'url' => 'groups',
                 'icon' => 'fas fa-fw fa-users',
-                
+                'submenu' => [
+                    [
+                        'text' => 'Create Group',
+                        'url' => 'groups/create',
+                        'icon' => 'fas fa-user-plus',
+                    ],
+                    [
+                        'text' => 'Groups List',
+                        'url' => 'groups',
+                        'icon' => 'fas fa-list',
+                    ],
+                    [
+                        'text' => 'Export Data',
+                        'url' => 'groups/export',
+                        'icon' => 'fas fa-file-export',
+                    ],
+                ],
+                'permission' => 'Group-list',
             ],
             [
                 'text' => 'Members Management', 

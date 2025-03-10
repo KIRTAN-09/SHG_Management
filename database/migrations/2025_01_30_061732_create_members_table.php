@@ -29,6 +29,9 @@ return new class extends Migration
             $table->enum('status', ['Active', 'Inactive']);
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade'); // Add foreign key constraint
         });
+
+        // Generate member_id based on the first letter of the name followed by the ID
+        DB::statement('UPDATE members SET member_id = CONCAT(LEFT(name, 1), id)');
     }
     
     /**
