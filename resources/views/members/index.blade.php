@@ -196,7 +196,7 @@
                             </tr>
                             <tr>
                                 <th>Group:</th>
-                                <td>${data.group}</td>
+                                <td>${data.group_name}</td>
                             </tr>
                             <tr>
                                 <th>Caste:</th>
