@@ -8,7 +8,7 @@
 
 @section('content')
 
-<link href="{{ asset('css/modal.css') }}" rel="stylesheet">
+
 
 <div class="container mx-auto p-4">
     <div class="flex justify-between items-center mb-4">
@@ -20,14 +20,11 @@
         </div>
     </div>
 
-
 @session('success')
     <div class="alert alert-success" role="alert"> 
         {{ $value }}
     </div>
 @endsession
-
-
 
 <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
    @foreach ($data as $key => $user)
@@ -41,7 +38,7 @@
           @endif
         </div>
         <div class="flex space-x-2">
-            <button type="button" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"> View</button>
+            <button onclick="showUserDetails({{ $user->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
             <a class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800" href="{{ route('users.edit',$user->id) }}"> Edit</a>
             <button type="button" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"> Delete</button>
         </div>
@@ -51,9 +48,6 @@
 
 <div id="tableView" class="hidden">
     <link href="css/table.css"   rel="stylesheet">   
-    <table class="table">
-        <thead>
-            <tr>
     <table class="table">
         <thead>
             <tr>
@@ -76,7 +70,7 @@
                     @endif
                 </td>
                 <td class="border px-4 py-2">
-                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"> View</button>
+                    <button onclick="showUserDetails({{ $user->id }})" class="btn btn-info">View</button>
                     <a class="btn btn-warning btn-sm" href="{{ route('users.edit',$user->id) }}"> Edit</a>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"> Delete</button>
                 </td>
@@ -90,23 +84,17 @@
         {{ $data->links('pagination::bootstrap-4') }}
     </div></div>
 
-<p class="text-center text-primary"><small> </small></p>
-
 <!-- Show User Details Modal -->
-<div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="showModalLabel">User Details</h5>
-            </div>
-            <div class="modal-body">
-                <p><strong>Name:</strong> <span id="modalUserName"></span></p>
-                <p><strong>Email:</strong> <span id="modalUserEmail"></span></p>
-                <p><strong>Roles:</strong> <span id="modalUserRoles"></span></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+<div id="userModal" class="fixed inset-1 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/3 max-w-2xl relative">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-black">User Details</h2>
+        </div>
+        <div id="modalContent" class="space-y-4">
+            <!-- User details will be loaded here -->
+        </div>
+        <div class="flex justify-end mt-4">
+            <button onclick="closeModal()" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Close</button>
         </div>
     </div>
 </div>
@@ -135,22 +123,6 @@
 </div>
 
 <script>
-    var showModal = document.getElementById('showModal');
-    showModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;
-        var userName = button.getAttribute('data-username');
-        var userEmail = button.getAttribute('data-useremail');
-        var userRoles = button.getAttribute('data-userroles');
-
-        var modalUserName = document.getElementById('modalUserName');
-        var modalUserEmail = document.getElementById('modalUserEmail');
-        var modalUserRoles = document.getElementById('modalUserRoles');
-
-        modalUserName.textContent = userName;
-        modalUserEmail.textContent = userEmail;
-        modalUserRoles.textContent = userRoles;
-    });
-
     var deleteModal = document.getElementById('deleteModal');
     deleteModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
@@ -167,5 +139,41 @@
         cardView.classList.toggle('hidden');
         tableView.classList.toggle('hidden');
     });
+
+    function showUserDetails(userId) {
+        fetch(`/users/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                const modalContent = `
+                    <div class="text-center">
+                        <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4">
+                    </div>
+                    <table class="modal-table mx-auto">
+                    <tbody>
+                        <tr>
+                            <th>Name:</th>
+                            <td>${data.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>${data.email}</td>
+                        </tr>
+                        <tr>
+                            <th>Roles:</th>
+                            <td>${data.roles}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('modalContent').innerHTML = modalContent;
+            document.getElementById('userModal').classList.remove('hidden');
+            document.getElementById('userModal').classList.add('flex'); // Add this line to make the modal visible
+        });
+    }
+
+    function closeModal() {
+        document.getElementById('userModal').classList.add('hidden');
+        document.getElementById('userModal').classList.remove('flex'); // Add this line to hide the modal
+    }
 </script>
 @endsection
