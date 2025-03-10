@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
+@section('title', 'Meetings')
+@section('content_header')
+<h2 class="text-2xl font-bold mb-4">Meetings</h2>
+@stop
+
 @section('content')
-<br>
 <div class="container">
-    <h2 class="text-2xl font-bold mb-4">Meetings</h2>
-    <link rel="stylesheet" href="{{ asset('css/table.css') }}">
     <div class="pull-right">
+    <link rel="stylesheet" href="{{ asset('css/table.css') }}">
         <a href="{{ route('meetings.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Schedule a New Meeting</a>
     </div>
     <!-- Live Search Bar -->
@@ -16,12 +19,26 @@
         <table class="table mt-3">
             <thead>
                 <tr>
-                    <th>Date</th>
+                    
+                        <th>
+                        @foreach (['Date'] as $column)
+                            <form method="GET" action="{{ route('meetings.index') }}">
+                                <input type="hidden" name="column" value="{{ $column }}">
+                                <input type="hidden" name="sort" value="{{ request('column') === $column && request('sort') === 'asc' ? 'desc' : 'asc' }}">
+                                <input type="hidden" name="search" value="{{ request('search') }}">
+                                <input type="hidden" name="page" value="{{ request('page', 1) }}">
+                                <button type="submit" class="header-button">
+                                    {{ $column }} {{ request('column') === $column ? (request('sort') === 'asc' ? '▲' : '▼') : '' }}
+                                </button>
+                            </form>
+                        </th>
+                    
+                    @endforeach
                     <th>Photo</th>
                     <th>Group Name</th>
                     <th>Group ID</th>
                     <th>Discussion Points</th>
-                    <th>No. Members Present</th>
+                    <th>Attendance List</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -77,14 +94,33 @@
     </div>
 </div>
 
-<script>
-document.getElementById('liveSearch').addEventListener('keyup', function() {
-    let filter = this.value.toLowerCase();
-    let rows = document.querySelectorAll('#meetingsTable tr');
-    rows.forEach(row => {
-        let text = row.textContent.toLowerCase();
-        row.style.display = text.includes(filter) ? '' : 'none';
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        const liveSearch = document.getElementById('liveSearch');
+        liveSearch.addEventListener('keyup', debounce(function() {
+            let filter = liveSearch.value.toLowerCase();
+            let rows = document.querySelectorAll('#meetingsTable tr');
+            rows.forEach(row => {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        }, 300));
+
+        document.querySelectorAll('.view-meeting').forEach(button => {
+            button.addEventListener('click', function() {
+                let meetingId = this.getAttribute('data-meeting-id');
+                let modal = document.getElementById('meetingModal' + meetingId);
+                $(modal).modal('show');
+            });
+        });
     });
-});
-</script>
+    </script>
 @endsection

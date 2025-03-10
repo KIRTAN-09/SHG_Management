@@ -3,13 +3,13 @@
 @section('content')
 
 <div class="container">
-<link rel="stylesheet" href="{{ asset(path: 'css/Members/Create.css') }}">
+<link rel="stylesheet" href="{{ asset('css/Members/Create.css') }}">
     <form action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return validatePhotoSize()">
         @csrf
         <h1><b>Add Member</b></h1>
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required> 
         </div>
         <div class="form-group">
             <label for="number">Contact Number:</label>

@@ -12,25 +12,21 @@ class MemberController extends Controller
 
     public function index(Request $request)
     {
+<<<<<<< HEAD
 
         $search = $request->input('search');
         $status = $request->input('sort');
+=======
+        $query = Member::query();
+>>>>>>> 201d2ce8bdbefcb45cf6d41d054f33be4f67752f
 
-        $members = Member::query()
-            ->when($search, function ($query, $search) {
-                return $query->where(function ($query) use ($search) {
-                    $query->where('name', 'like', "%{$search}%")
-                        ->orWhere('village', 'like', "%{$search}%")
-                        ->orWhere('group', 'like', "%{$search}%")
-                        ->orWhere('caste', 'like', "%{$search}%");
-                        // ->orWhere('status', 'like', "%{$search}%");
-                });
-            })
-            ->when($status, function ($query, $status) {
-                return $query->where('status', $status);
-            })
-            ->orderBy('created_at', 'desc') // Sort by latest added
-            ->paginate(15);
+        if ($request->has('sort')) {
+            $query->where('status', $request->input('sort'));
+        }
+
+        $rows = $request->input('rows', 10); // Default to 10 rows per page if not specified
+
+        $members = $query->paginate($rows);
 
         //     $group_name = Group::where('name')->first();
         // $group_name->increment('no_of_members');

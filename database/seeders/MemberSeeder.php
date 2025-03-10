@@ -4,11 +4,14 @@ namespace Database\Seeders;
 
 use App\Models\Member;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class MemberSeeder extends Seeder
 {
     public function run()
     {
+        $faker = Faker::create();
+
         Member::create([
             'photo' => asset('images/KIRAN.jpg'),
             'name' => 'KIRTAN',
@@ -50,6 +53,22 @@ class MemberSeeder extends Seeder
             'member_id' => uniqid('MEM'),
             'status' => 'Active',
         ]);
+
+        for ($i = 0; $i < 200; $i++) {
+            Member::create([
+                'photo' => $faker->imageUrl(640, 480, 'people'),
+                'name' => $faker->name,
+                'number' => $faker->phoneNumber,
+                'village' => $faker->city,
+                'group' => $faker->word,
+                'caste' => $faker->word,
+                'share_price' => $faker->randomFloat(2, 50, 150),
+                'share_quantity' => $faker->numberBetween(1, 10),
+                'member_type' => 'Member',
+                'member_id' => uniqid('MEM'),
+                'status' => 'Active',
+            ]);
+        }
     }
 }
 

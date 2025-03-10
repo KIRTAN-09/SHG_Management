@@ -22,24 +22,13 @@ class TrainingController extends Controller
             $query->where('category', 'like', '%' . $request->search . '%')
                   ->orWhere('location', 'like', '%' . $request->search . '%')
                   ->orWhere('trainer', 'like', '%' . $request->search . '%');
-        }
-
-        if ($request->has('sort')) {
-            switch ($request->sort) {
-                case 'date_asc':
-                    $query->orderBy('training_date', 'asc');
-                    break;
-                case 'date_desc':
-                    $query->orderBy('training_date', 'desc');
-                    break;
-                case 'category':
-                    $query->orderBy('category', 'asc');
-                    break;
-            }
-        }
-
+                }
+                if ($request->has('column') && $request->has('sort')) {
+                    $query->orderBy($request->column, $request->sort);
+                } else {
+                    $query->orderBy('created_at', 'desc');
+                }
         $trainings = $query->paginate(10);
-
         return view('training.index', compact('trainings'));
     }
 
@@ -67,7 +56,7 @@ class TrainingController extends Controller
     public function show($id)
     {
         $training = Training::findOrFail($id);
-        return view('training.show', compact('training'));
+        return response()->json($training); // Corrected variable name to $iga
     }
 
     public function edit($id)

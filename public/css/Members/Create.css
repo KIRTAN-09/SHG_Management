@@ -10,7 +10,7 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: 600px;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -85,7 +85,7 @@ input[type="submit"] {
     border: none;
     border-radius: 7px;
     cursor: pointer;
-    width: 15%;
+    width: 30%;
     font-size: 16px;
     display: block;
     margin: 0 auto;

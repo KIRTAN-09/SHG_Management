@@ -94,8 +94,8 @@ class SavingsController extends Controller
             'date-of-deposit' => 'required|date',
         ]);
 
-        $saving = Savings::find($id);
-        $saving->update([
+        $savings = Savings::find($id);
+        $savings->update([
             'group_id' => $request->input('group-id'),
             'group_name' => $request->input('group-name'),
             'member_id' => $request->input('member-id'),    
@@ -110,8 +110,8 @@ class SavingsController extends Controller
     // Remove the specified resource from storage.
     public function destroy($id)
     {
-        $saving = Savings::find($id);
-        $saving->delete();
+        $savings = Savings::find($id);
+        $savings->delete();
 
         return redirect()->route('savings.index')->with('success', 'Saving deleted successfully.');
     }
