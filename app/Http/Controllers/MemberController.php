@@ -12,13 +12,10 @@ class MemberController extends Controller
 
     public function index(Request $request)
     {
-<<<<<<< HEAD
 
         $search = $request->input('search');
         $status = $request->input('sort');
-=======
         $query = Member::query();
->>>>>>> 201d2ce8bdbefcb45cf6d41d054f33be4f67752f
 
         if ($request->has('sort')) {
             $query->where('status', $request->input('sort'));
