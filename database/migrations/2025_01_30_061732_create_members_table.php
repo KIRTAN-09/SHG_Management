@@ -25,10 +25,9 @@ return new class extends Migration
             $table->integer('share_quantity')->default(1);
             $table->enum('member_type', ['President', 'Secretary', 'Member']);
             $table->string('member_id')->unique();
-            // $table->unsignedBigInteger('group_id')->nullable()->after('id');
-            // $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->timestamps();
             $table->enum('status', ['Active', 'Inactive']);
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade'); // Add foreign key constraint
         });
 
         // Generate member_id based on the first letter of the name followed by the ID
@@ -40,10 +39,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('members', function (Blueprint $table) {
-        //     $table->dropForeign(['group_id']);
-        //     $table->dropColumn('group_id');
-        // });
+        Schema::table('members', function (Blueprint $table) {
+            $table->dropForeign(['group_id']); // Drop foreign key constraint
+        });
         Schema::dropIfExists('members');
     }
 

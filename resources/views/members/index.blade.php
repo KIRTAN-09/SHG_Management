@@ -64,7 +64,7 @@
             <tbody id="memberTableBody">
                 @foreach ($members as $member)
                     <tr class="bg-gray-100 border-b">
-                        <td class="py-2"><img src="{{ asset('storage/' . $member->photo) }}" class="w-10 h-10 object-cover rounded-full mx-auto"></td>
+                        <td class="py-2"><img src="{{ asset('storage/' . $member->photo) }}" class="w-20 h-20 object-cover rounded-full mx-auto"></td>
                         <td class="py-2">{{ $member->name }}</td>
                         <td class="py-2">{{ $member->member_id }}</td>
                         <td class="py-2">{{ $member->number }}</td>
@@ -120,16 +120,16 @@
 </div>
 
 <!-- Modal -->
-<div id="memberModal" class="bg-sky-200 fixed inset-1 flex items-center justify-center bg-black bg-opacity-50 hidden">
+<div id="memberModal" class="bg-sky-200 fixed inset-1 flex items-center justify-center bg-black bg-opacity-80 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-black">Member Details</h2>
+            <h1 class="font-serif text-3xl">Member Details</h1>
         </div>
         <div id="modalContent" class="space-y-4">
             <!-- Member details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="bg-sky-400 text-white py-2 px-4 rounded-lg hover:bg-blue-200">Close</button>
+            <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
         </div>
     </div>
 </div>
@@ -174,7 +174,7 @@
                 .then(data => {
                     const modalContent = `
                         <div class="text-center">
-                            <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-32 h-32 object-cover rounded-full mx-auto mb-4">
+                            <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-40 h-40 object-cover rounded-full mx-auto mb-4">
                         </div>
                         <table class="modal-table mx-auto">
                         <tbody>
@@ -196,7 +196,7 @@
                             </tr>
                             <tr>
                                 <th>Group:</th>
-                                <td>${data.group}</td>
+                                <td>${data.group_name}</td>
                             </tr>
                             <tr>
                                 <th>Caste:</th>
