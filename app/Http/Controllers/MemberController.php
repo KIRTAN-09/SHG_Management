@@ -45,7 +45,7 @@ class MemberController extends Controller
             'name' => 'required|string|max:255',
             'number' => 'nullable|string|max:15',
             'village' => 'required|string|max:255',
-            'group' => 'required|exists:groups,id', // Validate group as an existing group ID
+            'group' => 'required|string|max:255', // Validate group as an existing group ID
             'caste' => 'required|string|max:255',
             'share_price' => 'required|numeric|min:1',
             'member_type' => 'required|in:President,Secretary,Member',
@@ -74,7 +74,7 @@ class MemberController extends Controller
             'name' => 'required|string|max:255',
             'number' => 'nullable|string|max:15',
             'village' => 'required|string|max:255',
-            'group' => 'required|exists:groups,id', // Validate group as an existing group ID
+            'group' => 'required|string|max:255', // Validate group as an existing group ID
             'caste' => 'required|string|max:255',
             'share_price' => 'required|numeric|min:1',
             'member_type' => 'required|in:President,Secretary,Member',
