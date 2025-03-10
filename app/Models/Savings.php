@@ -13,7 +13,7 @@ class Savings extends Model
         'group_id',
         'group_name',
         'member_id',
-        'member_name',
+        // 'member_name',
         'amount',
         'date_of_deposit',
     ];

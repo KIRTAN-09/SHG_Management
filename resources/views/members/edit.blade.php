@@ -36,10 +36,11 @@
             <label for="group">Group:</label>
             <select id="group" name="group" required>
             @foreach($groups as $group)
-                <option value="{{ $group->name }}">{{ $group->name }}</option>
+                <option value="{{ $group->id }}">{{ $group->name }}</option>
             @endforeach
             </select>
         </div>
+        
 
         <div class="mb-4">
             <label for="caste" class="block text-gray-700">Caste</label>

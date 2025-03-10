@@ -12,6 +12,7 @@ class MemberController extends Controller
 
     public function index(Request $request)
     {
+
         $search = $request->input('search');
         $status = $request->input('sort');
 
@@ -31,6 +32,8 @@ class MemberController extends Controller
             ->orderBy('created_at', 'desc') // Sort by latest added
             ->paginate(15);
 
+        //     $group_name = Group::where('name')->first();
+        // $group_name->increment('no_of_members');
         return view('members.index', compact('members'));
     }
     
@@ -65,12 +68,10 @@ class MemberController extends Controller
         $validated['member_id'] = uniqid('MEM');
         $validated['status'] = $request->input('status'); // Add status to validated data
 
-        $validated['group'] = $request->input('group');
-        $group = Group::where('name', $validated['group'])->firstOrFail();
-        // $group->increment('no_of_members'); // Remove this line
+        $group = Group::find($request->input('group'));
+        $validated['group_id'] = $group->id;
 
         Member::create($validated);
-
         return redirect()->route('members.index')->with('success', 'Member added successfully.');
     }
 
@@ -96,18 +97,19 @@ class MemberController extends Controller
         }
 
         // Check if the group has changed
-        if ($member->group !== $validated['group']) {
+        if ($member->group_id !== $request->input('group')) {
             // Decrement the old group's member count
-            $oldGroup = Group::where('name', $member->group)->firstOrFail();
+            $oldGroup = Group::findOrFail($member->group_id);
             // $oldGroup->decrement('no_of_members'); // Remove this line
 
             // Increment the new group's member count
-            $newGroup = Group::where('name', $validated['group'])->firstOrFail();
+            $newGroup = Group::findOrFail($request->input('group'));
             // $newGroup->increment('no_of_members'); // Remove this line
         }
 
         // Explicitly set the status field
         $member->status = $request->input('status');
+        $member->group_id = $request->input('group'); // Update group_id
         $member->update($validated);
 
         // Redirect to the index page after successful update
@@ -122,7 +124,12 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $member = Member::findOrFail($id);
+        // $member = Member::query()
+        //     ->leftJoin('groups', 'members.group_id', '=', 'groups.id')
+        //     ->select('members.*', 'groups.name as group_name')
+        //     ->where('members.id', $id)
+        //     ->firstOrFail();
+
         return response()->json($member);
     }
 
@@ -136,7 +143,7 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $member = Member::findOrFail($id);
-        $group = Group::where('name', $member->group)->firstOrFail();
+        $group = Group::findOrFail($member->group_id);
         // $group->decrement('no_of_members'); // Remove this line
         $member->delete();
 
