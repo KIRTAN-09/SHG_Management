@@ -21,20 +21,7 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/table.css') }}">
 <style>
-    .modal-table {
-        width: 100%;
-        border-collapse: collapse;
-        color: black;
-    }
-    .modal-table th, .modal-table td {
-        border: 1px solid black;
-        padding: 8px;
-        color: black;
-        background-color: white;
-    }
-    .modal-table td{
-        text-align: center;
-    }
+    
     
 </style>
 <div class="container mx-auto p-4">
@@ -133,8 +120,8 @@
 </div>
 
 <!-- Modal -->
-<div id="memberModal" class="fixed inset-1 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/3 max-w-2xl relative">
+<div id="memberModal" class="bg-sky-200 fixed inset-1 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="container3">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold text-black">Member Details</h2>
         </div>
@@ -142,7 +129,7 @@
             <!-- Member details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Close</button>
+            <button onclick="closeModal()" class="bg-sky-400 text-white py-2 px-4 rounded-lg hover:bg-blue-200">Close</button>
         </div>
     </div>
 </div>
