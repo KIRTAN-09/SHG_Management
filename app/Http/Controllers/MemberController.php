@@ -45,7 +45,7 @@ class MemberController extends Controller
             'name' => 'required|string|max:255',
             'number' => 'nullable|string|max:15',
             'village' => 'required|string|max:255',
-            'group' => 'required|string|max:255',
+            'group' => 'required|string|max:255', // Validate group as an existing group ID
             'caste' => 'required|string|max:255',
             'share_price' => 'required|numeric|min:1',
             'member_type' => 'required|in:President,Secretary,Member',
@@ -58,11 +58,15 @@ class MemberController extends Controller
         }
 
         $validated['share_quantity'] = 1;
-        $validated['member_id'] = uniqid('MEM');
-        $validated['status'] = $request->input('status'); // Add status to validated data
 
-        $group = Group::find($request->input('group'));
-        $validated['group_id'] = $group->id;
+        // Generate member_id based on the first letter of the name followed by a serial number
+        $firstLetter = strtoupper(substr($request->input('name'), 0, 1));
+        $lastMember = Member::where('member_id', 'like', $firstLetter . '%')->orderBy('member_id', 'desc')->first();
+        $serialNumber = $lastMember ? intval(substr($lastMember->member_id, 1)) + 1 : 1;
+        $validated['member_id'] = $firstLetter . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
+
+        $validated['status'] = $request->input('status'); // Add status to validated data
+        $validated['group_id'] = $request->input('group'); // Use group_id
 
         Member::create($validated);
         return redirect()->route('members.index')->with('success', 'Member added successfully.');
@@ -76,7 +80,7 @@ class MemberController extends Controller
             'name' => 'required|string|max:255',
             'number' => 'nullable|string|max:15',
             'village' => 'required|string|max:255',
-            'group' => 'required|string|max:255',
+            'group' => 'required|string|max:255', // Validate group as an existing group ID
             'caste' => 'required|string|max:255',
             'share_price' => 'required|numeric|min:1',
             'member_type' => 'required|in:President,Secretary,Member',
@@ -119,8 +123,8 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = Member::query()
-            // ->leftJoin('groups', 'members.group_id', '=', 'groups.id')
-            // ->select('members.*', 'groups.name as group_name')
+            ->leftJoin('groups', 'members.group_id', '=', 'groups.id') // Join with groups table using group_id
+            ->select('members.*', 'groups.name as group_name') // Select group name
             ->where('members.id', $id)
             ->firstOrFail();
 

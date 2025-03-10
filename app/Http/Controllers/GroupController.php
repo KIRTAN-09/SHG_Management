@@ -57,8 +57,10 @@ class GroupController extends Controller
            // 'no_of_members.max' => 'The number of members may not be greater than 20.',
         ]);
 
-        $validated['group_id'] = uniqid('GRP');
-        
+        $lastGroup = Group::orderBy('id', 'desc')->first();
+        $serialNumber = $lastGroup ? $lastGroup->id + 1 : 1;
+        $validated['group_id'] = strtoupper(substr($validated['name'], 0, 1)) . $serialNumber;
+
         Group::create($validated);
 
         return redirect()->route('groups.index')->with('success', 'Group added successfully.');
