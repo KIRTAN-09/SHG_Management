@@ -12,24 +12,6 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <link href="{{ asset('css/table.css') }}" rel="stylesheet">
-<style>
-    .modal-table {
-        width: 100%;
-        border-collapse: collapse;
-        color: black;
-    }
-    .modal-table th, .modal-table td {
-        border: 1px solid black;
-        padding: 8px;
-        color: black;
-        background-color: white;
-    }
-    .modal-table td{
-        text-align: center;
-    }
-    
-</style>
-
 <div class="container mx-auto p-4">
     <div class="flex justify-between items-center mb-4">
         <div class="pull-right">
@@ -104,15 +86,15 @@
 
 <!-- Modal -->
 <div id="groupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/4 max-w-2xl">
+    <div class="container3">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-black"><u>Group Details</u></h2>
+        <h1 class="font-serif text-3xl">Group Details</h1>
         </div>
         <div id="modalContent" class="space-y-4">
             <!-- Group details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
+            <button onclick="closeModal()" class="bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
         </div>
     </div>
 </div>

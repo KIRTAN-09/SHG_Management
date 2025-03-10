@@ -144,29 +144,28 @@ h2 {
 }
 
 .container3 {
-    font-size: 12px;
-    height: 600px;
-    width: 800px;
-    background: rgba(20, 72, 194, 0.548);
-    color: #cd4416;
+    font-size: 14px;
+    height: auto;
+    width: 600px;
+    background: rgba(245, 245, 220, 0.714);
     padding: 20px;
-    border: 1px solid #2d2a2a1d;
-    border-radius: 4px;
+    border: 1px solid #f4f3f357;
+    border-radius: 6px;
 }
 
 .modal-table {
     width: 100%;
+    border-radius: 8px;
     border-collapse: collapse;
-    color: black;
 }
 .modal-table th, .modal-table td {
-    border: 1px solid black;
-    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.549);
+    padding: 6px;
     color: black;
-    background-color: rgba(31, 31, 191, 0.107);
+    background-color: rgba(41, 41, 41, 0.226);
 }
 .modal-table td{
-    background-color: #80d88d38;
-    color: #000;
+    background-color: rgba(32, 31, 31, 0.381)hite;
+    color: rgb(27, 26, 26);
     text-align: center;
 }
