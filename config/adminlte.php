@@ -350,10 +350,25 @@ return [
             ],
             [
                 'text' => 'Members Management', 
-                'url' => 'members',
                 'icon' => 'fas fa-address-card',
+                'submenu' => [
+                    [
+                        'text' => 'Create Member',
+                        'url' => 'members/create',
+                        'icon' => 'fas fa-user-plus',
+                    ],
+                    [
+                        'text' => 'Members List',
+                        'url' => 'members',
+                        'icon' => 'fas fa-list',
+                    ],
+                    [
+                        'text' => 'Export Data',
+                        'url' => 'members/export',
+                        'icon' => 'fas fa-file-export',
+                    ],
+                ],
                 'permission' => 'Member-list',
-                
             ],
             [
                 'text' => 'Savings Management', 
