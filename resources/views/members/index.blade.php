@@ -27,9 +27,9 @@
 <div class="container mx-auto p-4">
     <div class="flex justify-start items-center mb-4">
         <div class="pull-right">
-        @can('User-create')
+        <!-- @can('User-create')
             <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2.5 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
-        @endcan
+        @endcan -->
             <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
             </div>
         
