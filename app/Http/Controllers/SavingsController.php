@@ -22,8 +22,7 @@ class SavingsController extends Controller
         $query = Savings::query();
 
         if ($request->has('search')) {
-            $query->where('member_name', 'like', '%' . $request->search . '%')
-                  ->orWhere('group_id', 'like', '%' . $request->search . '%')
+            $query->where('group_id', 'like', '%' . $request->search . '%')
                   ->orWhere('member_id', 'like', '%' . $request->search . '%')
                   ->orWhere('group_name', 'LIKE', "%{$request->search}%");
         }
@@ -34,7 +33,7 @@ class SavingsController extends Controller
             $query->orderBy('created_at', 'desc');
         }
 
-        $savings = $query->paginate(20);
+        $savings = $query->paginate(10);
         return view('savings.index', compact('savings'));
     }
 

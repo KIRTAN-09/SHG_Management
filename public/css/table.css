@@ -142,3 +142,31 @@ h2 {
 .pagination-controls button:hover {
     background: #ccc;
 }
+
+.container3 {
+    font-size: 12px;
+    height: 600px;
+    width: 800px;
+    background: rgba(20, 72, 194, 0.548);
+    color: #cd4416;
+    padding: 20px;
+    border: 1px solid #2d2a2a1d;
+    border-radius: 4px;
+}
+
+.modal-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: black;
+}
+.modal-table th, .modal-table td {
+    border: 1px solid black;
+    padding: 8px;
+    color: black;
+    background-color: rgba(31, 31, 191, 0.107);
+}
+.modal-table td{
+    background-color: #80d88d38;
+    color: #000;
+    text-align: center;
+}
