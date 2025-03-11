@@ -20,6 +20,7 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/table.css') }}">
+<link rel="stylesheet" href="{{ asset('css/card.css') }}">
 <style>
     
     
@@ -30,7 +31,7 @@
         <!-- @can('User-create')
             <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2.5 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
         @endcan -->
-            <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
+            <button id="toggleView" class="btn btn-primary">Toggle View</button>
             </div>
         
         <form action="{{ route('members.index') }}" method="GET" class="ml-4">
@@ -102,12 +103,12 @@
                     <p class="text-gray-600 mb-2"><strong>Member UID:</strong> {{ $member->member_id }}</p>
                     <p class="text-gray-600 mb-2"><strong>Status:</strong> {{ $member->status }}</p>
                     <div class="flex justify-center space-x-2 mt-4">
-                        <button onclick="showMemberDetails({{ $member->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">View</button>
-                        <a href="{{ route('members.edit', $member->id) }}" class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-800">Edit</a>
+                        <button onclick="showMemberDetails({{ $member->id }})" class="btn btn-info">View</button>
+                        <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
                              @csrf
                             @method('DELETE')
-                            <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
