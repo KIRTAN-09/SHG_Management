@@ -54,7 +54,7 @@ class MemberSeeder extends Seeder
         //     'status' => 'Active',
         // ]);
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
             Member::create([
                 'photo' => $faker->imageUrl(640, 480, 'people'),
                 'name' => $faker->name,
