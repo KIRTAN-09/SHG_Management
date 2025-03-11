@@ -21,6 +21,7 @@ class CreateIgasTable extends Migration
             $table->date('date')->nullable();
             $table->string('category')->nullable();
             $table->decimal('earned', 8, 2)->nullable();
+            $table->softDeletes();
         });
 
         // Add the new column 'activity'
