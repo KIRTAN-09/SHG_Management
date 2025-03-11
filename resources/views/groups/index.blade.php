@@ -15,9 +15,9 @@
 <div class="container mx-auto p-4">
     <div class="flex justify-between items-center mb-4">
         <div class="pull-right">
-        @can('role-create')
+        <!-- @can('role-create')
             <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2.5 px-3 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Group</a>
-        @endcan
+        @endcan -->
         <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle View</button>
         </div>
     </div>     
