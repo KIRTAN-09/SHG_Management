@@ -20,6 +20,7 @@ class CreateMeetingsTable extends Migration
             $table->text('discussion');
             $table->string('photo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
