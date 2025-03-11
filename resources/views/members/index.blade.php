@@ -120,17 +120,17 @@
 </div>
 
 <!-- Modal -->
-<link href={{ asset('css/modal.css') }}   rel="stylesheet">
+<link href={{ asset('css/table.css') }}   rel="stylesheet">
 <div id="memberModal" class="bg-sky-200 fixed inset-1 flex items-center justify-center bg-black bg-opacity-80 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">
-            <h1 class="font-serif text-3xl">Member Details</h1>
+            <h1 class="font-serif text-3xl"  style="color: cornflowerblue;">Member Details</h1>
         </div>
         <div id="modalContent" class="space-y-4">
             <!-- Member details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="btn1">Close</button>
+            <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
         </div>
     </div>
 </div>
