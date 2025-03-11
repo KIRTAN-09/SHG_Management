@@ -88,7 +88,7 @@
 <div id="groupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">
-        <h1 class="font-serif text-3xl">Group Details</h1>
+        <h1 class="font-serif text-3xl" style="color: cornflowerblue;">Group Details</h1>
         </div>
         <div id="modalContent" class="space-y-4">
             <!-- Group details will be loaded here -->

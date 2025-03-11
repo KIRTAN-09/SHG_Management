@@ -8,21 +8,32 @@
 <div class="container">
 <link rel="stylesheet" href="{{ asset('css/table.css') }}">
 <style>
-    .modal-table {
-        width: 100%;
-        border-collapse: collapse;
-        color: black;
-    }
-    .modal-table th, .modal-table td {
-        border: 1px solid black;
-        padding: 8px;
-        color: black;
-        background-color: white;
-    }
-    .modal-table td{
-        text-align: center;
-    }
-    
+    .container3 {
+    font-size: 14px;
+    height: auto;
+    width: 600px;
+    background: rgba(245, 245, 220, 0.714);
+    padding: 20px;
+    border: 1px solid #f4f3f357;
+    border-radius: 6px;
+}
+
+.modal-table {
+    width: 100%;
+    border-radius: 8px;
+    border-collapse: collapse;
+}
+.modal-table th, .modal-table td {
+    border: 1px solid rgba(0, 0, 0, 0.549);
+    padding: 6px;
+    color: black;
+    background-color: rgba(41, 41, 41, 0.226);
+}
+.modal-table td{
+    background-color: rgba(32, 31, 31, 0.381)hite;
+    color: rgb(27, 26, 26);
+    text-align: center;
+}    
 </style>
     <a href="{{ route('igas.create') }}" class="btn btn-primary"><i class="fa fa-plus"> </i> Create IGA</a>
     <!-- Live Search Input -->
@@ -65,15 +76,15 @@
 
 <!-- Modal -->
 <div id="igaModal" class="fixed inset-1 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/3 max-w-2xl relative">
+    <div class="container3">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-black">IGA Details</h2>
+            <h1 class="font-serif text-3xl " style="color: cornflowerblue;">IGA Details</h1>
         </div>
         <div id="igaModalContent" class="space-y-4">
             <!-- IGA details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeIgaModal()" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Close</button>
+            <button onclick="closeIgaModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
         </div>
     </div>
 </div>

@@ -46,7 +46,7 @@
                 @foreach($meetings as $meeting)
                 <tr>
                     <td>{{ $meeting->date }}</td>
-                    <td><img src="{{ asset('storage/' . $meeting->photo) }}" alt="Group Photo" style="width: 50px; height: 30px;"></td>
+                    <td><img src="{{ asset('storage/' . $meeting->photo) }}" alt="Group Photo" class="w-20 h-20 object-cover rounded-full mx-auto mb-4"></td>
                     <td>{{ $meeting->group_name }}</td>
                     <td>{{ $meeting->group_id }}</td>
                     <td>{{ $meeting->discussion }}</td>
@@ -62,6 +62,11 @@
                     </td>
                 </tr>
                 <!-- Modal -->
+                 <style>
+                    .modal {
+                        transition: opacity 0.25s;
+                    }
+                    </style>
                 <div class="modal fade" id="meetingModal{{ $meeting->id }}" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel{{ $meeting->id }}" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
