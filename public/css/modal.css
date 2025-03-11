@@ -2,11 +2,10 @@
     font-size: 14px;
     height: auto;
     width: 600px;
-    background:  rgb(238, 233, 196);
+    background: rgb(184, 223, 239);
     padding: 20px;
     border: 1px solid #f4f3f357;
     border-radius: 6px;
-    color: #000;
 }
 
 .modal-table {
@@ -18,7 +17,7 @@
     border: 1px solid rgba(0, 0, 0, 0.549);
     padding: 6px;
     color: black;
-    background-color: white;
+    background-color: rgba(67, 142, 188, 0.737);
 }
 .modal-table td{
     text-align: center;
