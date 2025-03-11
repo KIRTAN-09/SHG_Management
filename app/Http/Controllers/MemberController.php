@@ -12,10 +12,11 @@ class MemberController extends Controller
 
     public function index(Request $request)
     {
-
         $search = $request->input('search');
         $status = $request->input('sort');
-        $query = Member::query();
+        $query = Member::query()
+            ->leftJoin('groups', 'members.group_id', '=', 'groups.id') // Join with groups table using group_id
+            ->select('members.*', 'groups.name as group_name'); // Select group name
 
         if ($request->has('sort')) {
             $query->where('status', $request->input('sort'));
@@ -25,8 +26,6 @@ class MemberController extends Controller
 
         $members = $query->paginate($rows);
 
-        //     $group_name = Group::where('name')->first();
-        // $group_name->increment('no_of_members');
         return view('members.index', compact('members'));
     }
     
@@ -127,8 +126,8 @@ class MemberController extends Controller
             ->select('members.*', 'groups.name as group_name') // Select group name
             ->where('members.id', $id)
             ->firstOrFail();
-
         return response()->json($member);
+        // return view('members.show', compact('member'));
     }
 
     public function edit($id)
