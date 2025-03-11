@@ -28,6 +28,7 @@ return new class extends Migration
             $table->timestamps();
             $table->enum('status', ['Active', 'Inactive']);
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade'); // Add foreign key constraint
+            $table->softDeletes();
         });
 
         // Generate member_id based on the first letter of the name followed by the ID
