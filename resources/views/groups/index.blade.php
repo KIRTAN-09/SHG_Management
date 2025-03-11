@@ -85,7 +85,7 @@
 </div>
 
 <!-- Modal -->
-<link href={{ asset('css/table.css') }}   rel="stylesheet">
+<link href={{ asset('css/modal.css') }}   rel="stylesheet">
 <div id="groupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">

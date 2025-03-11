@@ -2,7 +2,7 @@
     font-size: 14px;
     height: auto;
     width: 600px;
-    background: rgb(184, 223, 239);
+    background: rgba(245, 245, 220, 0.714);
     padding: 20px;
     border: 1px solid #f4f3f357;
     border-radius: 6px;
@@ -17,17 +17,10 @@
     border: 1px solid rgba(0, 0, 0, 0.549);
     padding: 6px;
     color: black;
-    background-color: rgba(67, 142, 188, 0.737);
+    background-color: rgba(41, 41, 41, 0.226);
 }
 .modal-table td{
+    background-color: rgba(32, 31, 31, 0.381)hite;
+    color: rgb(27, 26, 26);
     text-align: center;
-}
-.btn1{
-    background-color: #287da7a4;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-}
-.btn1:hover{
-    background-color: #287da7dd;
 }

@@ -120,7 +120,7 @@
 </div>
 
 <!-- Modal -->
-<link href={{ asset('css/table.css') }}   rel="stylesheet">
+<link href={{ asset('css/modal.css') }}   rel="stylesheet">
 <div id="memberModal" class="bg-sky-200 fixed inset-1 flex items-center justify-center bg-black bg-opacity-80 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">
