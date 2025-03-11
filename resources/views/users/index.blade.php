@@ -93,6 +93,16 @@
         });
     });
 
-   
+    function confirmDelete(userId) {
+        var deleteModal = document.getElementById('deleteModal');
+        var deleteForm = document.getElementById('deleteForm');
+        deleteForm.action = '/users/' + userId;
+        deleteModal.classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        var deleteModal = document.getElementById('deleteModal');
+        deleteModal.classList.add('hidden');
+    }
 </script>
 @endsection
