@@ -143,29 +143,3 @@ h2 {
     background: #ccc;
 }
 
-.container3 {
-    font-size: 14px;
-    height: auto;
-    width: 600px;
-    background: rgba(245, 245, 220, 0.714);
-    padding: 20px;
-    border: 1px solid #f4f3f357;
-    border-radius: 6px;
-}
-
-.modal-table {
-    width: 100%;
-    border-radius: 8px;
-    border-collapse: collapse;
-}
-.modal-table th, .modal-table td {
-    border: 1px solid rgba(0, 0, 0, 0.549);
-    padding: 6px;
-    color: black;
-    background-color: rgba(41, 41, 41, 0.226);
-}
-.modal-table td{
-    background-color: rgba(32, 31, 31, 0.381)hite;
-    color: rgb(27, 26, 26);
-    text-align: center;
-}

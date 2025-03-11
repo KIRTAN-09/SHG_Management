@@ -28,10 +28,8 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = User::latest()->paginate(15);
-  
-        return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
     
     /**
@@ -74,13 +72,13 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id): View
+    public function show($id): \Illuminate\Http\JsonResponse
     {
         $user = User::find($id);
-        return response()->json($user);    }
-    
+        return response()->json($user);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -137,8 +135,20 @@ class UserController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+    }
+
+    /**
+     * Fetch user details for modal view.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getUserDetails($id)
+    {
+        $user = User::with('roles')->find($id);
+        return response()->json($user);
     }
 }

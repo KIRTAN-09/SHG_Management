@@ -120,6 +120,7 @@
 </div>
 
 <!-- Modal -->
+<link href={{ asset('css/modal.css') }}   rel="stylesheet">
 <div id="memberModal" class="bg-sky-200 fixed inset-1 flex items-center justify-center bg-black bg-opacity-80 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">
@@ -129,104 +130,103 @@
             <!-- Member details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
+            <button onclick="closeModal()" class="btn1">Close</button>
         </div>
     </div>
 </div>
 
 <script>
-        let formToSubmit;
+    let formToSubmit;
 
-        function confirmDelete(event, form) {
-            event.preventDefault();
-            formToSubmit = form;
-            const confirmationBox = document.createElement('div');
-            confirmationBox.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
-            confirmationBox.innerHTML = `
-                <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-                    <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
-                    <p class="mb-4">Are you sure you want to delete this member?</p>
-                    <div class="flex justify-end space-x-4">
-                        <button onclick="closeConfirmationBox()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">No</button>
-                        <button onclick="submitDeleteForm()" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">Yes</button>
-                    </div>
+    function confirmDelete(event, form) {
+        event.preventDefault();
+        formToSubmit = form;
+        const confirmationBox = document.createElement('div');
+        confirmationBox.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
+        confirmationBox.innerHTML = `
+            <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+                <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
+                <p class="mb-4">Are you sure you want to delete this member?</p>
+                <div class="flex justify-end space-x-4">
+                    <button onclick="closeConfirmationBox()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">No</button>
+                    <button onclick="submitDeleteForm()" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">Yes</button>
                 </div>
-            `;
-            confirmationBox.id = 'confirmationBox';
-            document.body.appendChild(confirmationBox);
-        }
-
-        function closeConfirmationBox() {
-            const confirmationBox = document.getElementById('confirmationBox');
-            if (confirmationBox) {
-                confirmationBox.remove();
-            }
-        }
-
-        function submitDeleteForm() {
-            closeConfirmationBox();
-            formToSubmit.submit();
-        }
-
-        function showMemberDetails(memberId) {
-            fetch(`/members/${memberId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const modalContent = `
-                        <div class="text-center">
-                            <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-40 h-40 object-cover rounded-full mx-auto mb-4">
-                        </div>
-                        <table class="modal-table mx-auto">
-                        <tbody>
-                            <tr>
-                                <th>Name:</th>
-                                <td>${data.name}</td>
-                            </tr>
-                            <tr>
-                                <th>ID:</th>
-                                <td>${data.member_id}</td>
-                            </tr>
-                            <tr>
-                                <th>Number:</th>
-                                <td>${data.number}</td>
-                            </tr>
-                            <tr>
-                                <th>Village:</th>
-                                <td>${data.village}</td>
-                            </tr>
-                            <tr>
-                                <th>Group:</th>
-                                <td>${data.group_name}</td>
-                            </tr>
-                            <tr>
-                                <th>Caste:</th>
-                                <td>${data.caste}</td>
-                            </tr>
-                            <tr>
-                                <th>Share Price:</th>
-                                <td>${data.share_price}</td>
-                            </tr>
-                            <tr>
-                                <th>Member Type:</th>
-                                <td>${data.member_type}</td>
-                            </tr> 
-                            <tr>
-                                <th>Status:</th>
-                                <td>${data.status}</td>
-                            </tr>  
-                        </tbody>
-                    </table>
-                `;
-                document.getElementById('modalContent').innerHTML = modalContent;
-                document.getElementById('memberModal').classList.remove('hidden');
-            });
-            
+            </div>
+        `;
+        confirmationBox.id = 'confirmationBox';
+        document.body.appendChild(confirmationBox);
     }
-    
+
+    function closeConfirmationBox() {
+        const confirmationBox = document.getElementById('confirmationBox');
+        if (confirmationBox) {
+            confirmationBox.remove();
+        }
+    }
+
+    function submitDeleteForm() {
+        closeConfirmationBox();
+        formToSubmit.submit();
+    }
+
+    function showMemberDetails(memberId) {
+        fetch(`/members/${memberId}`)
+            .then(response => response.json())
+            .then(data => {
+                const modalContent = `
+                    <div class="text-center">
+                        <img src="${data.photo ? '{{ asset('storage/') }}' + '/' + data.photo : ''}" class="w-40 h-40 object-cover rounded-full mx-auto mb-4">
+                    </div>
+                    <table class="modal-table mx-auto">
+                    <tbody>
+                        <tr>
+                            <th>Name:</th>
+                            <td>${data.name}</td>
+                        </tr>
+                        <tr>
+                            <th>ID:</th>
+                            <td>${data.member_id}</td>
+                        </tr>
+                        <tr>
+                            <th>Number:</th>
+                            <td>${data.number}</td>
+                        </tr>
+                        <tr>
+                            <th>Village:</th>
+                            <td>${data.village}</td>
+                        </tr>
+                        <tr>
+                            <th>Group:</th>
+                            <td>${data.group_name}</td>
+                        </tr>
+                        <tr>
+                            <th>Caste:</th>
+                            <td>${data.caste}</td>
+                        </tr>
+                        <tr>
+                            <th>Share Price:</th>
+                            <td>${data.share_price}</td>
+                        </tr>
+                        <tr>
+                            <th>Member Type:</th>
+                            <td>${data.member_type}</td>
+                        </tr> 
+                        <tr>
+                            <th>Status:</th>
+                            <td>${data.status}</td>
+                        </tr>  
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('modalContent').innerHTML = modalContent;
+            document.getElementById('memberModal').classList.remove('hidden');
+        });
+    }
 
     function closeModal() {
         document.getElementById('memberModal').classList.add('hidden');
     }
+
     var toggleViewButton = document.getElementById('toggleView');
     var cardView = document.getElementById('cardView');
     var tableView = document.getElementById('tableView');

@@ -1,26 +1,34 @@
-.modal-header {
-    background: linear-gradient(135deg, #a4d1ea, #8dafa147);
-    border-bottom: 1px solid #dee2e6;
+.container3 {
+    font-size: 14px;
+    height: auto;
+    width: 600px;
+    background:  rgb(238, 233, 196);
+    padding: 20px;
+    border: 1px solid #f4f3f357;
+    border-radius: 6px;
+    color: #000;
 }
-.modal-title {
-    color: #495057;
+
+.modal-table {
+    width: 100%;
+    border-radius: 8px;
+    border-collapse: collapse;
 }
-.modal-body {
-    background: linear-gradient(135deg, #a4d1ea, #9e93e5);
+.modal-table th, .modal-table td {
+    border: 1px solid rgba(0, 0, 0, 0.549);
+    padding: 6px;
+    color: black;
+    background-color: white;
 }
-.modal-footer {
-    background: linear-gradient(135deg, #a4d1ea, #9e93e5);
-    border-top: 1px solid #dee2e6;
+.modal-table td{
+    text-align: center;
 }
-.btn-close {
-    background-color: #6c757d;
-    color: #ffffff;
+.btn1{
+    background-color: #287da7a4;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
 }
-.btn-secondary {
-    background-color: #4abf0b1e;
-    color: #ffffff;
-}
-.btn-danger {
-    background-color: #dc3545;
-    color: #ffffff;
+.btn1:hover{
+    background-color: #287da7dd;
 }
