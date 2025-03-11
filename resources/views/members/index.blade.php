@@ -65,15 +65,15 @@
                 @foreach ($members as $member)
                     <tr class="bg-gray-100 border-b">
                         <td class="py-2"><img src="{{ asset('storage/' . $member->photo) }}" class="w-20 h-20 object-cover rounded-full mx-auto"></td>
-                        <td class="py-2">{{ $member->name }}</td>
-                        <td class="py-2">{{ $member->member_id }}</td>
-                        <td class="py-2">{{ $member->number }}</td>
-                        <td class="py-2">{{ $member->village }}</td>
-                        <td class="py-2">{{ $member->group }}</td>
-                        <td class="py-2">{{ $member->caste }}</td>
-                        <td class="py-2">{{ $member->share_price }}</td>
-                        <td class="py-2">{{ $member->member_type }}</td>
-                        <td class="py-2">{{ $member->status }}</td>
+                        <td class="py-2">{{ $member->name}}</td>
+                        <td class="py-2">{{ $member->member_id}}</td>
+                        <td class="py-2">{{ $member->number}}</td>
+                        <td class="py-2">{{ $member->village}}</td>
+                        <td class="py-2">{{ $member->group_name }}</td>
+                        <td class="py-2">{{ $member->caste}}</td>
+                        <td class="py-2">{{ $member->share_price}}</td>
+                        <td class="py-2">{{ $member->member_type}}</td>
+                        <td class="py-2">{{ $member->status}}</td>
                         <td class="py-2">
                             <div class="flex justify-center space-x-2">
                                 <button onclick="showMemberDetails({{ $member->id }})" class="btn btn-info">View</button>
