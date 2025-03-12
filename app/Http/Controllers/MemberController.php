@@ -155,10 +155,10 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $member = Member::findOrFail($id);
-        $group = Group::findOrFail($member->group_id);
-        // $group->decrement('no_of_members'); // Remove this line
+        $member->status = 'Inactive';
+        $member->save();
         $member->delete();
 
-        return redirect()->route('members.index')->with('success', 'Member deleted successfully');
+        return redirect()->route('members.index')->with('success', 'Member status set to Inactive and deleted successfully');
     }
 }

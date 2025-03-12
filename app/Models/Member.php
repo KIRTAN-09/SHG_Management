@@ -18,7 +18,4 @@ class Member extends Model
     {
         return $this->belongsTo(Group::class, 'group_id'); // Update relationship to use group_id
     }   
-
-
-
 }

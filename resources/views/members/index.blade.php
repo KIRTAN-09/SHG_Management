@@ -146,8 +146,8 @@
         confirmationBox.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
         confirmationBox.innerHTML = `
             <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-                <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
-                <p class="mb-4">Are you sure you want to delete this member?</p>
+                <h2 class="text-xl font-bold mb-4">Confirm Status Change and Deletion</h2>
+                <p class="mb-4">Are you sure you want to set this member's status to Inactive and delete the member?</p>
                 <div class="flex justify-end space-x-4">
                     <button onclick="closeConfirmationBox()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">No</button>
                     <button onclick="submitDeleteForm()" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">Yes</button>
