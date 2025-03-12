@@ -22,7 +22,7 @@ body, html {
 form {
     width: 100%;
     max-width: 600px;
-    padding: 20px;
+    padding: 20px;  
     border: 1px solid #343798;
     border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(8, 8, 8, 0.478);
@@ -118,17 +118,9 @@ input[type="submit"]:hover {
         @csrf
         <h1><b>Savings  Form</b></h1>
         <!-- Group ID/Name -->
-        <label>Group:</label>
-        <div class="radio-group">
-            <input type="radio" id="group-id-option" name="group-option" value="id" checked>
-            <label for="group-id-option">ID</label>
-            <input type="radio" id="group-name-option" name="group-option" value="name">
-            <label for="group-name-option">Name</label>
-        </div>
+        <label for="group-id">Group ID:</label>
         <input type="text" id="group-id" name="group-id" placeholder="Enter Group ID" required>
-        <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span>
-        <input type="text" id="group-name" name="group-name" placeholder="Enter Group Name" style="display: none;">
-        <span id="group-name-error" class="error-message" style="display: none; color: red;">Name must be in characters</span><br><br>
+        <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
         
         <!-- Member ID -->
         <label for="member-id">Member ID:</label>
@@ -136,9 +128,9 @@ input[type="submit"]:hover {
         <span id="member-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
         
         <!-- Member Name -->
-        <label for="member-name">Member Name:</label>
+        <!-- <label for="member-name">Member Name:</label>
         <input type="text" id="member-name" name="member-name" placeholder="Enter Member Name" required>
-        <span id="member-name-error" class="error-message" style="display: none; color: red;">Name must be in characters</span><br><br>
+        <span id="member-name-error" class="error-message" style="display: none; color: red;">Name must be in characters</span><br><br> -->
         
         <!-- Date of deposit -->
         <label for="date-of-deposit">Date of Deposit:</label>
@@ -154,41 +146,18 @@ input[type="submit"]:hover {
 </div>
 
 <script>
-document.getElementById('group-id-option').addEventListener('change', function() {
-    document.getElementById('group-id').style.display = 'block';
-    document.getElementById('group-id').setAttribute('type', 'number');
-    document.getElementById('group-name').style.display = 'none';
-    document.getElementById('group-id-error').style.display = 'none';
-    document.getElementById('group-name-error').style.display = 'none';
-});
-document.getElementById('group-name-option').addEventListener('change', function() {
-    document.getElementById('group-id').style.display = 'none';
-    document.getElementById('group-name').style.display = 'block';
-    document.getElementById('group-id-error').style.display = 'none';
-    document.getElementById('group-name-error').style.display = 'none';
-});
-
 // Prevent future dates in the date of deposit field
 const dateOfDeposit = document.getElementById('date-of-deposit');
 const today = new Date().toISOString().split('T')[0];
 dateOfDeposit.setAttribute('max', today);
 
-// Validation for Group ID and Name inputs
+// Validation for Group ID input
 document.getElementById('group-id').addEventListener('input', function() {
     const value = this.value;
     if (isNaN(value) || /[^0-9]/.test(value)) {
         document.getElementById('group-id-error').style.display = 'block';
     } else {
         document.getElementById('group-id-error').style.display = 'none';
-    }
-});
-
-document.getElementById('group-name').addEventListener('input', function() {
-    const value = this.value;
-    if (/[^a-zA-Z]/.test(value)) {
-        document.getElementById('group-name-error').style.display = 'block';
-    } else {
-        document.getElementById('group-name-error').style.display = 'none';
     }
 });
 

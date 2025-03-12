@@ -19,6 +19,14 @@ class CreateIgasTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->date('date')->nullable();
+            $table->string('category')->nullable();
+            $table->decimal('earned', 8, 2)->nullable();
+            $table->softDeletes();
+        });
+
+        // Add the new column 'activity'
+        Schema::table('igas', function (Blueprint $table) {
+            $table->string('activity')->nullable();
         });
     }
 
@@ -29,6 +37,13 @@ class CreateIgasTable extends Migration
      */
     public function down()
     {
+        // Remove the new column 'activity'
+        Schema::table('igas', function (Blueprint $table) {
+            $table->dropColumn('activity');
+            $table->dropColumn('category');
+            $table->dropColumn('earned');
+        });
+
         Schema::dropIfExists('igas');
     }
 }

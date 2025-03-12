@@ -25,7 +25,15 @@
 
             <label for="attendance_list">Attendance List:</label>
             <div id="attendance_list">
-                <!-- Fetched members will be displayed here -->
+                <label for="group">Group:</label>
+                <select id="group" name="group" required>
+                    @foreach($groups as $group)
+                        <option value="{{ $group->id }}">{{ $group->name }}</option>
+                    @endforeach
+                </select>
+                <div id="members_list">
+                    <!-- Members will be populated here based on the selected group -->
+                </div>
             </div>
             <br><br>
 
@@ -38,5 +46,31 @@
             <input type="submit" value="Schedule Meeting">
         </form>
     </div>
+    <script>
+        document.getElementById('group').addEventListener('change', function() {
+            var groupId = this.value;
+            fetch(`/groups/${groupId}/members`)
+                .then(response => response.json())
+                .then(data => {
+                    var membersList = document.getElementById('members_list');
+                    membersList.innerHTML = '';
+                    data.members.forEach(member => {
+                        var checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.name = 'attendance[]';
+                        checkbox.value = member.id;
+                        checkbox.id = 'member_' + member.id;
+
+                        var label = document.createElement('label');
+                        label.htmlFor = 'member_' + member.id;
+                        label.appendChild(document.createTextNode(member.name));
+
+                        membersList.appendChild(checkbox);
+                        membersList.appendChild(label);
+                        membersList.appendChild(document.createElement('br'));
+                    });
+                });
+        });
+    </script>
 </body>
 </html>

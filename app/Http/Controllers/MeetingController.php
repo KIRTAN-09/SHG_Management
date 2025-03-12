@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Meeting;
+use App\Models\Group;
 use Illuminate\Support\Facades\Storage;
 
 class MeetingController extends Controller
@@ -11,9 +12,20 @@ class MeetingController extends Controller
     /**
      * Display a listing of meetings.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $meetings = Meeting::orderBy('created_at', 'desc')->paginate(10); // Sort by latest added
+        $query = Meeting::query();
+
+        if ($request->has('search')) {
+            $query->where('group_name', 'like', '%' . $request->search . '%')
+                  ->orWhere('discussion', 'like', '%' . $request->search . '%');
+        }
+        if ($request->has('column') && $request->has('sort')) {
+            $query->orderBy($request->column, $request->sort);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+        $meetings = $query->paginate(20);
         return view('meetings.index', compact('meetings'));
     }
 
@@ -22,7 +34,8 @@ class MeetingController extends Controller
      */
     public function create()
     {
-        return view('meetings.create');
+        $groups = Group::all();
+        return view('meetings.create', compact('groups'));
     }
 
     /**

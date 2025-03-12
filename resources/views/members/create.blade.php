@@ -9,10 +9,10 @@
         <h1><b>Add Member</b></h1>
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required> 
         </div>
         <div class="form-group">
-            <label for="number">Number:</label>
+            <label for="number">Contact Number:</label>
             <input type="tel" id="number" name="number">
         </div>
         <div class="form-group">

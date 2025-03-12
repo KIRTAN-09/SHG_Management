@@ -52,6 +52,34 @@ class HomeController extends Controller
             $savings[] = $monthlySavings[$i] ?? 0;
         }
 
-        return view('home', compact('totalGroups', 'totalMembers', 'totalActiveMembers', 'months', 'savings'));
+        $years = Savings::selectRaw('YEAR(date_of_deposit) as year')
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->toArray();
+
+        return view('home', compact('totalGroups', 'totalMembers', 'totalActiveMembers', 'months', 'savings', 'years'));
+    }
+
+    public function getSavingsData(Request $request)
+    {
+        $year = $request->query('year', Carbon::now()->year);
+
+        $monthlySavings = Savings::selectRaw('SUM(amount) as total, MONTH(date_of_deposit) as month')
+            ->whereYear('date_of_deposit', $year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->pluck('total', 'month')
+            ->toArray();
+
+        $months = [];
+        $savings = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $months[] = Carbon::create()->month($i)->format('F');
+            $savings[] = $monthlySavings[$i] ?? 0;
+        }
+
+        return response()->json(['months' => $months, 'savings' => $savings]);
     }
 }

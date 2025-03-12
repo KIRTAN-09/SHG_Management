@@ -23,7 +23,7 @@ form {
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    border: 2px solid #343798;
+    border: 1px solidrgb(66, 67, 70);
     border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(8, 8, 8, 0.478);
     background-color: #fff;
@@ -101,7 +101,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color:rgb(15, 73, 134);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -138,11 +138,11 @@ input[type="submit"]:hover {
             <label for="earned">Amount Earned</label>
             <input type="number" class="form-control" id="earned" name="earned" placeholder="Enter amount earned" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="remarks">Remarks</label>
             <textarea class="form-control" id="remarks" name="remarks" rows="3" placeholder="Enter any remarks"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        </div> -->
+        <input type="submit" value="Create IGA">
     </form>
 </div>
 <script>

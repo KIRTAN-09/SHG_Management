@@ -299,17 +299,25 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        // [
-        //     'type' => 'navbar-search',
-        //     'text' => 'search',
-        //     'topnav_right' => true,
-        // ],
+        [
+            'type' => 'dropdown',
+            'text' => 'Language',
+            'icon' => 'fas fa-globe',
+            'topnav_right' => true,
+        ],
+        [
+            'type' => 'dropdown',
+            'text' => '',
+            'icon' => 'fas fa-bell',
+            'topnav_right' => true,
+            'url' => '#',   
+        ],
+        
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-
+        
         // Sidebar items:
       
             [
@@ -319,34 +327,75 @@ return [
                 
             ],
             [
-                'text' => 'Roles',
-                'url' => 'roles',
-                'icon' => 'fas fa-fw fa-user',
-                
-            ],
-            [
-                'text' => 'Manage Users',
-                'url' => 'users',
-                'icon' => 'fas fa-user-edit',
-                
-                
+                'text' => 'User Management',
+                'icon' => 'fas fa-users-cog',
+                'submenu' => [
+                    [
+                        'text' => 'Roles',
+                        'url' => 'roles',
+                        'icon' => 'fas fa-fw fa-user',
+                    ],
+                    [
+                        'text' => 'Manage Users',
+                        'url' => 'users',
+                        'icon' => 'fas fa-user-edit',
+                    ],
+                ],
             ],
             [
                 'text' => 'Groups Management', 
-                'url' => 'groups',
                 'icon' => 'fas fa-fw fa-users',
-                
+                'submenu' => [
+                    [
+                        'text' => 'Create Group',
+                        'url' => 'groups/create',
+                        'icon' => 'fas fa-user-plus',
+                    ],
+                    [
+                        'text' => 'Groups List',
+                        'url' => 'groups',
+                        'icon' => 'fas fa-list',
+                    ],
+                    [
+                        'text' => 'Member Designation',
+                        'url' => 'groups/member_designation',
+                        'icon' => 'fas fa-users',
+                    ],
+                    [
+                        'text' => 'Export Data',
+                        'url' => 'groups/export',
+                        'icon' => 'fas fa-file-export',
+                    ],
+                ],
+                'permission' => 'Group-list',
             ],
             [
                 'text' => 'Members Management', 
-                'url' => 'members',
                 'icon' => 'fas fa-address-card',
-                
+                'submenu' => [
+                    [
+                        'text' => 'Create Member',
+                        'url' => 'members/create',
+                        'icon' => 'fas fa-user-plus',
+                    ],
+                    [
+                        'text' => 'Members List',
+                        'url' => 'members',
+                        'icon' => 'fas fa-list',
+                    ],
+                    [
+                        'text' => 'Export Data',
+                        'url' => 'members/export',
+                        'icon' => 'fas fa-file-export',
+                    ],
+                ],
+                'permission' => 'Member-list',
             ],
             [
                 'text' => 'Savings Management', 
                 'url' => 'savings',
                 'icon' =>'fas fa-rupee-sign',
+                'permission' => 'Savings-list',
                 
             ],
             [
@@ -366,12 +415,12 @@ return [
                 'icon' => 'fas fa-fw fa-users',
                 
             ],
-            // [
-            //     'text' => 'Reports', 
-            //     'url' => 'reports',
-            //     'icon' => 'fas fa-file-excel',
+            [
+                'text' => 'Generate Reports', 
+                'url' => 'reports',
+                'icon' => 'fas fa-file-pdf',
                 
-            // ],
+            ],
             
             
        
@@ -417,17 +466,17 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],

@@ -1,87 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Add this line to include Font Awesome -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/table.css') }}">
 
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2 class="text-2xl font-bold mb-4">Users Management</h2>
+
+<div class="container mx-auto p-4">
+    <div class="flex justify-between items-center mb-3">
+        <h1 class="text-2xl font-bold">Users</h1>
+        <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle View</button>
+    </div>
+
+    <div id="tableView" class="hidden">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($users as $user)
+                <tr>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
+                    <td>
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                        <button data-user-id="{{ $user->id }}" class="delete-button btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        @foreach($users as $user)
+        <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $user->name }}</h5>
+                    <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
+                    <p class="card-text"><strong>Role:</strong> {{ $user->roles->pluck('name')->join(', ') }}</p>
+                    <br>
+                    <a href="{{ route('users.edit', $user->id) }}" class="bg-blue-500 text-white py-2 px-2 rounded hover:bg-yellow-700">Edit</a>
+                    <button data-user-id="{{ $user->id }}" class="delete-button bg-red-500 text-white py-2 px-2 rounded hover:bg-red-700">Delete</button>
+                </div>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-success mb-2" href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create New User</a>
-        </div>
-        <br>
+        @endforeach
     </div>
 </div>
 
-@session('success')
-    <div class="alert alert-success" role="alert"> 
-        {{ $value }}
-    </div>
-@endsession
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-   @foreach ($data as $key => $user)
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <h3 class="text-lg font-semibold mb-2">{{ $user->name }}</h3>
-        <div class="mb-4">
-          @if(!empty($user->getRoleNames()))
-            @foreach($user->getRoleNames() as $v)
-               <span class="inline-block bg-green-200 text-green-800 text-xs px-2 py-1 rounded">{{ $v }}</span>
-            @endforeach
-          @endif
-        </div>
-        <div class="flex space-x-2">
-            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showModal" data-username="{{ $user->name }}" data-useremail="{{ $user->email }}" data-userroles="{{ implode(', ', $user->getRoleNames()->toArray()) }}"><i class="fa-solid fa-list"></i> View</button>
-            <a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-userid="{{ $user->id }}"><i class="fa-solid fa-trash"></i> Delete</button>
-        </div>
-    </div>
- @endforeach
-</div>
-
-{!! $data->links('pagination::bootstrap-5') !!}
-
-<p class="text-center text-primary"><small> </small></p>
-
-<!-- Show User Details Modal -->
-<div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="showModalLabel">User Details</h5>
-            </div>
-            <div class="modal-body">
-                <p><strong>Name:</strong> <span id="modalUserName"></span></p>
-                <p><strong>Email:</strong> <span id="modalUserEmail"></span></p>
-                <p><strong>Roles:</strong> <span id="modalUserRoles"></span></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this user?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form id="deleteForm" method="POST" action="">
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
+            <p>Are you sure you want to delete this user?</p>
+            <div class="flex justify-end mt-4">
+                <button onclick="closeDeleteModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 mr-2">Cancel</button>
+                <form id="deleteForm" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">Delete</button>
                 </form>
             </div>
         </div>
@@ -89,28 +74,35 @@
 </div>
 
 <script>
-    var showModal = document.getElementById('showModal');
-    showModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;
-        var userName = button.getAttribute('data-username');
-        var userEmail = button.getAttribute('data-useremail');
-        var userRoles = button.getAttribute('data-userroles');
+    document.addEventListener('DOMContentLoaded', function () {
+        
 
-        var modalUserName = document.getElementById('modalUserName');
-        var modalUserEmail = document.getElementById('modalUserEmail');
-        var modalUserRoles = document.getElementById('modalUserRoles');
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function () {
+                confirmDelete(this.dataset.userId);
+            });
+        });
 
-        modalUserName.textContent = userName;
-        modalUserEmail.textContent = userEmail;
-        modalUserRoles.textContent = userRoles;
+        var toggleViewButton = document.getElementById('toggleView');
+        var cardView = document.getElementById('cardView');
+        var tableView = document.getElementById('tableView');
+
+        toggleViewButton.addEventListener('click', function () {
+            cardView.classList.toggle('hidden');
+            tableView.classList.toggle('hidden');
+        });
     });
 
-    var deleteModal = document.getElementById('deleteModal');
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;
-        var userId = button.getAttribute('data-userid');
-        var form = document.getElementById('deleteForm');
-        form.action = '/users/' + userId;
-    });
+    function confirmDelete(userId) {
+        var deleteModal = document.getElementById('deleteModal');
+        var deleteForm = document.getElementById('deleteForm');
+        deleteForm.action = '/users/' + userId;
+        deleteModal.classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        var deleteModal = document.getElementById('deleteModal');
+        deleteModal.classList.add('hidden');
+    }
 </script>
 @endsection

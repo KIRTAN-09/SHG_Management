@@ -14,9 +14,21 @@ class TrainingController extends Controller
     //     $this->middleware('permission:training-edit', ['only' => ['edit', 'update']]);
     //     $this->middleware('permission:training-delete', ['only' => ['destroy']]);
     // }
-    public function index()
+    public function index(Request $request)
     {
-        $trainings = Training::paginate(10);
+        $query = Training::query();
+
+        if ($request->has('search')) {
+            $query->where('category', 'like', '%' . $request->search . '%')
+                  ->orWhere('location', 'like', '%' . $request->search . '%')
+                  ->orWhere('trainer', 'like', '%' . $request->search . '%');
+                }
+                if ($request->has('column') && $request->has('sort')) {
+                    $query->orderBy($request->column, $request->sort);
+                } else {
+                    $query->orderBy('created_at', 'desc');
+                }
+        $trainings = $query->paginate(10);
         return view('training.index', compact('trainings'));
     }
 
@@ -44,7 +56,7 @@ class TrainingController extends Controller
     public function show($id)
     {
         $training = Training::findOrFail($id);
-        return view('training.show', compact('training'));
+        return response()->json($training); // Corrected variable name to $iga
     }
 
     public function edit($id)

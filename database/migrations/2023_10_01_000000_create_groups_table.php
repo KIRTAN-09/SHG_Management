@@ -12,12 +12,13 @@ class CreateGroupsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('village_name');
-            $table->string('president_name');
-            $table->string('secretary_name');
-            $table->integer('no_of_members');
+            // $table->string('president_name');
+            // $table->string('secretary_name');
+            // $table->integer('no_of_members');
             $table->string('group_id')->unique();
-            $table->text('description')->nullable();
+            // $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

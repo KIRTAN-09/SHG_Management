@@ -18,32 +18,33 @@
     @endif
 
     <form action="{{ route('training.update', $training->id) }}" method="POST">
+    <link rel="stylesheet" href="{{ asset('css/create.css') }}">
         @csrf
         @method('PUT')
-        <div class="container">
-            <div class="form-group">
+        <div class="container1">
+            <div class="form-group custom-form-group">
                 <label for="training_date">Training Date:</label>
-                <input type="date" class="form-control" id="training_date" name="training_date" value="{{ $training->training_date }}" required>
+                <input type="date" class="form-control custom-input" id="training_date" name="training_date" value="{{ $training->training_date }}">
             </div>  
 
-            <div class="form-group">
+            <div class="form-group custom-form-group">
                 <label for="trainer">Trainer Name:</label>
-                <input type="text" class="form-control" id="trainer" name="trainer" value="{{ $training->trainer }}" placeholder="Enter trainer's name" required>
+                <input type="text" class="form-control custom-input" id="trainer" name="trainer" value="{{ $training->trainer }}">
             </div>
 
-            <div class="form-group">
+            <div class="form-group custom-form-group">
                 <label for="members_name">Member Name:</label>
-                <input type="text" class="form-control" id="members_name" name="members_name" value="{{ $training->members_name }}" placeholder="Enter Member's name" required>
+                <input type="text" class="form-control custom-input" id="members_name" name="members_name" value="{{ $training->members_name }}">
             </div>
 
-            <div class="form-group">
+            <div class="form-group custom-form-group">
                 <label for="members_ID">Member ID:</label>
-                <input type="text" class="form-control" id="members_ID" name="members_ID" value="{{ $training->members_ID }}" placeholder="Enter Member's ID" required>
+                <input type="text" class="form-control custom-input" id="members_ID" name="members_ID" value="{{ $training->members_ID }}">
             </div> 
             
-            <div class="form-group">
+            <div class="form-group custom-form-group">
                 <label for="location">Training Location:</label>
-                <input type="text" class="form-control" id="location" name="location" value="{{ $training->location }}" placeholder="Enter location" required>
+                <input type="text" class="form-control custom-input" id="location" name="location" value="{{ $training->location }}">
             </div>
 
             <div class="form-group">

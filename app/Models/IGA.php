@@ -4,18 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class IGA extends Model
 {
-    use HasFactory;
+    use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'group_id',
-        'activity',
-        'date',
-        'location',
-        'amount',
-        'description',
+        'name', 'date', 'activity', 'category', 'earned'
     ];
 
     protected $table = 'igas'; // Ensure the table name is correct
