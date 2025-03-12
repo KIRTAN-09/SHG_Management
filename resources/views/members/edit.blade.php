@@ -29,7 +29,7 @@
             <label for="group">Group:</label>
             <select id="group" name="group" required>
             @foreach($groups as $group)
-                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                <option value="{{ $group->name }}">{{ $group->name }}</option>
             @endforeach
             </select>
         </div>

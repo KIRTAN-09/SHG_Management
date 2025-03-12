@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('member_id');
-            // $table->string('status');
             $table->date('in_date');
             $table->date('out_date');
             $table->timestamps();

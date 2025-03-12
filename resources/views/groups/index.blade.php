@@ -42,17 +42,17 @@
                         <td class="py-2">{{ $group->name }}</td>
                         <td class="py-2">{{ $group->group_id }}</td>
                         <td class="py-2">{{ $group->village_name }}</td>
-                        <td class="py-2">{{ $group->president_name }}</td>
-                        <td class="py-2">{{ $group->secretary_name }}</td>
-                        <td class="py-2">{{ $group->no_of_members }}</td>
+                        <td class="py-2">{{ $group->members->where('member_type', 'President')->first()->name ?? 'N/A' }}</td>
+                        <td class="py-2">{{ $group->members->where('member_type', 'Secretary')->first()->name ?? 'N/A' }}</td>
+                        <td class="py-2">{{ $group->members->count() }}</td>
                         <td class="py-2">
-                        <button onclick="showGroupDetails({{ $group->id }})" class="btn btn-info">View</button>
-                    <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                            <button onclick="showGroupDetails({{ $group->id }})" class="btn btn-info">View</button>
+                            <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -157,7 +157,7 @@
                             </tr>
                             <tr>
                                 <th>No. of members:</th>
-                                <td>${data.no_of_members}</td>
+                                <td>${data.members.length}</td>
                             </tr>
                         </tbody>
                     </table>

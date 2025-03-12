@@ -68,9 +68,16 @@ class GroupController extends Controller
 
     public function show($id)
     {
-        // dd('hi');
-        $group = Group::findOrFail($id);
-        // dd($group);
+        $group = Group::with(['members' => function ($query) {
+            $query->select('members.*', 'groups.name as group_name')
+                  ->leftJoin('groups', 'members.group_id', '=', 'groups.id');
+        }])->findOrFail($id);
+
+        $group->president_name = $group->members->where('member_type', 'President')->first()->name ?? null;
+        $group->secretary_name = $group->members->where('member_type', 'Secretary')->first()->name ?? null;
+
+        
+
         return response()->json($group);
     }
 
