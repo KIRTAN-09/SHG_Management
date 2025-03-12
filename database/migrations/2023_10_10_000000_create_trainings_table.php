@@ -17,6 +17,7 @@ class CreateTrainingsTable extends Migration
             $table->string('location');
             $table->string('category');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

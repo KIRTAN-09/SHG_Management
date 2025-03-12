@@ -65,14 +65,21 @@
                  <style>
                     .modal {
                         transition: opacity 0.25s;
-                    }
+                    }.container3 {
+    font-size: 14px;
+    height: auto;
+    width: 600px;
+    background: rgba(245, 245, 220, 0.714);
+    padding: 20px;
+    border: 1px solid #f4f3f357;
+    border-radius: 6px;
+}
                     </style>
-                <div class="modal fade" id="meetingModal{{ $meeting->id }}" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel{{ $meeting->id }}" aria-hidden="true">
+                <div class="modal" id="meetingModal{{ $meeting->id }}" tabindex="-1" role="dialog" aria-labelledby="meetingModalLabel{{ $meeting->id }}" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="container3">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="meetingModalLabel{{ $meeting->id }}">Meeting Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>

@@ -85,7 +85,6 @@
 </div>
 
 <!-- Modal -->
-<link href={{ asset('css/modal.css') }}   rel="stylesheet">
 <div id="groupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">
@@ -95,7 +94,7 @@
             <!-- Group details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="btn1">Close</button>
+            <button onclick="closeModal()" class="bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
         </div>
     </div>
 </div>
