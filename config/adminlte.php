@@ -356,11 +356,11 @@ return [
                         'url' => 'groups',
                         'icon' => 'fas fa-list',
                     ],
-                    [
-                        'text' => 'Member Designation',
-                        'url' => 'groups/member_designation',
-                        'icon' => 'fas fa-users',
-                    ],
+                    // [
+                    //     'text' => 'Member Designation',
+                    //     'url' => 'groups/member_designation',
+                    //     'icon' => 'fas fa-users',
+                    // ],
                     [
                         'text' => 'Export Data',
                         'url' => 'groups/export',

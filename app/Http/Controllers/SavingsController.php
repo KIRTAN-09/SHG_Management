@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Savings;
 use App\Models\Member;
+use App\Models\Group;
 
 class SavingsController extends Controller
 {
@@ -19,18 +20,19 @@ class SavingsController extends Controller
     // Display a listing of the resource.
     public function index(Request $request)
     {
-        $query = Savings::query();
+        $query = Savings::query()
+            ->leftJoin('members', 'savings.member_id', '=', 'members.id')
+            ->select('savings.*', 'members.name as member_name');
 
         if ($request->has('search')) {
-            $query->where('group_id', 'like', '%' . $request->search . '%')
-                  ->orWhere('member_id', 'like', '%' . $request->search . '%')
-                  ->orWhere('group_name', 'LIKE', "%{$request->search}%");
+            $query->where('savings.group_id', 'like', '%' . $request->search . '%')
+                  ->orWhere('members.name', 'LIKE', "%{$request->search}%");
         }
 
         if ($request->has('column') && $request->has('sort')) {
             $query->orderBy($request->column, $request->sort);
         } else {
-            $query->orderBy('created_at', 'desc');
+            $query->orderBy('savings.created_at', 'desc');
         }
 
         $savings = $query->paginate(10);
@@ -40,7 +42,9 @@ class SavingsController extends Controller
     // Show the form for creating a new resource.
     public function create()
     {
-        return view('savings.create');
+        $groups = Group::all(['id', 'name']);
+        $members = Member::all(['id', 'name']);
+        return view('savings.create', compact('groups', 'members'));
     }
 
     // Store a newly created resource in storage.
@@ -48,18 +52,14 @@ class SavingsController extends Controller
     {
         $request->validate([
             'group-id' => 'nullable|numeric',
-            'group-name' => 'nullable|string',
             'member-id' => 'required|numeric',
-            // 'member-name' => 'required|string',
             'amount' => 'required|numeric',
             'date-of-deposit' => 'required|date',
         ]);
 
         Savings::create([
             'group_id' => $request->input('group-id'),
-            'group_name' => $request->input('group-name'),
             'member_id' => $request->input('member-id'),
-            // 'member_name' => $request->input('member-name'),
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);
@@ -78,7 +78,9 @@ class SavingsController extends Controller
     public function edit($id)
     {
         $savings = Savings::with('member')->find($id);
-        return view('savings.edit', compact('savings'));
+        $groups = Group::all(['id', 'name']);
+        $members = Member::all(['id', 'name']);
+        return view('savings.edit', compact('savings', 'groups', 'members'));
     }
 
     // Update the specified resource in storage.
@@ -86,9 +88,7 @@ class SavingsController extends Controller
     {
         $request->validate([
             'group-id' => 'nullable|numeric',
-            'group-name' => 'nullable|string',
             'member-id' => 'required|numeric',
-            // 'member-name' => 'required|string',
             'amount' => 'required|numeric',
             'date-of-deposit' => 'required|date',
         ]);
@@ -96,9 +96,7 @@ class SavingsController extends Controller
         $savings = Savings::find($id);
         $savings->update([
             'group_id' => $request->input('group-id'),
-            'group_name' => $request->input('group-name'),
             'member_id' => $request->input('member-id'),    
-            // 'member_name' => $request->input('member-name'),
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);

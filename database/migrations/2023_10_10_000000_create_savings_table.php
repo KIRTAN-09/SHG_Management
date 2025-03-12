@@ -16,7 +16,7 @@ class CreateSavingsTable extends Migration
         Schema::create('savings', function (Blueprint $table) {
             $table->id();
             $table->string('group_id')->nullable();
-            $table->string('group_name')->nullable();
+            // $table->string('group_name')->nullable();
             $table->string('member_id');
             // $table->string('member_name');
             $table->decimal('amount', 8, 2);

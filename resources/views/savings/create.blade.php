@@ -117,20 +117,23 @@ input[type="submit"]:hover {
     <form action="{{ route('savings.store') }}" method="post">
         @csrf
         <h1><b>Savings  Form</b></h1>
-        <!-- Group ID/Name -->
+        <!-- Group ID -->
         <label for="group-id">Group ID:</label>
-        <input type="text" id="group-id" name="group-id" placeholder="Enter Group ID" required>
-        <span id="group-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
+        <select id="group-id" name="group-id">
+            <option value="">Select Group</option>
+            @foreach($groups as $group)
+                <option value="{{ $group->id }}">{{ $group->name }}</option>
+            @endforeach
+        </select><br><br>
         
         <!-- Member ID -->
         <label for="member-id">Member ID:</label>
-        <input type="text" id="member-id" name="member-id" placeholder="Enter Member ID" required>
-        <span id="member-id-error" class="error-message" style="display: none; color: red;">ID must be a number</span><br><br>
-        
-        <!-- Member Name -->
-        <!-- <label for="member-name">Member Name:</label>
-        <input type="text" id="member-name" name="member-name" placeholder="Enter Member Name" required>
-        <span id="member-name-error" class="error-message" style="display: none; color: red;">Name must be in characters</span><br><br> -->
+        <select id="member-id" name="member-id">
+            <option value="">Select Member</option>
+            @foreach($members as $member)
+                <option value="{{ $member->id }}">{{ $member->name }}</option>
+            @endforeach
+        </select><br><br>
         
         <!-- Date of deposit -->
         <label for="date-of-deposit">Date of Deposit:</label>
