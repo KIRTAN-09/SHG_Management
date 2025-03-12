@@ -103,12 +103,12 @@
                     <p class="text-gray-600 mb-2"><strong>Member UID:</strong> {{ $member->member_id }}</p>
                     <p class="text-gray-600 mb-2"><strong>Status:</strong> {{ $member->status }}</p>
                     <div class="flex justify-center space-x-2 mt-4">
-                        <button onclick="showMemberDetails({{ $member->id }})" class="btn btn-info">View</button>
-                        <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
+                        <button onclick="showMemberDetails({{ $member->id }})" class="btn btn-Info">View</button>
+                        <a href="{{ route('members.edit', $member->id) }}" class="btn btn-Warning">Edit</a>
                         <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
                              @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-Danger">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -241,8 +241,14 @@
         const searchValue = this.value.toLowerCase();
         const members = document.querySelectorAll('#cardView > div, #tableView tbody > tr');
         members.forEach(function(member) {
-            const name = member.querySelector('td:nth-child(2), h3').textContent.toLowerCase();
-            if (name.includes(searchValue)) {
+            const fields = member.querySelectorAll('td, h3, p');
+            let match = false;
+            fields.forEach(function(field) {
+                if (field.textContent.toLowerCase().startsWith(searchValue)) {
+                    match = true;
+                }
+            });
+            if (match) {
                 member.style.display = '';
             } else {
                 member.style.display = 'none';

@@ -7,8 +7,8 @@
 
 @section('content')
 <br>
-<link rel="stylesheet" href="{{ asset('css/Create.css') }}">
-<div class="container mt-5">
+<link rel="stylesheet" href="{{ asset('css/Training/create.css') }}">
+<div class="container">
     <form action="{{ route('training.store') }}" method="POST" onsubmit="return handleFormSubmit(event)">
         @csrf
         <div class="container1">
@@ -48,8 +48,8 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary custom-button">Add Training</button>
-        </div>
+            <input type="submit" value="Add Training">
+            </div>
     </form>
 </div>
 
