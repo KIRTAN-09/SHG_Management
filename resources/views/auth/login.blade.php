@@ -1,6 +1,7 @@
 <!DOCTYPE html>  
 <html lang="en">  
-<head>  
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Login Form</title>  
@@ -11,12 +12,12 @@
     <div class="cs-loader">
         <div class="cs-loader-inner">
             <h2>Loading</h2>
-            <label>●</label>
-            <label>●</label>
-            <label>●</label>
-            <label>●</label>
-            <label>●</label>
-            <label>●</label>
+            <label>></label>
+            <label>></label>
+            <label>></label>
+            <label>></label>
+            <label>></label>
+            <label>></label>
         </div>
     </div>
     <div class="container" id="container">  

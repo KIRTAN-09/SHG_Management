@@ -6,22 +6,32 @@
 @stop
 
 @section('content')
-<style>
-    .modal-table {
-        width: 100%;
-        border-collapse: collapse;
-        color: black;
-    }
-    .modal-table th, .modal-table td {
-        border: 1px solid black;
-        padding: 8px;
-        color: black;
-        background-color: white;
-    }
-    .modal-table td{
-        text-align: center;
-    }
-    
+<style>.container3 {
+    font-size: 14px;
+    height: auto;
+    width: 600px;
+    background: rgba(245, 245, 220, 0.714);
+    padding: 20px;
+    border: 1px solid #f4f3f357;
+    border-radius: 6px;
+}
+
+.modal-table {
+    width: 100%;
+    border-radius: 8px;
+    border-collapse: collapse;
+}
+.modal-table th, .modal-table td {
+    border: 1px solid rgba(0, 0, 0, 0.549);
+    padding: 6px;
+    color: black;
+    background-color: rgba(41, 41, 41, 0.226);
+}
+.modal-table td{
+    background-color: rgba(41, 41, 41, 0.226);
+    color: rgb(27, 26, 26);
+    text-align: center;
+}
 </style>
 
 <div class="container mx-auto p-4">
@@ -83,15 +93,15 @@
 
 <!-- Modal -->
 <div id="trainingModal" class="fixed inset-1 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-blue-100 p-6 rounded-lg shadow-lg w-1/3 max-w-2xl relative">
+    <div class="container3">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-black">Training Details</h2>
+            <h2 class="font-serif text-3xl"  style="color: cornflowerblue;">Training Details</h2>
         </div>
         <div id="trainingModalContent" class="space-y-4">
             <!-- Training details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeTrainingModal()" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Close</button>
+            <button onclick="closeTrainingModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
         </div>
     </div>
 </div>
