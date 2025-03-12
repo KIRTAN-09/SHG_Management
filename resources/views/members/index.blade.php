@@ -241,8 +241,14 @@
         const searchValue = this.value.toLowerCase();
         const members = document.querySelectorAll('#cardView > div, #tableView tbody > tr');
         members.forEach(function(member) {
-            const name = member.querySelector('td:nth-child(2), h3').textContent.toLowerCase();
-            if (name.includes(searchValue)) {
+            const fields = member.querySelectorAll('td, h3, p');
+            let match = false;
+            fields.forEach(function(field) {
+                if (field.textContent.toLowerCase().startsWith(searchValue)) {
+                    match = true;
+                }
+            });
+            if (match) {
                 member.style.display = '';
             } else {
                 member.style.display = 'none';
