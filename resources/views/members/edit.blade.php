@@ -4,7 +4,7 @@
 
 <div class="container">
 <link rel="stylesheet" href="{{ asset('css/Members/Create.css') }}">
-    <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-6" onsubmit="return validatePhotoSize()">
+    <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data"  onsubmit="return validatePhotoSize()">
         @csrf
         @method('PUT')
         <h1><b>Edit Member</b></h1>
