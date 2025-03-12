@@ -44,12 +44,25 @@ class MemberController extends Controller
             'name' => 'required|string|max:255',
             'number' => 'nullable|string|max:15',
             'village' => 'required|string|max:255',
-            'group' => 'required|string|max:255', // Validate group as an existing group ID
+            'group' => 'required|string|max:255', // Validate group as a string
             'caste' => 'required|string|max:255',
             'share_price' => 'required|numeric|min:1',
             'member_type' => 'required|in:President,Secretary,Member',
             'status' => 'required|in:Active,Inactive',
         ]);
+
+        $group_id = Group::where('name', $request->input('group'))->first()->id;
+
+        // Validate that there is only one President and Secretary in a group
+        if (in_array($request->input('member_type'), ['President', 'Secretary'])) {
+            $existingMember = Member::where('group_id', $group_id)
+                ->where('member_type', $request->input('member_type'))
+                ->first();
+
+            if ($existingMember) {
+                return redirect()->back()->withErrors(['member_type' => 'A ' . $request->input('member_type') . ' already exists in this group.']);
+            }
+        }
 
         if ($request->hasFile('photo')) {
             $validated['photo'] = $request->file('photo')->store('images', 'public');
@@ -65,7 +78,7 @@ class MemberController extends Controller
         $validated['member_id'] = $firstLetter . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
 
         $validated['status'] = $request->input('status'); // Add status to validated data
-        $validated['group_id'] = $request->input('group'); // Use group_id
+        $validated['group_id'] = Group::where('name', $request->input('group'))->first()->id; // Use group_id
 
         Member::create($validated);
         return redirect()->route('members.index')->with('success', 'Member added successfully.');
@@ -79,12 +92,26 @@ class MemberController extends Controller
             'name' => 'required|string|max:255',
             'number' => 'nullable|string|max:15',
             'village' => 'required|string|max:255',
-            'group' => 'required|string|max:255', // Validate group as an existing group ID
+            'group' => 'required|string|max:255', // Validate group as a string
             'caste' => 'required|string|max:255',
             'share_price' => 'required|numeric|min:1',
             'member_type' => 'required|in:President,Secretary,Member',
             'status' => 'required|in:Active,Inactive',
         ]);
+
+        $group_id = Group::where('name', $request->input('group'))->first()->id;
+
+        // Validate that there is only one President and Secretary in a group
+        if (in_array($request->input('member_type'), ['President', 'Secretary'])) {
+            $existingMember = Member::where('group_id', $group_id)
+                ->where('member_type', $request->input('member_type'))
+                ->where('id', '!=', $id)
+                ->first();
+
+            if ($existingMember) {
+                return redirect()->back()->withErrors(['member_type' => 'A ' . $request->input('member_type') . ' already exists in this group.']);
+            }
+        }
 
         $member = Member::findOrFail($id);
 
@@ -92,21 +119,9 @@ class MemberController extends Controller
             $validated['photo'] = $request->file('photo')->store('images', 'public');
             Log::info('Photo updated at: ' . $validated['photo']);
         }
-
-        // Check if the group has changed
-        // if ($member->group_id !== $request->input('group')) {
-        //     // Decrement the old group's member count
-        //     $oldGroup = Group::findOrFail($member->group_id);
-        //     // $oldGroup->decrement('no_of_members'); // Remove this line
-
-        //     // Increment the new group's member count
-        //     $newGroup = Group::findOrFail($request->input('group'));
-        //     // $newGroup->increment('no_of_members'); // Remove this line
-        // }
-
         // Explicitly set the status field
         $member->status = $request->input('status');
-        $member->group_id = $request->input('group'); // Update group_id
+        $member->group_id = Group::where('name', $request->input('group'))->first()->id; // Update group_id
         $member->update($validated);
 
         // Redirect to the index page after successful update
