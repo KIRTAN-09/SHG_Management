@@ -44,6 +44,9 @@
             <input type="file" id="photo" name="photo" accept="image/*" required><br><br>
 
             <input type="submit" value="Schedule Meeting">
+            <div class="pull-right">
+            <a class="btn btn-primary btn-sm mb-2 create-back-button" href="{{ route('meetings.index') }}">Back</a>
+        </div>
         </form>
     </div>
     <script>
