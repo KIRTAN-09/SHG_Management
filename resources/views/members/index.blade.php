@@ -3,18 +3,19 @@
 @section('title', 'Member List')
 
 @section('content_header')
-    <h1>Member List</h1>
-    <div class="flex justify-between items-center mb-4">
-        <!-- <label for="rowsPerPage" class="mr-2">Rows per page:</label> -->
-        <select id="rowsPerPage" class="py-2 px-4 rounded-lg border border-gray-300">
-            <option value="10" {{ request('rows') == 10 ? 'selected' : '' }}>10</option>
-            <option value="20" {{ request('rows') == 20 ? 'selected' : '' }}>20</option>
-            <option value="50" {{ request('rows') == 50 ? 'selected' : '' }}>50</option>
-            <option value="100" {{ request('rows') == 100 ? 'selected' : '' }}>100</option>
+<h1>Member List</h1>
+<div class="flex justify-between items-center mb-4">
+    <!-- <label for="rowsPerPage" class="mr-2">Rows per page:</label> -->
+    <select id="rowsPerPage" class="py-2 px-4 rounded-lg border border-gray-300">
+        <option value="10" {{ request('rows') == 10 ? 'selected' : '' }}>10</option>
+        <option value="20" {{ request('rows') == 20 ? 'selected' : '' }}>20</option>
+        <option value="50" {{ request('rows') == 50 ? 'selected' : '' }}>50</option>
+        <option value="100" {{ request('rows') == 100 ? 'selected' : '' }}>100</option>
 
-        </select>
-        <input type="text" id="liveSearch" placeholder="Search members..." class="py-2 px-4 rounded-lg border border-gray-300 ml-4">
-    </div>
+    </select>
+    <input type="text" id="liveSearch" placeholder="Search members..."
+        class="py-2 px-4 rounded-lg border border-gray-300 ml-4">
+</div>
 @stop
 
 @section('content')
@@ -22,18 +23,18 @@
 <link rel="stylesheet" href="{{ asset('css/table.css') }}">
 <link rel="stylesheet" href="{{ asset('css/card.css') }}">
 <style>
-    
-    
+
+
 </style>
 <div class="container mx-auto p-4">
     <div class="flex justify-start items-center mb-4">
         <div class="pull-right">
-        <!-- @can('User-create')
+            <!-- @can('User-create')
             <a href="{{ route('members.create') }}" class="bg-green-500 text-white py-2.5 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Add Member</a>
         @endcan -->
             <button id="toggleView" class="btn btn-primary">Toggle View</button>
-            </div>
-        
+        </div>
+
         <form action="{{ route('members.index') }}" method="GET" class="ml-4">
             <label for="sort" class="mr-2">Sort by Status:</label>
             <select name="sort" onchange="this.form.submit()" class="py-2 px-4 rounded-lg border border-gray-300">
@@ -42,12 +43,12 @@
                 <option value="inactive" {{ request('sort') == 'inactive' ? 'selected' : '' }}>Inactive</option>
             </select>
         </form>
-       
+
     </div>
     <div id="tableView" class="hidden">
-        <link href="css/table.css"   rel="stylesheet">   
+        <link href="css/table.css" rel="stylesheet">
         <table class="table">
-            <thead> 
+            <thead>
                 <tr>
                     <th class="py-2">Photo</th>
                     <th class="py-2">Name</th>
@@ -65,7 +66,8 @@
             <tbody id="memberTableBody">
                 @foreach ($members as $member)
                     <tr class="bg-gray-100 border-b">
-                        <td class="py-2"><img src="{{ asset('storage/' . $member->photo) }}" class="w-20 h-20 object-cover rounded-full mx-auto"></td>
+                        <td class="py-2"><img src="{{ asset('storage/' . $member->photo) }}"
+                                class="w-20 h-20 object-cover rounded-full mx-auto"></td>
                         <td class="py-2">{{ $member->name}}</td>
                         <td class="py-2">{{ $member->member_id}}</td>
                         <td class="py-2">{{ $member->number}}</td>
@@ -82,7 +84,8 @@
                                     <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
                                 @endcan
                                 <a href="{{ route('members.edit', $member->id) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
+                                <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline"
+                                    onsubmit="return confirmDelete(event, this)">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -95,18 +98,21 @@
         </table>
     </div>
     <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-         @foreach ($members as $member)
-            <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150 member-card">
+        @foreach ($members as $member)
+            <div
+                class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150 member-card">
                 <div class="text-center">
-                    <img src="{{ asset('storage/' . $member->photo) }}" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
+                    <img src="{{ asset('storage/' . $member->photo) }}"
+                        class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
                     <h3 class="text-l font-bold mb-2">{{ $member->name }}</h3>
                     <p class="text-gray-600 mb-2"><strong>Member UID:</strong> {{ $member->member_id }}</p>
                     <p class="text-gray-600 mb-2"><strong>Status:</strong> {{ $member->status }}</p>
                     <div class="flex justify-center space-x-2 mt-4">
                         <button onclick="showMemberDetails({{ $member->id }})" class="btn btn-Info">View</button>
                         <a href="{{ route('members.edit', $member->id) }}" class="btn btn-Warning">Edit</a>
-                        <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
-                             @csrf
+                        <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="inline"
+                            onsubmit="return confirmDelete(event, this)">
+                            @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-Danger">Delete</button>
                         </form>
@@ -121,17 +127,18 @@
 </div>
 
 <!-- Modal -->
-<link href={{ asset('css/modal.css') }}   rel="stylesheet">
+<link href={{ asset('css/modal.css') }} rel="stylesheet">
 <div id="memberModal" class="bg-sky-200 fixed inset-1 flex items-center justify-center bg-black bg-opacity-80 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">
-            <h1 class="font-serif text-3xl"  style="color: cornflowerblue;">Member Details</h1>
+            <h1 class="font-serif text-3xl" style="color: cornflowerblue;">Member Details</h1>
         </div>
         <div id="modalContent" class="space-y-4">
             <!-- Member details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
+            <button onclick="closeModal()"
+                class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
         </div>
     </div>
 </div>
@@ -219,9 +226,9 @@
                     </tbody>
                 </table>
             `;
-            document.getElementById('modalContent').innerHTML = modalContent;
-            document.getElementById('memberModal').classList.remove('hidden');
-        });
+                document.getElementById('modalContent').innerHTML = modalContent;
+                document.getElementById('memberModal').classList.remove('hidden');
+            });
     }
 
     function closeModal() {
@@ -237,13 +244,13 @@
         tableView.classList.toggle('hidden');
     });
 
-    document.getElementById('liveSearch').addEventListener('input', function() {
+    document.getElementById('liveSearch').addEventListener('input', function () {
         const searchValue = this.value.toLowerCase();
         const members = document.querySelectorAll('#cardView > div, #tableView tbody > tr');
-        members.forEach(function(member) {
+        members.forEach(function (member) {
             const fields = member.querySelectorAll('td, h3, p');
             let match = false;
-            fields.forEach(function(field) {
+            fields.forEach(function (field) {
                 if (field.textContent.toLowerCase().startsWith(searchValue)) {
                     match = true;
                 }
@@ -256,7 +263,7 @@
         });
     });
 
-    document.getElementById('rowsPerPage').addEventListener('change', function() {
+    document.getElementById('rowsPerPage').addEventListener('change', function () {
         const rowsPerPage = this.value;
         const url = new URL(window.location.href);
         url.searchParams.set('rows', rowsPerPage);
