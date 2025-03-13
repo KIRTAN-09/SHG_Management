@@ -115,7 +115,7 @@
             </div>
         @endforeach
     </div>
-    <div class="ml-auto">
+    <div class="ml-auto"><br>
         {{ $members->appends(request()->query())->links('pagination::bootstrap-4') }}
     </div>
 </div>
