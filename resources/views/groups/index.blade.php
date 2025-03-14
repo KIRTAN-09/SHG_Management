@@ -3,10 +3,11 @@
 @section('title', 'Group List')
 
 @section('content_header')
-    <h1>Group List</h1>
-    <div class="flex justify-end">
-        <input type="text" id="liveSearch" placeholder="Search groups..." class="py-2 px-4 rounded-lg border border-gray-300">
-    </div>
+<h1>Group List</h1>
+<div class="flex justify-end">
+    <input type="text" id="liveSearch" placeholder="Search groups..."
+        class="py-2 px-4 rounded-lg border border-gray-300">
+</div>
 @stop
 
 @section('content')
@@ -17,15 +18,16 @@
 <div class="container mx-auto p-4">
     <div class="flex justify-between items-center mb-4">
         <div class="pull-right">
-        <!-- @can('role-create')
+            <!-- @can('role-create')
             <a href="{{ route('groups.create') }}" class="bg-green-500 text-white py-2.5 px-3 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New Group</a>
         @endcan -->
-        <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle View</button>
+            <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle
+                View</button>
         </div>
-    </div>     
-   
+    </div>
+
     <div id="tableView" class="hidden">
-    <link href="css/table.css"   rel="stylesheet">   
+        <link href="css/table.css" rel="stylesheet">
         <table class="table">
             <thead>
                 <tr>
@@ -44,13 +46,16 @@
                         <td class="py-2">{{ $group->name }}</td>
                         <td class="py-2">{{ $group->group_id }}</td>
                         <td class="py-2">{{ $group->village_name }}</td>
-                        <td class="py-2">{{ $group->members->where('member_type', 'President')->first()->name ?? 'N/A' }}</td>
-                        <td class="py-2">{{ $group->members->where('member_type', 'Secretary')->first()->name ?? 'N/A' }}</td>
+                        <td class="py-2">{{ $group->members->where('member_type', 'President')->first()->name ?? 'N/A' }}
+                        </td>
+                        <td class="py-2">{{ $group->members->where('member_type', 'Secretary')->first()->name ?? 'N/A' }}
+                        </td>
                         <td class="py-2">{{ $group->members->count() }}</td>
                         <td class="py-2">
                             <button onclick="showGroupDetails({{ $group->id }})" class="btn btn-info">View</button>
                             <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
+                            <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline"
+                                onsubmit="return confirmDelete(event, this)">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -61,17 +66,19 @@
             </tbody>
         </table>
     </div>
-    
+
     <div id="cardView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         @foreach ($groups as $group)
-            <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
+            <div
+                class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
                 <div class="text-center">
                     <h3 class="text-l font-bold mb-2">{{ $group->name }}</h3>
-                    <p class="text-gray-600 mb-2"><strong>Group ID:</strong> {{ $group->group_id }}</p> 
+                    <p class="text-gray-600 mb-2"><strong>Group ID:</strong> {{ $group->group_id }}</p>
                     <div class="flex justify-center space-x-2 mt-4">
-                    <button onclick="showGroupDetails({{ $group->id }})" class="btn btn-Info">View</button>
-                    <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-Warning">Edit</a>
-                        <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline" onsubmit="return confirmDelete(event, this)">
+                        <button onclick="showGroupDetails({{ $group->id }})" class="btn btn-Info">View</button>
+                        <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-Warning">Edit</a>
+                        <form action="{{ route('groups.destroy', $group->id) }}" method="POST" class="inline"
+                            onsubmit="return confirmDelete(event, this)">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-Danger">Delete</button>
@@ -90,13 +97,14 @@
 <div id="groupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="container3">
         <div class="flex justify-between items-center mb-4">
-        <h1 class="font-serif text-3xl" style="color: cornflowerblue;">Group Details</h1>
+            <h1 class="font-serif text-3xl" style="color: cornflowerblue;">Group Details</h1>
         </div>
         <div id="modalContent" class="space-y-4">
             <!-- Group details will be loaded here -->
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="closeModal()" class="bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
+            <button onclick="closeModal()"
+                class="bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Close</button>
         </div>
     </div>
 </div>
@@ -180,7 +188,7 @@
     document.getElementById('liveSearch').addEventListener('input', function () {
         const searchValue = this.value.toLowerCase();
         const groups = document.querySelectorAll('#cardView > div, #tableView tbody > tr');
-        
+
         groups.forEach(group => {
             const groupName = group.querySelector('h3, td:first-child').textContent.toLowerCase();
             if (groupName.includes(searchValue)) {

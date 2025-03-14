@@ -30,6 +30,7 @@ h1 {
 }
 
 form {
+    display: block;
     width: 100%;
     max-width: 1600px;
     height: 100%;
@@ -128,4 +129,15 @@ input[type="submit"] {
 
 .attendance-item input[name="attendance-name[]"] {
     flex: 1; /* 80% width for Name field */
+}
+
+.btn-primary{
+    background-color: #435c77;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }

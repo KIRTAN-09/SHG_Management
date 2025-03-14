@@ -45,6 +45,9 @@
             <br>
 
             <input type="submit" value="Update Meeting">
+            <div>
+            <input type="submit" value="Back" href="{{ route('meetings.index') }}">
+        </div>
         </form>
     </div>
 </body>

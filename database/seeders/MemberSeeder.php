@@ -12,7 +12,20 @@ class MemberSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // ...existing code...
+        for ($i = 0; $i < 500; $i++) {
+            Member::create([
+                'member_id' => $i + 1, // Ensure unique member_id
+                'photo' => $faker->imageUrl(),
+                'name' => $faker->name,
+                'number' => $faker->phoneNumber,
+                'village' => $faker->city,
+                'group' => $faker->company,
+                'caste' => $faker->word,
+                'share_price' => $faker->randomFloat(2, 1, 100),
+                'member_type' => $faker->randomElement(['President', 'Secretary', 'Member']),
+                'status' => $faker->randomElement(['Active', 'Inactive']),
+            ]);
+        }
     }
 }
 
