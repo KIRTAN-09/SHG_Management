@@ -21,7 +21,7 @@ class SavingsController extends Controller
     public function index(Request $request)
     {
         $query = Savings::query()
-            ->leftJoin('members', 'savings.member_id', '=', 'members.id')
+            ->leftJoin('members', 'savings.member_name', '=', 'members.name')
             ->select('savings.*', 'members.name as member_name');
 
         if ($request->has('search')) {
@@ -40,10 +40,11 @@ class SavingsController extends Controller
     }
 
     // Show the form for creating a new resource.
-    public function create()
+    public function create(Request $request)
     {
         $groups = Group::all(['id', 'name']);
         $members = Member::all(['id', 'name']);
+        
         return view('savings.create', compact('groups', 'members'));
     }
 
@@ -52,14 +53,14 @@ class SavingsController extends Controller
     {
         $request->validate([
             'group-id' => 'nullable|numeric',
-            'member-id' => 'required|numeric',
+            'member-name' => 'required|string',
             'amount' => 'required|numeric',
             'date-of-deposit' => 'required|date',
         ]);
 
         Savings::create([
             'group_id' => $request->input('group-id'),
-            'member_id' => $request->input('member-id'),
+            'member_name' => $request->input('member-name'),
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);
@@ -88,7 +89,7 @@ class SavingsController extends Controller
     {
         $request->validate([
             'group-id' => 'nullable|numeric',
-            'member-id' => 'required|numeric',
+            'member-name' => 'required|string',
             'amount' => 'required|numeric',
             'date-of-deposit' => 'required|date',
         ]);
@@ -96,7 +97,7 @@ class SavingsController extends Controller
         $savings = Savings::find($id);
         $savings->update([
             'group_id' => $request->input('group-id'),
-            'member_id' => $request->input('member-id'),    
+            'member_name' => $request->input('member-name'),
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);

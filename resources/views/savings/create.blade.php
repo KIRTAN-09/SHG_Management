@@ -126,12 +126,12 @@ input[type="submit"]:hover {
             @endforeach
         </select><br><br>
         
-        <!-- Member ID -->
-        <label for="member-id">Member ID:</label>
-        <select id="member-id" name="member-id">
+        <!-- Member Name -->
+        <label for="member-name">Member Name:</label>
+        <select id="member-name" name="member-name">
             <option value="">Select Member</option>
             @foreach($members as $member)
-                <option value="{{ $member->id }}">{{ $member->name }}</option>
+                <option value="{{ $member->name }}">{{ $member->name }}</option>
             @endforeach
         </select><br><br>
         

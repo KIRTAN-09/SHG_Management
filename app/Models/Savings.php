@@ -13,8 +13,7 @@ class Savings extends Model
     protected $fillable = [
         'group_id',
         'group_name',
-        'member_id',
-        // 'member_name',
+        'member_name', // This will now store the member name
         'amount',
         'date_of_deposit',
     ];
