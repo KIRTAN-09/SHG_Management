@@ -40,4 +40,3 @@ Route::get('/roles/{id}/json', [RoleController::class, 'showJson'])->name('roles
 // Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
 Route::get('/reports/filter', [ReportController::class, 'filter'])->name('reports.filter');
 });
-
