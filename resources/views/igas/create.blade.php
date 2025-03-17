@@ -109,6 +109,10 @@ input[type="submit"]:hover {
     font-size: 12px;
 }
 </style>
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('igas.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
 <div class="container">
     <form action="{{ route('igas.store') }}" method="POST">
         @csrf

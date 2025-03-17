@@ -1,12 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
 <!-- Add Bootstrap CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-
-
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('roles.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
 <div class="container">
+    
     <form method="POST" action="{{ route('roles.store') }}">
         @csrf
         <h1><b>Create New Role</b></h1>

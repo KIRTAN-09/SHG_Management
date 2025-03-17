@@ -13,7 +13,11 @@
         </div>
     @endif
 
-    <link rel="stylesheet" href="{{ asset('css/Training/create.css') }}">
+<link rel="stylesheet" href="{{ asset('css/Training/create.css') }}">
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('training.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
 <div class="container">
     <br>
     <form action="{{ route('training.update', $training->id) }}" method="POST">

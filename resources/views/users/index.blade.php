@@ -4,6 +4,7 @@
 
 @section('content_header')
 <h1>Users</h1>
+
 @stop
 
 @section('content')
@@ -12,10 +13,14 @@
 
 
     <div class="container mx-auto p-4">
-        <div class="flex justify-between items-center mb-3">
-            <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle
-                View</button>
+    <div class="flex justify-between items-center mb-4">
+        <div class="pull-right">
+        @can('role-create')
+            <a href="{{ route('users.create') }}" class="bg-green-500 text-white py-2.5 px-4 rounded-lg hover:bg-green-700"><i class="fa fa-plus"></i> Create New User</a>
+        @endcan
+        <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Toggle View</button>
         </div>
+    </div>
 
         <div id="tableView" class="hidden">
             <table class="table table-bordered">
@@ -53,7 +58,7 @@
                         <p class="card-text"><strong>Role:</strong> {{ $user->roles->pluck('name')->join(', ') }}</p>
                         <br>
                         <a href="{{ route('users.edit', $user->id) }}"
-                            class="bg-blue-500 text-white py-2 px-2 rounded hover:bg-yellow-700">Edit</a>
+                            class="bg-blue-500 text-white  py-2.5 px-3 rounded hover:bg-blue-700">Edit</a>
                         <button data-user-id="{{ $user->id }}"
                             class="delete-button bg-red-500 text-white py-2 px-2 rounded hover:bg-red-700">Delete</button>
                     </div>
