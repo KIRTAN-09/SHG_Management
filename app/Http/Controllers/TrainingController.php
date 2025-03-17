@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Training;
+use App\Models\Member;
 
 class TrainingController extends Controller
 {
@@ -34,7 +35,8 @@ class TrainingController extends Controller
 
     public function create()
     {
-        return view('training.create');
+        $members = Member::all();
+        return view('training.create', compact('members'));
     }
 
     public function store(Request $request)
@@ -62,7 +64,8 @@ class TrainingController extends Controller
     public function edit($id)
     {
         $training = Training::findOrFail($id);
-        return view('training.edit', compact('training'));
+        $members = Member::all();
+        return view('training.edit', compact('training', 'members'));
     }
 
     public function update(Request $request, $id)

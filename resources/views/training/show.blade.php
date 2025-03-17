@@ -12,7 +12,8 @@
             <p><strong>Training Location:</strong> {{ $training->location }}</p>
             <p><strong>Number of Participants:</strong> {{ $training->participants }}</p>
             <p><strong>Trainer Name:</strong> {{ $training->trainer}}</p>
-
+            <p><strong>Member Name:</strong> {{ $training->members_name }}</p>
+            <p><strong>Member ID:</strong> {{ $training->members_ID }}</p>
         </div>
     </div>
     <a href="{{ route('training.index') }}" class="btn btn-primary mt-3">Back to Training List</a>

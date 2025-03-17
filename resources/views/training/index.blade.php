@@ -53,7 +53,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        @foreach(['training_date' => 'Date', 'category' => 'Category', 'location' => 'Location', 'participants' => 'Participants', 'trainer' => 'Trainer'] as $column => $label)
+                        @foreach(['training_date' => 'Date', 'category' => 'Category', 'location' => 'Location', 'participants' => 'Participants', 'trainer' => 'Trainer', 'members_name' => 'Member Name', 'members_ID' => 'Member ID'] as $column => $label)
                             <th>
                                 <form method="GET" action="{{ route('training.index') }}">
                                     <input type="hidden" name="column" value="{{ $column }}">
@@ -79,6 +79,8 @@
                             <td>{{ $training->location }}</td>
                             <td>{{ $training->participants }}</td>
                             <td>{{ $training->trainer }}</td>
+                            <td>{{ $training->members_name }}</td>
+                            <td>{{ $training->members_ID }}</td>
                             <td class="action-buttons">
                                 <button onclick="showTrainingDetails({{ $training->id }})" class="btn btn-info">View</button>
                                 <a href="{{ route('training.edit', $training->id) }}" class="btn btn-warning">Edit</a>
