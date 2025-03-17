@@ -24,7 +24,7 @@ class CreateIgasTable extends Migration
             $table->decimal('earned', 8, 2)->nullable();
             $table->softDeletes();
 
-            $table->foreign('member_id')->references('id')->on('members')->onDelete('set null');
+            // $table->foreign('member_id')->references('id')->on('members')->onDelete('set null');
         });
 
         // Add the new column 'activity'
