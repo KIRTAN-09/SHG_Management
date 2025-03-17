@@ -45,7 +45,7 @@ class MembersDataTable extends DataTable
                     ->minifiedAjax() // Ensure AJAX is enabled
                     ->orderBy(1)
                     ->selectStyleSingle()
-                    ->dom('<"top"f>rt<"bottom"lp><"clear">Bfrtip') // Custom DOM layout
+                    // ->dom('<"top"f>rt<"bottom"lp><"clear">Bfrtip') // Custom DOM layout
                     ->buttons([
                         Button::make('excel'),
                         Button::make('csv'),
@@ -63,7 +63,8 @@ class MembersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
+            // Column::make('id'),
+            Column::make('photo'),
             Column::make('name'),
             Column::make('number'),
             Column::make('village'),
