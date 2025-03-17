@@ -4,6 +4,8 @@
 
 @section('content_header')
 <h1>Users</h1>
+<a href="{{ route('savings.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Create new User</a>
+
 @stop
 
 @section('content')
@@ -53,7 +55,7 @@
                         <p class="card-text"><strong>Role:</strong> {{ $user->roles->pluck('name')->join(', ') }}</p>
                         <br>
                         <a href="{{ route('users.edit', $user->id) }}"
-                            class="bg-blue-500 text-white py-2 px-2 rounded hover:bg-yellow-700">Edit</a>
+                            class="bg-blue-500 text-white py-2.5 px-2 rounded hover:bg-yellow-700">Edit</a>
                         <button data-user-id="{{ $user->id }}"
                             class="delete-button bg-red-500 text-white py-2 px-2 rounded hover:bg-red-700">Delete</button>
                     </div>
