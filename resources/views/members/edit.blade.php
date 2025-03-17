@@ -2,6 +2,11 @@
 
 @section('content')
 
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('members.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+
 <div class="container">
 <link rel="stylesheet" href="{{ asset('css/Members/Create.css') }}">
     <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data"  onsubmit="return validatePhotoSize()">

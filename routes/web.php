@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth']], function() {
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 Route::resource('members', MemberController::class);
+ 
+Route::get('/members', [MemberController::class, 'index'])->name('members.index');
 Route::resource('groups', HomeController::class);
 Route::resource('groups', GroupController::class);
 Route::resource('savings', SavingsController::class);
