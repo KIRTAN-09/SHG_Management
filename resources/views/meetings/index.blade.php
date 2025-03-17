@@ -21,7 +21,6 @@
             <table class="table mt-3">
                 <thead>
                     <tr>
-
                         <th>
                             @foreach (['Date'] as $column)
                                     <form method="GET" action="{{ route('meetings.index') }}">
@@ -36,7 +35,6 @@
                                         </button>
                                     </form>
                                 </th>
-
                             @endforeach
                         <th>Photo</th>
                         <th>Group Name</th>
