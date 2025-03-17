@@ -23,18 +23,13 @@
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" value="{{ old('date', $meeting->date) }}" required><br><br>
 
-            <label for="group_name">Group Name:</label>
-            <input type="text" id="group_name" name="group_name" value="{{ old('group_name', $meeting->group_name) }}" required>
-            <span class="error-message-group-name" style="display: none; color: red;">Group Name should only contain letters.</span><br><br>
-
-            <label for="group_id">Group ID:</label>
-            <input type="text" id="group_id" name="group_id" value="{{ old('group_id', $meeting->group_id) }}">
-            <span class="error-message-group-id" style="display: none; color: red;">Group ID should only contain numbers.</span><br><br>
-
-            <label for="attendance_list">Attendance List:</label>
-            <div id="attendance_list">
-                <!-- Fetched members will be displayed here -->
-            </div>
+            <label for="group_id">Group:</label>
+            <select id="group_id" name="group_id" required>
+                @foreach($groups as $group)
+                    <option value="{{ $group->id }}" {{ $group->id == $meeting->group_id ? 'selected' : '' }}>{{ $group->name }}</option>
+                @endforeach
+            </select>
+            <br><br>
 
             <label for="discussion">Discussion Points:</label>
             <textarea id="discussion" name="discussion" required style="height: 100%; width: 100%;">{{ old('discussion', $meeting->discussion) }}</textarea><br>

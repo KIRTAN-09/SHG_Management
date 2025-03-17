@@ -31,7 +31,7 @@
 <script>
     function showmeetingdetails(meetingId) {
         // Fetch meeting details via AJAX and display in the modal
-        fetch(/meetings/${meetingId}/details)
+        fetch(`/meetings/${meetingId}/details`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('modalContent').innerHTML = `
@@ -43,7 +43,7 @@
                         <tr><td><strong>No. Members Present:</strong></td><td>${data.attendance_list}</td></tr>
                     </table>
                 `;
-                document.getElementById('modalPhoto').src = /storage/${data.photo};
+                document.getElementById('modalPhoto').src = `/storage/${data.photo}`;
                 document.getElementById('meetingModal').classList.remove('hidden');
             });
     }

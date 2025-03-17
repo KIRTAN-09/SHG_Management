@@ -43,19 +43,21 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
+        // dd('test');
+
         $request->validate([
             'date' => 'required|date',
-            'group_name' => 'required|string|max:255',
-            'group_id' => 'nullable|numeric',
+            'group_id' => 'required|numeric',
             'discussion' => 'required|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $group = Group::findOrFail($request->group_id);
         $photoPath = $request->file('photo')->store('meetings/photos', 'public');
 
         Meeting::create([
             'date' => $request->date,
-            'group_name' => $request->group_name,
+            'group_name' => $group->name,
             'group_id' => $request->group_id,
             'discussion' => $request->discussion,
             'photo' => $photoPath,
@@ -78,7 +80,8 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        return view('meetings.edit', compact('meeting'));
+            $groups = Group::all();
+        return view('meetings.edit', compact('meeting', 'groups'));
     }
 
     /**
@@ -88,11 +91,12 @@ class MeetingController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
-            'group_name' => 'required|string|max:255',
-            'group_id' => 'nullable|numeric',
+            'group_id' => 'required|numeric',
             'discussion' => 'required|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $group = Group::findOrFail($request->group_id);
 
         if ($request->hasFile('photo')) {
             Storage::delete('public/' . $meeting->photo);
@@ -101,7 +105,7 @@ class MeetingController extends Controller
 
         $meeting->update([
             'date' => $request->date,
-            'group_name' => $request->group_name,
+            'group_name' => $group->name,
             'group_id' => $request->group_id,
             'discussion' => $request->discussion,
         ]);

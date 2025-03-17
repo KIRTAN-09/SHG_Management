@@ -53,7 +53,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        @foreach(['training_date' => 'Date', 'category' => 'Category', 'location' => 'Location', 'participants' => 'Participants', 'trainer' => 'Trainer', 'members_name' => 'Member Name', 'members_ID' => 'Member ID'] as $column => $label)
+                        @foreach(['training_date' => 'Date', 'members_name' => 'Member Name', 'members_ID' => 'Member ID','category' => 'Category', 'location' => 'Location',  'trainer' => 'Trainer' ] as $column => $label)
                             <th>
                                 <form method="GET" action="{{ route('training.index') }}">
                                     <input type="hidden" name="column" value="{{ $column }}">
@@ -75,12 +75,12 @@
                     @foreach ($trainings as $training)
                         <tr>
                             <td>{{ $training->training_date }}</td>
-                            <td>{{ $training->category }}</td>
-                            <td>{{ $training->location }}</td>
-                            <td>{{ $training->participants }}</td>
-                            <td>{{ $training->trainer }}</td>
                             <td>{{ $training->members_name }}</td>
                             <td>{{ $training->members_ID }}</td>
+                            <td>{{ $training->category }}</td>
+                            <td>{{ $training->location }}</td>
+                            <!-- <td>{{ $training->participants }}</td> -->
+                            <td>{{ $training->trainer }}</td>
                             <td class="action-buttons">
                                 <button onclick="showTrainingDetails({{ $training->id }})" class="btn btn-info">View</button>
                                 <a href="{{ route('training.edit', $training->id) }}" class="btn btn-warning">Edit</a>
