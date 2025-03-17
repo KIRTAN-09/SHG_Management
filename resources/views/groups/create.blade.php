@@ -20,10 +20,6 @@
             <label for="village_name">Village Name</label>
             <input type="text" name="village_name" class="form-control" required>
         </div>
-        <!-- <div class="form-group">
-            <label for="no_of_members">No. of members</label>
-            <input type="number" name="no_of_members" class="form-control" required>
-        </div> -->
         <input type="submit" value="Add Group">
     </form>
 </div>
