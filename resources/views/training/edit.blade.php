@@ -38,12 +38,20 @@
 
             <div class="form-group custom-form-group">
                 <label for="members_name">Member Name:</label>
-                <input type="text" class="form-control custom-input" id="members_name" name="members_name" value="{{ $training->members_name }}">
+                <select class="form-control custom-select" id="members_name" name="members_name" required>
+                    @foreach($members as $member)
+                        <option value="{{ $member->name }}" {{ $training->members_name == $member->name ? 'selected' : '' }}>{{ $member->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group custom-form-group">
                 <label for="members_ID">Member ID:</label>
-                <input type="text" class="form-control custom-input" id="members_ID" name="members_ID" value="{{ $training->members_ID }}">
+                <select class="form-control custom-select" id="members_ID" name="members_ID" required>
+                    @foreach($members as $member)
+                        <option value="{{ $member->id }}" {{ $training->members_ID == $member->id ? 'selected' : '' }}>{{ $member->id }}</option>
+                    @endforeach
+                </select>
             </div> 
             
             <div class="form-group custom-form-group">

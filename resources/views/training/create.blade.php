@@ -29,12 +29,20 @@
 
             <div class="form-group custom-form-group">
                 <label for="members_name">Member Name:</label>
-                <input type="text" class="form-control custom-input" id="members_name" name="members_name" placeholder="Enter Member's name" required>
+                <select class="form-control custom-select" id="members_name" name="members_name" required>
+                    @foreach($members as $member)
+                        <option value="{{ $member->name }}">{{ $member->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group custom-form-group">
                 <label for="members_ID">Member ID:</label>
-                <input type="text" class="form-control custom-input" id="members_ID" name="members_ID" placeholder="Enter Member's ID" required>
+                <select class="form-control custom-select" id="members_ID" name="members_ID" required>
+                    @foreach($members as $member)
+                        <option value="{{ $member->id }}">{{ $member->id }}</option>
+                    @endforeach
+                </select>
             </div> 
             
             <div class="form-group custom-form-group">
