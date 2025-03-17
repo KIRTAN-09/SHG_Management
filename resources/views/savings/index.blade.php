@@ -32,6 +32,7 @@
             <thead>
                 <tr>
                     @foreach(['group_id' => 'Group ID', 
+                    'group_name' => 'Group Name', // Add group_name column
                     'member_name' =>  'Member Name', 
                     'date_of_deposit' => 'Date', 
                     'amount' => 'Amount']
@@ -56,7 +57,8 @@
                 @foreach($savings as $saving)
                     <tr>
                         <td>{{ $saving->group_id }}</td>
-                        <td>{{ $saving->member_name }}</td> <!-- Changed to display member_name -->
+                        <td>{{ $saving->group_name }}</td> <!-- Display group_name -->
+                        <td>{{ $saving->member_name }}</td>
                         <td>{{ $saving->date_of_deposit }}</td>
                         <td>{{ $saving->amount }}</td>
                         <td>

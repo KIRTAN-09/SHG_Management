@@ -22,11 +22,13 @@ class SavingsController extends Controller
     {
         $query = Savings::query()
             ->leftJoin('members', 'savings.member_name', '=', 'members.name')
-            ->select('savings.*', 'members.name as member_name');
+            ->leftJoin('groups', 'savings.group_id', '=', 'groups.id') // Join with groups table
+            ->select('savings.*', 'members.name as member_name', 'groups.name as group_name'); // Select group_name
 
         if ($request->has('search')) {
             $query->where('savings.group_id', 'like', '%' . $request->search . '%')
-                  ->orWhere('members.name', 'LIKE', "%{$request->search}%");
+                  ->orWhere('members.name', 'LIKE', "%{$request->search}%")
+                  ->orWhere('groups.name', 'LIKE', "%{$request->search}%"); // Add search for group_name
         }
 
         if ($request->has('column') && $request->has('sort')) {
@@ -53,14 +55,14 @@ class SavingsController extends Controller
     {
         $request->validate([
             'group-id' => 'nullable|numeric',
-            'member-name' => 'required|string',
+            'member-id' => 'required|numeric',
             'amount' => 'required|numeric',
             'date-of-deposit' => 'required|date',
         ]);
 
         Savings::create([
             'group_id' => $request->input('group-id'),
-            'member_name' => $request->input('member-name'),
+            'member_id' => $request->input('member-id'),
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);
@@ -89,7 +91,7 @@ class SavingsController extends Controller
     {
         $request->validate([
             'group-id' => 'nullable|numeric',
-            'member-name' => 'required|string',
+            'member-id' => 'required|numeric',
             'amount' => 'required|numeric',
             'date-of-deposit' => 'required|date',
         ]);
@@ -97,7 +99,7 @@ class SavingsController extends Controller
         $savings = Savings::find($id);
         $savings->update([
             'group_id' => $request->input('group-id'),
-            'member_name' => $request->input('member-name'),
+            'member_id' => $request->input('member-id'),
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);

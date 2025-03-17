@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\IGA;
+use App\Models\Member; // Add this line to import the Member model
 
 class IGAController extends Controller
 {
@@ -26,12 +27,14 @@ class IGAController extends Controller
 
     public function create()
     {
-        return view('igas.create');
+        $members = Member::all(); // Fetch all members
+        return view('igas.create', compact('members')); // Pass members to the view
     }
 
     public function store(Request $request)
     {
         $iga = new IGA($request->all());
+        $iga->member_id = $request->input('member_id'); // Add this line to handle the member_id field
         $iga->date = $request->input('date'); // Add this line to handle the date field
         $iga->save();   
         return redirect()->route('igas.index');
@@ -46,13 +49,15 @@ class IGAController extends Controller
     public function edit($id)
     {
         $iga = IGA::findOrFail($id);
-        return view('igas.edit', compact('iga'));
+        $members = Member::all(); // Fetch all members
+        return view('igas.edit', compact('iga', 'members')); // Pass members to the view
     }
 
     public function update(Request $request, $id)
     {
         $iga = IGA::findOrFail($id);
         $iga->update($request->all());
+        $iga->member_id = $request->input('member_id'); // Add this line to handle the member_id field
         $iga->date = $request->input('date'); // Add this line to handle the date field
         $iga->save();
         return redirect()->route('igas.index');

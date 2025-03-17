@@ -114,12 +114,21 @@ input[type="submit"]:hover {
         @csrf
         <h1>Create IGA</h1>
         <div class="form-group">
-            <label for="member-id">Member id</label>
-            <input type="text" class="form-control" id="member-id" name="member-id" required>
+            <label for="member-id">Member ID</label>
+            <select class="form-control" id="member-id" name="member_id" required>
+                @foreach($members as $member)
+                    <option value="{{ $member->id }}">{{ $member->id }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label for="name">Members Name</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+            <select class="form-control" id="member-name" name="member_name" required>
+                @foreach($members as $member)
+                    <option value="{{ $member->name }}">{{ $member->name }}</option>
+                @endforeach
+            </select>
+            <!-- <input type="text" class="form-control" id="name" name="name" required> -->
         </div>
         <div class="form-group">
             <label for="date">Date</label>

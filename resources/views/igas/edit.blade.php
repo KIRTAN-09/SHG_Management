@@ -115,7 +115,20 @@ input[type="submit"]:hover {
         @csrf
         @method('PUT')
         <div class="form-group">
+            <label for="member-id">Member ID</label>
+            <select class="form-control" id="member-id" name="member_id" required>
+                @foreach($members as $member)
+                    <option value="{{ $member->id }}" {{ $iga->member_id == $member->id ? 'selected' : '' }}>{{ $member->id }} </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="name">Name</label>
+            <!-- <select class="form-control" id="member-id" name="member_id" required>
+                @foreach($members as $member)
+                    <option value="{{ $member->id }}" {{ $iga->member_id == $member->id ? 'selected' : '' }}>{{ $member->id }} - {{ $member->name }}</option>
+                @endforeach
+            </select> -->
             <input type="text" class="form-control" id="name" name="name" value="{{ $iga->name }}" required>
         </div>
         <div class="form-group">

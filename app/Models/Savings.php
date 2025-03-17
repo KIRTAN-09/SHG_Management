@@ -12,8 +12,7 @@ class Savings extends Model
 
     protected $fillable = [
         'group_id',
-        'group_name',
-        'member_name', // This will now store the member name
+        'member_id', // Change to member_id
         'amount',
         'date_of_deposit',
     ];
@@ -21,6 +20,12 @@ class Savings extends Model
     // Define the relationship with the Member model
     public function member()
     {
-        return $this->belongsTo(Member::class, 'member_id');
+        return $this->belongsTo(Member::class, 'member_id'); // Ensure this is correct
+    }
+
+    // Define the relationship with the Group model
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id'); // Ensure this is correct
     }
 }

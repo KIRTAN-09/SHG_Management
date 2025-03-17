@@ -43,6 +43,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Member ID</th>
                 <th>Name</th>
                 <th>Date</th>
                 <th>Category</th>
@@ -54,6 +55,7 @@
         <tbody id="igaTable">
             @foreach($igas as $iga)
             <tr>
+                <td>{{ $iga->member_id }}</td>
                 <td>{{ $iga->name }}</td>
                 <td>{{ $iga->date }}</td>
                 <td>{{ $iga->category }}</td>
@@ -99,6 +101,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <table class="modal-table mx-auto">
                         <tbody>
                             <tr>
+                                <th>Member ID:</th>
+                                <td>${data.member_id}</td>
+                            </tr>
+                            <tr>
                                 <th>Name:</th>
                                 <td>${data.name}</td>
                             </tr>
@@ -130,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var searchValue = this.value.toLowerCase();
         var rows = document.querySelectorAll('#igaTable tr');
         rows.forEach(function(row) {
-            var name = row.cells[0].textContent.toLowerCase();
-            var category = row.cells[2].textContent.toLowerCase();
+            var name = row.cells[1].textContent.toLowerCase();
+            var category = row.cells[3].textContent.toLowerCase();
             if (name.includes(searchValue) || category.includes(searchValue)) {
                 row.style.display = '';
             } else {

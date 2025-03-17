@@ -37,7 +37,12 @@
 
         <div class="form-group">
             <label for="caste" class="block text-gray-700">Caste</label>
-            <input type="text" class="form-control" id="caste" name="caste" value="{{ $member->caste }}" required>
+            <select class="form-control" id="caste" name="caste" required>
+                <option value="General" {{ $member->caste == 'General' ? 'selected' : '' }}>General</option>
+                <option value="ST" {{ $member->caste == 'ST' ? 'selected' : '' }}>ST</option>
+                <option value="SC" {{ $member->caste == 'SC' ? 'selected' : '' }}>SC</option>
+                <option value="OBC" {{ $member->caste == 'OBC' ? 'selected' : '' }}>OBC</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -70,7 +75,8 @@
             @endif
         </div>
 
-        <input type="submit" value="Edit Member">
+
+        <input type="submit" value="Update Member">
     </form>
 </div>
 

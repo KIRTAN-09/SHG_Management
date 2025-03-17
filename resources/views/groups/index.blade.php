@@ -31,11 +31,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="py-2">Name</th>
+                    <th class="py-2">Group Name</th>
                     <th class="py-2">Group ID</th>
-                    <th class="py-2">Village</th>
-                    <th class="py-2">President</th>
-                    <th class="py-2">Secretary</th>
+                    <th class="py-2">Village Name</th>
+                    <th class="py-2">President Name</th>
+                    <th class="py-2">Secretary Name</th>
                     <th class="py-2">No. of Members</th>
                     <th class="py-2">Actions</th>
                 </tr>
@@ -146,23 +146,23 @@
                     <table class="modal-table mx-auto">
                         <tbody>
                             <tr>
-                                <th>Name:</th>
+                                <th>Group Name:</th>
                                 <td>${data.name}</td>
                             </tr>
                             <tr>
-                                <th>ID:</th>
+                                <th>Group ID:</th>
                                 <td>${data.group_id}</td>
                             </tr>
                             <tr>
-                                <th>Village:</th>
+                                <th>Village Name:</th>
                                 <td>${data.village_name}</td>
                             </tr>
                             <tr>
-                                <th>President:</th>
+                                <th>President Name:</th>
                                 <td>${data.president_name}</td>
                             </tr>
                             <tr>
-                                <th>Secretary:</th>
+                                <th>Secretary Name:</th>
                                 <td>${data.secretary_name}</td>
                             </tr>
                             <tr>

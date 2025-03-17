@@ -16,3 +16,4 @@ class IGA extends Model
 
     protected $table = 'igas'; // Ensure the table name is correct
 }
+    

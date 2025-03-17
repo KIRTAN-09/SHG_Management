@@ -51,15 +51,15 @@
             <thead>
                 <tr>
                     <th class="py-2">Photo</th>
-                    <th class="py-2">Name</th>
                     <th class="py-2">Member UID</th>
-                    <th class="py-2">Number</th>
+                    <th class="py-2">Name</th>
+                    <th class="py-2">Contact Number</th>
                     <th class="py-2">Village</th>
-                    <th class="py-2">Group</th>
+                    <th class="py-2">Group Name</th>
                     <th class="py-2">Caste</th>
                     <th class="py-2">Share Price</th>
-                    <th class="py-2">Member Type</th>
-                    <th class="py-2">Status</th>
+                    <th class="py-2">Member Designation</th>
+                    <th class="py-2">Member Status</th>
                     <th class="py-2">Actions</th>
                 </tr>
             </thead>
@@ -68,8 +68,8 @@
                     <tr class="bg-gray-100 border-b">
                         <td class="py-2"><img src="{{ asset('storage/' . $member->photo) }}"
                                 class="w-20 h-20 object-cover rounded-full mx-auto"></td>
-                        <td class="py-2">{{ $member->name}}</td>
                         <td class="py-2">{{ $member->member_id}}</td>
+                        <td class="py-2">{{ $member->name}}</td>
                         <td class="py-2">{{ $member->number}}</td>
                         <td class="py-2">{{ $member->village}}</td>
                         <td class="py-2">{{ $member->group_name }}</td>
@@ -187,16 +187,16 @@
                     </div>
                     <table class="modal-table mx-auto">
                     <tbody>
+                    <tr>
+                            <th>Member ID:</th>
+                            <td>${data.member_id}</td>
+                        </tr>
                         <tr>
                             <th>Name:</th>
                             <td>${data.name}</td>
                         </tr>
                         <tr>
-                            <th>ID:</th>
-                            <td>${data.member_id}</td>
-                        </tr>
-                        <tr>
-                            <th>Number:</th>
+                            <th>Contact Number:</th>
                             <td>${data.number}</td>
                         </tr>
                         <tr>
@@ -204,7 +204,7 @@
                             <td>${data.village}</td>
                         </tr>
                         <tr>
-                            <th>Group:</th>
+                            <th>Group Name:</th>
                             <td>${data.group_name}</td>
                         </tr>
                         <tr>
@@ -216,11 +216,11 @@
                             <td>${data.share_price}</td>
                         </tr>
                         <tr>
-                            <th>Member Type:</th>
+                            <th>Member Designation:</th>
                             <td>${data.member_type}</td>
                         </tr> 
                         <tr>
-                            <th>Status:</th>
+                            <th>Member Status:</th>
                             <td>${data.status}</td>
                         </tr>  
                     </tbody>

@@ -29,7 +29,12 @@
         </div>
         <div class="form-group">
             <label for="caste">Caste:</label>
-            <input type="text" id="caste" name="caste" required>
+            <select id="caste" name="caste" required>
+                <option value="General">General</option>
+                <option value="ST">ST</option>
+                <option value="SC">SC</option>
+                <option value="OBC">OBC</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="share_price">Share Price:</label>
@@ -81,6 +86,5 @@ function validatePhotoSize() {
     return true;
 }
 </script>
-
 
 @endsection

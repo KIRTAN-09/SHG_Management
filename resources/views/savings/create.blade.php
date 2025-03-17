@@ -118,7 +118,7 @@ input[type="submit"]:hover {
         @csrf
         <h1><b>Savings  Form</b></h1>
         <!-- Group ID -->
-        <label for="group-id">Group ID:</label>
+        <label for="group-id">Group Name:</label>
         <select id="group-id" name="group-id">
             <option value="">Select Group</option>
             @foreach($groups as $group)
@@ -128,7 +128,7 @@ input[type="submit"]:hover {
         
         <!-- Member Name -->
         <label for="member-name">Member Name:</label>
-        <select id="member-name" name="member-name">
+        <select id="member-name" name="member-name"> <!-- Changed from 'member-id' to 'member-name' -->
             <option value="">Select Member</option>
             @foreach($members as $member)
                 <option value="{{ $member->name }}">{{ $member->name }}</option>
