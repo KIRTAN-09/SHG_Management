@@ -1,118 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
+<link rel="stylesheet" href="{{ asset('css/Create.css') }}">
 
-form {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;  
-    border: 1px solid #343798;
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px rgba(8, 8, 8, 0.478);
-    background-color: #fff;
-}
-
-form:hover {
-    box-shadow: 0px 0px 15px rgba(19, 19, 20, 0.6);
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color:rgb(0, 0, 0);
-    font-size: 28px;
-    font-style: bold;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color:rgb(0, 0, 0);
-    font-size: 16px;
-}
-
-.radio-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="number"] {
-    width: calc(100% - 16px);
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-    font-weight: normal; /* Ensure font is not bold */
-    transition: border-color 0.3s ease-in-out;
-}
-
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="number"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-input[type="date"] {
-    width: calc(100% - 16px);
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-}
-
-input[type="radio"] {
-    background color: black;
-}
-input[type="submit"] {
-    align-items: left;
-    background-color: #092f57;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-    display: block;
-    margin: 0; /* Changed from '0 auto' to '0' to align left */
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.error-message {
-    font-size: 12px;
-}
-</style>
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('savings.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
 <div class="container">
     <form action="{{ route('savings.store') }}" method="post">
         @csrf

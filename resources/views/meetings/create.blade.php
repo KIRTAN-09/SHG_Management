@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Form</title>
-    <link rel="stylesheet" href="{{ asset('css/Meetings/Meeting.css') }}">
-    <script src="{{ asset('js/Meeting.js') }}" defer></script>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+<link rel="stylesheet" href="{{ asset('css/Create.css') }}">
+
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('meetings.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
     <div class="container">
         <form action="{{ route('meetings.store') }}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
             @csrf
@@ -35,7 +34,7 @@
                     <!-- Members will be populated here based on the selected group -->
                 </div>
             </div>
-            <br><br>
+            <br>
 
             <label for="discussion">Discussion Points:</label>
             <textarea id="discussion" name="discussion" placeholder="Discussion Topic" required style="height: 100%; width: 100%;"></textarea><br>
@@ -44,9 +43,7 @@
             <input type="file" id="photo" name="photo" accept="image/*" required><br><br>
 
             <input type="submit" value="Schedule Meeting">
-            <div class="pull-right">
-            <a class="btn btn-primary btn-sm mb-2 create-back-button" href="{{ route('meetings.index') }}">Back</a>
-        </div>
+            
         </form>
     </div>
     <script>
@@ -76,4 +73,4 @@
         });
     </script>
 </body>
-</html>
+@endsection

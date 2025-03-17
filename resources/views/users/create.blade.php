@@ -4,7 +4,11 @@
 <br>
 <link href="{{ asset('css/create.css') }}" rel="stylesheet">
 
-<div class="container1">
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('users.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+
+<div class="container">
     <form method="POST" action="{{ route('users.store') }}">
         @csrf
         <h1><b>Create New User</b></h1>
@@ -12,10 +16,10 @@
             <label for="name">Name:</label>
             <input type="text" name="name" placeholder="Name" class="form-control" required>
         </div>
-        <div class="form-group">
+        <di class="form-group">
             <label for="email">Email:</label>
             <input type="email" name="email" placeholder="Email" class="form-control" required>
-        </div>
+        </di v>
         <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" name="password" placeholder="Password" class="form-control" required>

@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
+
+@section('content')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Meeting</title>
-    <link rel="stylesheet" href="{{ asset('css/Meetings/Meeting.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Create.css') }}">
     <script src="{{ asset('js/Meeting.js') }}" defer></script>
 </head>
 <body>
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('meetings.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
     <div class="container">
         <form action="{{ route('meetings.update', $meeting->id) }}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
             @csrf
@@ -30,7 +35,6 @@
             <div id="attendance_list">
                 <!-- Fetched members will be displayed here -->
             </div>
-            <br><br>
 
             <label for="discussion">Discussion Points:</label>
             <textarea id="discussion" name="discussion" required style="height: 100%; width: 100%;">{{ old('discussion', $meeting->discussion) }}</textarea><br>
@@ -45,10 +49,8 @@
             <br>
 
             <input type="submit" value="Update Meeting">
-            <div>
-            <input type="submit" value="Back" href="{{ route('meetings.index') }}">
-        </div>
+            
         </form>
     </div>
 </body>
-</html>
+@endsection
