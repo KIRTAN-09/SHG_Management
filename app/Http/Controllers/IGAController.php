@@ -17,6 +17,7 @@ class IGAController extends Controller
     }
     public function index(Request $request)
     {
+
         $search = $request->input('search');
         $igas = IGA::query()
             ->where('name', 'LIKE', "%{$search}%")
@@ -33,9 +34,22 @@ class IGAController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'member_id' => 'required',
+            'member_name' => 'required',
+            
+            'date' => 'required',
+            'category' => 'required',
+            'earned' => 'required',
+            
+        ]);
         $iga = new IGA($request->all());
         $iga->member_id = $request->input('member_id'); // Add this line to handle the member_id field
+        $iga->name = $request->input('member_name'); // Add this line to handle the name field
         $iga->date = $request->input('date'); // Add this line to handle the date field
+        $iga->category = $request->input('category'); // Add this line to handle the category field
+        $iga->earned = $request->input('earned'); // Add this line to handle the earned field
+        // dd($request->all());
         $iga->save();   
         return redirect()->route('igas.index');
     }
