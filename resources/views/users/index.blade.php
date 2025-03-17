@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title', 'Users')
+
+@section('content_header')
+<h1>Users</h1>
+@stop
+
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/table.css') }}">
@@ -7,7 +13,6 @@
 
     <div class="container mx-auto p-4">
         <div class="flex justify-between items-center mb-3">
-            <h1 class="text-2xl font-bold">Users</h1>
             <button id="toggleView" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Toggle
                 View</button>
         </div>
