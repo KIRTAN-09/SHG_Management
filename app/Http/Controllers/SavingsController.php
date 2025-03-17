@@ -52,23 +52,23 @@ class SavingsController extends Controller
 
     // Store a newly created resource in storage.
     public function store(Request $request)
-    {
-        $request->validate([
-            'group-id' => 'nullable|numeric',
-            'member-id' => 'required|numeric',
-            'amount' => 'required|numeric',
-            'date-of-deposit' => 'required|date',
-        ]);
+{
+    $request->validate([
+        'group-id' => 'nullable|numeric',
+        'member-name' => 'required|string', // Changed to required
+        'amount' => 'required|numeric',
+        'date-of-deposit' => 'required|date',
+    ]);
 
-        Savings::create([
-            'group_id' => $request->input('group-id'),
-            'member_id' => $request->input('member-id'),
-            'amount' => $request->input('amount'),
-            'date_of_deposit' => $request->input('date-of-deposit'),
-        ]);
+    Savings::create([
+        'group_id' => $request->input('group-id'),
+        'member_name' => $request->input('member-name'),
+        'amount' => $request->input('amount'),
+        'date_of_deposit' => $request->input('date-of-deposit'),
+    ]);
 
-        return redirect()->route('savings.index')->with('success', 'Saving created successfully.');
-    }
+    return redirect()->route('savings.index')->with('success', 'Saving created successfully.');
+}
 
     // Display the specified resource.
     public function show($id)
@@ -91,7 +91,7 @@ class SavingsController extends Controller
     {
         $request->validate([
             'group-id' => 'nullable|numeric',
-            'member-id' => 'required|numeric',
+            'member-id' => 'nullable|numeric', // Change this to nullable
             'amount' => 'required|numeric',
             'date-of-deposit' => 'required|date',
         ]);
@@ -99,7 +99,7 @@ class SavingsController extends Controller
         $savings = Savings::find($id);
         $savings->update([
             'group_id' => $request->input('group-id'),
-            'member_id' => $request->input('member-id'),
+            'member_id' => $request->input('member-id'), // Ensure this handles null values
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);
