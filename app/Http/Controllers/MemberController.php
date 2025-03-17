@@ -6,33 +6,17 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Group;
+use App\DataTables\MembersDataTable;
 
 class MemberController extends Controller
 {
-
-    public function index(Request $request)
+    public function index(MembersDataTable $dataTable)
     {
-        $search = $request->input('search');
-        $status = $request->input('sort');
-        $query = Member::query()
-            ->leftJoin('groups', 'members.group_id', '=', 'groups.id') // Join with groups table using group_id
-            ->select('members.*', 'groups.name as group_name'); // Select group name
-
-        if ($request->has('sort')) {
-            $query->where('status', $request->input('sort'));
-        }
-
-        $rows = $request->input('rows', 10); // Default to 10 rows per page if not specified
-
-        $members = $query->paginate($rows);
-
-        return view('members.index', compact('members'));
+        return $dataTable->render('members.index');
     }
-    
 
     public function create()
     {
-        
         $groups = Group::all();
         return view('members.create', compact('groups'));	
     }
