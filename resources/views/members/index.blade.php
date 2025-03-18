@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+<link rel="stylesheet" href="{{ asset('css/table.css') }}">
+<div class="container">
         <div class="card">
             <div class="card-header">Manage Members</div>
             <div class="card-body">
