@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Member;
+use App\DataTables\TrainingDataTable;
 
 class TrainingController extends Controller
 {
