@@ -47,6 +47,10 @@ class PermissionSeeder extends Seeder
             'Meetings-create',
             'Meetings-edit',
             'Meetings-delete',
+            'report-list',
+            'report-create',
+            'report-edit',
+            'report-delete',
         ];
 
         foreach ($permissions as $permission) {

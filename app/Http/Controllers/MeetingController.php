@@ -12,6 +12,15 @@ class MeetingController extends Controller
     /**
      * Display a listing of meetings.
      */
+    public function __construct(){
+        $this->middleware('permission:Meetings-list|Meetings-create|Meetings-edit|Meetings-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Meetings-list', ['only' => ['index']]);
+        $this->middleware('permission:Meetings-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Meetings-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Meetings-delete', ['only' => ['destroy']]);
+        // Ensure the fetchMeetingDetails method has the correct permission
+        $this->middleware('permission:Meetings-list', ['only' => ['fetchMeetingDetails']]);
+    }
     public function index(Request $request)
     {
         $query = Meeting::query();
