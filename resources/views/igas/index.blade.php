@@ -16,7 +16,7 @@
 @endsection
 
 @push('scripts')
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+    <!-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} -->
     <script>
         $(document).ready(function() {
             if ($.fn.dataTable.isDataTable('#igas-table')) {
@@ -34,7 +34,7 @@
                     { data: 'earned', name: 'earned' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
-                dom: '<"top">rt<"bottom"l><"clear">Bfrtip', // Custom DOM layout
+                dom: '<"top">rt<"bottom"l>Bfrtip', // Custom DOM layout
                 buttons: [
                     'excel', 'csv', 'pdf', 'print', 'reset', 'reload'
                 ],
@@ -42,7 +42,8 @@
                     [10, 25, 50, 100, -1],
                     [10, 25, 50, 100, "All"]
                 ],
-                searching: true // Enable searching
+                searching: true, // Enables search
+order: [[0, 'asc']], // Sort by ID in ascending order by default
             });
         });
     </script>

@@ -12,7 +12,7 @@
 @endsection
 
 @push('scripts')
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+    <!-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} -->
     <script>
         $(document).ready(function() {
             if ($.fn.dataTable.isDataTable('#members-table')) {
