@@ -23,7 +23,7 @@
                 serverSide: true,
                 ajax: '{{ route('members.index') }}', // Ensure the correct route is used
                 columns: [ // Ensure columns match the data returned by the query
-                    { data: 'Photo', name: 'Photo' },
+                    // { data: 'Photo', name: 'Photo' },
                     { data: 'name', name: 'name' },
                     { data: 'number', name: 'number' },
                     { data: 'village', name: 'village' },
@@ -34,7 +34,7 @@
                     { data: 'status', name: 'status' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
-                 dom: '<"top">rt<"bottom"l><"clear">Bfrtip', // Custom DOM layout
+                dom: '<"top">rt<"bottom"l><"clear">Bfrtip', // Custom DOM layout
                 buttons: [
                     'excel', 'csv', 'pdf', 'print', 'reset', 'reload'
                 ],

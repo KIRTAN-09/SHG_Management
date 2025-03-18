@@ -21,7 +21,31 @@ class MembersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'members.action')
-            ->setRowId('id');
+            ->setRowId('id')
+            ->filterColumn('name', function($query, $keyword) {
+                $query->where('members.name', 'like', "%{$keyword}%");
+            })
+            ->filterColumn('number', function($query, $keyword) {
+                $query->where('members.number', 'like', "%{$keyword}%");
+            })
+            ->filterColumn('village', function($query, $keyword) {
+                $query->where('members.village', 'like', "%{$keyword}%");
+            })
+            ->filterColumn('group_name', function($query, $keyword) {
+                $query->where('groups.name', 'like', "%{$keyword}%");
+            })
+            ->filterColumn('caste', function($query, $keyword) {
+                $query->where('members.caste', 'like', "%{$keyword}%");
+            })
+            ->filterColumn('share_price', function($query, $keyword) {
+                $query->where('members.share_price', 'like', "%{$keyword}%");
+            })
+            ->filterColumn('member_type', function($query, $keyword) {
+                $query->where('members.member_type', 'like', "%{$keyword}%");
+            })
+            ->filterColumn('status', function($query, $keyword) {
+                $query->where('members.status', 'like', "%{$keyword}%");
+            });
     }
 
     /**
@@ -64,7 +88,7 @@ class MembersDataTable extends DataTable
     {
         return [
             // Column::make('id'),
-            Column::make('photo'),
+            // Column::make('photo'),
             Column::make('name'),
             Column::make('number'),
             Column::make('village'),

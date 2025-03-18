@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\IGA;
 use App\Models\Member; // Add this line to import the Member model
+use App\DataTables\IgasDataTable; // Add this line to import the IgasDataTable
 
 class IGAController extends Controller
 {
@@ -15,15 +16,10 @@ class IGAController extends Controller
         // $this->middleware('permission:IGA-edit', ['only' => ['edit', 'update']]);
         // $this->middleware('permission:IGA-delete', ['only' => ['destroy']]);
     }
-    public function index(Request $request)
-    {
 
-        $search = $request->input('search');
-        $igas = IGA::query()
-            ->where('name', 'LIKE', "%{$search}%")
-            ->orWhere('category', 'LIKE', "%{$search}%")
-            ->get();
-        return view('igas.index', compact('igas'));
+    public function index(IgasDataTable $dataTable)
+    {
+        return $dataTable->render('igas.index');
     }
 
     public function create()
