@@ -299,19 +299,31 @@ return [
     */
 
     'menu' => [
+        
+        
+        [
+            'type' => 'navbar-notification',
+            'id' => 'my-notification',                // An ID attribute (required).
+            'icon' => 'fas fa-bell',                  // A font awesome icon (required).
+            'icon_color' => 'warning',                // The initial icon color (optional).
+            'label' => 0,                             // The initial label for the badge (optional).
+            'label_color' => 'danger',                // The initial badge color (optional).
+            'url' => 'notifications',                             // The url to access all notifications/elements (required).
+            'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
+            'dropdown_mode' => true,                  // Enables the dropdown mode (optional).
+            'dropdown_flabel' => 'All notifications', // The label for the dropdown footer link (optional).
+            'update_cfg' => [
+                'url' => 'notifications/get',         // The url to periodically fetch new data (optional).
+                'period' => 30,
+            ],
+        ],
         [
             'type' => 'dropdown',
             'text' => 'Language',
             'icon' => 'fas fa-globe',
             'topnav_right' => true,
         ],
-        [
-            'type' => 'dropdown',
-            'text' => '',
-            'icon' => 'fas fa-bell',
-            'topnav_right' => true,
-            'url' => '#',   
-        ],
+        
         
         [
             'type' => 'fullscreen-widget',
@@ -326,6 +338,7 @@ return [
                 'icon' => 'fas fa-home',
                 
             ],
+            
             [
                 'text' => 'User Management',
                 'icon' => 'fas fa-users-cog',
