@@ -2,10 +2,11 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/table.css') }}"><br>
-<div class="card-header"><h2>Manage Members</h2></div>
 
 <div class="container">
         <div class="card">
+        <div class="card-header">Manage Members</div>
+
             <div class="card-body">
                 {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'members-table']) }}
             </div>
