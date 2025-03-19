@@ -2,7 +2,7 @@
     <button onclick="showMemberDetails({{ $id }})" class="btn btn-info">
         <i class="fas fa-eye"></i>
     </button>
-    <a href="{{ route('savings.edit', $id) }}" class="btn btn-sm btn-primary">
+    <a href="{{ route('savings.edit', $id) }}" class="btn btn-sm btn-warning">
         <i class="fas fa-edit"></i>
     </a>
     <form action="{{ route('savings.destroy', $id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete(event, this)">

@@ -40,7 +40,7 @@ class MeetingDatatable extends DataTable
     {
         return $model->newQuery()
             ->leftJoin('groups', 'meetings.group_id', '=', 'groups.id')
-            ->select('meetings.id', 'meetings.group_id', 'groups.name as group_name', 'meetings.discussion', 'meetings.date', 'meetings.attendance'); // Added 'meetings.attendance'
+            ->select('meetings.id', 'meetings.group_id', 'groups.name as group_name', 'meetings.discussion', 'meetings.date'); // Added 'meetings.attendance'
     }
 
     /**
@@ -71,16 +71,16 @@ class MeetingDatatable extends DataTable
     protected function getColumns(): array
     {
         return [
-            Column::make('id'),
+            // Column::make('id'),
             Column::make('group_id')
                 ->title('Group ID'),
             Column::make('group_name')
                 ->title('Group Name'),
             Column::make('discussion'),
-            Column::make('Attendance')
-                ->title('Attendance')
-                ->exportable(false)
-                ->printable(false),
+            // Column::make('Attendance')
+            //     ->title('Attendance')
+            //     ->exportable(false)
+            //     ->printable(false),
             Column::make('date'),
             Column::make('action')
                 ->exportable(false)
