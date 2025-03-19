@@ -47,7 +47,7 @@ class SavingsDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            Column::make('id'),
+            // Column::make('id'),
             Column::make('member_name'),
             Column::make('amount'),
             Column::make('date_of_deposit'), // Corrected field name
