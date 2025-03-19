@@ -21,12 +21,12 @@
                 @endforeach
             </select>
             <br><br>
-            <!-- <label for="attendance_list">Attendance List:</label>
+            <label for="attendance_list">Attendance List:</label>
             <div id="attendance_list">
                 <div id="members_list">
                      Members will be populated here based on the selected group 
                 </div>
-            </div> -->
+            </div>
 
             <label for="discussion">Discussion Points:</label>
             <textarea id="discussion" name="discussion" placeholder="Discussion Topic" required style="height: 100%; width: 100%;"></textarea><br>
