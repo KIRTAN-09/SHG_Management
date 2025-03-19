@@ -1,148 +1,51 @@
 @extends('layouts.app')
 
-@section('title', 'Meetings')
-@section('content_header')
-<h2 class="text-2xl font-bold mb-4">Meetings</h2>
-@stop
-
 @section('content')
-    <div class="container">
-        <div class="pull-right">
-            <link rel="stylesheet" href="{{ asset('css/table.css') }}">
-            <a href="{{ route('meetings.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Schedule a New
-                Meeting</a>
-        </div>
-        <!-- Live Search Bar -->
-        <div class="flex justify-end mb-4">
-            <input type="text" id="liveSearch" placeholder="Search..."
-                class="py-2 px-2 w-1/4 rounded-lg border border-gray-300 mr-2">
-        </div>
-        <div class="table-container">
-            <table class="table mt-3">
-                <thead>
-                    <tr>
-                        <th>
-                            @foreach (['Date'] as $column)
-                                    <form method="GET" action="{{ route('meetings.index') }}">
-                                        <input type="hidden" name="column" value="{{ $column }}">
-                                        <input type="hidden" name="sort"
-                                            value="{{ request('column') === $column && request('sort') === 'asc' ? 'desc' : 'asc' }}">
-                                        <input type="hidden" name="search" value="{{ request('search') }}">
-                                        <input type="hidden" name="page" value="{{ request('page', 1) }}">
-                                        <button type="submit" class="header-button">
-                                            {{ $column }}
-                                            {{ request('column') === $column ? (request('sort') === 'asc' ? '▲' : '▼') : '' }}
-                                        </button>
-                                    </form>
-                                </th>
-                            @endforeach
-                        <th>Photo</th>
-                        <th>Group Name</th>
-                        <th>Group ID</th>
-                        <th>Discussion Points</th>
-                        <th>Attendance List</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="meetingsTable">
-                    @foreach($meetings as $meeting)
-                        <tr>
-                            <td>{{ $meeting->date }}</td>
-                            <td><img src="{{ asset('storage/' . $meeting->photo) }}" alt="Group Photo"
-                                    class="w-20 h-20 object-cover rounded-full mx-auto mb-4"></td>
-                            <td>{{ $meeting->group_name }}</td>
-                            <td>{{ $meeting->group_id }}</td>
-                            <td>{{ $meeting->discussion }}</td>
-                            <td>{{ $meeting->attendance_list }}</td>
-                            <td class="action-buttons">
-                                <button type="button" class="btn btn-info" data-toggle="modal"
-                                    data-target="#meetingModal{{ $meeting->id }}">View</button>
-                                <a href="{{ route('meetings.edit', $meeting) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('meetings.destroy', $meeting) }}" method="POST"
-                                    style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <!-- Modal -->
-                        <style>
-                            .modal {
-                                transition: opacity 0.25s;
-                            }
+<link rel="stylesheet" href="{{ asset('css/table.css') }}"><br>
+<div class="mb-3">
+    <a href="{{ route('meetings.create') }}" class="btn btn-primary">Create New Meeting</a>
+</div>
+<div class="card-header"><h2>Manage Meetings</h2></div>
 
-                            .container3 {
-                                font-size: 14px;
-                                height: auto;
-                                width: 600px;
-                                background: rgba(245, 245, 220, 0.714);
-                                padding: 20px;
-                                border: 1px solid #f4f3f357;
-                                border-radius: 6px;
-                            }
-                        </style>
-                        <div class="modal" id="meetingModal{{ $meeting->id }}" tabindex="-1" role="dialog"
-                            aria-labelledby="meetingModalLabel{{ $meeting->id }}" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="container3">
-                                    <div class="modal-header">
-                                        <h5 class=font-serif text-3xl style="color: cornflowerblue;"
-                                            id="meetingModalLabel{{ $meeting->id }}">Meeting Details</h5>
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p><strong>Date:</strong> {{ $meeting->date }}</p>
-                                        <p><strong>Group Name:</strong> {{ $meeting->group_name }}</p>
-                                        <p><strong>Group ID:</strong> {{ $meeting->group_id }}</p>
-                                        <p><strong>Discussion Points:</strong> {{ $meeting->discussion }}</p>
-                                        <p><strong>No. Members Present:</strong> {{ $meeting->attendance_list }}</p>
-                                        <img src="{{ asset('storage/' . $meeting->photo) }}" alt="Group Photo"
-                                            style="width: 100%; height: auto;">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <div class="d-flex justify-content-center">
-            {{ $meetings->links('pagination::bootstrap-4') }}
+<div class="container">
+        <div class="card">
+            <div class="card-body">
+                {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'meeting-table']) }}
+            </div>
         </div>
     </div>
+@endsection
 
+@push('scripts')
+    <!-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            function debounce(func, wait) {
-                let timeout;
-                return function (...args) {
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => func.apply(this, args), wait);
-                };
+        $(document).ready(function() {
+            if ($.fn.dataTable.isDataTable('#meeting-table')) {
+                $('#meeting-table').DataTable().clear().destroy(); // Clear and destroy existing instance
             }
-
-            const liveSearch = document.getElementById('liveSearch');
-            liveSearch.addEventListener('keyup', debounce(function () {
-                let filter = liveSearch.value.toLowerCase();
-                let rows = document.querySelectorAll('#meetingsTable tr');
-                rows.forEach(row => {
-                    let text = row.textContent.toLowerCase();
-                    row.style.display = text.includes(filter) ? '' : 'none';
-                });
-            }, 300));
-
-            document.querySelectorAll('.view-meeting').forEach(button => {
-                button.addEventListener('click', function () {
-                    let meetingId = this.getAttribute('data-meeting-id');
-                    let modal = document.getElementById('meetingModal' + meetingId);
-                    $(modal).modal('show');
-                });
+            $('#meeting-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('meetings.index') }}', // Ensure the correct route is used
+                columns: [ // Ensure columns match the data returned by the query
+                    { data: 'id', name: 'id' },
+                    { data: 'group_id', name: 'group_id', title: 'Group ID' },
+                    { data: 'group_name', name: 'group_name', title: 'Group Name' },
+                    { data: 'discussion', name: 'discussion' },
+                    { data: 'attendance', name: 'attendance' },
+                    { data: 'date', name: 'date' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                ],
+                dom: '<"top">rt<"bottom"l><"clear">Bfrtip', // Custom DOM layout
+                buttons: [
+                    'excel', 'csv', 'pdf', 'print', 'reset', 'reload'
+                ],
+                lengthMenu: [ // Add row in show option
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"]
+                ],
+                searching: true // Enable searching
             });
         });
     </script>
-@endsection
+@endpush
