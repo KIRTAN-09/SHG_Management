@@ -12,6 +12,7 @@ use App\Http\Controllers\IGAController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -34,7 +35,6 @@ Route::resource('savings', SavingsController::class);
 Route::resource('igas', IGAController::class);
 Route::resource('training', TrainingController::class);
 Route::resource('meetings', MeetingController::class);
-Route::get('/meetings/data', [MeetingController::class, 'getData'])->name('meetings.data');
 Route::resource('reports', ReportController::class);
 Route::get('/roles/{id}/json', [RoleController::class, 'showJson'])->name('roles.showJson');
 Route::get('/reports/filter', [ReportController::class, 'filter'])->name('reports.filter');

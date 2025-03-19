@@ -5,32 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Member;
+use App\DataTables\TrainingDataTable;
 
 class TrainingController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('permission:training-list|training-create|training-edit|training-delete', ['only' => ['index', 'show']]);
-    //     $this->middleware('permission:training-create', ['only' => ['create', 'store']]);
-    //     $this->middleware('permission:training-edit', ['only' => ['edit', 'update']]);
-    //     $this->middleware('permission:training-delete', ['only' => ['destroy']]);
-    // }
-    public function index(Request $request)
+    
+    public function __construct(){
+        $this->middleware('permission:Training-list|Training-create|Training-edit|Training-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Training-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Training-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Training-delete', ['only' => ['destroy']]);
+    }
+    public function index(Request $request, TrainingDataTable $dataTable)
     {
-        $query = Training::query();
-
-        if ($request->has('search')) {
-            $query->where('category', 'like', '%' . $request->search . '%')
-                  ->orWhere('location', 'like', '%' . $request->search . '%')
-                  ->orWhere('trainer', 'like', '%' . $request->search . '%');
-                }
-                if ($request->has('column') && $request->has('sort')) {
-                    $query->orderBy($request->column, $request->sort);
-                } else {
-                    $query->orderBy('created_at', 'desc');
-                }
-        $trainings = $query->paginate(10);
-        return view('training.index', compact('trainings'));
+        return $dataTable->render('training.index');
     }
 
     public function create()

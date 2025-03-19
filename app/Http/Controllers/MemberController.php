@@ -10,6 +10,13 @@ use App\DataTables\MembersDataTable;
 
 class MemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Member-list|Member-create|Member-edit|Member-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Member-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Member-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Member-delete', ['only' => ['destroy']]);
+    }
     public function index(MembersDataTable $dataTable)
     {
         return $dataTable->render('members.index');

@@ -11,10 +11,10 @@ class IGAController extends Controller
 {
     public function __construct()
     {
-        // // $this->middleware('permission:IGA-list|IGA-create|IGA-edit|IGA-delete', ['only' => ['index', 'show']]);
-        // $this->middleware('permission:IGA-create', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:IGA-edit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:IGA-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:Iga-list|Iga-create|Iga-edit|Iga-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Iga-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Iga-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Iga-delete', ['only' => ['destroy']]);
     }
 
     public function index(IgasDataTable $dataTable)
