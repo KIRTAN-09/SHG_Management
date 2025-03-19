@@ -13,6 +13,7 @@ use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\NotificationController;
+use App\DataTables\GroupsDataTable;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -30,6 +31,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/members', [MemberController::class, 'index'])->name('members.index');
     Route::resource('groups', HomeController::class);
     Route::resource('groups', GroupController::class);
+    Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
     Route::resource('savings', SavingsController::class);
     Route::resource('igas', IGAController::class);
     Route::resource('training', TrainingController::class);

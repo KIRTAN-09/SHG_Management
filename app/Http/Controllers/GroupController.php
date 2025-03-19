@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Member;
+use App\DataTables\GroupsDataTable;
 
 class GroupController extends Controller
 {
@@ -20,23 +21,11 @@ class GroupController extends Controller
     }
     
 
-    public function index(Request $request)
+    public function index(GroupsDataTable $dataTable)
     {
-        $search = $request->input('search');
-        $groups = Group::query()
-            ->when($search, function ($query, $search) {
-                return $query->where('name', 'like', "%{$search}%")
-                             ->orWhere('group_id', 'like', "%{$search}%")
-                             ->orWhere('village_name', 'like', "%{$search}%");
-                             // ->orWhere('president_name', 'like', "%{$search}%")
-                             // ->orWhere('secretary_name', 'like', "%{$search}%")
-                             // ->orWhere('no_of_members', 'like', "%{$search}%");
-            });
-        $totalMembers = Member::count(); // Count total members
-        $totalGroups = Group::count(); // Count total groups
-        $groups = Group::with('members')->paginate(14); // Ensure members relationship is loaded
-        return view('groups.index', compact('groups', 'totalMembers'));
+        return $dataTable->render('groups.index');
     }
+    
 
     public function create(): View
     {
@@ -49,12 +38,6 @@ class GroupController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'village_name' => 'required|string|max:255',
-           // 'president_name' => 'required|string|max:255',
-            //'secretary_name' => 'required|string|max:255',
-           // 'no_of_members' => 'required|integer|min:10|max:20',
-        ], [
-           // 'no_of_members.min' => 'The number of members must be at least 10.',
-           // 'no_of_members.max' => 'The number of members may not be greater than 20.',
         ]);
 
         $lastGroup = Group::orderBy('id', 'desc')->first();
@@ -75,8 +58,7 @@ class GroupController extends Controller
 
         $group->president_name = $group->members->where('member_type', 'President')->first()->name ?? null;
         $group->secretary_name = $group->members->where('member_type', 'Secretary')->first()->name ?? null;
-
-        
+        $group->no_of_members = $group->members->count();
 
         return response()->json($group);
     }
