@@ -152,4 +152,5 @@ class MemberController extends Controller
 
         return redirect()->route('members.index')->with('success', 'Member status set to Inactive and deleted successfully');
     }
+    
 }

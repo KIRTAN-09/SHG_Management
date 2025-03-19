@@ -5,10 +5,10 @@
 <div class="mb-3">
     <a href="{{ route('meetings.create') }}" class="btn btn-primary">Create New Meeting</a>
 </div>
-<div class="card-header"><h2>Manage Meetings</h2></div>
 
 <div class="container">
         <div class="card">
+        <div class="card-header"><h5>Manage Meetings</h5><div>
             <div class="card-body">
                 {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'meeting-table']) }}
             </div>
