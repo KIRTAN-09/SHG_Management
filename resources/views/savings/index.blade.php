@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.0/css/dataTables.dateTime.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
-
+<br>
 <div class="mb-3">
     <a href="{{ route('savings.create') }}" class="btn btn-primary">Create New Saving</a>
 </div>
