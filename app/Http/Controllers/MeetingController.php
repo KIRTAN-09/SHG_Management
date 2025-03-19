@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Meeting;
 use App\Models\Group;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
+use App\DataTables\MeetingDatatable;
 
 class MeetingController extends Controller
 {
@@ -21,21 +23,9 @@ class MeetingController extends Controller
         // Ensure the fetchMeetingDetails method has the correct permission
         $this->middleware('permission:Meetings-list', ['only' => ['fetchMeetingDetails']]);
     }
-    public function index(Request $request)
+    public function index(MeetingDatatable $dataTable)
     {
-        $query = Meeting::query();
-
-        if ($request->has('search')) {
-            $query->where('group_name', 'like', '%' . $request->search . '%')
-                  ->orWhere('discussion', 'like', '%' . $request->search . '%');
-        }
-        if ($request->has('column') && $request->has('sort')) {
-            $query->orderBy($request->column, $request->sort);
-        } else {
-            $query->orderBy('created_at', 'desc');
-        }
-        $meetings = $query->paginate(20);
-        return view('meetings.index', compact('meetings'));
+        return $dataTable->render('meetings.index');
     }
 
     /**
@@ -63,13 +53,14 @@ class MeetingController extends Controller
 
         $group = Group::findOrFail($request->group_id);
         $photoPath = $request->file('photo')->store('meetings/photos', 'public');
+        $photoUrl = Storage::url($photoPath);
 
         Meeting::create([
             'date' => $request->date,
             'group_name' => $group->name,
             'group_id' => $request->group_id,
             'discussion' => $request->discussion,
-            'photo' => $photoPath,
+            'photo' => $photoUrl,
         ]);
 
         return redirect()->route('meetings.index')->with('success', 'Meeting scheduled successfully!');
@@ -109,7 +100,8 @@ class MeetingController extends Controller
 
         if ($request->hasFile('photo')) {
             Storage::delete('public/' . $meeting->photo);
-            $meeting->photo = $request->file('photo')->store('meetings/photos', 'public');
+            $photoPath = $request->file('photo')->store('meetings/photos', 'public');
+            $meeting->photo = Storage::url($photoPath);
         }
 
         $meeting->update([
@@ -139,5 +131,22 @@ class MeetingController extends Controller
     {
         $meeting = Meeting::findOrFail($id);
         return response()->json($meeting);
+    }
+
+    /**
+     * Get data for DataTables.
+     */
+    public function getData()
+    {
+        $meetings = Meeting::select(['id', 'date', 'photo', 'group_name', 'group_id', 'discussion', 'attendance_list']);
+        return DataTables::of($meetings)
+            ->addColumn('actions', function ($meeting) {
+                return view('meetings.partials.actions', compact('meeting'))->render();
+            })
+            ->editColumn('photo', function ($meeting) {
+                return '<img src="'.asset('storage/' . $meeting->photo).'" alt="Group Photo" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">';
+            })
+            ->rawColumns(['actions', 'photo'])
+            ->make(true);
     }
 }
