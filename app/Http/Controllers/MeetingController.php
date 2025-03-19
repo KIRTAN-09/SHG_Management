@@ -26,6 +26,7 @@ class MeetingController extends Controller
     public function index(MeetingDatatable $dataTable)
     {
         return $dataTable->render('meetings.index');
+    }
 
     /**
      * Show the form for creating a new meeting.
