@@ -18,6 +18,7 @@ class CreateMeetingsTable extends Migration
             $table->string('group_name');
             $table->unsignedBigInteger('group_id');
             $table->text('discussion');
+            $table->text('attendance')->nullable(); // Added 'attendance' column
             $table->string('photo');
             $table->timestamps();
             $table->softDeletes();

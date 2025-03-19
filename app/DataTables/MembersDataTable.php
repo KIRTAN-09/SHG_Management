@@ -21,6 +21,10 @@ class MembersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'members.action')
+            ->addColumn('photo', function($member) {
+                return '<img src="'.asset('storage/' . $member->photo).'" alt="Member Photo" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">';
+            })
+            ->rawColumns(['photo', 'action'])
             ->setRowId('id')
             ->filterColumn('name', function($query, $keyword) {
                 $query->where('members.name', 'like', "%{$keyword}%");
@@ -88,7 +92,7 @@ class MembersDataTable extends DataTable
     {
         return [
             // Column::make('id'),
-            // Column::make('photo'),
+            Column::make('photo'),
             Column::make('name'),
             Column::make('number'),
             Column::make('village'),
