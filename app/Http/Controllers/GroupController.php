@@ -13,7 +13,7 @@ class GroupController extends Controller
 
     public function __construct()
     {
-        //  $this->middleware('permission:Group-list|Group-create|Group-edit|Group-delete', ['only' => ['index', 'show']]);
+         $this->middleware('permission:Group-list|Group-create|Group-edit|Group-delete', ['only' => ['index', 'show']]);
          $this->middleware('permission:Group-create', ['only' => ['create','store']]);
          $this->middleware('permission:Group-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:Group-delete', ['only' => ['destroy']]);
