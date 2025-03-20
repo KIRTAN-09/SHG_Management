@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('group_id')->nullable();
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->string('photo')->nullable();
             $table->string('name');
             $table->string('number')->nullable();
@@ -27,7 +28,6 @@ return new class extends Migration
             $table->string('member_id')->unique();
             $table->timestamps();
             $table->enum('status', ['Active', 'Inactive']);
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade'); // Add foreign key constraint
             $table->softDeletes();
         });
 

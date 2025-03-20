@@ -93,4 +93,13 @@ class GroupController extends Controller
         Group::find($id)->delete();
         return redirect()->route('groups.index')->with('success', 'Group deleted successfully.');
     }
+
+    public function getMembersByGroup($groupId)
+    {
+        $members = Member::where('group_id', $groupId)->get(['id', 'name']);
+        if ($members->isEmpty()) {
+            return response()->json(['message' => 'No members found for this group'], 404);
+        }
+        return response()->json($members);
+    }
 }

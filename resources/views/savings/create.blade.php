@@ -1,92 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-
-<link rel="stylesheet" href="{{ asset('css/Create.css') }}">
-
-<br>
-    <div class="pull-right">
-        <a class="btn btn-primary btn-sm mb-2" href="{{ route('savings.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
-    </div>
 <div class="container">
-    <form action="{{ route('savings.store') }}" method="post">
+    <h2>Create Savings</h2>
+    <form action="{{ route('savings.store') }}" method="POST">
         @csrf
-        <h1><b>Savings  Form</b></h1>
-        <!-- Group ID -->
-        <label for="group-id">Group Name:</label>
-        <select id="group-id" name="group-id">
-            <option value="">Select Group</option>
-            @foreach($groups as $group)
-                <option value="{{ $group->id }}">{{ $group->name }}</option>
-            @endforeach
-        </select><br><br>
-        
-        <!-- Member Name -->
-        <label for="member-name">Member Name:</label>
-        <select id="member-name" name="member-name"> <!-- Changed from 'member-id' to 'member-name' -->
-            <option value="">Select Member</option>
-            @foreach($members as $member)
-                <option value="{{ $member->name }}">{{ $member->name }}</option>
-            @endforeach
-        </select><br><br>
-        
-        <!-- Date of deposit -->
-        <label for="date-of-deposit">Date of Deposit:</label>
-        <input type="date" id="date-of-deposit" name="date-of-deposit" required><br><br>
-        
-        <!-- Amount -->
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" required>
-        <span id="amount-error" class="error-message" style="display: none; color: red;">Amount Can't Be Negative</span><br><br>
-        
-        <input type="submit" value="Submit">    
+        <div class="form-group">
+            <label for="group-id">Group Name:</label>
+            <select id="group-id" name="group-id" class="form-control">
+                <option value="">Select Group</option>
+                @foreach($groups as $group)
+                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="member-id">Member Name:</label>
+            <select id="member-id" name="member-id" class="form-control">
+                <option value="">Select Member</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="date-of-deposit">Date of Deposit:</label>
+            <input type="date" id="date-of-deposit" name="date-of-deposit" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
 <script>
-// Prevent future dates in the date of deposit field
-const dateOfDeposit = document.getElementById('date-of-deposit');
-const today = new Date().toISOString().split('T')[0];
-dateOfDeposit.setAttribute('max', today);
+    document.getElementById('group-id').addEventListener('change', function () {
+        const groupId = this.value;
+        const memberSelect = document.getElementById('member-id');
+        memberSelect.innerHTML = '<option value="">Select Member</option>'; // Reset members
 
-// Validation for Group ID input
-document.getElementById('group-id').addEventListener('input', function() {
-    const value = this.value;
-    if (isNaN(value) || /[^0-9]/.test(value)) {
-        document.getElementById('group-id-error').style.display = 'block';
-    } else {
-        document.getElementById('group-id-error').style.display = 'none';
-    }
-});
-
-// Validation for Member ID and Name inputs
-document.getElementById('member-id').addEventListener('input', function() {
-    const value = this.value;
-    if (isNaN(value) || /[^0-9]/.test(value)) {
-        document.getElementById('member-id-error').style.display = 'block';
-    } else {
-        document.getElementById('member-id-error').style.display = 'none';
-    }
-});
-
-document.getElementById('member-name').addEventListener('input', function() {
-    const value = this.value;
-    if (/[^a-zA-Z]/.test(value)) {
-        document.getElementById('member-name-error').style.display = 'block';
-    } else {
-        document.getElementById('member-name-error').style.display = 'none';
-    }
-});
-
-// Validation for Amount input
-document.getElementById('amount').addEventListener('input', function() {
-    const value = this.value;
-    if (value < 0) {
-        this.value = '';
-        document.getElementById('amount-error').style.display = 'block';
-    } else {
-        document.getElementById('amount-error').style.display = 'none';
-    }
-});
+        if (groupId) {
+            fetch(`/api/groups/${groupId}/members`)
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Error response:', response);
+                        throw new Error('Failed to fetch members');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(member => {
+                        const option = document.createElement('option');
+                        option.value = member.id;
+                        option.textContent = member.name;
+                        memberSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching members:', error);
+                    alert('Failed to load members. Please try again.');
+                });
+        }
+    });
 </script>
 @endsection

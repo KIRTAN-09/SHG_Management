@@ -36,23 +36,23 @@ class SavingsController extends Controller
 
     // Store a newly created resource in storage.
     public function store(Request $request)
-{
-    $request->validate([
-        'group-id' => 'nullable|numeric',
-        'member-name' => 'required|string', // Changed to required
-        'amount' => 'required|numeric',
-        'date-of-deposit' => 'required|date',
-    ]);
+    {
+        $request->validate([
+            'group-id' => 'nullable|numeric',
+            'member-name' => 'required|string', // Changed to required
+            'amount' => 'required|numeric',
+            'date-of-deposit' => 'required|date',
+        ]);
 
-    Savings::create([
-        'group_id' => $request->input('group-id'),
-        'member_name' => $request->input('member-name'),
-        'amount' => $request->input('amount'),
-        'date_of_deposit' => $request->input('date-of-deposit'),
-    ]);
+        Savings::create([
+            'group_id' => $request->input('group-id'),
+            'member_name' => $request->input('member-name'),
+            'amount' => $request->input('amount'),
+            'date_of_deposit' => $request->input('date-of-deposit'),
+        ]);
 
-    return redirect()->route('savings.index')->with('success', 'Saving created successfully.');
-}
+        return redirect()->route('savings.index')->with('success', 'Saving created successfully.');
+    }
 
     // Display the specified resource.
     public function show($id)
@@ -98,5 +98,14 @@ class SavingsController extends Controller
         $savings->delete();
 
         return redirect()->route('savings.index')->with('success', 'Saving deleted successfully.');
+    }
+
+    public function getMembersByGroup($groupId)
+    {
+        $members = Member::where('group_id', $groupId)->get(['id', 'name']);
+        if ($members->isEmpty()) {
+            return response()->json(['message' => 'No members found for this group'], 404);
+        }
+        return response()->json($members);
     }
 }
