@@ -2,10 +2,12 @@
 
 @section('content')
 <div class="container">
-    <h2>Create Savings</h2>
+    <link rel="stylesheet" href="{{ asset('css/Create.css') }}">
+   
     <form action="{{ route('savings.store') }}" method="POST">
         @csrf
         <div class="form-group">
+        <h1>Create Savings</h1>
             <label for="group-id">Group Name:</label>
             <select id="group-id" name="group-id" class="form-control">
                 <option value="">Select Group</option>
