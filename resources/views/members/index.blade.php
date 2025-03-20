@@ -6,7 +6,6 @@
 <div class="container">
         <div class="card">
         <div class="card-header">Manage Members</div>
-
             <div class="card-body">
                 {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'members-table']) }}
             </div>
@@ -24,7 +23,12 @@
             $('#members-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('members.index') }}', // Ensure the correct route is used
+                ajax: {
+                    url: '{{ route('members.index') }}', // Ensure the correct route is used
+                    error: function(xhr, error, code) {
+                        console.log('DataTables error:', error); // Log error to console
+                    }
+                },
                 columns: [ // Ensure columns match the data returned by the query
                     { data: 'photo', name: 'photo' },
                     { data: 'name', name: 'name' },

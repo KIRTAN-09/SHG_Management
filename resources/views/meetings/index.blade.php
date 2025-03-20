@@ -34,7 +34,7 @@
                     { data: 'group_id', name: 'group_id', title: 'Group ID' },
                     { data: 'group_name', name: 'group_name', title: 'Group Name' },
                     { data: 'discussion', name: 'discussion' },
-                    // { data: 'attendance', name: 'attendance' },
+                    { data: 'attendance', name: 'attendance' },
                     { data: 'date', name: 'date' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],

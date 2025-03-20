@@ -77,10 +77,10 @@ class MeetingDatatable extends DataTable
             Column::make('group_name')
                 ->title('Group Name'),
             Column::make('discussion'),
-            // Column::make('Attendance')
-            //     ->title('Attendance')
-            //     ->exportable(false)
-            //     ->printable(false),
+            Column::make('Attendance')
+                ->title('Attendance')
+                ->exportable(false)
+                ->printable(false),
             Column::make('date'),
             Column::make('action')
                 ->exportable(false)
