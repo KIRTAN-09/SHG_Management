@@ -47,8 +47,9 @@ class SavingsController extends Controller
         $member = Member::findOrFail($request->input('member_id'));
 
         Savings::create([
+            
             'group_id' => $request->input('group_id'),
-            'member_id' => $request->input('member_id'),
+            
             'member_name' => $member->name, // Ensure member_name is populated
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date_of_deposit'),
