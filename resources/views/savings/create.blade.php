@@ -8,8 +8,8 @@
         @csrf
         <div class="form-group">
         <h1>Create Savings</h1>
-            <label for="group-id">Group Name:</label>
-            <select id="group-id" name="group-id" class="form-control">
+            <label for="group_id">Group Name:</label>
+            <select id="group-id" name="group_id" class="form-control">
                 <option value="">Select Group</option>
                 @foreach($groups as $group)
                     <option value="{{ $group->id }}">{{ $group->name }}</option>
@@ -17,14 +17,14 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="member-id">Member Name:</label>
-            <select id="member-id" name="member-id" class="form-control">
+            <label for="member_id">Member Name:</label>
+            <select id="member-id" name="member_id" class="form-control">
                 <option value="">Select Member</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="date-of-deposit">Date of Deposit:</label>
-            <input type="date" id="date-of-deposit" name="date-of-deposit" class="form-control" required>
+            <label for="date_of_deposit">Date of Deposit:</label>
+            <input type="date" id="date-of-deposit" name="date_of_deposit" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="amount">Amount:</label>

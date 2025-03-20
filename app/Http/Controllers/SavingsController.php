@@ -38,17 +38,20 @@ class SavingsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'group-id' => 'nullable|numeric',
-            'member-name' => 'required|string', // Changed to required
-            'amount' => 'required|numeric',
-            'date-of-deposit' => 'required|date',
+            'group_id' => 'required|numeric|exists:groups,id',
+            'member_id' => 'required|numeric|exists:members,id',
+            'amount' => 'required|numeric|min:0',
+            'date_of_deposit' => 'required|date',
         ]);
 
+        $member = Member::findOrFail($request->input('member_id'));
+
         Savings::create([
-            'group_id' => $request->input('group-id'),
-            'member_name' => $request->input('member-name'),
+            'group_id' => $request->input('group_id'),
+            'member_id' => $request->input('member_id'),
+            'member_name' => $member->name, // Ensure member_name is populated
             'amount' => $request->input('amount'),
-            'date_of_deposit' => $request->input('date-of-deposit'),
+            'date_of_deposit' => $request->input('date_of_deposit'),
         ]);
 
         return redirect()->route('savings.index')->with('success', 'Saving created successfully.');
@@ -74,16 +77,20 @@ class SavingsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'group-id' => 'nullable|numeric',
-            'member-id' => 'nullable|numeric', // Change this to nullable
+            'group-id' => 'nullable|numeric|exists:groups,id',
+            'member-id' => 'nullable|numeric|exists:members,id',
             'amount' => 'required|numeric',
             'date-of-deposit' => 'required|date',
         ]);
 
-        $savings = Savings::find($id);
+        $savings = Savings::findOrFail($id);
+
+        $member = $request->input('member-id') ? Member::findOrFail($request->input('member-id')) : null;
+
         $savings->update([
             'group_id' => $request->input('group-id'),
-            'member_id' => $request->input('member-id'), // Ensure this handles null values
+            'member_id' => $request->input('member-id'),
+            'member_name' => $member ? $member->name : $savings->member_name, // Ensure member_name is updated
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),
         ]);
