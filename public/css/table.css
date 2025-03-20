@@ -168,3 +168,21 @@ h2 {
     color: rgb(27, 26, 26);
     text-align: center;
 }
+
+.card-header {
+    background-color: #287da7a4;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 2em;
+}
+
+table.dataTable {
+    width: 100% !important;
+}
+
+@media screen and (max-width: 768px) {
+    .dataTables_wrapper {
+        overflow-x: auto;
+    }
+}
