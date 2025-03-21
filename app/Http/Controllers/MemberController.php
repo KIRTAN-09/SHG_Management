@@ -25,7 +25,16 @@ class MemberController extends Controller
     public function create()
     {
         $groups = Group::all();
-        return view('members.create', compact('groups'));	
+        
+        // Fetch existing roles for each group
+        $existingRoles = Member::select('group', 'member_type')
+            ->get()
+            ->groupBy('group')
+            ->map(function ($members) {
+                return $members->pluck('member_type')->toArray();
+            });
+
+        return view('members.create', compact('groups', 'existingRoles'));	
     }
 
     public function store(Request $request)
@@ -140,7 +149,16 @@ class MemberController extends Controller
     {
         $member = Member::findOrFail($id);
         $groups = Group::all(); // Assuming you have a Group model to fetch all groups
-        return view('members.edit', compact('member', 'groups'));
+        
+        // Fetch existing roles for each group
+        $existingRoles = Member::select('group', 'member_type')
+            ->get()
+            ->groupBy('group')
+            ->map(function ($members) {
+                return $members->pluck('member_type')->toArray();
+            });
+
+        return view('members.edit', compact('member', 'groups', 'existingRoles'));
     }
 
     public function destroy($id)

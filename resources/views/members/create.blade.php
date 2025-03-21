@@ -9,7 +9,7 @@
 
 <div class="container">
 <link rel="stylesheet" href="{{ asset('css/Members/Create.css') }}">
-    <form action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return validatePhotoSize()">
+    <form action="{{ route('members.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateMemberType()">
         @csrf
         <h1><b>Add Member</b></h1>
         <div class="form-group">
@@ -89,6 +89,19 @@ function validatePhotoSize() {
         }
     }
     return true;
+}
+
+function validateMemberType() {
+    const memberType = document.getElementById('member_type').value;
+    const group = document.getElementById('group').value;
+
+    // Simulated check for existing President/Secretary in the group
+    const existingRoles = @json($existingRoles); // Pass existing roles from the backend
+    if ((memberType === 'President' || memberType === 'Secretary') && existingRoles[group]?.includes(memberType)) {
+        alert(`There can only be one ${memberType} in the group.`);
+        return false;
+    }
+    return validatePhotoSize(); // Ensure photo size validation is also performed
 }
 </script>
 
