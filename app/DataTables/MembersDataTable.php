@@ -59,7 +59,7 @@ class MembersDataTable extends DataTable
     {
         return $model->newQuery()
             ->leftJoin('groups', 'members.group_id', '=', 'groups.id')
-            ->select('members.id', 'members.name', 'members.number', 'members.village', 'groups.name as group_name', 'members.caste', 'members.share_price', 'members.member_type', 'members.status'); // Corrected select statement
+            ->select('members.id', 'members.member_id', 'members.name', 'members.number', 'members.village', 'groups.name as group_name', 'members.caste', 'members.share_price', 'members.member_type', 'members.status'); // Added member_id
     }
 
     /**
@@ -91,7 +91,7 @@ class MembersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            // Column::make('id'),
+            Column::make('member_id')->title('Member ID'), // Added member_id column
             Column::make('photo'),
             Column::make('name'),
             Column::make('number'),
