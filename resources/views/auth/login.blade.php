@@ -9,21 +9,10 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
 </head>  
 <body>  
-    <div class="cs-loader">
-        <div class="cs-loader-inner">
-            <h2>Loading</h2>
-            <label>></label>
-            <label>></label>
-            <label>></label>
-            <label>></label>
-            <label>></label>
-            <label>></label>
-        </div>
-    </div>
     <div class="container" id="container">  
         <div class="form-container">
             <div class="form-box login">  
-                <form action="{{ route('login') }}" method="POST">  
+                <form action="{{ route('login') }}" method="POST" onsubmit="showLoader()">  
                     @csrf
                     <h1><u><b>Login</b></u></h1>  
                     <div class="input-box">  
@@ -37,7 +26,7 @@
                     <div class="forgot-link">  
                         <a href="{{ route('password.request') }}">Forgot Password?</a>  
                     </div>  
-                    <button type="submit" class="btn" onclick="showLoader()"><u>Login</u></button>  
+                    <button type="submit" class="btn"><u>Login</u></button>  
                 </form>  
             </div>  
             <div class="form-box register">  
@@ -79,7 +68,20 @@
         }
 
         function showLoader() {
-            document.querySelector('.cs-loader').style.display = 'flex';
+            const loader = document.createElement('div');
+            loader.className = 'cs-loader';
+            loader.innerHTML = `
+                <div class="cs-loader-inner">
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                </div>
+            `;
+            document.body.appendChild(loader);
+            loader.style.display = 'flex';
             document.querySelector('.container').classList.add('blur-background');
         }
     </script>
@@ -101,90 +103,49 @@
             height: 100%;
             width: 100%;
             z-index: 1000; /* Ensure it is above other elements */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .cs-loader-inner {
-            transform: translateY(-50%);
-            top: 50%;
-            position: absolute;
-            width: 100%;
-            color: black;
-            padding: 0 100px;
-            text-align: center;
+            display: flex;
+            gap: 10px;
         }
 
-        .cs-loader-inner label {
-            font-size: 20px;
-            opacity: 0;
-            display: inline-block;
+        .loader-circle {
+            width: 15px;
+            height: 15px;
+            background-color: #70bcef;
+            border-radius: 50%;
+            animation: bounce 0.6s infinite alternate;
         }
 
-        @keyframes lol {
-            0% {
-                opacity: 0;
-                transform: translateX(-300px);
+        .loader-circle:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .loader-circle:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .loader-circle:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .loader-circle:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .loader-circle:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes bounce {
+            to {
+                transform: translateY(-20px);
+                background-color:  darkblue;
             }
-            33% {
-                opacity: 1;
-                transform: translateX(0px);
-            }
-            66% {
-                opacity: 1;
-                transform: translateX(0px);
-            }
-            100% {
-                opacity: 0;
-                transform: translateX(300px);
-            }
-        }
-
-        @-webkit-keyframes lol {
-            0% {
-                opacity: 0;
-                -webkit-transform: translateX(-300px);
-            }
-            33% {
-                opacity: 1;
-                -webkit-transform: translateX(0px);
-            }
-            66% {
-                opacity: 1;
-                -webkit-transform: translateX(0px);
-            }
-            100% {
-                opacity: 0;
-                -webkit-transform: translateX(300px);
-            }
-        }
-
-        .cs-loader-inner label:nth-child(6) {
-            -webkit-animation: lol 3s infinite ease-in-out;
-            animation: lol 3s infinite ease-in-out;
-        }
-
-        .cs-loader-inner label:nth-child(5) {
-            -webkit-animation: lol 3s 100ms infinite ease-in-out;
-            animation: lol 3s 100ms infinite ease-in-out;
-        }
-
-        .cs-loader-inner label:nth-child(4) {
-            -webkit-animation: lol 3s 200ms infinite ease-in-out;
-            animation: lol 3s 200ms infinite ease-in-out;
-        }
-
-        .cs-loader-inner label:nth-child(3) {
-            -webkit-animation: lol 3s 300ms infinite ease-in-out;
-            animation: lol 3s 300ms infinite ease-in-out;
-        }
-
-        .cs-loader-inner label:nth-child(2) {
-            -webkit-animation: lol 3s 400ms infinite ease-in-out;
-            animation: lol 3s 400ms infinite ease-in-out;
-        }
-
-        .cs-loader-inner label:nth-child(1) {
-            -webkit-animation: lol 3s 500ms infinite ease-in-out;
-            animation: lol 3s 500ms infinite ease-in-out;
         }
 
         .blur-background {
