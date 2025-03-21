@@ -136,13 +136,8 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $member = Member::query()
-            ->leftJoin('groups', 'members.group_id', '=', 'groups.id') // Join with groups table using group_id
-            ->select('members.*', 'groups.name as group_name') // Select group name
-            ->where('members.id', $id)
-            ->firstOrFail();
+        $member = Member::findOrFail($id);
         return response()->json($member);
-        // return view('members.show', compact('member'));
     }
 
     public function edit($id)
