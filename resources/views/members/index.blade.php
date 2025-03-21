@@ -30,7 +30,7 @@
                     }
                 },
                 columns: [ // Ensure columns match the data returned by the query
-                    { data: 'member_id', name: 'member_id' }, // Added member_id column
+                    { data: 'member_id', name: 'member_id' },
                     { data: 'photo', name: 'photo' },
                     { data: 'name', name: 'name' },
                     { data: 'number', name: 'number' },
