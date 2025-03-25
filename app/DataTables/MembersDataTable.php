@@ -72,18 +72,13 @@ class MembersDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax() // Ensure AJAX is enabled
                     ->orderBy(1)
-                    ->selectStyleSingle()
-                    // ->dom('<"top"f>rt<"bottom"lp><"clear">Bfrtip') // Custom DOM layout
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ])
-                    ->addTableClass('table table-bordered table-striped table-hover'); // Custom table styling
+                    ->addTableClass('table table-bordered table-striped table-hover')
+                    ->parameters([
+                        'dom'          => ('<"top">rt<"bottom"l>Bfrtip'),
+                        'buttons'      => ['export', 'print', 'reset', 'reload'],
+                    ]); // Custom table styling
     }
+                    
 
     /**
      * Get the dataTable columns definition.

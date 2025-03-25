@@ -45,7 +45,7 @@ class GroupsDataTable extends DataTable
                 
                     ->addTableClass('table table-bordered table-striped table-hover')
                     ->parameters([
-                        'dom'          => 'Bfrtip',
+                        'dom'          => ('<"top">rt<"bottom"l>Bfrtip'),
                         'buttons'      => ['export', 'print', 'reset', 'reload'],
                     ]); // Custom table styling
     }

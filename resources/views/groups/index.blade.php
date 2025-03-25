@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="{{ asset('css/table.css') }}" rel="stylesheet">
 <div class="container">
     <div class="card">
         <div class="card-header">Manage Groups</div>
