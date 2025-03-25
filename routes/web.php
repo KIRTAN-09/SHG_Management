@@ -31,9 +31,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/members', [MemberController::class, 'index'])->name('members.index');
     Route::resource('groups', HomeController::class);
     Route::resource('groups', GroupController::class);
-    Route::get('groups', function(GroupsDataTable $dataTable) {
-        return $dataTable->render('groups.index');
-    });
     Route::resource('savings', SavingsController::class);
     Route::resource('igas', IGAController::class);
     Route::resource('training', TrainingController::class);
