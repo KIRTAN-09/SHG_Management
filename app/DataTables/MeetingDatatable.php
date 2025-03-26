@@ -54,15 +54,12 @@ class MeetingDatatable extends DataTable
             ->setTableId('meeting-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->dom('Bfrtip')
             ->orderBy(1)
-            ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            );
+                    ->addTableClass('table table-bordered table-striped table-hover')
+                    ->parameters([
+                        'dom'          => ('<"top">rt<"bottom"l>Bfrtip'),
+                        'buttons'      => ['export', 'print', 'reset', 'reload'],
+                    ]); // Custom table styling
     }
 
     /**

@@ -19,7 +19,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="memberDetailsModalLabel">Member Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -65,4 +64,9 @@ function confirmDelete(event, form) {
         form.submit();
     }
 }
+
+// Close modal on button click
+$(document).on('click', '.btn-secondary', function() {
+    $('#memberDetailsModal').modal('hide');
+});
 </script>

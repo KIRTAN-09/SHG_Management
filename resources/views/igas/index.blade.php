@@ -51,4 +51,3 @@ order: [[0, 'asc']], // Sort by ID in ascending order by default
         });
     </script>
 @endpush
-

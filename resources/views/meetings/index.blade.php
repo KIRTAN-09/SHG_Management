@@ -19,35 +19,9 @@
 @endsection 
 
 @push('scripts')
-    <!-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} -->
-    <script>
-        $(document).ready(function() {
-            if ($.fn.dataTable.isDataTable('#meeting-table')) {
-                $('#meeting-table').DataTable().clear().destroy(); // Clear and destroy existing instance
-            }
-            $('#meeting-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('meetings.index') }}', // Ensure the correct route is used
-                columns: [ // Ensure columns match the data returned by the query
-                    // { data: 'id', name: 'id' },
-                    { data: 'group_id', name: 'group_id', title: 'Group ID' },
-                    { data: 'group_name', name: 'group_name', title: 'Group Name' },
-                    { data: 'discussion', name: 'discussion' },
-                    { data: 'attendance', name: 'attendance' },
-                    { data: 'date', name: 'date' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
-                ],
-                dom: '<"top">rt<"bottom"l><"clear">Bfrtip', // Custom DOM layout
-                buttons: [
-                    'excel', 'csv', 'pdf', 'print', 'reset', 'reload'
-                ],
-                lengthMenu: [ // Add row in show option
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"]
-                ],
-                searching: true // Enable searching
-            });
-        });
-    </script>
+<script src="{{ asset('js/dropdown.js') }}"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+<script src="/vendor/datatables/buttons.server-side.js"></script>
+{!! $dataTable->scripts() !!}
 @endpush

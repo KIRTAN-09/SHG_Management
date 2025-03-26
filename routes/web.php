@@ -31,7 +31,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/members', [MemberController::class, 'index'])->name('members.index');
     Route::resource('groups', HomeController::class);
     Route::resource('groups', GroupController::class);
-    Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
     Route::resource('savings', SavingsController::class);
     Route::resource('igas', IGAController::class);
     Route::resource('training', TrainingController::class);
@@ -42,3 +41,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/api/groups/{groupId}/members', [GroupController::class, 'getMembersByGroup'])->name('groups.members');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
