@@ -11,13 +11,18 @@
         <div class="card">
             <div class="card-header">Manage IGAS</div>
             <div class="card-body">
-                {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'igas-table']) }}
+                    {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'igas-table']) }}
             </div>
         </div>
     </div>
 @endsection
 
 @push('scripts')
+<script src="{{ asset('js/dropdown.js') }}"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+<script src="/vendor/datatables/buttons.server-side.js"></script>
+{!! $dataTable->scripts() !!}
     <!-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} -->
     <script>
         $(document).ready(function() {
