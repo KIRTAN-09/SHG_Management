@@ -41,7 +41,7 @@
         @foreach ($roles as $role)
             <div class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
                 <div class="text-center">
-                    <h3 class="text-l font-bold mb-2">{{ $role->name }}</h3>
+                    <h3 class="text-xl font-bold mb-2">{{ $role->name }}</h3>
                     <div class="flex justify-center space-x-2 mt-4">
                         <button onclick="showRoleDetails({{ $role->id }})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700">Show</button>
                         @can('role-edit')

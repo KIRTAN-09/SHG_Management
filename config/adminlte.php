@@ -349,7 +349,7 @@ return [
                         'icon' => 'fas fa-fw fa-user',
                     ],
                     [
-                        'text' => 'Manage Users',
+                        'text' => 'Users',
                         'url' => 'users',
                         'icon' => 'fas fa-user-edit',
                     ],

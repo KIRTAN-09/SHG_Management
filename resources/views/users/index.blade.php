@@ -53,7 +53,7 @@
                 <div
                     class="bg-blue-100 p-4 rounded-lg border border-gray-800 shadow-md hover:bg-gradient-to-b from-blue-100 to-teal-500 transform hover:scale-105 transition duration-150">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $user->name }}</h5>
+                        <h5 class="card-title font-bold text-xl"><u>{{ $user->name }}</u></h5>
                         <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
                         <p class="card-text"><strong>Role:</strong> {{ $user->roles->pluck('name')->join(', ') }}</p>
                         <br>
