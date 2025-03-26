@@ -14,7 +14,7 @@ class IgasDataTable extends DataTable
 {
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        $dataTable = new EloquentDataTable($query);
+        $dataTable = new EloquentDataTable($query->with('member')); // Include member relationship
         return $dataTable->addColumn('action', function($row) {
             return view('igas.action', compact('row'))->render();
         });
@@ -22,7 +22,7 @@ class IgasDataTable extends DataTable
 
     public function query(IGA $model): QueryBuilder // Change to IGA model
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('member'); // Include member relationship
     }
 
     public function html(): HtmlBuilder
@@ -46,7 +46,11 @@ class IgasDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name'),
+            Column::make('member_id')
+                ->title('Member ID')
+                ->data('members.member_id'), // Explicitly map to the correct field in the member table
+            Column::make('name')
+                ->data('members.name'), // Map to member's name field
             Column::make('category'), // Change to category
             Column::make('date'), // Change to date
             Column::make('earned'), // Change to earned

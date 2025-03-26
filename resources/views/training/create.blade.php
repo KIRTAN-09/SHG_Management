@@ -21,30 +21,27 @@
                 <label for="training_date">Training Date:</label>
                 <input type="date" class="form-control custom-input" id="training_date" name="training_date" required>
             </div>  
+            
+            <div class="form-group custom-form-group">
+                <label for="member-id">Member ID/Name:</label>
+                <div class="dropdown">
+                    <input type="text" id="member-search" class="form-control custom-input" placeholder="Search Member ID or Name" onfocus="toggleDropdown(true)" onblur="setTimeout(() => toggleDropdown(false), 200)">
+                    <div id="member-dropdown" class="dropdown-menu" style="display: none; max-height: 200px; overflow-y: auto; border: 1px solid #ced4da; border-radius: 5px;">
+                        @foreach($members as $member)
+                            <div class="dropdown-item" onclick="selectMember('{{ $member->id }}', '{{ $member->member_id }}-{{ $member->name }}')">
+                                {{ $member->member_id }}-{{ $member->name }}
+                            </div>
+                        @endforeach
+                    </div>
+                    <input type="hidden" id="member-id" name="members_name" required>
+                </div>
+            </div>
 
             <div class="form-group custom-form-group">
                 <label for="trainer">Trainer Name:</label>
                 <input type="text" class="form-control custom-input" id="trainer" name="trainer" placeholder="Enter trainer's name" required>
             </div>
 
-            <div class="form-group custom-form-group">
-                <label for="members_name">Member Name:</label>
-                <select class="form-control custom-select" id="members_name" name="members_name" required>
-                    @foreach($members as $member)
-                        <option value="{{ $member->name }}">{{ $member->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="form-group custom-form-group">
-                <label for="members_ID">Member ID:</label>
-                <select class="form-control custom-select" id="members_ID" name="members_ID" required>
-                    @foreach($members as $member)
-                        <option value="{{ $member->id }}">{{ $member->id }}</option>
-                    @endforeach
-                </select>
-            </div> 
-            
             <div class="form-group custom-form-group">
                 <label for="location">Training Location:</label>
                 <input type="text" class="form-control custom-input" id="location" name="location" placeholder="Enter location" required>
@@ -90,5 +87,41 @@
 
         return false;
     }
+
+    function toggleDropdown(show) {
+        const dropdown = document.getElementById('member-dropdown');
+        dropdown.style.display = show ? 'block' : 'none';
+    }
+
+    function selectMember(id, text) {
+        document.getElementById('member-id').value = id;
+        document.getElementById('member-search').value = text;
+    }
+
+    document.getElementById('member-search').addEventListener('input', function() {
+        const searchValue = this.value.toLowerCase();
+        const items = document.querySelectorAll('#member-dropdown .dropdown-item');
+        items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(searchValue) ? 'block' : 'none';
+        });
+    });
+
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('member-dropdown');
+        const searchInput = document.getElementById('member-search');
+        if (!dropdown.contains(event.target) && event.target !== searchInput) {
+            toggleDropdown(false);
+        }
+    });
+
+    document.getElementById('member-dropdown').addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+
+    // Ensure dropdown visibility is reset on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleDropdown(false);
+    });
 </script>
 @stop

@@ -33,7 +33,13 @@
 
             <div class="form-group custom-form-group">
                 <label for="trainer">Trainer Name:</label>
-                <input type="text" class="form-control custom-input" id="trainer" name="trainer" value="{{ $training->trainer }}">
+                <input type="text" class="form-control custom-input" id="trainer_search" placeholder="Search trainer's name">
+                <select class="form-control custom-select mt-2" id="trainer" name="trainer" required>
+                    <option value="">Select Trainer</option>
+                    @foreach($trainers as $trainer)
+                        <option value="{{ $trainer->name }}" {{ $training->trainer == $trainer->name ? 'selected' : '' }}>{{ $trainer->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group custom-form-group">
@@ -42,14 +48,14 @@
                     @foreach($members as $member)
                         <option value="{{ $member->name }}" {{ $training->members_name == $member->name ? 'selected' : '' }}>{{ $member->name }}</option>
                     @endforeach
-                </select>
+                </select>`
             </div>
 
             <div class="form-group custom-form-group">
                 <label for="members_ID">Member ID:</label>
                 <select class="form-control custom-select" id="members_ID" name="members_ID" required>
                     @foreach($members as $member)
-                        <option value="{{ $member->id }}" {{ $training->members_ID == $member->id ? 'selected' : '' }}>{{ $member->id }}</option>
+                        <option value="{{ $member->id }}" {{ $training->members_ID == $member->id ? 'selected' : '' }}>{{ $member->id }}-{{$member->name}}</option>
                     @endforeach
                 </select>
             </div> 

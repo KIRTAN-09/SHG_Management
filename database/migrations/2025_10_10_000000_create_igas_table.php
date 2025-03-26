@@ -16,7 +16,6 @@ class CreateIgasTable extends Migration
         Schema::create('igas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('member_id')->nullable();
-            $table->string('name');
             // $table->text('description')->nullable();
             $table->timestamps();
             $table->date('date')->nullable();

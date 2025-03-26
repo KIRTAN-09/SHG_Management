@@ -30,6 +30,7 @@
                 ajax: '{{ route('igas.index') }}', // Ensure the correct route is used
                 columns: [ // Ensure columns match the data returned by the query
                     { data: 'id', name: 'id' },
+                    { data: 'member_id', name: 'member_id' },
                     { data: 'name', name: 'name' },
                     { data: 'category', name: 'category' },
                     { data: 'date', name: 'date' },
