@@ -42,7 +42,7 @@ class GroupController extends Controller
 
         $lastGroup = Group::orderBy('id', 'desc')->first();
         $serialNumber = $lastGroup ? $lastGroup->id + 1 : 1;
-        $validated['group_id'] = strtoupper(substr($validated['name'], 0, 1)) . $serialNumber;
+        $validated['group_uid'] = strtoupper(substr($validated['name'], 0, 1)) . $serialNumber;
 
         Group::create($validated);
 
@@ -53,7 +53,7 @@ class GroupController extends Controller
     {
         $group = Group::with(['members' => function ($query) {
             $query->select('members.*', 'groups.name as group_name')
-                  ->leftJoin('groups', 'members.group_id', '=', 'groups.id');
+                  ->leftJoin('groups', 'members.group_uid', '=', 'groups.id');
         }])->findOrFail($id);
 
         $group->president_name = $group->members->where('member_type', 'President')->first()->name ?? null;
@@ -96,7 +96,7 @@ class GroupController extends Controller
 
     public function getMembersByGroup($groupId)
     {
-        $members = Member::where('group_id', $groupId)->get(['id', 'name']);
+        $members = Member::where('group_uid', $groupId)->get(['id', 'name']);
         if ($members->isEmpty()) {
             return response()->json(['message' => 'No members found for this group'], 404);
         }

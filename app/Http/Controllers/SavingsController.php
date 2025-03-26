@@ -38,7 +38,7 @@ class SavingsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'group_id' => 'required|numeric|exists:groups,id',
+            'group_uid' => 'required|numeric|exists:groups,id',
             'member_id' => 'required|numeric|exists:members,id',
             'amount' => 'required|numeric|min:0',
             'date_of_deposit' => 'required|date',
@@ -48,7 +48,7 @@ class SavingsController extends Controller
 
         Savings::create([
             
-            'group_id' => $request->input('group_id'),
+            'group_uid' => $request->input('group_uid'),
             
             'member_name' => $member->name, // Ensure member_name is populated
             'amount' => $request->input('amount'),
@@ -89,7 +89,7 @@ class SavingsController extends Controller
         $member = $request->input('member-id') ? Member::findOrFail($request->input('member-id')) : null;
 
         $savings->update([
-            'group_id' => $request->input('group-id'),
+            'group_uid' => $request->input('group-id'),
             'member_id' => $request->input('member-id'),
             'member_name' => $member ? $member->name : $savings->member_name, // Ensure member_name is updated
             'amount' => $request->input('amount'),
@@ -110,7 +110,7 @@ class SavingsController extends Controller
 
     public function getMembersByGroup($groupId)
     {
-        $members = Member::where('group_id', $groupId)->get(['id', 'name']);
+        $members = Member::where('group_uid', $groupId)->get(['id', 'name']);
         if ($members->isEmpty()) {
             return response()->json(['message' => 'No members found for this group'], 404);
         }

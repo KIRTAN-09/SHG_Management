@@ -58,7 +58,7 @@ class MembersDataTable extends DataTable
     public function query(Member $model): QueryBuilder
     {
         return $model->newQuery()
-            ->leftJoin('groups', 'members.group_id', '=', 'groups.id')
+            ->leftJoin('groups', 'members.group_uid', '=', 'groups.id')
             ->select('members.id', 'members.member_id', 'members.name', 'members.number', 'members.village', 'groups.name as group_name', 'members.caste', 'members.share_price', 'members.member_type', 'members.status'); // Added member_id
     }
 

@@ -8,7 +8,7 @@
         @csrf
         <div class="form-group">
         <h1>Create Savings</h1>
-            <label for="group_id">Group Name:</label>
+            <label for="group_uid">Group Name:</label>
             <div class="dropdown">
                 <input type="text" id="group-search" class="form-control" placeholder="Search Group Name" oninput="filterGroupDropdown()" onfocus="toggleGroupDropdown(true)" onblur="setTimeout(() => toggleGroupDropdown(false), 200)">
                 <div id="group-dropdown" class="dropdown-menu" style="display: none; max-height: 200px; overflow-y: auto; border: 1px solid #ced4da; border-radius: 5px;">
@@ -18,7 +18,7 @@
                         </div>
                     @endforeach
                 </div>
-                <input type="hidden" id="group-id" name="group_id" required>
+                <input type="hidden" id="group-id" name="group_uid" required>
             </div>
         </div>
         <div class="form-group">

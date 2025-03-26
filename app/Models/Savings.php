@@ -11,7 +11,7 @@ class Savings extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'group_id',
+        'group_uid',
         'member_name', // Change to member_id
         'amount',
         'date_of_deposit',
@@ -26,6 +26,6 @@ class Savings extends Model
     // Define the relationship with the Group model
     public function group()
     {
-        return $this->belongsTo(Group::class, 'group_id'); // Ensure this is correct
+        return $this->belongsTo(Group::class, 'group_uid'); // Ensure this is correct
     }
 }

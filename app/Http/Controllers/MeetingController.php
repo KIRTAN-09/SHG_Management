@@ -46,19 +46,19 @@ class MeetingController extends Controller
 
         $request->validate([
             'date' => 'required|date',
-            'group_id' => 'required|numeric',
+            'group_uid' => 'required|numeric',
             'discussion' => 'required|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $group = Group::findOrFail($request->group_id);
+        $group = Group::findOrFail($request->group_uid);
         $photoPath = $request->file('photo')->store('meetings/photos', 'public');
         $photoUrl = Storage::url($photoPath);
 
         Meeting::create([
             'date' => $request->date,
             'group_name' => $group->name,
-            'group_id' => $request->group_id,
+            'group_uid' => $request->group_uid,
             'discussion' => $request->discussion,
             'photo' => $photoUrl,
         ]);
@@ -91,12 +91,12 @@ class MeetingController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
-            'group_id' => 'required|numeric',
+            'group_uid' => 'required|numeric',
             'discussion' => 'required|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $group = Group::findOrFail($request->group_id);
+        $group = Group::findOrFail($request->group_uid);
 
         if ($request->hasFile('photo')) {
             Storage::delete('public/' . $meeting->photo);
@@ -107,7 +107,7 @@ class MeetingController extends Controller
         $meeting->update([
             'date' => $request->date,
             'group_name' => $group->name,
-            'group_id' => $request->group_id,
+            'group_uid' => $request->group_uid,
             'discussion' => $request->discussion,
         ]);
 
@@ -138,7 +138,7 @@ class MeetingController extends Controller
      */
     public function getData()
     {
-        $meetings = Meeting::select(['id', 'date', 'photo', 'group_name', 'group_id', 'discussion', 'attendance_list']);
+        $meetings = Meeting::select(['id', 'date', 'photo', 'group_name', 'group_uid', 'discussion', 'attendance_list']);
         return DataTables::of($meetings)
             ->addColumn('actions', function ($meeting) {
                 return view('meetings.partials.actions', compact('meeting'))->render();

@@ -18,7 +18,7 @@
         <select id="group-id" name="group-id">
             <option value="">Select Group</option>
             @foreach($groups as $group)
-                <option value="{{ $group->id }}" {{ $group->id == $savings->group_id ? 'selected' : '' }}>{{ $group->name }}</option> <!-- Display group name -->
+                <option value="{{ $group->id }}" {{ $group->id == $savings->group_uid ? 'selected' : '' }}>{{ $group->name }}</option> <!-- Display group name -->
             @endforeach
         </select><br><br>
 

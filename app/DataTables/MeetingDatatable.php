@@ -39,8 +39,8 @@ class MeetingDatatable extends DataTable
     public function query(Meeting $model): QueryBuilder
     {
         return $model->newQuery()
-            ->leftJoin('groups', 'meetings.group_id', '=', 'groups.id')
-            ->select('meetings.id', 'meetings.group_id', 'groups.name as group_name', 'meetings.discussion', 'meetings.date'); // Added 'meetings.attendance'
+            ->leftJoin('groups', 'meetings.group_uid', '=', 'groups.id')
+            ->select('meetings.id', 'meetings.group_uid', 'groups.name as group_name', 'meetings.discussion', 'meetings.date'); // Added 'meetings.attendance'
     }
 
     /**
@@ -69,7 +69,7 @@ class MeetingDatatable extends DataTable
     {
         return [
             // Column::make('id'),
-            Column::make('group_id')
+            Column::make('group_uid')
                 ->title('Group ID'),
             Column::make('group_name')
                 ->title('Group Name'),

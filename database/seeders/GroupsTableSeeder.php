@@ -19,7 +19,7 @@ class GroupsTableSeeder extends Seeder
             DB::table('groups')->insert([
                 'name' => 'Group ' . $i,
                 'village_name' => 'Village ' . $i,
-                'group_id' => Str::uuid(),
+                'group_uid' => Str::uuid(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

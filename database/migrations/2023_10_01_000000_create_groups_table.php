@@ -12,7 +12,7 @@ class CreateGroupsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('village_name');
-            $table->string('group_id')->unique();
+            $table->string('group_uid')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,8 +34,8 @@ class AddGroupIdToMembersTable extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->unsignedBigInteger('group_id')->nullable()->after('id');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->unsignedBigInteger('group_uid')->nullable()->after('id');
+            $table->foreign('group_uid')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 
@@ -47,8 +47,8 @@ class AddGroupIdToMembersTable extends Migration
     public function down()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropForeign(['group_id']);
-            $table->dropColumn('group_id');
+            $table->dropForeign(['group_uid']);
+            $table->dropColumn('group_uid');
         });
     }
 }

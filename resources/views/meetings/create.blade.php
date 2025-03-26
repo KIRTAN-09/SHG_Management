@@ -14,8 +14,8 @@
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" required><br><br>
 
-            <label for="group_id">Group:</label>
-            <select id="group_id" name="group_id" required>
+            <label for="group_uid">Group:</label>
+            <select id="group_uid" name="group_uid" required>
                 @foreach($groups as $group)
                     <option value="{{ $group->id }}">{{ $group->name }}</option>
                 @endforeach

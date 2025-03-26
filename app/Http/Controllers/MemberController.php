@@ -51,11 +51,11 @@ class MemberController extends Controller
             'status' => 'required|in:Active,Inactive',
         ]);
 
-        $group_id = Group::where('name', $request->input('group'))->first()->id;
+        $group_uid = Group::where('name', $request->input('group'))->first()->id;
 
         // Validate that there is only one President and Secretary in a group
         if (in_array($request->input('member_type'), ['President', 'Secretary'])) {
-            $existingMember = Member::where('group_id', $group_id)
+            $existingMember = Member::where('group_uid', $group_uid)
                 ->where('member_type', $request->input('member_type'))
                 ->first();
 
@@ -78,7 +78,7 @@ class MemberController extends Controller
         $validated['member_id'] = $firstLetter . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
 
         $validated['status'] = $request->input('status'); // Add status to validated data
-        $validated['group_id'] = Group::where('name', $request->input('group'))->first()->id; // Use group_id
+        $validated['group_uid'] = Group::where('name', $request->input('group'))->first()->id; // Use group_uid
 
         Member::create($validated);
         return redirect()->route('members.index')->with('success', 'Member added successfully.');
@@ -99,11 +99,11 @@ class MemberController extends Controller
             'status' => 'required|in:Active,Inactive',
         ]);
 
-        $group_id = Group::where('name', $request->input('group'))->first()->id;
+        $group_uid = Group::where('name', $request->input('group'))->first()->id;
 
         // Validate that there is only one President and Secretary in a group
         if (in_array($request->input('member_type'), ['President', 'Secretary'])) {
-            $existingMember = Member::where('group_id', $group_id)
+            $existingMember = Member::where('group_uid', $group_uid)
                 ->where('member_type', $request->input('member_type'))
                 ->where('id', '!=', $id)
                 ->first();
@@ -121,7 +121,7 @@ class MemberController extends Controller
         }
         // Explicitly set the status field
         $member->status = $request->input('status');
-        $member->group_id = Group::where('name', $request->input('group'))->first()->id; // Update group_id
+        $member->group_uid = Group::where('name', $request->input('group'))->first()->id; // Update group_uid
         $member->update($validated);
 
         // Redirect to the index page after successful update

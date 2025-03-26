@@ -38,7 +38,7 @@
                     <table>
                         <tr><td><strong>Date:</strong></td><td>${data.date}</td></tr>
                         <tr><td><strong>Group Name:</strong></td><td>${data.group_name}</td></tr>
-                        <tr><td><strong>Group ID:</strong></td><td>${data.group_id}</td></tr>
+                        <tr><td><strong>Group ID:</strong></td><td>${data.group_uid}</td></tr>
                         <tr><td><strong>Discussion Points:</strong></td><td>${data.discussion}</td></tr>
                         <tr><td><strong>No. Members Present:</strong></td><td>${data.attendance_list}</td></tr>
                     </table>

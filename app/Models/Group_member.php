@@ -12,7 +12,7 @@ class Group_member extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'group_id',
+        'group_uid',
         'member_id',
         'in_date',
         'out_date',
@@ -20,7 +20,7 @@ class Group_member extends Model
 
     public function group()
     {
-        return $this->belongsTo(Group::class, 'group_id', 'id');
+        return $this->belongsTo(Group::class, 'group_uid', 'id');
     }
     public function member()
     {

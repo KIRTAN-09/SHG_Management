@@ -56,6 +56,7 @@ class GroupsDataTable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('village_name'),
+            column::make('group_uid'),
             Column::make('president_name')->title('President'),
             Column::make('secretary_name')->title('Secretary'),
             Column::make('no_of_members')->title('No. of Members'),

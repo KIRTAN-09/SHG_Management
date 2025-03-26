@@ -15,8 +15,8 @@ class CreateSavingsTable extends Migration
     {
         Schema::create('savings', function (Blueprint $table) {
             $table->id();
-            // $table->string('group_id')->nullable();
-            $table->foreignId('group_id')->constrained('groups')->onDelete('cascade'); // Ensure this is correct
+            // $table->string('group_uid')->nullable();
+            $table->foreignId('group_uid')->constrained('groups')->onDelete('cascade'); // Ensure this is correct
             // $table->string('group_name')->nullable(); // New column for group name
             $table->string('member_name'); // Ensure member_name is required and not nullable
             $table->decimal('amount', 8, 2);

@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('group_id')->nullable();
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->unsignedBigInteger('group_uid')->nullable();
+            $table->foreign('group_uid')->references('id')->on('groups')->onDelete('cascade');
             $table->string('photo')->nullable();
             $table->string('name');
             $table->string('number')->nullable();
@@ -41,7 +41,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropForeign(['group_id']); // Drop foreign key constraint
+            $table->dropForeign(['group_uid']); // Drop foreign key constraint
         });
         Schema::dropIfExists('members');
     }
@@ -67,7 +67,7 @@ class AddGroupIdToMembersTable extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->unsignedBigInteger('group_id')->nullable();
+            $table->unsignedBigInteger('group_uid')->nullable();
         });
     }
 
@@ -79,7 +79,7 @@ class AddGroupIdToMembersTable extends Migration
     public function down()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropColumn('group_id');
+            $table->dropColumn('group_uid');
         });
     }
 }
