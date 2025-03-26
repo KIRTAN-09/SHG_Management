@@ -25,14 +25,14 @@ return new class extends Migration
             $table->decimal('share_price', 10, 2);
             $table->integer('share_quantity')->default(1);
             $table->enum('member_type', ['President', 'Secretary', 'Member']);
-            $table->string('member_id')->unique();
+            $table->string('member_uid')->unique();
             $table->timestamps();
             $table->enum('status', ['Active', 'Inactive']);
             $table->softDeletes();
         });
 
-        // Generate member_id based on the first letter of the name followed by the ID
-        DB::statement('UPDATE members SET member_id = CONCAT(LEFT(name, 1), id)');
+        // Generate member_uid based on the first letter of the name followed by the ID
+        DB::statement('UPDATE members SET member_uid = CONCAT(LEFT(name, 1), id)');
     }
     
     /**
@@ -52,7 +52,7 @@ return new class extends Migration
     public function updateStatus($memberId, $status)
     {
         DB::table('members')
-            ->where('member_id', $memberId)
+            ->where('member_uid', $memberId)
             ->update(['status' => $status]);
     }
 };

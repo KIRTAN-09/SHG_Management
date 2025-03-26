@@ -71,11 +71,11 @@ class MemberController extends Controller
 
         $validated['share_quantity'] = 1;
 
-        // Generate member_id based on the first letter of the name followed by a serial number
+        // Generate member_uid based on the first letter of the name followed by a serial number
         $firstLetter = strtoupper(substr($request->input('name'), 0, 1));
-        $lastMember = Member::where('member_id', 'like', $firstLetter . '%')->orderBy('member_id', 'desc')->first();
-        $serialNumber = $lastMember ? intval(substr($lastMember->member_id, 1)) + 1 : 1;
-        $validated['member_id'] = $firstLetter . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
+        $lastMember = Member::where('member_uid', 'like', $firstLetter . '%')->orderBy('member_uid', 'desc')->first();
+        $serialNumber = $lastMember ? intval(substr($lastMember->member_uid, 1)) + 1 : 1;
+        $validated['member_uid'] = $firstLetter . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
 
         $validated['status'] = $request->input('status'); // Add status to validated data
         $validated['group_uid'] = Group::where('name', $request->input('group'))->first()->id; // Use group_uid

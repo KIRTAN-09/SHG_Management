@@ -15,7 +15,7 @@ class CreateIgasTable extends Migration
     {
         Schema::create('igas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id')->nullable();
+            $table->unsignedBigInteger('member_uid')->nullable();
             // $table->text('description')->nullable();
             $table->timestamps();
             $table->date('date')->nullable();
@@ -23,7 +23,7 @@ class CreateIgasTable extends Migration
             $table->decimal('earned', 8, 2)->nullable();
             $table->softDeletes();
 
-            $table->foreign('member_id')->references('id')->on('members')->onDelete('set null');
+            $table->foreign('member_uid')->references('id')->on('members')->onDelete('set null');
         });
 
         // Add the new column 'activity'
@@ -44,7 +44,7 @@ class CreateIgasTable extends Migration
             $table->dropColumn('activity');
             $table->dropColumn('category');
             $table->dropColumn('earned');
-            $table->dropForeign(['member_id']);
+            $table->dropForeign(['member_uid']);
         });
 
         Schema::dropIfExists('igas');

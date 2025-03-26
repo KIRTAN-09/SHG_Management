@@ -22,13 +22,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="member_id">Member Name:</label>
+            <label for="member_uid">Member Name:</label>
             <div class="dropdown">
                 <input type="text" id="member-search" class="form-control" placeholder="Search Member Name" oninput="filterMemberDropdown()" onfocus="toggleMemberDropdown(true)" onblur="setTimeout(() => toggleMemberDropdown(false), 200)">
                 <div id="member-dropdown" class="dropdown-menu" style="display: none; max-height: 200px; overflow-y: auto; border: 1px solid #ced4da; border-radius: 5px;">
                     <!-- Member options will be dynamically populated -->
                 </div>
-                <input type="hidden" id="member-id" name="member_id" required>
+                <input type="hidden" id="member-id" name="member_uid" required>
             </div>
         </div>
         <div class="form-group">

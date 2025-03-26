@@ -27,7 +27,7 @@
         <select id="member-id" name="member-id">
             <option value="">Select Member</option>
             @foreach($members as $member)
-                <option value="{{ $member->id }}" {{ $member->id == $savings->member_id ? 'selected' : '' }}>{{ $member->name }}</option> <!-- Display member name -->
+                <option value="{{ $member->id }}" {{ $member->id == $savings->member_uid ? 'selected' : '' }}>{{ $member->name }}</option> <!-- Display member name -->
             @endforeach
         </select><br><br>
 

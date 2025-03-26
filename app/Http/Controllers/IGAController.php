@@ -32,9 +32,9 @@ class IGAController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'member_id' => [
+            'member_uid' => [
                 'required',
-                Rule::exists('members', 'id') // Validate that member_id exists in the members table
+                Rule::exists('members', 'id') // Validate that member_uid exists in the members table
             ],
             'date' => 'required|date',
             'category' => 'required|string',
@@ -43,7 +43,7 @@ class IGAController extends Controller
 
         // Create a new IGA record
         IGA::create([
-            'member_id' => $request->input('member_id'),
+            'member_uid' => $request->input('member_uid'),
             'date' => $request->input('date'),
             'category' => $request->input('category'),
             'earned' => $request->input('earned'),
@@ -68,9 +68,9 @@ class IGAController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'member_id' => [
+            'member_uid' => [
                 'required',
-                Rule::exists('members', 'id') // Validate that member_id exists in the members table
+                Rule::exists('members', 'id') // Validate that member_uid exists in the members table
             ],
             'date' => 'required|date',
             'category' => 'required|string',
@@ -79,7 +79,7 @@ class IGAController extends Controller
 
         $iga = IGA::findOrFail($id);
         $iga->update([
-            'member_id' => $request->input('member_id'),
+            'member_uid' => $request->input('member_uid'),
             'date' => $request->input('date'),
             'category' => $request->input('category'),
             'earned' => $request->input('earned'),

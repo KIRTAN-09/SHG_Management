@@ -39,12 +39,12 @@ class SavingsController extends Controller
     {
         $request->validate([
             'group_uid' => 'required|numeric|exists:groups,id',
-            'member_id' => 'required|numeric|exists:members,id',
+            'member_uid' => 'required|numeric|exists:members,id',
             'amount' => 'required|numeric|min:0',
             'date_of_deposit' => 'required|date',
         ]);
 
-        $member = Member::findOrFail($request->input('member_id'));
+        $member = Member::findOrFail($request->input('member_uid'));
 
         Savings::create([
             
@@ -90,7 +90,7 @@ class SavingsController extends Controller
 
         $savings->update([
             'group_uid' => $request->input('group-id'),
-            'member_id' => $request->input('member-id'),
+            'member_uid' => $request->input('member-id'),
             'member_name' => $member ? $member->name : $savings->member_name, // Ensure member_name is updated
             'amount' => $request->input('amount'),
             'date_of_deposit' => $request->input('date-of-deposit'),

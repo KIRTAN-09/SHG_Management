@@ -28,8 +28,8 @@
                     <input type="text" id="member-search" class="form-control custom-input" placeholder="Search Member ID or Name" onfocus="toggleDropdown(true)" onblur="setTimeout(() => toggleDropdown(false), 200)">
                     <div id="member-dropdown" class="dropdown-menu" style="display: none; max-height: 200px; overflow-y: auto; border: 1px solid #ced4da; border-radius: 5px;">
                         @foreach($members as $member)
-                            <div class="dropdown-item" onclick="selectMember('{{ $member->id }}', '{{ $member->member_id }}-{{ $member->name }}')">
-                                {{ $member->member_id }}-{{ $member->name }}
+                            <div class="dropdown-item" onclick="selectMember('{{ $member->id }}', '{{ $member->member_uid }}-{{ $member->name }}')">
+                                {{ $member->member_uid }}-{{ $member->name }}
                             </div>
                         @endforeach
                     </div>

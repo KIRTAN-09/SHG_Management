@@ -43,11 +43,11 @@ class IgasDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('member_id')
-                ->title('Member ID')
-                ->data('members.member_id'), // Explicitly map to the correct field in the member table
+            Column::make('member_uid')
+                ->title('Member UID')
+                ->data('member.member_uid'), // Explicitly map to the correct field in the member table
             Column::make('name')
-                ->data('members.name'), // Map to member's name field
+                ->data('member.name'), // Map to member's name field
             Column::make('category'), // Change to category
             Column::make('date'), // Change to date
             Column::make('earned'), // Change to earned

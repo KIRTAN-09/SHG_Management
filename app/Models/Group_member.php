@@ -13,7 +13,7 @@ class Group_member extends Model
 
     protected $fillable = [
         'group_uid',
-        'member_id',
+        'member_uid',
         'in_date',
         'out_date',
     ];
@@ -24,6 +24,6 @@ class Group_member extends Model
     }
     public function member()
     {
-        return $this->belongsTo(Member::class, 'member_id', 'id');
+        return $this->belongsTo(Member::class, 'member_uid', 'id');
     }
 }

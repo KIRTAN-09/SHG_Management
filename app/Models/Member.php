@@ -11,7 +11,7 @@ class Member extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'photo', 'name', 'number', 'village', 'group', 'caste', 'share_price', 'share_quantity', 'member_type', 'member_id', 'status', 'group_uid'
+        'photo', 'name', 'number', 'village', 'group', 'caste', 'share_price', 'share_quantity', 'member_type', 'member_uid', 'status', 'group_uid'
     ];
 
     public function group()

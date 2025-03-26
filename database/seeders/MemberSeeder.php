@@ -14,7 +14,7 @@ class MemberSeeder extends Seeder
 
         for ($i = 0; $i < 5; $i++) {
             Member::create([
-                'member_id' => $i + 1, // Ensure unique member_id
+                'member_uid' => $i + 1, // Ensure unique member_uid
                 'photo' => $faker->imageUrl(),
                 'name' => $faker->name,
                 'number' => $faker->phoneNumber,
