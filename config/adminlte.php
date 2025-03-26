@@ -369,11 +369,7 @@ return [
                         'url' => 'groups',
                         'icon' => 'fas fa-list',
                     ],                   
-                    // [
-                    //     'text' => 'Export Data',
-                    //     'url' => 'groups/export',
-                    //     'icon' => 'fas fa-file-export',
-                    // ],
+                 
                 ],
                 'permission' => 'Group-list',
             ],
@@ -391,11 +387,7 @@ return [
                         'url' => 'members',
                         'icon' => 'fas fa-list',
                     ],
-                    // [
-                    //     'text' => 'Export Data',
-                    //     'url' => 'members/export',
-                    //     'icon' => 'fas fa-file-export',
-                    // ],
+                   
                 ],
                 'permission' => 'Member-list',
             ],
@@ -423,12 +415,12 @@ return [
                 'icon' => 'fas fa-fw fa-users',
                 
             ],
-            // [
-            //     'text' => 'Generate Reports', 
-            //     'url' => 'reports',
-            //     'icon' => 'fas fa-file-pdf',
+            [
+                'text' => 'Generate Reports', 
+                'url' => 'reports',
+                'icon' => 'fas fa-file-pdf',
                 
-            // ],
+            ],
             
             
        
