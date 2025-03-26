@@ -1,57 +1,102 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Reports List')
-
-@section('content_header')
+@section('content')
 <div class="container">
     <h1>Reports</h1>
-    <form action="{{ route('reports.filter') }}" method="GET">
-        <div class="form-group">
-            <label for="reportType">Report Type:</label>
-            <select name="reportType" id="reportType" class="form-control">
-                <option value="all">All</option>    
-                <option value="members">Members</option>
-                <option value="groups">Groups</option>
-                <option value="savings">Savings</option>
-                <option value="igas">IGAs</option>
-                <option value="training">Training</option>
-                <option value="meetings">Meetings</option>
-            </select>
+    <div class="row">
+        <!-- Cards for report selection -->
+        <div class="col-md-3">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('example')">
+                <div class="card-body">
+                    <h5 class="card-title">Members Report</h5>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="startDate">Start Date:</label>
-            <input type="date" name="startDate" id="startDate" class="form-control">
+        <div class="col-md-3">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('groups')">
+                <div class="card-body">
+                    <h5 class="card-title">Groups Report</h5>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="endDate">End Date:</label>
-            <input type="date" name="endDate" id="endDate" class="form-control">
+        <div class="col-md-3">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('savings')">
+                <div class="card-body">
+                    <h5 class="card-title">Savings Report</h5>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Generate Report</button>
-    </form>
-    <hr>
-    <div id="reportResults">
-        <!-- Report results will be displayed here -->
-        @if(isset($reportData) && $reportType == 'members')
-            <h2>Members Report</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Joined Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($reportData as $member)
-                        <tr>
-                            <td>{{ $member->name }}</td>
-                            <td>{{ $member->email }}</td>
-                            <td>{{ $member->created_at }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
+        <div class="col-md-3">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('igas')">
+                <div class="card-body">
+                    <h5 class="card-title">IGAs Report</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('training')">
+                <div class="card-body">
+                    <h5 class="card-title">Training Report</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('meetings')">
+                <div class="card-body">
+                    <h5 class="card-title">Meetings Report</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('monthly')">
+                <div class="card-body">
+                    <h5 class="card-title">Monthly Report</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('annual')">
+                <div class="card-body">
+                    <h5 class="card-title">Annual Report</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="reportFormContainer" class="mt-4">
+        <!-- Dynamic form content will be loaded here -->
     </div>
 </div>
+
+<style>
+    .hover-secondary {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hover-secondary::before {
+        content: '';
+        position: absolute;
+        bottom: -100%; /* Start from the bottom */
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bs-secondary);
+        z-index: 0;
+        transition: bottom 0.3s ease-in-out; /* Animate from bottom to top */
+    }
+
+    .hover-secondary:hover::before {
+        bottom: 0; /* Fill to the top */
+    }
+
+    .hover-secondary:hover {
+        color: white !important; /* Change text color on hover */
+    }
+
+    .hover-secondary .card-body {
+        position: relative;
+        z-index: 1;
+    }
+</style>
+
 @endsection
