@@ -4,11 +4,10 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 <br>
-    <div class="pull-right">
-        <a class="btn btn-primary btn-sm mb-2" href="{{ route('roles.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
-    </div>
+<div class="pull-right">
+    <a class="btn btn-primary btn-sm mb-2" href="{{ route('roles.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+</div>
 <div class="container">
-    
     <form method="POST" action="{{ route('roles.store') }}">
         @csrf
         <h1><b>Create New Role</b></h1>
@@ -16,9 +15,9 @@
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
                 <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
                 </ul>
             </div>
         @endif
@@ -28,17 +27,156 @@
         </div>
         <div class="form-group">
             <label for="permission"><strong>Select the permissions for this role:</strong></label>
-            
             <div class="row">
-                @foreach($permission as $value)
-                    <div class="col-md-3 mb-3">
-                        <label><input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
-                        {{ $value->name }}</label>
+                <!-- First Column -->
+                <div class="col-md-4">
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="rolePermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Role Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="rolePermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['role-list', 'role-create', 'role-edit', 'role-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
-                @endforeach
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="savingsPermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Savings Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="savingsPermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['Savings-list', 'Savings-create', 'Savings-edit', 'Savings-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="trainingPermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Training Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="trainingPermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['Training-list', 'Training-create', 'Training-edit', 'Training-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Column -->
+                <div class="col-md-4">
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="memberPermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Member Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="memberPermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['Member-list', 'Member-create', 'Member-edit', 'Member-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="userPermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            User Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="userPermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['User-list', 'User-create', 'User-edit', 'User-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="meetingsPermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Meetings Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="meetingsPermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['Meetings-list', 'Meetings-create', 'Meetings-edit', 'Meetings-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Column -->
+                <div class="col-md-4">
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="groupPermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Group Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="groupPermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['Group-list', 'Group-create', 'Group-edit', 'Group-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="igaPermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            IGA Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="igaPermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['Iga-list', 'Iga-create', 'Iga-edit', 'Iga-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="reportPermissionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Report Permissions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="reportPermissionsDropdown">
+                            @foreach($permission as $value)
+                                @if (in_array($value->name, ['report-list', 'report-create', 'report-edit', 'report-delete']))
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn btn-primary">
     </form>
 </div>
 @endsection
