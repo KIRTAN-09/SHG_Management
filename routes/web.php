@@ -15,12 +15,15 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\NotificationController;
 use App\DataTables\GroupsDataTable;
 
+
+
 Route::get('/', function () {
     return view('auth.login');
 });
 
 Auth::routes();
 
+Route::get('/reports/{type}', [ReportController::class, 'loadReportForm'])->name('reports.load');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/savings-data', [App\Http\Controllers\HomeController::class, 'getSavingsData'])->name('home.savingsData');
 

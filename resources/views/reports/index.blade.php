@@ -6,7 +6,7 @@
     <div class="row">
         <!-- Cards for report selection -->
         <div class="col-md-3">
-            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('example')">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('members')">
                 <div class="card-body">
                     <h5 class="card-title">Members Report</h5>
                 </div>
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('training')">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('trainings')">
                 <div class="card-body">
                     <h5 class="card-title">Training Report</h5>
                 </div>
@@ -67,10 +67,33 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function loadReportForm(type) {
+        $.ajax({
+            url: "{{ url('/reports') }}/" + type,
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                if (response.status === 'success') {
+                    $("#reportFormContainer").html(response.html);
+                } else {
+                    $("#reportFormContainer").html('<div class="alert alert-danger">Form not found!</div>');
+                }
+            },
+            error: function() {
+                $("#reportFormContainer").html('<div class="alert alert-danger">An error occurred while loading the form.</div>');
+            }
+        });
+    }
+</script>
+
+
 <style>
     .hover-secondary {
         position: relative;
         overflow: hidden;
+        transition: transform 0.3s ease-in-out; /* Add transition for zoom effect */
     }
 
     .hover-secondary::before {
@@ -91,6 +114,7 @@
 
     .hover-secondary:hover {
         color: white !important; /* Change text color on hover */
+        transform: scale(1.05); /* Zoom effect */
     }
 
     .hover-secondary .card-body {

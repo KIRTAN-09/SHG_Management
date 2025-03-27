@@ -43,5 +43,21 @@ class ReportController extends Controller
         return view('reports.index', compact('reportData', 'reportType'));
     }
 
+    public function loadReportForm($type)
+    {
+        // Check if the corresponding view exists
+        if (view()->exists("reports.forms.$type")) {
+            return response()->json([
+                'status' => 'success',
+                'html' => view("reports.forms.$type")->render()
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Report form not found!'
+        ], 404);
+    }
+
     // ...existing code...
 }
