@@ -24,11 +24,17 @@
             <input type="date" id="date" name="date" value="{{ old('date', $meeting->date) }}" required><br><br>
 
             <label for="group_uid">Group:</label>
-            <select id="group_uid" name="group_uid" required>
-                @foreach($groups as $group)
-                    <option value="{{ $group->id }}" {{ $group->id == $meeting->group_uid ? 'selected' : '' }}>{{ $group->name }}</option>
-                @endforeach
-            </select>
+            <div style="position: relative;">
+                <input type="text" id="group_search" placeholder="Search or Select Group..." onfocus="showDropdown()" onkeyup="filterGroups()" value="{{ $groups->firstWhere('id', $meeting->group_uid)->name ?? '' }}" style="width: 100%; margin-bottom: 5px;">
+                <div id="group_dropdown" style="position: absolute; width: 100%; max-height: 150px; overflow-y: auto; border: 1px solid #ccc; background: #fff; display: none; z-index: 1000;">
+                    @foreach($groups as $group)
+                        <div class="dropdown-item" onclick="selectGroup('{{ $group->id }}', '{{ $group->name }}')" style="padding: 5px; cursor: pointer;">
+                            {{ $group->name }}
+                        </div>
+                    @endforeach
+                </div>
+                <input type="hidden" id="group_uid" name="group_uid" value="{{ $meeting->group_uid }}" required>
+            </div>
             <br><br>
 
             <label for="discussion">Discussion Points:</label>
@@ -47,5 +53,43 @@
             
         </form>
     </div>
+    <script>
+        function filterGroups() {
+            const searchInput = document.getElementById('group_search').value.toLowerCase();
+            const dropdown = document.getElementById('group_dropdown');
+            const items = dropdown.getElementsByClassName('dropdown-item');
+            let hasVisibleItems = false;
+
+            for (let i = 0; i < items.length; i++) {
+                const itemText = items[i].textContent.toLowerCase();
+                if (itemText.includes(searchInput)) {
+                    items[i].style.display = '';
+                    hasVisibleItems = true;
+                } else {
+                    items[i].style.display = 'none';
+                }
+            }
+
+            dropdown.style.display = hasVisibleItems ? 'block' : 'none';
+        }
+
+        function selectGroup(id, name) {
+            document.getElementById('group_search').value = name;
+            document.getElementById('group_uid').value = id;
+            document.getElementById('group_dropdown').style.display = 'none';
+        }
+
+        function showDropdown() {
+            const dropdown = document.getElementById('group_dropdown');
+            dropdown.style.display = 'block';
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('group_dropdown');
+            if (!dropdown.contains(event.target) && event.target.id !== 'group_search') {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 @endsection
