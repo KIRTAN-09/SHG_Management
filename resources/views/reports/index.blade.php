@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('training')">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('trainings')">
                 <div class="card-body">
                     <h5 class="card-title">Training Report</h5>
                 </div>
