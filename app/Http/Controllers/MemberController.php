@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Group;
 use App\DataTables\MembersDataTable;
 
+
 class MemberController extends Controller
 {
     public function __construct()
@@ -165,5 +166,7 @@ class MemberController extends Controller
 
         return redirect()->route('members.index')->with('success', 'Member status set to Inactive and deleted successfully');
     }
-    
+
+   
+
 }

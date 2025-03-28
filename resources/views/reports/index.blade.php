@@ -6,7 +6,7 @@
     <div class="row">
         <!-- Cards for report selection -->
         <div class="col-md-3">
-            <div class="card text-center bg-light text-dark hover-secondary" onclick="loadReportForm('members')">
+            <div class="card text-center bg-light text-dark hover-secondary" onclick="window.location.href='{{ url('/reports/forms/members') }}'">
                 <div class="card-body">
                     <h5 class="card-title">Members Report</h5>
                 </div>
@@ -71,7 +71,7 @@
 <script>
     function loadReportForm(type) {
         $.ajax({
-            url: "{{ url('/reports') }}/" + type,
+            url: "{{ url('/reports') }}" + "/" + type,
             type: "GET",
             dataType: "json",
             success: function(response) {

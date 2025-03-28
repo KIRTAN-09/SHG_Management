@@ -27,6 +27,11 @@ Route::get('/reports/{type}', [ReportController::class, 'loadReportForm'])->name
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/savings-data', [App\Http\Controllers\HomeController::class, 'getSavingsData'])->name('home.savingsData');
 
+Route::get('/reports/forms/members', function () {
+    $members = \App\Models\Member::all(); // Fetch members from the database
+    return view('reports.forms.members', compact('members'));
+});
+
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
