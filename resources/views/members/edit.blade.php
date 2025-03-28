@@ -80,14 +80,7 @@
             @endif
         </div>
 
-        <div class="form-group">
-            <label for="attendance_list">Attendance List:</label>
-            <div id="attendance_list">
-                <div id="members_list">
-                    <!-- Members will be populated here based on the selected group -->
-                </div>
-            </div>
-        </div>
+      
 
         <input type="submit" value="Update Member">
     </form>
