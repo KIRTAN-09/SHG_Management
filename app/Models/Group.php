@@ -21,6 +21,6 @@ class Group extends Model
 
     public function members()
     {
-        return $this->hasMany(Member::class); // Adjust the related model and foreign key as needed
+        return $this->hasMany(Member::class, 'group', 'name');
     }
 }
