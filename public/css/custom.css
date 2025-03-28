@@ -104,3 +104,18 @@ input[type="submit"]:hover {
 .error-message {
     font-size: 12px;
 }
+
+.btn-secondary {
+    text-align: left;
+    background: #28557d;
+    width: calc(100% - 16px);
+    border: 1px solid #1b5b9c40;
+    box-sizing: border-box;
+    font-size: 12px;
+    font-weight: normal; /* Ensure font is not bold */
+    transition: border-color 0.3s ease-in-out;
+}
+
+.btn-secondary:hover {
+    background: #203f61ca;
+}

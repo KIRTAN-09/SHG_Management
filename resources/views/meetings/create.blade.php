@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Form</title>
-    <link rel="stylesheet" href="{{ asset('css/Meetings/Meeting.css') }}">
-    <script src="{{ asset('js/Meeting.js') }}" defer></script>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+<link rel="stylesheet" href="{{ asset('css/Create.css') }}">
+
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('meetings.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
     <div class="container">
         <form action="{{ route('meetings.store') }}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
             @csrf
@@ -15,27 +14,62 @@
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" required><br><br>
 
-            <label for="group_name">Group Name:</label>
-            <input type="text" id="group_name" name="group_name" placeholder="Group Name" required>
-            <span class="error-message-group-name" style="display: none; color: red;">Group Name should only contain letters.</span><br><br>
-
-            <label for="group_id">Group ID:</label>
-            <input type="text" id="group_id" name="group_id" placeholder="Group ID">
-            <span class="error-message-group-id" style="display: none; color: red;">Group ID should only contain numbers.</span><br><br>
+            <label for="group_uid">Group:</label>
+            <div style="position: relative;">
+                <input type="text" id="group_search" placeholder="Search or Select Group..." onfocus="showDropdown()" onkeyup="filterGroups()" style="width: 100%; margin-bottom: 5px;">
+                <div id="group_dropdown" style="position: absolute; width: 100%; max-height: 150px; overflow-y: auto; border: 1px solid #ccc; background: #fff; display: none; z-index: 1000;">
+                    @foreach($groups as $group)
+                        <div class="dropdown-item" onclick="selectGroup('{{ $group->id }}', '{{ $group->name }}')" style="padding: 5px; cursor: pointer;">
+                            {{ $group->name }}
+                        </div>
+                    @endforeach
+                </div>
+                <input type="hidden" id="group_uid" name="group_uid" required>
+            </div>
+            <br><br>
 
             <label for="attendance_list">Attendance List:</label>
             <div id="attendance_list">
-                <label for="group">Group:</label>
-                <select id="group" name="group" required>
-                    @foreach($groups as $group)
-                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                    @endforeach
-                </select>
                 <div id="members_list">
                     <!-- Members will be populated here based on the selected group -->
                 </div>
             </div>
-            <br><br>
+            <script>
+                async function fetchMembers(groupId) {
+                    const membersList = document.getElementById('members_list');
+                    membersList.innerHTML = 'Loading members...';
+
+                    try {
+                        const response = await fetch(`/api/groups/${groupId}/members`);
+                        if (!response.ok) {
+                            const errorText = await response.text();
+                            throw new Error(`Failed to fetch members: ${response.status} ${response.statusText} - ${errorText}`);
+                        }
+
+                        const members = await response.json();
+                        if (!Array.isArray(members)) {
+                            throw new Error('Invalid response format: Expected an array of members');
+                        }
+
+                        membersList.innerHTML = members.map(member => `
+                            <div>
+                                <input type="checkbox" name="attendance[]" value="${member.id}">
+                                ${member.name}
+                            </div>
+                        `).join('');
+                    } catch (error) {
+                        membersList.innerHTML = 'Error loading members. Please try again later.';
+                        console.error('Error fetching members:', error);
+                    }
+                }
+
+                function selectGroup(id, name) {
+                    document.getElementById('group_search').value = name;
+                    document.getElementById('group_uid').value = id;
+                    document.getElementById('group_dropdown').style.display = 'none';
+                    fetchMembers(id); // Fetch members when a group is selected
+                }
+            </script>
 
             <label for="discussion">Discussion Points:</label>
             <textarea id="discussion" name="discussion" placeholder="Discussion Topic" required style="height: 100%; width: 100%;"></textarea><br>
@@ -44,33 +78,39 @@
             <input type="file" id="photo" name="photo" accept="image/*" required><br><br>
 
             <input type="submit" value="Schedule Meeting">
+            
         </form>
     </div>
     <script>
-        document.getElementById('group').addEventListener('change', function() {
-            var groupId = this.value;
-            fetch(`/groups/${groupId}/members`)
-                .then(response => response.json())
-                .then(data => {
-                    var membersList = document.getElementById('members_list');
-                    membersList.innerHTML = '';
-                    data.members.forEach(member => {
-                        var checkbox = document.createElement('input');
-                        checkbox.type = 'checkbox';
-                        checkbox.name = 'attendance[]';
-                        checkbox.value = member.id;
-                        checkbox.id = 'member_' + member.id;
+        function filterGroups() {
+            const searchInput = document.getElementById('group_search').value.toLowerCase();
+            const dropdown = document.getElementById('group_dropdown');
+            const items = dropdown.getElementsByClassName('dropdown-item');
+            let hasVisibleItems = false;
 
-                        var label = document.createElement('label');
-                        label.htmlFor = 'member_' + member.id;
-                        label.appendChild(document.createTextNode(member.name));
+            for (let i = 0; i < items.length; i++) {
+                const itemText = items[i].textContent.toLowerCase();
+                if (itemText.includes(searchInput)) {
+                    items[i].style.display = '';
+                    hasVisibleItems = true;
+                } else {
+                    items[i].style.display = 'none';
+                }
+            }
 
-                        membersList.appendChild(checkbox);
-                        membersList.appendChild(label);
-                        membersList.appendChild(document.createElement('br'));
-                    });
-                });
+            dropdown.style.display = hasVisibleItems ? 'block' : 'none';
+        }
+
+        function showDropdown() {
+            const dropdown = document.getElementById('group_dropdown');
+            dropdown.style.display = 'block';
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('group_dropdown');
+            if (!dropdown.contains(event.target) && event.target.id !== 'group_search') {
+                dropdown.style.display = 'none';
+            }
         });
     </script>
-</body>
-</html>
+@endsection

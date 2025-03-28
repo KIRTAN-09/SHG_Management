@@ -10,9 +10,12 @@ class IGA extends Model
 {
     use SoftDeletes, HasFactory;
 
-    protected $fillable = [
-        'name', 'date', 'activity', 'category', 'earned'
-    ];
+    protected $fillable = ['member_uid', 'date', 'category', 'earned'];
 
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_uid');
+    }
+    
     protected $table = 'igas'; // Ensure the table name is correct
 }

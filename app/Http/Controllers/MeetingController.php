@@ -6,27 +6,26 @@ use Illuminate\Http\Request;
 use App\Models\Meeting;
 use App\Models\Group;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
+use App\DataTables\MeetingDatatable;
 
 class MeetingController extends Controller
 {
     /**
      * Display a listing of meetings.
      */
-    public function index(Request $request)
+    public function __construct(){
+        $this->middleware('permission:Meetings-list|Meetings-create|Meetings-edit|Meetings-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:Meetings-list', ['only' => ['index']]);
+        $this->middleware('permission:Meetings-create', ['only' => ['create','store']]);
+        $this->middleware('permission:Meetings-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:Meetings-delete', ['only' => ['destroy']]);
+        // Ensure the fetchMeetingDetails method has the correct permission
+        $this->middleware('permission:Meetings-list', ['only' => ['fetchMeetingDetails']]);
+    }
+    public function index(MeetingDatatable $dataTable)
     {
-        $query = Meeting::query();
-
-        if ($request->has('search')) {
-            $query->where('group_name', 'like', '%' . $request->search . '%')
-                  ->orWhere('discussion', 'like', '%' . $request->search . '%');
-        }
-        if ($request->has('column') && $request->has('sort')) {
-            $query->orderBy($request->column, $request->sort);
-        } else {
-            $query->orderBy('created_at', 'desc');
-        }
-        $meetings = $query->paginate(20);
-        return view('meetings.index', compact('meetings'));
+        return $dataTable->render('meetings.index');
     }
 
     /**
@@ -43,22 +42,25 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
+        // dd('test');
+
         $request->validate([
             'date' => 'required|date',
-            'group_name' => 'required|string|max:255',
-            'group_id' => 'nullable|numeric',
+            'group_uid' => 'required|numeric',
             'discussion' => 'required|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $group = Group::findOrFail($request->group_uid);
         $photoPath = $request->file('photo')->store('meetings/photos', 'public');
+        $photoUrl = Storage::url($photoPath);
 
         Meeting::create([
             'date' => $request->date,
-            'group_name' => $request->group_name,
-            'group_id' => $request->group_id,
+            'group_name' => $group->name,
+            'group_uid' => $request->group_uid,
             'discussion' => $request->discussion,
-            'photo' => $photoPath,
+            'photo' => $photoUrl,
         ]);
 
         return redirect()->route('meetings.index')->with('success', 'Meeting scheduled successfully!');
@@ -78,7 +80,8 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        return view('meetings.edit', compact('meeting'));
+            $groups = Group::all();
+        return view('meetings.edit', compact('meeting', 'groups'));
     }
 
     /**
@@ -88,21 +91,23 @@ class MeetingController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
-            'group_name' => 'required|string|max:255',
-            'group_id' => 'nullable|numeric',
+            'group_uid' => 'required|numeric',
             'discussion' => 'required|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $group = Group::findOrFail($request->group_uid);
+
         if ($request->hasFile('photo')) {
             Storage::delete('public/' . $meeting->photo);
-            $meeting->photo = $request->file('photo')->store('meetings/photos', 'public');
+            $photoPath = $request->file('photo')->store('meetings/photos', 'public');
+            $meeting->photo = Storage::url($photoPath);
         }
 
         $meeting->update([
             'date' => $request->date,
-            'group_name' => $request->group_name,
-            'group_id' => $request->group_id,
+            'group_name' => $group->name,
+            'group_uid' => $request->group_uid,
             'discussion' => $request->discussion,
         ]);
 
@@ -126,5 +131,22 @@ class MeetingController extends Controller
     {
         $meeting = Meeting::findOrFail($id);
         return response()->json($meeting);
+    }
+
+    /**
+     * Get data for DataTables.
+     */
+    public function getData()
+    {
+        $meetings = Meeting::select(['id', 'date', 'photo', 'group_name', 'group_uid', 'discussion', 'attendance_list']);
+        return DataTables::of($meetings)
+            ->addColumn('actions', function ($meeting) {
+                return view('meetings.partials.actions', compact('meeting'))->render();
+            })
+            ->editColumn('photo', function ($meeting) {
+                return '<img src="'.asset('storage/' . $meeting->photo).'" alt="Group Photo" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">';
+            })
+            ->rawColumns(['actions', 'photo'])
+            ->make(true);
     }
 }

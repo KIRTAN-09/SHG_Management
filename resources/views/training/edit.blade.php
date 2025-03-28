@@ -2,10 +2,6 @@
 
 @section('title', 'Edit Training')
 
-@section('content_header')
-    <h1>Edit Training</h1>
-@stop
-
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -17,11 +13,19 @@
         </div>
     @endif
 
+<link rel="stylesheet" href="{{ asset('css/Training/create.css') }}">
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('training.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+<div class="container">
+    <br>
     <form action="{{ route('training.update', $training->id) }}" method="POST">
-    <link rel="stylesheet" href="{{ asset('css/create.css') }}">
-        @csrf
+
+    @csrf
         @method('PUT')
         <div class="container1">
+        <h1>Edit Training</h1>
             <div class="form-group custom-form-group">
                 <label for="training_date">Training Date:</label>
                 <input type="date" class="form-control custom-input" id="training_date" name="training_date" value="{{ $training->training_date }}">
@@ -29,17 +33,31 @@
 
             <div class="form-group custom-form-group">
                 <label for="trainer">Trainer Name:</label>
-                <input type="text" class="form-control custom-input" id="trainer" name="trainer" value="{{ $training->trainer }}">
+                <input type="text" class="form-control custom-input" id="trainer_search" placeholder="Search trainer's name">
+                <select class="form-control custom-select mt-2" id="trainer" name="trainer" required>
+                    <option value="">Select Trainer</option>
+                    @foreach($trainers as $trainer)
+                        <option value="{{ $trainer->name }}" {{ $training->trainer == $trainer->name ? 'selected' : '' }}>{{ $trainer->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group custom-form-group">
                 <label for="members_name">Member Name:</label>
-                <input type="text" class="form-control custom-input" id="members_name" name="members_name" value="{{ $training->members_name }}">
+                <select class="form-control custom-select" id="members_name" name="members_name" required>
+                    @foreach($members as $member)
+                        <option value="{{ $member->name }}" {{ $training->members_name == $member->name ? 'selected' : '' }}>{{ $member->name }}</option>
+                    @endforeach
+                </select>`
             </div>
 
             <div class="form-group custom-form-group">
                 <label for="members_ID">Member ID:</label>
-                <input type="text" class="form-control custom-input" id="members_ID" name="members_ID" value="{{ $training->members_ID }}">
+                <select class="form-control custom-select" id="members_ID" name="members_ID" required>
+                    @foreach($members as $member)
+                        <option value="{{ $member->id }}" {{ $training->members_ID == $member->id ? 'selected' : '' }}>{{ $member->id }}-{{$member->name}}</option>
+                    @endforeach
+                </select>
             </div> 
             
             <div class="form-group custom-form-group">
@@ -56,8 +74,8 @@
                     <option value="Other" {{ $training->category == 'Other' ? 'selected' : '' }}>Other</option>
                 </select>
             </div>
-
-            <button type="submit" class="btn btn-primary">Update Training</button>
-        </div>
+            <input type="submit" value="Update">
+            </div>
     </form>
+</div>
 @stop

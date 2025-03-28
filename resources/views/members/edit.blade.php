@@ -2,9 +2,14 @@
 
 @section('content')
 
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('members.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+
 <div class="container">
 <link rel="stylesheet" href="{{ asset('css/Members/Create.css') }}">
-    <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-6" onsubmit="return validatePhotoSize()">
+    <form action="{{ route('members.update', $member->id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateMemberType()">
         @csrf
         @method('PUT')
         <h1><b>Edit Member</b></h1>
@@ -37,7 +42,12 @@
 
         <div class="form-group">
             <label for="caste" class="block text-gray-700">Caste</label>
-            <input type="text" class="form-control" id="caste" name="caste" value="{{ $member->caste }}" required>
+            <select class="form-control" id="caste" name="caste" required>
+                <option value="General" {{ $member->caste == 'General' ? 'selected' : '' }}>General</option>
+                <option value="ST" {{ $member->caste == 'ST' ? 'selected' : '' }}>ST</option>
+                <option value="SC" {{ $member->caste == 'SC' ? 'selected' : '' }}>SC</option>
+                <option value="OBC" {{ $member->caste == 'OBC' ? 'selected' : '' }}>OBC</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -70,7 +80,8 @@
             @endif
         </div>
 
-        <input type="submit" value="Edit Member">
+
+        <input type="submit" value="Update Member">
     </form>
 </div>
 
@@ -94,6 +105,19 @@ function validatePhotoSize() {
         }
     }
     return true;
+}
+
+function validateMemberType() {
+    const memberType = document.getElementById('member_type').value;
+    const group = document.getElementById('group').value;
+
+    // Simulated check for existing President/Secretary in the group
+    const existingRoles = @json($existingRoles); // Pass existing roles from the backend
+    if ((memberType === 'President' || memberType === 'Secretary') && existingRoles[group]?.includes(memberType)) {
+        alert(`There can only be one ${memberType} in the group.`);
+        return false;
+    }
+    return validatePhotoSize(); // Ensure photo size validation is also performed
 }
 </script>
 

@@ -13,7 +13,7 @@ class Meeting extends Model
     protected $fillable = [
         'date',
         'group_name',
-        'group_id',
+        'group_uid',
         'discussion',
         'photo',
     ];

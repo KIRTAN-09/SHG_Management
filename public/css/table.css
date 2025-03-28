@@ -16,7 +16,7 @@ body {
 
 /* Heading */
 h2 {
-    font-family: 'Monospace','Courier New';
+    font-family: 'Verdana','Courier New';
     color: #2a5d84;
     text-align: center;
     margin-bottom: 20px;
@@ -168,3 +168,33 @@ h2 {
     color: rgb(27, 26, 26);
     text-align: center;
 }
+
+.card-header {
+    background-color: #287da7a4;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 2em;
+}
+
+table.dataTable {
+    width: 100% !important;
+}
+
+@media screen and (max-width: 768px) {
+    .dataTables_wrapper {
+        overflow-x: auto;
+    }
+}
+
+    /* Remove the black background overlay */
+    div.dt-button-background {
+        display: none !important;
+    }
+    
+    /* Optional: Ensure the dropdown itself is styled correctly */
+    .dt-button-collection {
+        background: white !important; /* Change as needed */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Optional shadow */
+    }
+

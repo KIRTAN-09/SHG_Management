@@ -6,35 +6,35 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Group;
+use App\DataTables\MembersDataTable;
 
 class MemberController extends Controller
 {
-
-    public function index(Request $request)
+    public function __construct()
     {
-        $search = $request->input('search');
-        $status = $request->input('sort');
-        $query = Member::query()
-            ->leftJoin('groups', 'members.group_id', '=', 'groups.id') // Join with groups table using group_id
-            ->select('members.*', 'groups.name as group_name'); // Select group name
-
-        if ($request->has('sort')) {
-            $query->where('status', $request->input('sort'));
-        }
-
-        $rows = $request->input('rows', 10); // Default to 10 rows per page if not specified
-
-        $members = $query->paginate($rows);
-
-        return view('members.index', compact('members'));
+        $this->middleware('permission:Member-list|Member-create|Member-edit|Member-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Member-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Member-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Member-delete', ['only' => ['destroy']]);
     }
-    
+    public function index(MembersDataTable $dataTable)
+    {
+        return $dataTable->render('members.index');
+    }
 
     public function create()
     {
-        
         $groups = Group::all();
-        return view('members.create', compact('groups'));	
+        
+        // Fetch existing roles for each group
+        $existingRoles = Member::select('group', 'member_type')
+            ->get()
+            ->groupBy('group')
+            ->map(function ($members) {
+                return $members->pluck('member_type')->toArray();
+            });
+
+        return view('members.create', compact('groups', 'existingRoles'));	
     }
 
     public function store(Request $request)
@@ -51,11 +51,11 @@ class MemberController extends Controller
             'status' => 'required|in:Active,Inactive',
         ]);
 
-        $group_id = Group::where('name', $request->input('group'))->first()->id;
+        $group_uid = Group::where('name', $request->input('group'))->first()->id;
 
         // Validate that there is only one President and Secretary in a group
         if (in_array($request->input('member_type'), ['President', 'Secretary'])) {
-            $existingMember = Member::where('group_id', $group_id)
+            $existingMember = Member::where('group_uid', $group_uid)
                 ->where('member_type', $request->input('member_type'))
                 ->first();
 
@@ -71,14 +71,14 @@ class MemberController extends Controller
 
         $validated['share_quantity'] = 1;
 
-        // Generate member_id based on the first letter of the name followed by a serial number
+        // Generate member_uid based on the first letter of the name followed by a serial number
         $firstLetter = strtoupper(substr($request->input('name'), 0, 1));
-        $lastMember = Member::where('member_id', 'like', $firstLetter . '%')->orderBy('member_id', 'desc')->first();
-        $serialNumber = $lastMember ? intval(substr($lastMember->member_id, 1)) + 1 : 1;
-        $validated['member_id'] = $firstLetter . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
+        $lastMember = Member::where('member_uid', 'like', $firstLetter . '%')->orderBy('member_uid', 'desc')->first();
+        $serialNumber = $lastMember ? intval(substr($lastMember->member_uid, 1)) + 1 : 1;
+        $validated['member_uid'] = $firstLetter . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
 
         $validated['status'] = $request->input('status'); // Add status to validated data
-        $validated['group_id'] = Group::where('name', $request->input('group'))->first()->id; // Use group_id
+        $validated['group_uid'] = Group::where('name', $request->input('group'))->first()->id; // Use group_uid
 
         Member::create($validated);
         return redirect()->route('members.index')->with('success', 'Member added successfully.');
@@ -99,11 +99,11 @@ class MemberController extends Controller
             'status' => 'required|in:Active,Inactive',
         ]);
 
-        $group_id = Group::where('name', $request->input('group'))->first()->id;
+        $group_uid = Group::where('name', $request->input('group'))->first()->id;
 
         // Validate that there is only one President and Secretary in a group
         if (in_array($request->input('member_type'), ['President', 'Secretary'])) {
-            $existingMember = Member::where('group_id', $group_id)
+            $existingMember = Member::where('group_uid', $group_uid)
                 ->where('member_type', $request->input('member_type'))
                 ->where('id', '!=', $id)
                 ->first();
@@ -121,7 +121,7 @@ class MemberController extends Controller
         }
         // Explicitly set the status field
         $member->status = $request->input('status');
-        $member->group_id = Group::where('name', $request->input('group'))->first()->id; // Update group_id
+        $member->group_uid = Group::where('name', $request->input('group'))->first()->id; // Update group_uid
         $member->update($validated);
 
         // Redirect to the index page after successful update
@@ -136,29 +136,34 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $member = Member::query()
-            ->leftJoin('groups', 'members.group_id', '=', 'groups.id') // Join with groups table using group_id
-            ->select('members.*', 'groups.name as group_name') // Select group name
-            ->where('members.id', $id)
-            ->firstOrFail();
+        $member = Member::findOrFail($id);
         return response()->json($member);
-        // return view('members.show', compact('member'));
     }
 
     public function edit($id)
     {
         $member = Member::findOrFail($id);
         $groups = Group::all(); // Assuming you have a Group model to fetch all groups
-        return view('members.edit', compact('member', 'groups'));
+        
+        // Fetch existing roles for each group
+        $existingRoles = Member::select('group', 'member_type')
+            ->get()
+            ->groupBy('group')
+            ->map(function ($members) {
+                return $members->pluck('member_type')->toArray();
+            });
+
+        return view('members.edit', compact('member', 'groups', 'existingRoles'));
     }
 
     public function destroy($id)
     {
         $member = Member::findOrFail($id);
-        $group = Group::findOrFail($member->group_id);
-        // $group->decrement('no_of_members'); // Remove this line
+        $member->status = 'Inactive';
+        $member->save();
         $member->delete();
 
-        return redirect()->route('members.index')->with('success', 'Member deleted successfully');
+        return redirect()->route('members.index')->with('success', 'Member status set to Inactive and deleted successfully');
     }
+    
 }

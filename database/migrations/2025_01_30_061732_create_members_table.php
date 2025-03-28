@@ -14,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('group_id')->nullable();
+            $table->unsignedBigInteger('group_uid')->nullable();
+            $table->foreign('group_uid')->references('id')->on('groups')->onDelete('cascade');
             $table->string('photo')->nullable();
             $table->string('name');
             $table->string('number')->nullable();
@@ -24,15 +25,14 @@ return new class extends Migration
             $table->decimal('share_price', 10, 2);
             $table->integer('share_quantity')->default(1);
             $table->enum('member_type', ['President', 'Secretary', 'Member']);
-            $table->string('member_id')->unique();
+            $table->string('member_uid')->unique();
             $table->timestamps();
             $table->enum('status', ['Active', 'Inactive']);
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade'); // Add foreign key constraint
             $table->softDeletes();
         });
 
-        // Generate member_id based on the first letter of the name followed by the ID
-        DB::statement('UPDATE members SET member_id = CONCAT(LEFT(name, 1), id)');
+        // Generate member_uid based on the first letter of the name followed by the ID
+        DB::statement('UPDATE members SET member_uid = CONCAT(LEFT(name, 1), id)');
     }
     
     /**
@@ -41,7 +41,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropForeign(['group_id']); // Drop foreign key constraint
+            $table->dropForeign(['group_uid']); // Drop foreign key constraint
         });
         Schema::dropIfExists('members');
     }
@@ -52,7 +52,7 @@ return new class extends Migration
     public function updateStatus($memberId, $status)
     {
         DB::table('members')
-            ->where('member_id', $memberId)
+            ->where('member_uid', $memberId)
             ->update(['status' => $status]);
     }
 };
@@ -67,7 +67,7 @@ class AddGroupIdToMembersTable extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->unsignedBigInteger('group_id')->nullable();
+            $table->unsignedBigInteger('group_uid')->nullable();
         });
     }
 
@@ -79,7 +79,7 @@ class AddGroupIdToMembersTable extends Migration
     public function down()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropColumn('group_id');
+            $table->dropColumn('group_uid');
         });
     }
 }

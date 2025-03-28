@@ -12,18 +12,18 @@ class Group_member extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'group_id',
-        'member_id',
+        'group_uid',
+        'member_uid',
         'in_date',
         'out_date',
     ];
 
     public function group()
     {
-        return $this->belongsTo(Group::class, 'group_id', 'id');
+        return $this->belongsTo(Group::class, 'group_uid', 'id');
     }
     public function member()
     {
-        return $this->belongsTo(Member::class, 'member_id', 'id');
+        return $this->belongsTo(Member::class, 'member_uid', 'id');
     }
 }

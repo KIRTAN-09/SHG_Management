@@ -7,8 +7,10 @@
             Savings Information
         </div>
         <div class="card-body">
-            <!-- <p><strong>Member Name:</strong> {{ $savings->member_name }}</p> -->
-            <p><strong>Member ID:</strong> {{ $savings->member ? $savings->member->id : 'N/A' }}</p>
+            <p><strong>Group ID:</strong> {{ $savings->group_uid }}</p>
+            <p><strong>Group Name:</strong> {{ $savings->group_name }}</p> <!-- Fetch group name from the join -->
+            <p><strong>Member Name:</strong> {{ $savings->member_name }}</p>
+            <!-- <p><strong>Member ID:</strong> {{ $savings->member ? $savings->member->name : 'N/A' }}</p> -->
             <p><strong>Amount:</strong> {{ $savings->amount }}</p>
             <p><strong>Date of Deposit:</strong> {{ $savings->date_of_deposit }}</p>
         </div>

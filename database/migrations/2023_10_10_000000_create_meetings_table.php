@@ -16,11 +16,14 @@ class CreateMeetingsTable extends Migration
             $table->id();
             $table->date('date');
             $table->string('group_name');
-            $table->string('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->unsignedBigInteger('group_uid');
             $table->text('discussion');
+            $table->text('attendance')->nullable(); // Added 'attendance' column
             $table->string('photo');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('group_uid')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 

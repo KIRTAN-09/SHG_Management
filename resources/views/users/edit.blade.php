@@ -25,7 +25,7 @@
 @endif
 
 
-<div class="container1">
+<div class="container">
     <form method="POST" action="{{ route('users.update', $user->id) }}">
         @csrf
         @method('PUT')

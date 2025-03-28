@@ -31,19 +31,19 @@
 <script>
     function showmeetingdetails(meetingId) {
         // Fetch meeting details via AJAX and display in the modal
-        fetch(/meetings/${meetingId}/details)
+        fetch(`/meetings/${meetingId}/details`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('modalContent').innerHTML = `
                     <table>
                         <tr><td><strong>Date:</strong></td><td>${data.date}</td></tr>
                         <tr><td><strong>Group Name:</strong></td><td>${data.group_name}</td></tr>
-                        <tr><td><strong>Group ID:</strong></td><td>${data.group_id}</td></tr>
+                        <tr><td><strong>Group ID:</strong></td><td>${data.group_uid}</td></tr>
                         <tr><td><strong>Discussion Points:</strong></td><td>${data.discussion}</td></tr>
                         <tr><td><strong>No. Members Present:</strong></td><td>${data.attendance_list}</td></tr>
                     </table>
                 `;
-                document.getElementById('modalPhoto').src = /storage/${data.photo};
+                document.getElementById('modalPhoto').src = `/storage/${data.photo}`;
                 document.getElementById('meetingModal').classList.remove('hidden');
             });
     }

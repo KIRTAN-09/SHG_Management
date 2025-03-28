@@ -109,17 +109,28 @@ input[type="submit"]:hover {
     font-size: 12px;
 }
 </style>
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('igas.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
 <div class="container">
     <form action="{{ route('igas.store') }}" method="POST">
         @csrf
         <h1>Create IGA</h1>
         <div class="form-group">
-            <label for="member-id">Member id</label>
-            <input type="text" class="form-control" id="member-id" name="member-id" required>
-        </div>
-        <div class="form-group">
-            <label for="name">Members Name</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+            <label for="member-id">Member ID/Name:</label>
+            <div class="dropdown">
+                <input type="text" id="member-search" class="form-control" placeholder="Search Member ID or Name" onfocus="toggleDropdown(true)" onblur="setTimeout(() => toggleDropdown(false), 200)">
+                <div id="member-dropdown" class="dropdown-menu" style="display: none; max-height: 200px; overflow-y: auto; border: 1px solid #ced4da; border-radius: 5px;">
+                    @foreach($members as $member)
+                        <div class="dropdown-item" onclick="selectMember('{{ $member->id }}', '{{ $member->member_uid }}-{{ $member->name }}')">
+                            {{ $member->member_uid }}-{{ $member->name }}
+                        </div>
+                    @endforeach
+                </div>
+                <input type="hidden" id="member-id" name="member_uid" required>
+            </div>
+            <p id="selected-member-name" style="margin-top: 10px; font-weight: bold; color: #333;"></p>
         </div>
         <div class="form-group">
             <label for="date">Date</label>
@@ -138,14 +149,31 @@ input[type="submit"]:hover {
             <label for="earned">Amount Earned</label>
             <input type="number" class="form-control" id="earned" name="earned" placeholder="Enter amount earned" required>
         </div>
-        <!-- <div class="form-group">
-            <label for="remarks">Remarks</label>
-            <textarea class="form-control" id="remarks" name="remarks" rows="3" placeholder="Enter any remarks"></textarea>
-        </div> -->
         <input type="submit" value="Create IGA">
     </form>
 </div>
 <script>
+function toggleDropdown(show) {
+    const dropdown = document.getElementById('member-dropdown');
+    dropdown.style.display = show ? 'block' : 'none';
+}
+
+function selectMember(id, text) {
+    document.getElementById('member-id').value = id;
+    document.getElementById('member-search').value = text;
+    document.getElementById('selected-member-name').textContent = `Selected Member: ${text}`;
+    toggleDropdown(false);
+}
+
+document.getElementById('member-search').addEventListener('input', function() {
+    const searchValue = this.value.toLowerCase();
+    const items = document.querySelectorAll('#member-dropdown .dropdown-item');
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(searchValue) ? 'block' : 'none';
+    });
+});
+
 document.getElementById('group-id-option').addEventListener('change', function() {
     document.getElementById('group-id').style.display = 'block';
     document.getElementById('group-id').setAttribute('type', 'number');
@@ -212,6 +240,15 @@ document.getElementById('amount').addEventListener('input', function() {
     } else {
         document.getElementById('amount-error').style.display = 'none';
     }
+});
+
+document.getElementById('member-search').addEventListener('input', function() {
+    const searchValue = this.value.toLowerCase();
+    const options = document.querySelectorAll('#member-id option');
+    options.forEach(option => {
+        const text = option.textContent.toLowerCase();
+        option.style.display = text.includes(searchValue) || option.value === '' ? '' : 'none';
+    });
 });
 </script>
 @endsection

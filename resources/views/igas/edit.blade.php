@@ -109,13 +109,30 @@ input[type="submit"]:hover {
     font-size: 12px;
 }
 </style>
+<br>
+    <div class="pull-right">
+        <a class="btn btn-primary btn-sm mb-2" href="{{ route('igas.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
 <div class="container">
     <form action="{{ route('igas.update', $iga->id) }}" method="POST">
     <h1>Edit IGA</h1>
         @csrf
         @method('PUT')
         <div class="form-group">
+            <label for="member-id">Member ID</label>
+            <select class="form-control" id="member-id" name="member_uid" required>
+                @foreach($members as $member)
+                    <option value="{{ $member->id }}" {{ $iga->member_uid == $member->id ? 'selected' : '' }}>{{ $member->id }}-{{$member->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="name">Name</label>
+            <!-- <select class="form-control" id="member-id" name="member_uid" required>
+                @foreach($members as $member)
+                    <option value="{{ $member->id }}" {{ $iga->member_uid == $member->id ? 'selected' : '' }}>{{ $member->id }} - {{ $member->name }}</option>
+                @endforeach
+            </select> -->
             <input type="text" class="form-control" id="name" name="name" value="{{ $iga->name }}" required>
         </div>
         <div class="form-group">
@@ -147,6 +164,16 @@ input[type="submit"]:hover {
             <label for="remarks">Remarks</label>
             <textarea class="form-control" id="remarks" name="remarks" required>{{ $iga->remarks }}</textarea>
         </div> -->
+        <div class="form-group">
+            <label for="trainer">Trainer Name:</label>
+            <input type="text" class="form-control" id="trainer_search" placeholder="Search trainer's name">
+            <select class="form-control mt-2" id="trainer" name="trainer" required>
+                <option value="">Select Trainer</option>
+                @foreach($trainers as $trainer)
+                    <option value="{{ $trainer->name }}" {{ $iga->trainer == $trainer->name ? 'selected' : '' }}>{{ $trainer->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <input type="submit" value="Update">
     </form>
 </div>
