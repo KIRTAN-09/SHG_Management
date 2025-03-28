@@ -13,3 +13,4 @@
         </button>
     </form>
 </div>
+<td>{{ $meeting->attendance ?? 'N/A' }}</td> <!-- Add this if the attendance data needs to be displayed -->

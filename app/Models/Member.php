@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Group;
 
 class Member extends Model
 {
@@ -16,6 +17,6 @@ class Member extends Model
 
     public function group()
     {
-        return $this->belongsTo(Group::class, 'group_uid'); // Update relationship to use group_uid
+        return $this->belongsTo(Group::class);
     }   
 }

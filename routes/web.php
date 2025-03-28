@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/reports/filter', [ReportController::class, 'filter'])->name('reports.filter');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/api/groups/{groupId}/members', [GroupController::class, 'getMembersByGroup'])->name('groups.members');
+    Route::get('/api/groups/{group}/members', [GroupController::class, 'getMembers'])->name('groups.members');
 });
 Auth::routes();
 

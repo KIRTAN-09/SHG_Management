@@ -40,7 +40,15 @@ class MeetingDatatable extends DataTable
     {
         return $model->newQuery()
             ->leftJoin('groups', 'meetings.group_uid', '=', 'groups.id')
-            ->select('meetings.id', 'meetings.group_uid', 'groups.name as group_name', 'meetings.discussion', 'meetings.date'); // Added 'meetings.attendance'
+            ->leftJoin('members', 'meetings.attendance', '=', 'members.id') // Join with members table
+            ->select(
+                'meetings.id', 
+                'meetings.group_uid', 
+                'groups.name as group_name', 
+                'meetings.discussion', 
+                'meetings.date',
+                'members.name as attendance' // Fetch member name for attendance
+            );
     }
 
     /**
@@ -74,10 +82,10 @@ class MeetingDatatable extends DataTable
             Column::make('group_name')
                 ->title('Group Name'),
             Column::make('discussion'),
-            Column::make('Attendance')
-                ->title('Attendance')
-                ->exportable(false)
-                ->printable(false),
+            Column::make('attendance') // Ensure this matches the query alias
+                ->title('Attendance List')
+                ->exportable(true)
+                ->printable(true),
             Column::make('date'),
             Column::make('action')
                 ->exportable(false)
