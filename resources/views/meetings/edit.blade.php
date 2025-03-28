@@ -37,6 +37,49 @@
             </div>
             <br><br>
 
+            <label for="attendance_list">Attendance List:</label>
+            <div id="attendance_list">
+                <div id="members_list">
+                    <!-- Members will be populated here based on the selected group -->
+                </div>
+            </div>
+            <script>
+                async function fetchMembers(groupId) {
+                    const membersList = document.getElementById('members_list');
+                    membersList.innerHTML = 'Loading members...';
+
+                    try {
+                        const response = await fetch(`/api/groups/${groupId}/members`);
+                        if (!response.ok) {
+                            const errorText = await response.text();
+                            throw new Error(`Failed to fetch members: ${response.status} ${response.statusText} - ${errorText}`);
+                        }
+
+                        const members = await response.json();
+                        if (!Array.isArray(members)) {
+                            throw new Error('Invalid response format: Expected an array of members');
+                        }
+
+                        membersList.innerHTML = members.map(member => `
+                            <div>
+                                <input type="checkbox" name="attendance[]" value="${member.id}">
+                                ${member.name}
+                            </div>
+                        `).join('');
+                    } catch (error) {
+                        membersList.innerHTML = 'Error loading members. Please try again later.';
+                        console.error('Error fetching members:', error);
+                    }
+                }
+
+                function selectGroup(id, name) {
+                    document.getElementById('group_search').value = name;
+                    document.getElementById('group_uid').value = id;
+                    document.getElementById('group_dropdown').style.display = 'none';
+                    fetchMembers(id); // Fetch members when a group is selected
+                }
+            </script>
+
             <label for="discussion">Discussion Points:</label>
             <textarea id="discussion" name="discussion" required style="height: 100%; width: 100%;">{{ old('discussion', $meeting->discussion) }}</textarea><br>
 
@@ -71,12 +114,6 @@
             }
 
             dropdown.style.display = hasVisibleItems ? 'block' : 'none';
-        }
-
-        function selectGroup(id, name) {
-            document.getElementById('group_search').value = name;
-            document.getElementById('group_uid').value = id;
-            document.getElementById('group_dropdown').style.display = 'none';
         }
 
         function showDropdown() {

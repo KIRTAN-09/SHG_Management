@@ -80,8 +80,9 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-            $groups = Group::all();
-        return view('meetings.edit', compact('meeting', 'groups'));
+        $groups = Group::all();
+        $members = $meeting->group ? $meeting->group->members : []; // Check if group exists before accessing members
+        return view('meetings.edit', compact('meeting', 'groups', 'members'));
     }
 
     /**
