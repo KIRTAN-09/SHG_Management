@@ -14,8 +14,7 @@ use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\NotificationController;
 use App\DataTables\GroupsDataTable;
-
-
+use App\Http\Controllers\Forms\MemberReportController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -49,6 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/api/groups/{groupId}/members', [GroupController::class, 'getMembersByGroup'])->name('groups.membersByGroup');
     Route::get('/api/groups/{group}/members', [GroupController::class, 'getMembers'])->name('groups.members');
+    Route::get('/get-member-details', [MemberReportController::class, 'getMemberDetails']);
 });
 Auth::routes();
 
