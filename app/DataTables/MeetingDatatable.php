@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Meeting;
+use App\Models\Member;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -22,7 +23,11 @@ class MeetingDatatable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('attendance', function ($meeting) {
                 $attendance = json_decode($meeting->attendance, true);
-                return $attendance ? implode(', ', $attendance) : 'No attendance'; // Display attendance as a comma-separated list
+                if ($attendance) {
+                    $memberNames = Member::whereIn('id', $attendance)->pluck('name')->toArray();
+                    return implode(', ', $memberNames); // Display member names as a comma-separated list
+                }
+                return 'No attendance';
             })
             ->addColumn('action', 'meetings.action')
             ->setRowId('id')
