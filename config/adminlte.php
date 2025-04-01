@@ -421,42 +421,42 @@ return [
                 'submenu' => [
                     [
                         'text' => 'Members Report',
-                        'url' => 'members/reports',
+                        'url' => 'reports/members',
                         'icon' => 'fas fa-user',
                     ],
                     [
                         'text' => 'Groups Report',
-                        'url' => 'groups/reports',
+                        'url' => 'reports/groups',
                         'icon' => 'fas fa-users',
                     ],
                     [
                         'text' => 'Savings Report',
-                        'url' => 'savings/reports',
+                        'url' => 'reports/savings',
                         'icon' => 'fas fa-rupee-sign',
                     ],
                     [
                         'text' => 'IGA Report',
-                        'url' => 'igas/reports',
+                        'url' => 'reports/igas',
                         'icon' => 'fas fa-globe',
                     ],
                     [
                         'text' => 'Trainings Report',
-                        'url' => 'trainings/reports',
+                        'url' => 'reports/trainings',
                         'icon' => 'fas fa-fist-raised',
                     ],
                     [
                         'text' => 'Meetings Report',
-                        'url' => 'meetings/reports',
+                        'url' => 'reports/meetings',
                         'icon' => 'fas fa-users',
                     ],
                     [
                         'text' => 'Monthly Report',
-                        'url' => 'monthly/reports',
+                        'url' => 'reports/monthly',
                         'icon' => 'fas fa-calendar-alt',
                     ],
                     [
                         'text' => 'Annual Report',
-                        'url' => 'annual/reports',
+                        'url' => 'reports/annual',
                         'icon' => 'fas fa-calendar',
                     ],
                 ],
