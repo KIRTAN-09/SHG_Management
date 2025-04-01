@@ -12,8 +12,8 @@ class CreateTrainingsTable extends Migration
             $table->id();
             $table->date('training_date');
             $table->string('trainer');
-            $table->string('members_name');
-            $table->string('members_ID');
+            $table->string('member_id')->nullable(); // Allow null values for member_id
+            $table->string('members_name')->nullable(); // Allow null values for members_name
             $table->string('location');
             $table->string('category');
             $table->timestamps();

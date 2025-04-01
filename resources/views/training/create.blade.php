@@ -33,7 +33,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <input type="hidden" id="member-id" name="members_name" required>
+                    <input type="hidden" id="member-id" name="member_id" required>
                 </div>
             </div>
 
@@ -94,8 +94,8 @@
     }
 
     function selectMember(id, text) {
-        document.getElementById('member-id').value = id;
-        document.getElementById('member-search').value = text;
+        document.getElementById('member-id').value = id; // Sets the hidden input value
+        document.getElementById('member-search').value = text;	
     }
 
     document.getElementById('member-search').addEventListener('input', function() {
@@ -124,4 +124,4 @@
         toggleDropdown(false);
     });
 </script>
-@stop
+@stop 

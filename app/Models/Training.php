@@ -14,8 +14,13 @@ class Training extends Model
         'training_date',
         'trainer',
         'members_name',
-        'members_ID',
+        'members_uid',
         'location',
         'category',
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id'); // Define the relationship with Member
+    }
 }
