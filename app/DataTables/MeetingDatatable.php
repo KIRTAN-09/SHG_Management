@@ -20,6 +20,10 @@ class MeetingDatatable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('attendance', function ($meeting) {
+                $attendance = json_decode($meeting->attendance, true);
+                return $attendance ? implode(', ', $attendance) : 'No attendance'; // Display attendance as a comma-separated list
+            })
             ->addColumn('action', 'meetings.action')
             ->setRowId('id')
             ->filterColumn('group_name', function($query, $keyword) {
@@ -40,14 +44,13 @@ class MeetingDatatable extends DataTable
     {
         return $model->newQuery()
             ->leftJoin('groups', 'meetings.group_uid', '=', 'groups.id')
-            ->leftJoin('members', 'meetings.attendance', '=', 'members.id') // Join with members table
             ->select(
-                'meetings.id', 
-                'meetings.group_uid', 
-                'groups.name as group_name', 
-                'meetings.discussion', 
+                'meetings.id',
+                'meetings.group_uid',
+                'groups.name as group_name',
+                'meetings.discussion',
                 'meetings.date',
-                'members.name as attendance' // Fetch member name for attendance
+                'meetings.attendance' // Include attendance field
             );
     }
 

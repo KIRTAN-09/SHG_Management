@@ -49,6 +49,7 @@ class MeetingController extends Controller
             'group_uid' => 'required|numeric',
             'discussion' => 'required|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'attendance' => 'nullable|array', // Validate attendance as an array
         ]);
 
         $group = Group::findOrFail($request->group_uid);
@@ -61,6 +62,7 @@ class MeetingController extends Controller
             'group_uid' => $request->group_uid,
             'discussion' => $request->discussion,
             'photo' => $photoUrl,
+            'attendance' => json_encode($request->attendance), // Save attendance as JSON
         ]);
 
         return redirect()->route('meetings.index')->with('success', 'Meeting scheduled successfully!');

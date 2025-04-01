@@ -16,5 +16,6 @@ class Meeting extends Model
         'group_uid',
         'discussion',
         'photo',
+        'attendance',
     ];
 }
