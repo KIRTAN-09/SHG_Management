@@ -17,6 +17,7 @@ class Training extends Model
         'members_uid',
         'location',
         'category',
+        'member_id', // Added this line
     ];
 
     public function member()

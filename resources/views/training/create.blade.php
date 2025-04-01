@@ -33,7 +33,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <input type="hidden" id="member-id" name="member_id" required>
+                    <input type="hidden" id="member-id" name="member_id" required> <!-- Ensure this field is submitted -->
                 </div>
             </div>
 
@@ -124,4 +124,4 @@
         toggleDropdown(false);
     });
 </script>
-@stop 
+@stop
