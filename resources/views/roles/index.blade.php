@@ -48,7 +48,7 @@
                             <a href="{{ route('roles.edit', $role->id) }}" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-yellow-700">Edit</a>
                         @endcan
                         @can('role-delete')
-                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline">
+                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this role?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
@@ -86,7 +86,7 @@
                             <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         @endcan
                         @can('role-delete')
-                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline">
+                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this role?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>

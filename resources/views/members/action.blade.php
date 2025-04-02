@@ -5,7 +5,7 @@
     <a href="{{ route('members.edit', $id) }}" class="btn btn-sm btn-warning">
         <i class="fas fa-edit"></i>
     </a>
-    <form action="{{ route('members.destroy', $id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete(event, this)">
+    <form action="{{ route('members.destroy', $id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this member?')">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-sm btn-danger">
