@@ -28,4 +28,23 @@ class Savings extends Model
     {
         return $this->belongsTo(Group::class, 'group_uid'); // Ensure this is correct
     }
+
+    public static function filter($filters)
+    {
+        $query = self::query();
+
+        if (isset($filters['member_id'])) {
+            $query->where('member_id', $filters['member_id']);
+        }
+
+        if (isset($filters['group_id'])) {
+            $query->where('group_id', $filters['group_id']);
+        }
+
+        if (isset($filters['date_from']) && isset($filters['date_to'])) {
+            $query->whereBetween('created_at', [$filters['date_from'], $filters['date_to']]);
+        }
+
+        return $query;
+    }
 }

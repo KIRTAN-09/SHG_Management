@@ -14,6 +14,14 @@ use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\NotificationController;
 use App\DataTables\GroupsDataTable;
 use App\Http\Controllers\Forms\MembersReportController;
+use App\Http\Controllers\Forms\AnnualReportController;
+use App\Http\Controllers\Forms\MeetingsReportController;
+use App\Http\Controllers\Forms\SavingsReportController;
+use App\Http\Controllers\Forms\GroupsReportController;
+use App\Http\Controllers\Forms\TrainingsReportController;
+use App\Http\Controllers\Forms\IgasReportController;
+use App\Http\Controllers\Forms\MonthlyReportController;
+
 
 // Public Routes
 Route::get('/', function () {
