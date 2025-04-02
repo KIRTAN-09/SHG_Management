@@ -223,6 +223,7 @@
 <style>
 /* Styling for the card */
 .card {
+    background-color: rgba(167, 201, 236, 0.46);
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -232,7 +233,7 @@
 
 /* Styling for the card header */
 .card-header {
-    background-color: #f8f9fa;
+    background-color:rgba(42, 92, 142, 0.15);
     font-weight: bold;
     padding: 10px;
     border-bottom: 1px solid #ddd;
@@ -245,27 +246,31 @@
 
 /* Styling for the select dropdown */
 .form-control {
+    background-color:rgba(156, 163, 165, 0.9);
+    color:rgb(10, 10, 10);
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
+    padding: 6px;
+    margin: 2px;
+    border: 1px solid black;
     border-radius: 4px;
 }
 
 /* Styling for the table */
 .table {
+    background-color:rgba(167, 201, 236, 0.46);
     width: 100%;
-    border-collapse: collapse;
+    border: px solid black;
     margin-top: 20px;
 }
 
 .table th, .table td {
-    border: 1px solid #ddd;
+    border: 1px solid #2a5e864e;
     padding: 8px;
     text-align: left;
 }
 
 .table th {
-    background-color: #f8f9fa;
+    background-color:rgb(154, 169, 184);
     font-weight: bold;
 }
 </style>

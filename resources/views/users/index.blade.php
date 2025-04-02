@@ -91,14 +91,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-
-
-            document.querySelectorAll('.delete-button').forEach(button => {
-                button.addEventListener('click', function () {
-                    confirmDelete(this.dataset.userId);
-                });
-            });
-
             var toggleViewButton = document.getElementById('toggleView');
             var cardView = document.getElementById('cardView');
             var tableView = document.getElementById('tableView');
@@ -107,13 +99,26 @@
                 cardView.classList.toggle('hidden');
                 tableView.classList.toggle('hidden');
             });
+
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    confirmDelete(this.dataset.userId);
+                });
+            });
         });
 
         function confirmDelete(userId) {
-            var deleteModal = document.getElementById('deleteModal');
-            var deleteForm = document.getElementById('deleteForm');
-            deleteForm.action = '/users/' + userId;
-            deleteModal.classList.remove('hidden');
+            if (confirm('Are you sure you want to delete this user?')) {
+                const deleteForm = document.createElement('form');
+                deleteForm.method = 'POST';
+                deleteForm.action = `/users/${userId}`;
+                deleteForm.innerHTML = `
+                    @csrf
+                    @method('DELETE')
+                `;
+                document.body.appendChild(deleteForm);
+                deleteForm.submit();
+            }
         }
 
         function closeDeleteModal() {
