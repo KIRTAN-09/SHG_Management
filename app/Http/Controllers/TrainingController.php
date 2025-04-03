@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Training;
 use App\Models\Member;
-use App\Models\Trainer; // Added Trainer model
+use App\Models\Trainer; // Ensure this line is present
 use App\DataTables\TrainingDataTable;
 
 class TrainingController extends Controller
@@ -58,10 +58,8 @@ class TrainingController extends Controller
     public function edit($id)
     {
         $training = Training::findOrFail($id);
-        $trainers = Trainer::all(); // Fetch trainers from the database
         $members = Member::all();  // Fetch members from the database
-
-        return view('training.edit', compact('training', 'trainers', 'members'));
+        return view('training.edit', compact('training', 'members'));
     }
 
     public function update(Request $request, $id)
@@ -69,8 +67,8 @@ class TrainingController extends Controller
         $request->validate([
             'training_date' => 'required|date',
             'trainer' => 'required|string|max:255',
-            'members_name' => 'required|string|max:255',
-            'members_ID' => 'required|string|max:255',
+            // 'members_name' => 'required|string|max:255',
+            // 'members_ID' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'category' => 'required|string|max:255',
         ]);
