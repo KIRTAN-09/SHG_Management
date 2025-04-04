@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/popup.css') }}">
+
 <div class="flex justify-center space-x-2">
     <button onclick="showMemberDetails({{ $id }})" class="btn btn-info">
         <i class="fas fa-eye"></i>
@@ -5,7 +7,7 @@
     <a href="{{ route('members.edit', $id) }}" class="btn btn-sm btn-warning">
         <i class="fas fa-edit"></i>
     </a>
-    <form action="{{ route('members.destroy', $id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this member?')">
+    <form action="{{ route('members.destroy', $id) }}" method="POST" style="display:inline;" onsubmit="return showDeletePopup(event, this)">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-sm btn-danger">
@@ -13,6 +15,16 @@
         </button>
     </form>
 </div>
+
+<div id="deletePopup" class="popup-box" style="display: none;">
+    <h3>Are you sure you want to delete this member?</h3>
+    <div class="popup-buttons">
+        <button class="btn btn-cancel" onclick="closeDeletePopup()">Cancel</button>
+        <button class="btn btn-confirm" id="confirmDeleteButton">Delete</button>
+    </div>
+</div>
+<div id="popupOverlay" class="popup-overlay" style="display: none;" onclick="closeDeletePopup()"></div>
+
 <!-- Member Details Modal -->
 <div id="memberDetailsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="memberDetailsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -45,6 +57,7 @@ function showMemberDetails(id) {
         url: '/members/' + id,
         method: 'GET',
         success: function(response) {
+            // Ensure the photo path points to the correct location
             $('#memberPhoto').attr('src', response.photo ? `/storage/${response.photo}` : '/images/default-avatar.png');
             
             let detailsHtml = '';
@@ -62,11 +75,20 @@ function showMemberDetails(id) {
     });
 }
 
-function confirmDelete(event, form) {
+function showDeletePopup(event, form) {
     event.preventDefault();
-    if (confirm('Are you sure you want to delete this member?')) {
+    document.getElementById('deletePopup').style.display = 'block';
+    document.getElementById('popupOverlay').style.display = 'block';
+
+    const confirmButton = document.getElementById('confirmDeleteButton');
+    confirmButton.onclick = function () {
         form.submit();
-    }
+    };
+}
+
+function closeDeletePopup() {
+    document.getElementById('deletePopup').style.display = 'none';
+    document.getElementById('popupOverlay').style.display = 'none';
 }
 
 // Close modal on button click
