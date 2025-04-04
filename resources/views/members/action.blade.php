@@ -19,11 +19,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="memberDetailsModalLabel">Member Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Member details will be loaded here dynamically -->
+                <div class="d-flex justify-content-center mb-4">
+                    <img id="memberPhoto" src="" alt="Member Photo" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover; border: 2px solid #ddd;">
+                </div>
                 <table class="table table-bordered">
                     <tbody id="memberDetailsContent"></tbody>
                 </table>
@@ -42,14 +45,15 @@ function showMemberDetails(id) {
         url: '/members/' + id,
         method: 'GET',
         success: function(response) {
-            // Assuming response is an object with member details
+            $('#memberPhoto').attr('src', response.photo ? `/storage/${response.photo}` : '/images/default-avatar.png');
+            
             let detailsHtml = '';
             for (const [key, value] of Object.entries(response)) {
-                detailsHtml += `<tr><th>${key}</th><td>${value}</td></tr>`;
+                if (key !== 'photo') {
+                    detailsHtml += `<tr><th>${key}</th><td>${value}</td></tr>`;
+                }
             }
-            // Load the response into the table body
             $('#memberDetailsContent').html(detailsHtml);
-            // Show the modal
             $('#memberDetailsModal').modal('show');
         },
         error: function() {
