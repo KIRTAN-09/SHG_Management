@@ -71,7 +71,7 @@ class MembersDataTable extends DataTable
                     ->setTableId('members-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax() // Ensure AJAX is enabled
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->addTableClass('table table-bordered table-striped table-hover')
                     ->parameters([
                         'dom'          => ('<"top">rt<"bottom"l>Bfrtip'),
@@ -87,7 +87,6 @@ class MembersDataTable extends DataTable
     {
         return [
             Column::make('member_uid')->title('Member ID'), // Added member_uid column
-            Column::make('photo'),
             Column::make('name'),
             Column::make('number'),
             Column::make('village'),
