@@ -29,7 +29,7 @@
     <form method="POST" action="{{ route('users.update', $user->id) }}">
         @csrf
         @method('PUT')
-        <h1><b>Create New User</b></h1>
+        <h1><b>Edit User</b></h1>
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" placeholder="Name" class="form-control create-input" value="{{ $user->name }}">
