@@ -12,7 +12,7 @@ class MemberSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 2500; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             Member::create([
                 'member_uid' => $i + 1, // Ensure unique member_uid
                 'photo' => $faker->imageUrl(),
