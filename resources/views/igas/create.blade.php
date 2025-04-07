@@ -136,19 +136,25 @@ input[type="submit"]:hover {
             <label for="date">Date</label>
             <input type="date" class="form-control" id="date" name="date" required>
         </div>
-        <div class="form-group">
-            <label for="category">Category</label>
-            <select class="form-control" id="category" name="category">
-                <option value="Farming">Farming</option>
-                <option value="Trading">Trading</option>
-                <option value="Services">Services</option>
-                <option value="Other">Other</option>
-            </select>
+
+        @for ($i = 1; $i <= 3; $i++)
+        <div class="form-group" style="display: flex; gap: 20px; align-items: center;"> <!-- Changed align-items to center -->
+            <div style="flex: 2;">
+                <label for="category{{ $i }}">Category {{ $i }}</label>
+                <select class="form-control" id="category{{ $i }}" name="category{{ $i }}">
+                    <option value="">Select Category</option>
+                    <option value="Farming">Farming</option>
+                    <option value="Trading">Trading</option>
+                    <option value="Services">Services</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div style="margin-top: 20px; flex: 1;">
+                <label for="earned{{ $i }}">Amount Earned {{ $i }}</label>
+                <input type="number" class="form-control" id="earned{{ $i }}" name="earned{{ $i }}" placeholder="Amount earned">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="earned">Amount Earned</label>
-            <input type="number" class="form-control" id="earned" name="earned" placeholder="Enter amount earned" required>
-        </div>
+        @endfor
         <input type="submit" value="Create IGA">
     </form>
 </div>

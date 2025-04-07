@@ -82,14 +82,14 @@
             <p><strong>Village:</strong> ${member.village}</p>
             <p><strong>Group:</strong> ${member.group}</p>
             <p><strong>Caste:</strong> ${member.caste}</p>
-            <p><strong>Share Price:</strong> $${member.share_price}</p>
+            <p><strong>Share Price:</strong> Rs. ${member.share_price}</p>
             <p><strong>Member Type:</strong> ${member.type}</p>
             <p><strong>Status:</strong> ${member.status}</p>
 
             <h2>Member Savings</h2>
-            <p><strong>Total Savings:</strong> $${member.total_savings}</p>
+            <p><strong>Total Savings:</strong> Rs. ${member.total_savings}</p>
             <p><strong>Last Deposit Date:</strong> ${member.last_deposit_date}</p>
-            <p><strong>Last Deposit Amount:</strong> $${member.last_deposit_amount}</p>
+            <p><strong>Last Deposit Amount:</strong> Rs. ${member.last_deposit_amount}</p>
 
             <h2>Member's Join Meetings</h2>
             <p><strong>Meeting Date:</strong> ${member.meeting_date}</p>

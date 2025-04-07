@@ -63,6 +63,19 @@
     <label for="to_date">To Date:</label>
     <input type="date" id="to_date" name="to_date">
     
+    <label for="member_search">Search Member:</label>
+    <input type="text" id="member_search" placeholder="Type to search..." onkeyup="filterMembers()">
+
+    <label for="member_id">Search by Member:</label>
+    <select id="member_id" name="member_id">
+        <option value="">-- Select Member --</option>
+        @foreach($members as $member)
+            <option value="{{ $member->id }}" {{ request('member_id') == $member->id ? 'selected' : '' }}>
+                {{ $member->name }}
+            </option>
+        @endforeach
+    </select>
+    
     <button type="submit">Fetch Details</button>
 </form>
 
@@ -101,7 +114,19 @@
         </tbody>
     </table>
 @elseif(isset($meetings))
-    <p>No meetings found for the selected date range.</p>
+    <p>No meetings found for the selected criteria.</p>
 @endif
+
+<script>
+    function filterMembers() {
+        const searchInput = document.getElementById('member_search').value.toLowerCase();
+        const memberOptions = document.getElementById('member_id').options;
+
+        for (let i = 1; i < memberOptions.length; i++) { // Skip the first option (placeholder)
+            const memberName = memberOptions[i].text.toLowerCase();
+            memberOptions[i].style.display = memberName.includes(searchInput) ? '' : 'none';
+        }
+    }
+</script>
 
 @endsection

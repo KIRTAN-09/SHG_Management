@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-header">Manage Groups</div>
         <div class="card-body">
-        {!! $dataTable->table() !!}
+        {!! $dataTable->table(['id' => 'groups-table']) !!}
         </div>
     </div>
 </div>
