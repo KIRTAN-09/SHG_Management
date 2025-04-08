@@ -24,8 +24,8 @@ class GroupsDataTable extends DataTable
             ->addColumn('no_of_members', function($row) {
                 return $row->members->count();
             })
-            ->addColumn('fund_received', function ($group) {
-                return $group->fund_received ?? 'null';
+            ->addColumn('Revolving_Fund', function ($group) {
+                return $group->Revolving_Fund ?? 'null';
             })
             ->addColumn('action', function($row) {
                 return view('groups.action', ['id' => $row->id]);
@@ -64,7 +64,7 @@ class GroupsDataTable extends DataTable
             Column::make('president_name')->title('President'),
             Column::make('secretary_name')->title('Secretary'),
             Column::make('no_of_members')->title('No. of Members'),
-            Column::make('fund_received')->title('Fund Received from govt.'),
+            Column::make('Revolving_Fund')->title('Revolvig Fund'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

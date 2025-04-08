@@ -38,7 +38,7 @@ class GroupController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'village_name' => 'required|string|max:255',
-            'fund_received' => 'nullable|numeric|min:0',
+            'Revolving_Fund' => 'nullable|numeric|min:0',
         ]);
 
         $lastGroup = Group::orderBy('id', 'desc')->first();
@@ -75,14 +75,14 @@ class GroupController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'village_name' => 'required|string|max:255',
-            'fund_received' => 'nullable|numeric|min:0',
+            'Revolving_Fund' => 'nullable|numeric|min:0',
         ]);
 
         $group = Group::find($id);
         $group->update([
             'name' => $validated['name'],
             'village_name' => $validated['village_name'],
-            'fund_received' => $validated['fund_received'], // Ensure this field is updated
+            'Revolving_Fund' => $validated['Revolving_Fund'], // Ensure this field is updated
         ]);
 
         return redirect()->route('groups.index')->with('success', 'Group updated successfully.');
