@@ -66,11 +66,7 @@
                 <option value="Inactive">Inactive</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="photo">Photo:</label>
-            <input type="file" id="photo" name="photo" onchange="validatePhotoSize()">
-            <span id="photo-error" style="color: red; display: none;">Photo size should not be more than 1 MB</span>
-        </div>
+        
         <input type="submit" value="Add Member">
     </form>
 </div>
