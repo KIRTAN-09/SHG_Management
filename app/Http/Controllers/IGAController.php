@@ -45,27 +45,18 @@ class IGAController extends Controller
             'earned3' => 'nullable|numeric|min:0',
         ]);
 
-        $igas = [];
-        for ($i = 1; $i <= 3; $i++) {
-            $category = $request->input("category$i");
-            $earned = $request->input("earned$i");
-            if ($category || $earned) {
-                $igas[] = [
-                    'member_uid' => $request->input('member_uid'),
-                    'date' => $request->input('date'),
-                    'category' => $category,
-                    'earned' => $earned,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-            }
-        }
+        $iga = new IGA();
+        $iga->member_uid = $request->input('member_uid');
+        $iga->date = $request->input('date');
+        $iga->category1 = $request->input('category1');
+        $iga->earned1 = $request->input('earned1');
+        $iga->category2 = $request->input('category2');
+        $iga->earned2 = $request->input('earned2');
+        $iga->category3 = $request->input('category3');
+        $iga->earned3 = $request->input('earned3');
+        $iga->save();
 
-        if (!empty($igas)) {
-            IGA::insert($igas);
-        }
-
-        return redirect()->route('igas.index')->with('success', 'IGA(s) created successfully.');
+        return redirect()->route('igas.index')->with('success', 'IGA created successfully.');
     }
 
     public function show($id)

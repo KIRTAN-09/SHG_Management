@@ -19,8 +19,12 @@ class CreateIgasTable extends Migration
             // $table->text('description')->nullable();
             $table->timestamps();
             $table->date('date')->nullable();
-            $table->string('category')->nullable();
-            $table->decimal('earned', 8, 2)->nullable();
+            $table->string('category1')->nullable();
+            $table->decimal('earned1', 8, 2)->nullable();
+            $table->string('category2')->nullable();
+            $table->decimal('earned2', 8, 2)->nullable();
+            $table->string('category3')->nullable();
+            $table->decimal('earned3', 8, 2)->nullable();
             $table->softDeletes();
 
             $table->foreign('member_uid')->references('id')->on('members')->onDelete('set null');

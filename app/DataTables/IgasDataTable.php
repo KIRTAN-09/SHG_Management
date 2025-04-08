@@ -14,8 +14,11 @@ class IgasDataTable extends DataTable
 {
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        $dataTable = new EloquentDataTable($query->with('member')); // Include member relationship
-        return $dataTable->addColumn('action', function($row) {
+        $dataTable = new EloquentDataTable($query->with('member'));
+
+        return $dataTable->addColumn('Total earned', function ($row) {
+            return $row->earned1 + $row->earned2 + $row->earned3; // Calculate total earned in the backend
+        })->addColumn('action', function($row) {
             return view('igas.action', compact('row'))->render();
         });
     }
@@ -48,9 +51,16 @@ class IgasDataTable extends DataTable
                 ->data('member.member_uid'), // Explicitly map to the correct field in the member table
             Column::make('name')
                 ->data('member.name'), // Map to member's name field
-            Column::make('category'), // Change to category
-            Column::make('date'), // Change to date
-            Column::make('earned'), // Change to earned
+            Column::make('category1'),
+            Column::make('earned1'),
+            Column::make('category2'),
+            Column::make('earned2'),
+            Column::make('category3'), 
+            Column::make('earned3'),
+            Column::make('date'), 
+            Column::make('Total earned')
+                ->data('Total earned') // Reference the computed backend column
+                ->title('Total Earned'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
