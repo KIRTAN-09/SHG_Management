@@ -1,0 +1,75 @@
+/* Styling for the card */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 15px;
+}
+
+/* Styling for the card header */
+.card-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Styling for the form group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Styling for the select dropdown */
+.form-control {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styling for the dropdown menu */
+.dropdown-menu {
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: white;
+    position: absolute;
+    width: calc(100% - 20px);
+    z-index: 1000;
+}
+
+/* Styling for dropdown items */
+.dropdown-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styling for the table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Hide elements by default */
+#all-members-table, #selected-member-details {
+    display: none;
+}

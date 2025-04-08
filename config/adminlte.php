@@ -417,9 +417,49 @@ return [
             ],
             [
                 'text' => 'Generate Reports', 
-                'url' => 'reports',
                 'icon' => 'fas fa-file-pdf',
-                
+                'submenu' => [
+                    [
+                        'text' => 'Members Report',
+                        'url' => 'reports/members',
+                        'icon' => 'fas fa-user',
+                    ],
+                    [
+                        'text' => 'Groups Report',
+                        'url' => 'reports/groups',
+                        'icon' => 'fas fa-users',
+                    ],
+                    [
+                        'text' => 'Savings Report',
+                        'url' => 'reports/savings',
+                        'icon' => 'fas fa-rupee-sign',
+                    ],
+                    [
+                        'text' => 'IGA Report',
+                        'url' => 'reports/igas',
+                        'icon' => 'fas fa-globe',
+                    ],
+                    [
+                        'text' => 'Trainings Report',
+                        'url' => 'reports/trainings',
+                        'icon' => 'fas fa-fist-raised',
+                    ],
+                    [
+                        'text' => 'Meetings Report',
+                        'url' => 'reports/meetings',
+                        'icon' => 'fas fa-users',
+                    ],
+                    [
+                        'text' => 'Monthly Report',
+                        'url' => 'reports/monthly',
+                        'icon' => 'fas fa-calendar-alt',
+                    ],
+                    [
+                        'text' => 'Annual Report',
+                        'url' => 'reports/annual',
+                        'icon' => 'fas fa-calendar',
+                    ],
+                ],
             ],
             
             

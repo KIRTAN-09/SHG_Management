@@ -11,7 +11,7 @@
         <div class="card">
             <div class="card-header">Manage Training</div>
             <div class="card-body">
-                {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'training-table']) }}
+                {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'training-table', 'columns' => ['members_ID', 'members_name']]) }}
             </div>
         </div>
     </div>

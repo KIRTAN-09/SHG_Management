@@ -24,3 +24,44 @@
     color: rgb(27, 26, 26);
     text-align: center;
 }
+
+#memberDetailsModal .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff; /* White background for modal body */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#memberDetailsModal .modal-body img {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for the image */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #dee2e6; /* Light gray border for the image */
+}
+
+#memberDetailsModal .table {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+    border-collapse: collapse;
+}
+
+#memberDetailsModal .table th {
+    width: 30%;
+    text-align: left;
+    background-color: #efece9; /* Light gray for header */
+    color: #495057; /* Dark gray text */
+    padding: 8px;
+}
+
+#memberDetailsModal .table td {
+    text-align: left;
+    color: #495057; /* Dark gray text */
+    background-color: #f8f9fa; /* Slightly lighter gray for cells */
+    padding: 8px;
+}

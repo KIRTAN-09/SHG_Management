@@ -80,6 +80,7 @@
             @endif
         </div>
 
+      
 
         <input type="submit" value="Update Member">
     </form>
@@ -118,6 +119,41 @@ function validateMemberType() {
         return false;
     }
     return validatePhotoSize(); // Ensure photo size validation is also performed
+}
+
+async function fetchMembers(groupId) {
+    const membersList = document.getElementById('members_list');
+    membersList.innerHTML = 'Loading members...';
+
+    try {
+        const response = await fetch(`/api/groups/${groupId}/members`);
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Failed to fetch members: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+
+        const members = await response.json();
+        if (!Array.isArray(members)) {
+            throw new Error('Invalid response format: Expected an array of members');
+        }
+
+        membersList.innerHTML = members.map(member => `
+            <div>
+                <input type="checkbox" name="attendance[]" value="${member.id}">
+                ${member.name}
+            </div>
+        `).join('');
+    } catch (error) {
+        membersList.innerHTML = 'Error loading members. Please try again later.';
+        console.error('Error fetching members:', error);
+    }
+}
+
+function selectGroup(id, name) {
+    document.getElementById('group_search').value = name;
+    document.getElementById('group_uid').value = id;
+    document.getElementById('group_dropdown').style.display = 'none';
+    fetchMembers(id); // Fetch members when a group is selected
 }
 </script>
 

@@ -13,6 +13,7 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('village_name');
             $table->string('group_uid')->unique();
+            $table->decimal('fund_received', 10, 2)->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
         });

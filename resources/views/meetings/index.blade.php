@@ -12,7 +12,7 @@
         <div class="card-header">Manage Meetings</div>
             <div class="card-body">
                 {{-- Ensure the DataTable is rendered with the correct columns --}}
-                {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'meeting-table']) }}
+                {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover', 'id' => 'meeting-table', 'columns' => ['attendance']]) }}
             </div>
         </div>
     </div>

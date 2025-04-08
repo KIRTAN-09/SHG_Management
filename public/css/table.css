@@ -39,7 +39,7 @@ h2 {
 .table th {
     font-display: left;
     background: #e0e7ef;
-    color: #555;
+    color: #161515bd;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: bold;
@@ -74,8 +74,8 @@ h2 {
 }
 
 .btn-info {
-    background-color: #17a2b8;
-    color: white;
+    background-color: white;
+    color: #17a2b8;
 }
 
 .btn-info:hover {
@@ -83,8 +83,8 @@ h2 {
 }
 
 .btn-warning {
-    background-color: #8baaa6;
-    color: white;
+    background-color: white;
+    color: #8baaa6;
 }
 
 .btn-warning:hover {
@@ -92,8 +92,8 @@ h2 {
 }
 
 .btn-danger {
-    background-color: #b04e588c;
-    color: white;
+    background-color: white;
+    color: #b04e588c;
 }
 
 .btn-danger:hover {
@@ -170,7 +170,7 @@ h2 {
 }
 
 .card-header {
-    background-color: #287da7a4;
+    background-color: #022232cf;
     color: white;
     padding: 10px;
     border-radius: 6px;

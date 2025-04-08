@@ -34,10 +34,11 @@ class GroupController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-       // dd('test');
+       
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'village_name' => 'required|string|max:255',
+            'fund_received' => 'nullable|numeric|min:0',
         ]);
 
         $lastGroup = Group::orderBy('id', 'desc')->first();
@@ -74,16 +75,15 @@ class GroupController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'village_name' => 'required|string|max:255',
-            // 'president_name' => 'required|string|max:255',
-            // 'secretary_name' => 'required|string|max:255',
-            // 'no_of_members' => 'required|integer|min:10|max:20',
-        ], [
-           // 'no_of_members.min' => 'The number of members must be at least 10.',
-           //'no_of_members.max' => 'The number of members may not be greater than 20.',
+            'fund_received' => 'nullable|numeric|min:0',
         ]);
 
         $group = Group::find($id);
-        $group->update($validated);
+        $group->update([
+            'name' => $validated['name'],
+            'village_name' => $validated['village_name'],
+            'fund_received' => $validated['fund_received'], // Ensure this field is updated
+        ]);
 
         return redirect()->route('groups.index')->with('success', 'Group updated successfully.');
     }

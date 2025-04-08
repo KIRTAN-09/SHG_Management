@@ -20,6 +20,10 @@
             <label for="village_name">Village Name</label>
             <input type="text" name="village_name" class="form-control" required>
         </div>
+        <div class="form-group">
+            <label for="fund_received">Fund Received from Govt.</label>
+            <input type="number" step="0.01" name="fund_received" class="form-control" placeholder="Enter amount (optional)">
+        </div>
         <input type="submit" value="Add Group">
     </form>
 </div>

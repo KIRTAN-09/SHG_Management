@@ -48,7 +48,7 @@
                             <a href="{{ route('roles.edit', $role->id) }}" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-yellow-700">Edit</a>
                         @endcan
                         @can('role-delete')
-                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline">
+                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this role?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-700">Delete</button>
@@ -74,11 +74,24 @@
                 <tr>
                     <td class="border px-4 py-2">{{ $role->name }}</td>
                     <td class="border px-4 py-2">
-                        @if(!empty($role->permissions))
-                            @foreach($role->permissions as $permission)
-                                <span class="inline-block bg-green-200 text-green-800 text-xs px-2 py-1 rounded">{{ $permission->name }}</span>
-                            @endforeach
-                        @endif
+                        <table class="w-full">
+                            @if(!empty($role->permissions))
+                                @foreach($role->permissions->chunk(4) as $chunk)
+                                <tr>
+                                    @foreach($chunk as $permission)
+                                    <td class="text-center">{{ $permission->name }}</td>
+                                    @endforeach
+                                    @for($i = $chunk->count(); $i < 4; $i++)
+                                    <td class="text-center"></td>
+                                    @endfor
+                                </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td class="text-center" colspan="3">No X</td>
+                                </tr>
+                            @endif
+                        </table>
                     </td>
                     <td class="border px-4 py-2">
                         <button onclick="showRoleDetails({{ $role->id }})" class="btn btn-info btn-sm">Show</button>
@@ -86,7 +99,7 @@
                             <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         @endcan
                         @can('role-delete')
-                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline">
+                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this role?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -126,6 +139,37 @@
         fetch(`/roles/${roleId}/json`)
             .then(response => response.json())
             .then(data => {
+                console.log('Permissions Data:', data.permissions); // Log permissions data for debugging
+
+                const categories = ['Role', 'Group', 'Member', 'Saving', 'IGAS', 'Training', 'Meeting'];
+                let permissionsByCategory = {};
+
+                // Group permissions by category with case-insensitive matching
+                categories.forEach(category => {
+                    permissionsByCategory[category] = data.permissions.filter(permission => {
+                        const normalizedPermission = permission.name.toLowerCase().trim();
+                        const normalizedCategory = category.toLowerCase().trim();
+                        return normalizedPermission.includes(normalizedCategory);
+                    });
+                });
+
+                // Generate rows for each category
+                const permissionsGrid = categories.map(category => {
+                    const permissions = permissionsByCategory[category]
+                        .map(permission => `<td class="text-center">${permission.name}</td>`)
+                        .join('');
+                    return `
+                        <tr>
+                            <th>${category}:</th>
+                            <td>
+                                <table class="w-full">
+                                    <tr>${permissions || '<td class="text-center">No Permissions</td>'}</tr>
+                                </table>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+
                 const modalContent = `
                     <table class="modal-table mx-auto">
                         <tbody>
@@ -133,11 +177,7 @@
                                 <th>Name:</th>
                                 <td>${data.name}</td>
                             </tr>
-                            <tr>
-                                <th>Permissions:</th>
-                                <td>
-                                    ${data.permissions.map(permission => `<span class="inline-block bg-green-200 text-green-800 text-xs px-2 py-1 rounded">${permission.name}</span>`).join('')}
-                                </td>
+                            ${permissionsGrid}
                         </tbody>
                     </table>
                 `;

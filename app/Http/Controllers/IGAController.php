@@ -37,19 +37,35 @@ class IGAController extends Controller
                 Rule::exists('members', 'id') // Validate that member_uid exists in the members table
             ],
             'date' => 'required|date',
-            'category' => 'required|string',
-            'earned' => 'required|numeric|min:0',
+            'category1' => 'nullable|string',
+            'earned1' => 'nullable|numeric|min:0',
+            'category2' => 'nullable|string',
+            'earned2' => 'nullable|numeric|min:0',
+            'category3' => 'nullable|string',
+            'earned3' => 'nullable|numeric|min:0',
         ]);
 
-        // Create a new IGA record
-        IGA::create([
-            'member_uid' => $request->input('member_uid'),
-            'date' => $request->input('date'),
-            'category' => $request->input('category'),
-            'earned' => $request->input('earned'),
-        ]);
+        $igas = [];
+        for ($i = 1; $i <= 3; $i++) {
+            $category = $request->input("category$i");
+            $earned = $request->input("earned$i");
+            if ($category || $earned) {
+                $igas[] = [
+                    'member_uid' => $request->input('member_uid'),
+                    'date' => $request->input('date'),
+                    'category' => $category,
+                    'earned' => $earned,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+        }
 
-        return redirect()->route('igas.index')->with('success', 'IGA created successfully.');
+        if (!empty($igas)) {
+            IGA::insert($igas);
+        }
+
+        return redirect()->route('igas.index')->with('success', 'IGA(s) created successfully.');
     }
 
     public function show($id)

@@ -15,12 +15,18 @@ class TrainingDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('members_name', function ($row) {
+                return $row->member->name ?? 'N/A'; // Fetch member name dynamically
+            })
+            ->addColumn('members_ID', function ($row) {
+                return $row->member->member_uid ?? 'N/A'; // Fetch member ID dynamically
+            })
             ->addColumn('action', 'training.action');
     }
 
     public function query(Training $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('member')->select('trainings.*'); // Ensure 'member' relationship is loaded
     }
 
     public function html(): HtmlBuilder

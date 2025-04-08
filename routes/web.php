@@ -11,40 +11,58 @@ use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\IGAController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MeetingController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\NotificationController;
 use App\DataTables\GroupsDataTable;
+use App\Http\Controllers\Forms\MembersReportController;
+use App\Http\Controllers\Forms\AnnualReportController;
+use App\Http\Controllers\Forms\MeetingsReportController;
+use App\Http\Controllers\Forms\SavingsReportController;
+use App\Http\Controllers\Forms\GroupsReportController;
+use App\Http\Controllers\Forms\TrainingsReportController;
+use App\Http\Controllers\Forms\IgasReportController;
+use App\Http\Controllers\Forms\MonthlyReportController;
 
 
-
+// Public Routes
 Route::get('/', function () {
     return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/reports/{type}', [ReportController::class, 'loadReportForm'])->name('reports.load');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/savings-data', [App\Http\Controllers\HomeController::class, 'getSavingsData'])->name('home.savingsData');
 
+
+
+// Authenticated Routes
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('members', MemberController::class);
     Route::get('/members', [MemberController::class, 'index'])->name('members.index');
-    Route::resource('groups', HomeController::class);
-    Route::resource('groups', GroupController::class);
+    Route::resource('groups', GroupController::class); 
     Route::resource('savings', SavingsController::class);
     Route::resource('igas', IGAController::class);
     Route::resource('training', TrainingController::class);
     Route::resource('meetings', MeetingController::class);
-    Route::resource('reports', ReportController::class);
     Route::get('/roles/{id}/json', [RoleController::class, 'showJson'])->name('roles.showJson');
-    Route::get('/reports/filter', [ReportController::class, 'filter'])->name('reports.filter');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
-    Route::get('/api/groups/{groupId}/members', [GroupController::class, 'getMembersByGroup'])->name('groups.members');
+    Route::get('/api/groups/{groupId}/members', [GroupController::class, 'getMembersByGroup'])->name('groups.membersByGroup');
     Route::get('/api/groups/{group}/members', [GroupController::class, 'getMembers'])->name('groups.members');
+    Route::get('/get-member-details', [MemberReportController::class, 'getMemberDetails']);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Report routes
+Route::get('/reports/members', [MembersReportController::class, 'index'])->name('reports.members');
+Route::get('/reports/annual', [AnnualReportController::class, 'index'])->name('reports.annual');
+Route::get('/reports/meetings', [MeetingsReportController::class, 'index'])->name('reports.meetings');
+Route::get('/reports/savings', [SavingsReportController::class, 'index'])->name('reports.savings');
+Route::get('/reports/groups', [GroupsReportController::class, 'index'])->name('reports.groups');
+Route::get('/reports/trainings', [TrainingsReportController::class, 'index'])->name('reports.trainings');
+Route::get('/reports/igas', [IgasReportController::class, 'index'])->name('reports.igas');
+Route::get('/reports/monthly', [MonthlyReportController::class, 'index'])->name('reports.monthly');
+
+
+

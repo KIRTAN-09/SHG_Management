@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Meeting;
+use App\Models\Member;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -20,6 +21,14 @@ class MeetingDatatable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('attendance', function ($meeting) {
+                $attendance = json_decode($meeting->attendance, true);
+                if ($attendance) {
+                    $memberNames = Member::whereIn('id', $attendance)->pluck('name')->toArray();
+                    return implode(', ', $memberNames); // Display member names as a comma-separated list
+                }
+                return 'No attendance';
+            })
             ->addColumn('action', 'meetings.action')
             ->setRowId('id')
             ->filterColumn('group_name', function($query, $keyword) {
@@ -40,14 +49,13 @@ class MeetingDatatable extends DataTable
     {
         return $model->newQuery()
             ->leftJoin('groups', 'meetings.group_uid', '=', 'groups.id')
-            ->leftJoin('members', 'meetings.attendance', '=', 'members.id') // Join with members table
             ->select(
-                'meetings.id', 
-                'meetings.group_uid', 
-                'groups.name as group_name', 
-                'meetings.discussion', 
+                'meetings.id',
+                'meetings.group_uid',
+                'groups.name as group_name',
+                'meetings.discussion',
                 'meetings.date',
-                'members.name as attendance' // Fetch member name for attendance
+                'meetings.attendance' // Include attendance field
             );
     }
 
