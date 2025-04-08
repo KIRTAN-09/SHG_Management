@@ -22,8 +22,8 @@
             <input type="text" name="village_name" class="form-control" value="{{ $group->village_name }}" required>
         </div>
         <div class="form-group">
-            <label for="fund_received">Fund Received from Govt.</label>
-            <input type="number" step="0.01" name="fund_received" class="form-control" value="{{ $group->fund_received }}" placeholder="Enter amount (optional)">
+            <label for="Revolving_Fund">Fund Received from Govt.</label>
+            <input type="number" step="0.01" name="Revolving_Fund" class="form-control" value="{{ $group->Revolving_Fund }}" placeholder="Enter amount (optional)">
         </div>
         <input type="submit" value="Update">
     </form>

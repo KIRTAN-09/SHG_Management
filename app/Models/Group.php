@@ -17,6 +17,7 @@ class Group extends Model
         'president_name',
         'secretary_name',
         'no_of_members',
+        'Revolving_Fund', // Ensure this field is fillable
     ];
 
     public function members()

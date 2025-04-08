@@ -34,12 +34,13 @@ class GroupController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-       
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'village_name' => 'required|string|max:255',
             'Revolving_Fund' => 'nullable|numeric|min:0',
         ]);
+
+        $validated['Revolving_Fund'] = $validated['Revolving_Fund']; // Ensure key is set
 
         $lastGroup = Group::orderBy('id', 'desc')->first();
         $serialNumber = $lastGroup ? $lastGroup->id + 1 : 1;
@@ -77,6 +78,8 @@ class GroupController extends Controller
             'village_name' => 'required|string|max:255',
             'Revolving_Fund' => 'nullable|numeric|min:0',
         ]);
+
+        $validated['Revolving_Fund'] = $validated['Revolving_Fund'] ?? null; // Ensure key is set
 
         $group = Group::find($id);
         $group->update([

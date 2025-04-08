@@ -64,7 +64,7 @@ class GroupsDataTable extends DataTable
             Column::make('president_name')->title('President'),
             Column::make('secretary_name')->title('Secretary'),
             Column::make('no_of_members')->title('No. of Members'),
-            Column::make('Revolving_Fund')->title('Revolvig Fund'),
+            Column::make('Revolving_fund')->title('Revolving Fund'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
