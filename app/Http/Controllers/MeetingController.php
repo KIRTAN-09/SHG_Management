@@ -48,20 +48,20 @@ class MeetingController extends Controller
             'date' => 'required|date',
             'group_uid' => 'required|numeric',
             'discussion' => 'required|string',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'attendance' => 'nullable|array', // Validate attendance as an array
         ]);
 
         $group = Group::findOrFail($request->group_uid);
-        $photoPath = $request->file('photo')->store('meetings/photos', 'public');
-        $photoUrl = Storage::url($photoPath);
+        // $photoPath = $request->file('photo')->store('meetings/photos', 'public');
+        // $photoUrl = Storage::url($photoPath);
 
         Meeting::create([
             'date' => $request->date,
             'group_name' => $group->name,
             'group_uid' => $request->group_uid,
             'discussion' => $request->discussion,
-            'photo' => $photoUrl,
+            // 'photo' => $photoUrl,
             'attendance' => json_encode($request->attendance), // Save attendance as JSON
         ]);
 
@@ -96,16 +96,16 @@ class MeetingController extends Controller
             'date' => 'required|date',
             'group_uid' => 'required|numeric',
             'discussion' => 'required|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $group = Group::findOrFail($request->group_uid);
 
-        if ($request->hasFile('photo')) {
-            Storage::delete('public/' . $meeting->photo);
-            $photoPath = $request->file('photo')->store('meetings/photos', 'public');
-            $meeting->photo = Storage::url($photoPath);
-        }
+        // if ($request->hasFile('photo')) {
+        //     Storage::delete('public/' . $meeting->photo);
+        //     $photoPath = $request->file('photo')->store('meetings/photos', 'public');
+        //     $meeting->photo = Storage::url($photoPath);
+        // }
 
         $meeting->update([
             'date' => $request->date,
@@ -122,7 +122,7 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        Storage::delete('public/' . $meeting->photo);
+        // Storage::delete('public/' . $meeting->photo);
         $meeting->delete();
         return redirect()->route('meetings.index')->with('success', 'Meeting deleted successfully!');
     }
@@ -141,14 +141,16 @@ class MeetingController extends Controller
      */
     public function getData()
     {
-        $meetings = Meeting::select(['id', 'date', 'photo', 'group_name', 'group_uid', 'discussion', 'attendance_list']);
+        $meetings = Meeting::select(['id', 'date', 
+        // 'photo', 
+        'group_name', 'group_uid', 'discussion', 'attendance_list']);
         return DataTables::of($meetings)
             ->addColumn('actions', function ($meeting) {
                 return view('meetings.partials.actions', compact('meeting'))->render();
             })
-            ->editColumn('photo', function ($meeting) {
-                return '<img src="'.asset('storage/' . $meeting->photo).'" alt="Group Photo" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">';
-            })
+            // ->editColumn('photo', function ($meeting) {
+            //     return '<img src="'.asset('storage/' . $meeting->photo).'" alt="Group Photo" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">';
+            // })
             ->rawColumns(['actions', 'photo'])
             ->make(true);
     }

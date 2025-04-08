@@ -94,15 +94,15 @@
                         </table>
                     </td>
                     <td class="border px-4 py-2">
-                        <button onclick="showRoleDetails({{ $role->id }})" class="btn btn-info btn-sm">Show</button>
+                        <button onclick="showRoleDetails({{ $role->id }})" class="btn btn-info1 btn-sm">Show</button>
                         @can('role-edit')
-                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning1 btn-sm">Edit</a>
                         @endcan
                         @can('role-delete')
                             <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this role?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit" class="btn btn-danger1 btn-sm">Delete</button>
                             </form>
                         @endcan
                     </td>

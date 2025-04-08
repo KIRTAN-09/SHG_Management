@@ -83,15 +83,7 @@
             <label for="discussion">Discussion Points:</label>
             <textarea id="discussion" name="discussion" required style="height: 100%; width: 100%;">{{ old('discussion', $meeting->discussion) }}</textarea><br>
 
-            <label for="photo">Group Photo:</label>
-            <input type="file" id="photo" name="photo" accept="image/*"><br><br>
-
-            <!-- Display existing photo -->
-            @if($meeting->photo)
-                <img src="{{ asset('storage/' . $meeting->photo) }}" alt="Group Photo" style="max-width: 150px; height: auto;">
-            @endif
-            <br>
-
+           
             <input type="submit" value="Update Meeting">
             
         </form>

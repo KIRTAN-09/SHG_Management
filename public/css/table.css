@@ -100,6 +100,33 @@ h2 {
     background-color: #c82333;
 }
 
+.btn-info1 {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-info1:hover {
+    background-color: #138496;
+}
+
+.btn-warning1 {
+    background-color: #8baaa6;
+    color: white;
+}
+
+.btn-warning1:hover {
+    background-color: #486561;
+}
+
+.btn-danger1 {
+    background-color: #b04e588c;
+    color: white;
+}
+
+.btn-danger1:hover {
+    background-color: #c82333;
+}
+
 /* Center align action buttons */
 .action-buttons {
     justify-content: left;
