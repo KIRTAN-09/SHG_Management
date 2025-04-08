@@ -76,7 +76,6 @@
         reportContainer.innerHTML = `
             <h2>Member Information</h2>
             <p><strong>Member ID:</strong> ${member.id}</p>
-            <p><strong>Photo:</strong> 📷</p>
             <p><strong>Name:</strong> ${member.name}</p>
             <p><strong>Number:</strong> ${member.number}</p>
             <p><strong>Village:</strong> ${member.village}</p>

@@ -74,8 +74,7 @@
             <label for="discussion">Discussion Points:</label>
             <textarea id="discussion" name="discussion" placeholder="Discussion Topic" required style="height: 100%; width: 100%;"></textarea><br>
 
-            <label for="photo">Group Photo:</label>
-            <input type="file" id="photo" name="photo" accept="image/*" required><br><br>
+           
 
             <input type="submit" value="Schedule Meeting">
             

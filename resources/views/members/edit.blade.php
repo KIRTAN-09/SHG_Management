@@ -71,14 +71,7 @@
                 <option value="Inactive" {{ $member->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="photo" class="block text-gray-700">Photo</label>
-            <input type="file" class="form-control" id="photo" name="photo" onchange="validatePhotoSize()">
-            <span id="photo-error" style="color: red; display: none;">Photo size should be less than 1 MB</span>
-            @if ($member->photo)
-                <img src="{{ asset('storage/' . $member->photo) }}" alt="Member Photo" class="w-24 h-24 object-cover mt-2 rounded-full">
-            @endif
-        </div>
+        
 
       
 

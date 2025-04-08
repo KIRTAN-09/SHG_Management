@@ -17,7 +17,6 @@
     </div>
 @endsection
 
-
 @push('scripts')
 <script src="{{ asset('js/dropdown.js') }}"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">

@@ -39,8 +39,8 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
                             <td>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                                <button data-user-id="{{ $user->id }}" class="delete-button btn btn-danger">Delete</button>
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning1">Edit</a>
+                                <button data-user-id="{{ $user->id }}" class="delete-button btn btn-danger1">Delete</button>
                             </td>
                         </tr>
                     @endforeach
